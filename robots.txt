@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://nischal-bhandari.com.np/sitemap.xml 
