@@ -27,7 +27,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800;1,9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -52,7 +52,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;font-size:16px;}
 body{
-  font-family:'Outfit',sans-serif;
+  font-family:'DM Sans',sans-serif;
   background:var(--bg-base);
   color:var(--text-primary);
   line-height:1.7;
@@ -105,7 +105,7 @@ body.cursor-click #cursor-dot{
 }
 #loading-screen.hidden{opacity:0;pointer-events:none;}
 .loading-logo{
-  font-family:'Syne',sans-serif;
+  font-family:'Fraunces',serif;
   font-size:64px;font-weight:800;
   color:var(--accent-primary);
   text-shadow:0 0 30px var(--accent-primary),0 0 60px rgba(0,229,255,0.4);
@@ -130,7 +130,7 @@ body.cursor-click #cursor-dot{
 }
 .loading-text{
   margin-top:16px;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   font-size:12px;color:var(--text-muted);
   letter-spacing:2px;
 }
@@ -153,7 +153,7 @@ body.cursor-click #cursor-dot{
   display:flex;align-items:center;justify-content:space-between;
 }
 .brand-link{
-  font-family:'Syne',sans-serif;
+  font-family:'Fraunces',serif;
   font-size:22px;font-weight:800;
   color:var(--text-primary);
   display:flex;align-items:center;gap:4px;
@@ -169,7 +169,7 @@ body.cursor-click #cursor-dot{
 
 .nav-menu{display:flex;align-items:center;gap:32px;}
 .nav-link{
-  font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
   color:var(--text-muted);
   position:relative;padding:4px 0;
   transition:color 0.3s;letter-spacing:0.5px;
@@ -216,7 +216,7 @@ body.cursor-click #cursor-dot{
 }
 /* left col */
 .hero-label{
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   font-size:13px;color:var(--accent-primary);
   letter-spacing:2px;margin-bottom:16px;
   display:flex;align-items:center;gap:8px;
@@ -229,7 +229,7 @@ body.cursor-click #cursor-dot{
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 
 .hero-title{
-  font-family:'Syne',sans-serif;
+  font-family:'Fraunces',serif;
   font-size:clamp(42px,6vw,72px);
   font-weight:800;line-height:1.1;
   color:var(--text-primary);margin-bottom:16px;
@@ -239,7 +239,7 @@ body.cursor-click #cursor-dot{
   transform:translateY(30px);
 }
 .hero-typewriter{
-  font-family:'Syne',sans-serif;
+  font-family:'Fraunces',serif;
   font-size:clamp(20px,3vw,32px);
   font-weight:600;color:var(--accent-primary);
   min-height:40px;margin-bottom:20px;
@@ -254,7 +254,7 @@ body.cursor-click #cursor-dot{
 .btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 24px;border-radius:8px;
-  font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
   transition:all 0.3s ease;letter-spacing:0.5px;
   position:relative;overflow:hidden;
 }
@@ -337,7 +337,7 @@ body.cursor-click #cursor-dot{
   border:1px solid var(--border);
   backdrop-filter:blur(10px);
   border-radius:12px;padding:8px 14px;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   font-size:12px;color:var(--text-primary);
   display:flex;align-items:center;gap:6px;
   white-space:nowrap;
@@ -354,7 +354,7 @@ body.cursor-click #cursor-dot{
   position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
   z-index:10;display:flex;flex-direction:column;align-items:center;
   gap:8px;color:var(--text-muted);font-size:11px;
-  font-family:'IBM Plex Mono',monospace;letter-spacing:2px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:2px;
   animation:fadeOutScroll 1s ease 3s forwards;
   opacity:1;
 }
@@ -376,12 +376,12 @@ section{padding:120px 0;}
 .container{max-width:1200px;margin:0 auto;padding:0 24px;}
 .section-header{text-align:center;margin-bottom:60px;}
 .section-subtitle{
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   font-size:12px;letter-spacing:4px;
   color:var(--accent-primary);margin-bottom:12px;
 }
 .section-title{
-  font-family:'Syne',sans-serif;
+  font-family:'Fraunces',serif;
   font-size:clamp(32px,4vw,48px);font-weight:800;
   color:var(--text-primary);margin-bottom:16px;
 }
@@ -426,7 +426,7 @@ section{padding:120px 0;}
 .marquee-card:hover img{transform:scale(1.05);}
 .marquee-meta{padding:16px;}
 .marquee-meta h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:16px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:16px;
   margin-bottom:6px;color:var(--text-primary);
 }
 .marquee-meta p{color:var(--text-muted);font-size:13px;margin-bottom:12px;}
@@ -434,7 +434,7 @@ section{padding:120px 0;}
 .marquee-tags span{
   background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);
   color:var(--accent-primary);font-size:11px;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   padding:2px 8px;border-radius:4px;
 }
 .details-btn,.btn-sm{
@@ -466,11 +466,11 @@ section{padding:120px 0;}
   display:block;
 }
 .about-stat-card .stat-num{
-  font-family:'Syne',sans-serif;font-size:28px;font-weight:800;
+  font-family:'Fraunces',serif;font-size:28px;font-weight:800;
   color:var(--text-primary);display:block;
 }
 .about-stat-card .stat-lbl{
-  font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;
+  font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;
   letter-spacing:1px;
 }
 
@@ -486,7 +486,7 @@ section{padding:120px 0;}
 }
 .globe-label{
   position:absolute;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   font-size:11px;color:var(--accent-primary);
   background:rgba(9,9,24,0.9);
   border:1px solid var(--accent-primary);
@@ -498,7 +498,7 @@ section{padding:120px 0;}
 /* Timeline */
 .timeline-section{padding-top:60px;}
 .timeline-title{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:28px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:28px;
   text-align:center;margin-bottom:48px;color:var(--text-primary);
 }
 .timeline{position:relative;padding:0 20px;}
@@ -533,11 +533,11 @@ section{padding:120px 0;}
 }
 .tl-card:hover{border-color:var(--accent-primary);box-shadow:0 0 20px var(--accent-glow);}
 .tl-card h4{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:16px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:16px;
   color:var(--text-primary);margin-bottom:4px;
 }
 .tl-card .tl-inst{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--accent-primary);margin-bottom:4px;
 }
 .tl-card .tl-period{font-size:12px;color:var(--text-muted);margin-bottom:8px;}
@@ -576,12 +576,12 @@ section{padding:120px 0;}
 }
 .service-icon-wrap i{font-size:24px;color:var(--accent-primary);}
 .service-card h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:18px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:18px;
   color:var(--text-primary);margin-bottom:12px;
 }
 .service-card p{color:var(--text-muted);font-size:14px;margin-bottom:20px;}
 .read-more-btn{
-  font-family:'IBM Plex Mono',monospace;font-size:12px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;
   color:var(--accent-primary);letter-spacing:1px;
   background:transparent;padding:0;
   display:flex;align-items:center;gap:6px;
@@ -595,12 +595,12 @@ section{padding:120px 0;}
 .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
 
 .tech-skills h3,.pro-skills h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:22px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:22px;
   color:var(--text-primary);margin-bottom:24px;
 }
 .skill-assessment{
   font-size:12px;color:var(--text-muted);
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   background:var(--bg-card);border:1px solid var(--border);
   padding:8px 12px;border-radius:6px;margin-bottom:24px;
 }
@@ -612,13 +612,13 @@ section{padding:120px 0;}
   font-weight:600;font-size:14px;flex:1;color:var(--text-primary);
 }
 .skill-level{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--accent-primary);
   background:rgba(0,229,255,0.1);
   border:1px solid rgba(0,229,255,0.2);
   padding:2px 8px;border-radius:4px;
 }
-.skill-pct{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text-muted);}
+.skill-pct{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-muted);}
 .skill-bar-bg{
   height:6px;background:var(--border);border-radius:3px;overflow:hidden;
 }
@@ -636,7 +636,7 @@ section{padding:120px 0;}
   animation:shimmer 2s ease-in-out infinite;
 }
 @keyframes shimmer{to{left:200%;}}
-.skill-details{font-size:11px;color:var(--text-muted);margin-top:6px;font-family:'IBM Plex Mono',monospace;}
+.skill-details{font-size:11px;color:var(--text-muted);margin-top:6px;font-family:'JetBrains Mono',monospace;}
 
 /* Hexagon grid */
 .hex-skills-grid{
@@ -662,23 +662,23 @@ section{padding:120px 0;}
 }
 .hex-shape .hex-pct{
   position:relative;z-index:1;
-  font-family:'Syne',sans-serif;font-size:18px;font-weight:800;
+  font-family:'Fraunces',serif;font-size:18px;font-weight:800;
   color:var(--text-primary);
 }
-.hex-skill h4{font-family:'Syne',sans-serif;font-weight:600;font-size:14px;color:var(--text-primary);}
+.hex-skill h4{font-family:'Fraunces',serif;font-weight:600;font-size:14px;color:var(--text-primary);}
 .hex-skill p{font-size:12px;color:var(--text-muted);text-align:center;}
 
 /* Tech cloud */
 .tech-cloud{margin-top:60px;}
 .tech-cloud h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:22px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:22px;
   color:var(--text-primary);margin-bottom:32px;text-align:center;
 }
 .tech-tags{
   display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
 }
 .tech-tag{
-  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
   color:var(--text-primary);
   background:var(--bg-card);border:1px solid var(--border);
   padding:8px 16px;border-radius:8px;
@@ -704,7 +704,7 @@ section{padding:120px 0;}
   background:var(--bg-card);border:1px solid var(--border);
   color:var(--text-primary);border-radius:8px;
   padding:10px 16px 10px 40px;font-size:14px;width:240px;
-  font-family:'Outfit',sans-serif;
+  font-family:'DM Sans',sans-serif;
   transition:border-color 0.3s;outline:none;
 }
 .search-input:focus{border-color:var(--accent-primary);}
@@ -718,7 +718,7 @@ section{padding:120px 0;}
   padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;
   border:1px solid var(--border);color:var(--text-muted);
   background:var(--bg-card);
-  transition:all 0.2s;font-family:'IBM Plex Mono',monospace;
+  transition:all 0.2s;font-family:'JetBrains Mono',monospace;
 }
 .filter-btn:hover,.filter-btn.active{
   border-color:var(--accent-primary);color:var(--accent-primary);
@@ -755,11 +755,11 @@ section{padding:120px 0;}
   background:linear-gradient(0deg,var(--bg-card),transparent);
 }
 .port-front-overlay h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:15px;
   color:var(--text-primary);
 }
 .port-cat-badge{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--accent-primary);
   background:rgba(0,229,255,0.1);
   border:1px solid rgba(0,229,255,0.2);
@@ -772,13 +772,13 @@ section{padding:120px 0;}
   padding:20px;display:flex;flex-direction:column;justify-content:space-between;
 }
 .port-back h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:16px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:16px;
   color:var(--text-primary);margin-bottom:8px;
 }
 .port-back p{font-size:13px;color:var(--text-muted);margin-bottom:12px;}
 .port-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
 .port-tech span{
-  font-size:11px;font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-family:'JetBrains Mono',monospace;
   color:var(--accent-primary);
   background:rgba(0,229,255,0.1);
   border:1px solid rgba(0,229,255,0.2);
@@ -822,14 +822,14 @@ section{padding:120px 0;}
 }
 .gh-stat-card i{font-size:24px;color:var(--accent-primary);display:block;margin-bottom:8px;}
 .gh-stat-card .num{
-  font-family:'Syne',sans-serif;font-size:28px;font-weight:800;
+  font-family:'Fraunces',serif;font-size:28px;font-weight:800;
   color:var(--text-primary);display:block;
 }
 .gh-stat-card .lbl{font-size:13px;color:var(--text-muted);}
 .gh-link-wrap{text-align:center;margin-top:32px;}
 .gh-disclaimer{
   text-align:center;margin-bottom:16px;
-  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--text-muted);letter-spacing:1px;
 }
 
@@ -837,7 +837,7 @@ section{padding:120px 0;}
 .contact{background:var(--bg-surface);}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
 .contact-form-wrap h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:22px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:22px;
   color:var(--text-primary);margin-bottom:24px;
 }
 .form-group{margin-bottom:20px;position:relative;}
@@ -845,7 +845,7 @@ section{padding:120px 0;}
   width:100%;background:var(--bg-card);
   border:none;border-bottom:2px solid var(--border);
   color:var(--text-primary);padding:12px 0;
-  font-size:15px;font-family:'Outfit',sans-serif;
+  font-size:15px;font-family:'DM Sans',sans-serif;
   outline:none;transition:border-color 0.3s;
 }
 .form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-muted);}
@@ -869,7 +869,7 @@ section{padding:120px 0;}
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.2);
   color:var(--accent-primary);font-size:12px;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   padding:4px 12px;border-radius:20px;margin-bottom:20px;
 }
 
@@ -889,12 +889,12 @@ section{padding:120px 0;}
 }
 .contact-card-icon i{color:var(--accent-primary);font-size:18px;}
 .contact-card h4{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:15px;
   color:var(--text-primary);margin-bottom:4px;
 }
 .contact-card p{font-size:13px;color:var(--text-muted);margin-bottom:6px;}
 .contact-link{
-  font-size:12px;font-family:'IBM Plex Mono',monospace;
+  font-size:12px;font-family:'JetBrains Mono',monospace;
   color:var(--accent-primary);display:flex;align-items:center;gap:4px;
 }
 .contact-link::after{content:'→';transition:margin 0.2s;}
@@ -915,7 +915,7 @@ section{padding:120px 0;}
   padding:60px 0 40px;
 }
 .footer-brand h3{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:24px;
+  font-family:'Fraunces',serif;font-weight:800;font-size:24px;
   color:var(--text-primary);margin-bottom:8px;
   text-shadow:0 0 20px var(--accent-glow);
 }
@@ -930,7 +930,7 @@ section{padding:120px 0;}
 }
 .footer-social:hover{border-color:var(--accent-primary);color:var(--accent-primary);box-shadow:0 0 12px var(--accent-glow);}
 .footer-col h4{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:14px;
   color:var(--text-primary);margin-bottom:16px;
   letter-spacing:1px;
 }
@@ -992,7 +992,7 @@ section{padding:120px 0;}
   margin-bottom:20px;
 }
 .modal-header h2{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:22px;
+  font-family:'Fraunces',serif;font-weight:800;font-size:22px;
   color:var(--text-primary);
 }
 .modal-close{
@@ -1005,12 +1005,12 @@ section{padding:120px 0;}
 .modal-body ul{color:var(--text-muted);font-size:14px;padding-left:20px;}
 .modal-body ul li{margin-bottom:6px;}
 .modal-body h3{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:16px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:16px;
   color:var(--text-primary);margin:16px 0 8px;
 }
 .modal-tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
 .modal-tech span{
-  font-size:12px;font-family:'IBM Plex Mono',monospace;
+  font-size:12px;font-family:'JetBrains Mono',monospace;
   color:var(--accent-primary);
   background:rgba(0,229,255,0.1);
   border:1px solid rgba(0,229,255,0.2);
@@ -1040,7 +1040,7 @@ section{padding:120px 0;}
   position:absolute;bottom:64px;right:0;
   background:var(--bg-card);border:1px solid var(--border);
   color:var(--text-primary);font-size:12px;
-  font-family:'IBM Plex Mono',monospace;
+  font-family:'JetBrains Mono',monospace;
   padding:6px 12px;border-radius:8px;
   white-space:nowrap;opacity:0;pointer-events:none;
   transition:opacity 0.2s;
@@ -1068,11 +1068,11 @@ section{padding:120px 0;}
   width:36px;height:36px;border-radius:50%;
   background:linear-gradient(135deg,var(--accent-secondary),var(--accent-primary));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#000;flex-shrink:0;
+  font-family:'Fraunces',serif;font-weight:800;font-size:16px;color:#000;flex-shrink:0;
 }
 .chat-header-info{flex:1;}
 .chat-header-info h4{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+  font-family:'Fraunces',serif;font-weight:700;font-size:14px;
   color:var(--text-primary);line-height:1;
 }
 .chat-status{
@@ -1101,7 +1101,7 @@ section{padding:120px 0;}
   width:28px;height:28px;border-radius:50%;
   background:linear-gradient(135deg,var(--accent-secondary),var(--accent-primary));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:12px;color:#000;
+  font-family:'Fraunces',serif;font-weight:800;font-size:12px;color:#000;
   flex-shrink:0;
 }
 .msg-bubble{
@@ -1146,7 +1146,7 @@ section{padding:120px 0;}
   background:var(--bg-surface);
   border:1px solid var(--border);
   color:var(--text-muted);
-  font-size:11px;font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-family:'JetBrains Mono',monospace;
   padding:5px 10px;border-radius:20px;
   transition:all 0.2s;white-space:nowrap;
 }
@@ -1160,7 +1160,7 @@ section{padding:120px 0;}
   border:1px solid var(--border);
   border-radius:20px;padding:8px 14px;
   font-size:13px;color:var(--text-primary);
-  font-family:'Outfit',sans-serif;outline:none;
+  font-family:'DM Sans',sans-serif;outline:none;
   transition:border-color 0.3s;
 }
 #chatInput:focus{border-color:var(--accent-primary);}
@@ -1184,7 +1184,7 @@ section{padding:120px 0;}
 }
 #mobileNav.open{transform:translateX(0);}
 #mobileNav .nav-link{
-  font-family:'Syne',sans-serif;font-size:32px;font-weight:700;
+  font-family:'Fraunces',serif;font-size:32px;font-weight:700;
   color:var(--text-muted);
 }
 #mobileNav .nav-link:hover{color:var(--accent-primary);}
@@ -1246,6 +1246,18 @@ section{padding:120px 0;}
     border-radius:0;
   }
   #cursor-dot,#cursor-ring{display:none;}
+
+  /* Prevent chat toggle + scroll-to-top overlap on mobile */
+  #chatToggle{
+    bottom:24px;right:16px;
+  }
+  #scrollToTop{
+    bottom:90px;right:16px;
+  }
+  /* When chat is open the toggle moves with the full-screen window — hide scroll btn */
+  body.chat-is-open #scrollToTop{
+    display:none;
+  }
 
   .portfolio-controls{flex-direction:column;align-items:flex-start;}
   .search-input{width:100%;}
@@ -1335,7 +1347,7 @@ section{padding:120px 0;}
       <div class="hero-typewriter" id="typewriter" aria-live="polite"></div>
       <p class="hero-desc">Computer Engineering student building production-grade experiences for the past 2+ years with a focus on performance, maintainability, and user-first solutions.</p>
       <div class="hero-buttons">
-        <a href="mailto:itisnischal@gmail.com" class="btn btn-cyan"><i class="fas fa-envelope"></i> Email Me</a>
+        <a href="/cdn-cgi/l/email-protection#d7bea3bea4b9bea4b4bfb6bb97b0bab6bebbf9b4b8ba" class="btn btn-cyan"><i class="fas fa-envelope"></i> Email Me</a>
         <a href="assets/Nischal-Bhandari-CV.pdf" class="btn btn-cyan-outline" download aria-label="Download CV PDF"><i class="fas fa-download"></i> Download CV</a>
         <a href="#contact" class="btn btn-violet"><i class="fas fa-handshake"></i> Hire Me Now</a>
         <button class="btn btn-ghost" id="talkAI"><i class="fas fa-comment-dots"></i> Talk to My AI ↓</button>
@@ -1879,8 +1891,8 @@ section{padding:120px 0;}
           <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
           <div>
             <h4>Email</h4>
-            <p>itisnischal@gmail.com</p>
-            <a href="mailto:itisnischal@gmail.com" class="contact-link">Send Email</a>
+            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97fee3fee4f9fee4f4fff6fbd7f0faf6fefbb9f4f8fa">[email&#160;protected]</a></p>
+            <a href="/cdn-cgi/l/email-protection#4b223f223825223828232a270b2c262a222765282426" class="contact-link">Send Email</a>
           </div>
         </div>
         <div class="contact-card">
@@ -2001,11 +2013,15 @@ section{padding:120px 0;}
     <button class="quick-chip">🛠️ Skills?</button>
     <button class="quick-chip">💼 Projects?</button>
     <button class="quick-chip">🎓 Education?</button>
-    <button class="quick-chip">📬 Contact?</button>
     <button class="quick-chip">💡 Services?</button>
-    <button class="quick-chip">⏱️ Experience?</button>
-    <button class="quick-chip">🔗 GitHub?</button>
-    <button class="quick-chip">💰 Available?</button>
+    <button class="quick-chip">💰 Available for hire?</button>
+    <button class="quick-chip">💵 Pricing?</button>
+    <button class="quick-chip">🎮 Hobbies?</button>
+    <button class="quick-chip">🌍 Languages?</button>
+    <button class="quick-chip">🏆 Goals?</button>
+    <button class="quick-chip">📬 Contact?</button>
+    <button class="quick-chip">⭐ Favourite tech?</button>
+    <button class="quick-chip">🤝 Collaborate?</button>
   </div>
   <div class="chat-input-row">
     <input type="text" id="chatInput" placeholder="Ask something..." aria-label="Type your message">
@@ -2014,7 +2030,7 @@ section{padding:120px 0;}
 </div>
 
 <!-- ==================== SCRIPTS ==================== -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // CHATBOT: To add new Q&A pairs, add entries to the RESPONSES array in getBotResponse()
 // Each entry needs: keywords (array of strings) and reply (string, use \n for line breaks)
 
@@ -2460,25 +2476,113 @@ document.getElementById('contactForm').addEventListener('submit',function(e){
 
 /* ============ CHATBOT ============ */
 const RESPONSES = [
-  { keywords:['skill','know','tech','stack','language','what can you'], reply:'Nischal\'s core skills include:\n\n🔹 HTML/CSS — 85% (Expert)\n🔹 JavaScript — 45%\n🔹 React — 45%\n🔹 Node.js — 35%\n🔹 Python — 40%\n\nProfessionally: Problem Solving (90%), Communication (80%), Teamwork (80%), Creativity (85%).' },
-  { keywords:['project','work','built','made','portfolio','pixelprompt','slpd','sbad','bus','license','plate'], reply:'Nischal has built 8+ projects. Highlights:\n\n🚀 PixelPrompt — AI that converts wireframe sketches into live websites (React, Node.js, OpenAI)\n\n🚗 Smart License Plate Detection — Edge AI for automated gate control (Python, OpenCV, TensorFlow)\n\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs (React Native, Firebase)\n\n🌐 This Portfolio — The site you\'re on right now!' },
-  { keywords:['pixelprompt','pixel prompt','sketch','wireframe','website generator'], reply:'PixelPrompt is Nischal\'s AI-powered tool that takes a hand-drawn wireframe sketch and converts it into a fully responsive website. It uses React on the frontend, Node.js on the backend, and the OpenAI API for image understanding and code generation.' },
-  { keywords:['license plate','slpd','gate','parking','detection','opencv'], reply:'Smart License Plate Detection (SLPD) is an edge AI system that reads vehicle license plates in real-time for automated gate and parking control. Built with Python, OpenCV, and TensorFlow — it runs efficiently on low-power hardware.' },
-  { keywords:['bus','sbad','arrival','tracker','tracking','transport'], reply:'Smart Bus Arrival Detector (SBAD) is a mobile app that gives real-time bus arrival times and ML-powered ETAs for Pokhara routes. Built with React Native, Firebase for live data sync, and Google Maps API for routing.' },
-  { keywords:['contact','reach','email','message','hire','available','freelance','work with'], reply:'You can reach Nischal at:\n\n📧 itisnischal@gmail.com\n\nOr use the Contact form on this page. He\'s open to freelance projects, collaboration, and internship opportunities. He usually replies within 24 hours! 🚀' },
-  { keywords:['github','code','repository','repo','open source'], reply:'Nischal\'s GitHub is github.com/nis6hal — you\'ll find his project repos there. He\'s actively contributing and building in public!' },
-  { keywords:['linkedin','professional','network'], reply:'You can connect with Nischal on LinkedIn at linkedin.com/in/nis6hal for professional networking, collaborations, or opportunities.' },
-  { keywords:['study','university','college','degree','education','student','pokhara university','where'], reply:'Nischal is a 7th semester BE Computer Engineering student at Pokhara University, Nepal. He\'s graduating in 2026 with a focus on software development, algorithms, and system design.' },
-  { keywords:['experience','year','how long','background'], reply:'Nischal has 2+ years of development experience, completing 8+ projects. He started coding in 2022, landed his first production web projects in 2023, and in 2024 moved into AI-integrated projects like SLPD, SBAD, and PixelPrompt.' },
-  { keywords:['service','offer','do for','help with','web development','full stack','mobile','cloud','consulting','ai integration'], reply:'Nischal offers:\n\n🌐 Web Development — responsive websites & web apps\n⚙️ Full Stack Development — frontend + backend + database\n🤖 AI Integration — adding smart features to your app\n☁️ Cloud Solutions — AWS, GCP, Azure deployments\n💬 Technical Consulting — architecture & tech stack advice\n\nInterested? Use the Contact form or email itisnischal@gmail.com!' },
-  { keywords:['location','nepal','pokhara','based','from'], reply:'Nischal is based in Pokhara, Nepal 🇳🇵 — a beautiful city at the foothills of the Himalayas. He works remotely and is open to global clients and remote collaborations.' },
-  { keywords:['hello','hi','hey','sup','good morning','good evening','howdy'], reply:'Hey there! 👋 Great to meet you. I\'m Nischal\'s virtual assistant. Ask me about his skills, projects, or how to get in touch. What would you like to know?' },
-  { keywords:['who','about','tell me about','introduce','yourself','nischal'], reply:'Nischal Bhandari is a Computer Engineering student (7th sem) at Pokhara University and a Full Stack Developer with 2+ years of experience. He builds web apps, mobile apps, and AI-integrated tools. He\'s passionate about creating digital solutions that solve real problems. 💻' },
-  { keywords:['cv','resume','download'], reply:'You can download Nischal\'s CV directly from the hero section button on this page — look for the \'Download CV\' button! 📄' },
-  { keywords:['twitter','instagram','social','follow'], reply:'Follow Nischal on social media:\n🐦 Twitter: @nis6hal\n📸 Instagram: @nis6hal\n💼 LinkedIn: @nis6hal\n💻 GitHub: @nis6hal' },
-  { keywords:['thank','thanks','appreciate','great','awesome','helpful'], reply:'You\'re welcome! 😊 Feel free to ask anything else, or reach out to Nischal directly at itisnischal@gmail.com. Good luck! 🚀' }
+
+  /* ── Greetings ──────────────────────────────────────────────────────────── */
+  { keywords:['hello','hi','hey','sup','good morning','good evening','howdy','what\'s up','wassup'],
+    reply:'Hey there! 👋 I\'m Nischal\'s virtual assistant.\nAsk me about his skills, projects, services, availability — or anything else.\nWhat would you like to know?' },
+
+  /* ── Who is Nischal ─────────────────────────────────────────────────────── */
+  { keywords:['who','about','tell me about','introduce','yourself','nischal'],
+    reply:'Nischal Bhandari is a Full Stack Developer in his final (8th) semester of BE Computer Engineering at Pokhara University, Nepal — graduating in 2026.\n\nHe has 2+ years of experience across paid client work and personal projects, building web apps, mobile apps, and AI-integrated tools.\n\nOutside the keyboard: gaming 🎮, music 🎵, and hiking the trails around Pokhara 🥾.' },
+
+  /* ── Education ──────────────────────────────────────────────────────────── */
+  { keywords:['study','university','college','degree','education','student','pokhara university','where','course','graduating','graduation','semester'],
+    reply:'🎓 Nischal is in his 8th and final semester of BE Computer Engineering at Pokhara University, Nepal — graduating in 2026.\n\nHis studies span algorithms, system design, computer networks, AI/ML, and software engineering. He\'s been complementing that with real freelance work and personal builds the whole way through.' },
+
+  /* ── Skills ─────────────────────────────────────────────────────────────── */
+  { keywords:['skill','know','tech','stack','language','what can you','capable','proficient'],
+    reply:'Here\'s Nischal\'s skill snapshot:\n\n⚙️ Technical\n🔹 HTML/CSS — 85% (Expert)\n🔹 JavaScript — 45%\n🔹 React — 45%\n🔹 Node.js — 35%\n🔹 Python — 40%\n\n🤝 Professional\n🔹 Problem Solving — 90%\n🔹 Communication — 80%\n🔹 Team Work — 80%\n🔹 Creativity — 85%\n\nCheck the Skills section on this page for the full breakdown!' },
+
+  /* ── Favourite tech ─────────────────────────────────────────────────────── */
+  { keywords:['favourite','favorite','enjoy','love','prefer','best tech','fav','fun to use','enjoy working'],
+    reply:'Nischal genuinely loves:\n\n⚛️ React / Next.js — building fast, interactive UIs\n🐍 Python + AI/ML — turning data into something actually useful\n🎨 Three.js / creative coding — making the web feel alive (like this very page!)\n🔧 Node.js — clean, expressive backend APIs\n\nHe\'s happiest when all of these collide in one project. 😄' },
+
+  /* ── All projects ───────────────────────────────────────────────────────── */
+  { keywords:['project','work','built','made','portfolio','what have you','show me','examples'],
+    reply:'Nischal has shipped 8+ projects. Key highlights:\n\n🚀 PixelPrompt — working prototype that converts wireframe sketches into live websites (React, Node.js, OpenAI)\n🚗 Smart License Plate Detection — Edge AI for automated gates (Python, OpenCV, TensorFlow)\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs (React Native, Firebase)\n🌐 This Portfolio — the 3D site you\'re on right now (Three.js, GSAP)\n\nSome projects are private. Reach out to see a specific project in action or check github.com/nis6hal for public repos!' },
+
+  /* ── PixelPrompt ────────────────────────────────────────────────────────── */
+  { keywords:['pixelprompt','pixel prompt','sketch','wireframe','website generator'],
+    reply:'🚀 PixelPrompt — Working Prototype\nAn AI tool that takes a hand-drawn wireframe sketch and converts it into a fully responsive website.\n\n✨ What it does:\n• Sketch-to-code via OpenAI Vision API\n• Generates clean HTML/CSS/JS instantly\n• Live preview with multi-page support\n• Cuts wireframe-to-prototype time by ~80%\n\nCurrently a working prototype — want to see it in action? Contact Nischal directly!\n\nStack: React · Node.js · OpenAI API · Canvas API · Express.js' },
+
+  /* ── SLPD ───────────────────────────────────────────────────────────────── */
+  { keywords:['license plate','slpd','gate','parking','detection','opencv','plate'],
+    reply:'🚗 Smart License Plate Detection (SLPD)\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n• Vehicle entry/exit logging\n\nStack: Python · OpenCV · TensorFlow · Raspberry Pi · SQLite' },
+
+  /* ── SBAD ───────────────────────────────────────────────────────────────── */
+  { keywords:['bus','sbad','arrival','tracker','tracking','transport','pokhara bus'],
+    reply:'🚌 Smart Bus Arrival Detector (SBAD)\nMobile app with real-time bus arrival times and ML-powered ETAs for Pokhara city routes.\n\n✨ Highlights:\n• Live bus tracking on Google Maps\n• Predictions accurate within ±2 minutes\n• Push notifications for upcoming buses\n• Covers 12 major Pokhara routes\n\nStack: React Native · Firebase · Google Maps API · TensorFlow Lite' },
+
+  /* ── Services ───────────────────────────────────────────────────────────── */
+  { keywords:['service','offer','do for','help with','what do you do'],
+    reply:'Nischal actively takes client work in three areas:\n\n🌐 Web Development — responsive sites, landing pages, web apps\n⚙️ Full Stack Development — frontend + backend + database + APIs end-to-end\n🤖 AI Integration — adding smart features: chatbots, vision APIs, LLMs\n\nHe also lists Cloud Solutions and Technical Consulting on his portfolio — feel free to ask about those too.\n\nInterested? Email itisnischal@gmail.com or DM @nis6hal on Instagram!' },
+
+  /* ── Web dev service ─────────────────────────────────────────────────────── */
+  { keywords:['web development','website','landing page','responsive'],
+    reply:'🌐 Web Development\nNischal builds modern, responsive websites and web apps — from clean landing pages to full dynamic platforms.\n\nThis is his primary service offering right now. He knows how to ship something that looks great, loads fast, and works on every device.\n\nInterested? → itisnischal@gmail.com or Instagram @nis6hal' },
+
+  /* ── Full stack service ─────────────────────────────────────────────────── */
+  { keywords:['full stack','fullstack','backend','api','database','end to end'],
+    reply:'⚙️ Full Stack Development\nNischal has strong full-stack experience from personal and academic projects — React frontend, Node.js/Express backend, MongoDB/PostgreSQL, REST APIs, authentication, deployment.\n\nWhile his primary client service right now is Web Development, he\'s comfortable owning an entire stack.\n\nWant to discuss a full-stack project? → itisnischal@gmail.com or Instagram @nis6hal' },
+
+  /* ── AI Integration service ─────────────────────────────────────────────── */
+  { keywords:['ai integration','machine learning','chatbot','openai','vision','llm','ml'],
+    reply:'🤖 AI Integration\nNischal can wire AI into your product — OpenAI APIs, computer vision with OpenCV/TensorFlow, custom chatbots, or LLM-powered features.\n\nHis projects SLPD (CV) and PixelPrompt (OpenAI Vision) are direct proof of this in practice.\n\nInterested? → itisnischal@gmail.com or Instagram @nis6hal' },
+
+  /* ── Pricing ────────────────────────────────────────────────────────────── */
+  { keywords:['price','pricing','cost','rate','charge','how much','fee','budget','quote'],
+    reply:'💵 Pricing is scoped per project — no fixed packages, because every project is different.\n\nTo get a quote, just share a quick brief:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nHe usually responds within 24 hours! 🚀' },
+
+  /* ── Availability / hire ────────────────────────────────────────────────── */
+  { keywords:['available','hire','hiring','freelance','internship','job','work with','open to work','opportunity','looking for work'],
+    reply:'✅ Yes — Nischal is actively looking for opportunities!\n\nHe\'s open to:\n💼 Web development client projects\n🎓 Internships — especially roles with real-world impact\n🤝 Remote work globally\n🚀 Collaborations and interesting builds\n\nBest way to reach him:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nHe replies fast ⚡' },
+
+  /* ── Collaborate ────────────────────────────────────────────────────────── */
+  { keywords:['collab','collaborate','team up','partner','work together','co-found','build together'],
+    reply:'Nischal loves teaming up on interesting problems! 🤝\n\nStartup idea, side project, hackathon, open-source effort — he\'s genuinely open.\n\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nBring the idea, he\'ll bring the code. 🚀' },
+
+  /* ── Goals ──────────────────────────────────────────────────────────────── */
+  { keywords:['goal','dream','aspire','future','plan','ambition','next step','vision','where do you see'],
+    reply:'🏆 Nischal\'s goals:\n\n🎓 Graduate from Pokhara University in 2026\n💼 Land a meaningful developer role or internship — ideally in a product company making real impact\n🌍 Work globally, build products used by thousands\n🤖 Keep pushing into AI/ML and creative coding\n\nFinal semester, strong portfolio, actively looking. 🔥' },
+
+  /* ── Hobbies ────────────────────────────────────────────────────────────── */
+  { keywords:['hobby','hobbies','fun','free time','outside coding','interest','personal','besides work','when not coding'],
+    reply:'Outside of coding, Nischal is into:\n\n🎮 Gaming — unwinding after a long build session\n🎵 Music — always something playing while he codes\n🥾 Hiking — Pokhara has incredible trails, he makes the most of them\n\nHe finds stepping away from the screen genuinely makes him a sharper problem-solver. 🧠' },
+
+  /* ── Languages spoken ───────────────────────────────────────────────────── */
+  { keywords:['language','speak','nepali','english','hindi','fluent','tongue'],
+    reply:'Nischal speaks:\n\n🇬🇧 English — professional fluency\n🇳🇵 Nepali — native\n🇮🇳 Hindi — conversational\n\nProject briefs welcome in any of the three! 😊' },
+
+  /* ── Experience ─────────────────────────────────────────────────────────── */
+  { keywords:['experience','year','how long','background','journey','started','when did','paid','client'],
+    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University, caught the coding bug immediately\n2023 — First production web projects, mastered the React + Node.js ecosystem\n2024 — Levelled into AI: SLPD, SBAD, and the PixelPrompt prototype\n2025–26 — Final semester, actively looking for his first big professional opportunity\n\n2+ years of hands-on building, mostly personal and academic projects, 8+ shipped. 🔥' },
+
+  /* ── Contact ────────────────────────────────────────────────────────────── */
+  { keywords:['contact','reach','email','message','dm','instagram','insta','get in touch','how to contact'],
+    reply:'Best ways to reach Nischal:\n\n📧 Email: itisnischal@gmail.com\n📸 Instagram: @nis6hal — DMs very welcome!\n\nOr use the Contact form at the bottom of this page.\nHe typically replies within 24 hours, often faster. ⚡' },
+
+  /* ── GitHub ─────────────────────────────────────────────────────────────── */
+  { keywords:['github','code','repository','repo','open source','source code'],
+    reply:'💻 github.com/nis6hal\n\nAll of Nischal\'s public project repos live here. He builds in public and keeps things active — worth a browse!' },
+
+  /* ── Social links ───────────────────────────────────────────────────────── */
+  { keywords:['linkedin','twitter','social','follow','network'],
+    reply:'Find Nischal across the web:\n\n📸 Instagram: @nis6hal (best for DMs)\n💼 LinkedIn: linkedin.com/in/nis6hal\n🐦 Twitter/X: @nis6hal\n💻 GitHub: github.com/nis6hal' },
+
+  /* ── CV / Resume ────────────────────────────────────────────────────────── */
+  { keywords:['cv','resume','download','pdf'],
+    reply:'📄 Hit the "Download CV" button in the hero section at the top of this page — it downloads directly!' },
+
+  /* ── Location ───────────────────────────────────────────────────────────── */
+  { keywords:['location','nepal','pokhara','based','from','where are you','city','country'],
+    reply:'📍 Pokhara, Nepal 🇳🇵 — a city at the foot of the Annapurna Himalayas.\n\nNischal works fully remotely and is open to clients and teams anywhere in the world.' },
+
+  /* ── Thanks ─────────────────────────────────────────────────────────────── */
+  { keywords:['thank','thanks','appreciate','great','awesome','helpful','nice','cool','cheers'],
+    reply:'You\'re welcome! 😊 Feel free to ask anything else.\nIf you\'d like to work with Nischal: itisnischal@gmail.com or DM @nis6hal on Instagram. Good luck! 🚀' }
+
 ];
-const FALLBACK = "Hmm, I\'m not sure about that one! 🤔 For anything specific, you can reach Nischal directly at itisnischal@gmail.com — he\'ll be happy to help. Or try one of the quick questions below!";
+const FALLBACK = "Hmm, I\'m not sure about that one! 🤔\n\nBest to reach Nischal directly:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nOr try one of the quick questions below — I\'m better with those! 😄";
 
 function getBotResponse(input){
   const lower = input.toLowerCase().trim();
@@ -2501,6 +2605,7 @@ function openChat(){
   chatWindow.classList.add('open');
   chatWindow.setAttribute('aria-hidden','false');
   chatToggle.setAttribute('aria-expanded','true');
+  document.body.classList.add('chat-is-open');
   if(!welcomeSent){ welcomeSent=true; addBotMsg('👋 Hi! I\'m Nischal\'s virtual assistant.\nI can answer questions about his skills, projects, experience, and how to reach him.\nTry one of the quick questions below, or type your own!'); }
   setTimeout(()=>chatInput.focus(), 400);
 }
@@ -2509,6 +2614,7 @@ function closeChatWindow(){
   chatWindow.classList.remove('open');
   chatWindow.setAttribute('aria-hidden','true');
   chatToggle.setAttribute('aria-expanded','false');
+  document.body.classList.remove('chat-is-open');
 }
 chatToggle.addEventListener('click',()=>{ chatOpen ? closeChatWindow() : openChat(); });
 chatClose.addEventListener('click', closeChatWindow);
@@ -2588,12 +2694,271 @@ if(window.gsap && window.ScrollTrigger){
   });
 }
 
-/* ============ PRIVACY/TERMS (stub) ============ */
-['privacyPolicy','termsOfService'].forEach(id=>{
-  const el = document.getElementById(id);
-  if(el) el.addEventListener('click',(e)=>{ e.preventDefault(); });
-});
+/* ============ LIVE DATA LOADER ============ */
+const API_URL = 'https://nischal-portfolio-api.onrender.com';
 
+async function loadLiveData() {
+  let data;
+  try {
+    const res = await fetch(API_URL + '/api/portfolio', { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error('API response not OK');
+    data = await res.json();
+  } catch (err) {
+    // Silent fallback — hardcoded content stays in place
+    console.info('[Portfolio] API unavailable, using static content.', err.message);
+    return;
+  }
+
+  const { projects, skills, content } = data;
+
+  /* ---- HERO DESCRIPTION ---- */
+  if (content?.hero?.description) {
+    const heroDesc = document.querySelector('.hero-desc');
+    if (heroDesc) heroDesc.textContent = content.hero.description;
+  }
+
+  /* ---- ABOUT BIO PARAGRAPHS ---- */
+  if (content?.about) {
+    const aboutParas = document.querySelectorAll('.about-text p');
+    const { bio1, bio2, bio3 } = content.about;
+    if (aboutParas[0] && bio1) aboutParas[0].textContent = bio1;
+    if (aboutParas[1] && bio2) aboutParas[1].textContent = bio2;
+    if (aboutParas[2] && bio3) aboutParas[2].textContent = bio3;
+  }
+
+  /* ---- CONTACT INFO ---- */
+  if (content?.contact) {
+    const c = content.contact;
+    // Email links
+    if (c.email) {
+      document.querySelectorAll('a[href^="mailto"]').forEach(el => {
+        el.href = 'mailto:' + c.email;
+      });
+      const emailCard = document.querySelector('.contact-card p a[href^="mailto"]');
+      if (emailCard) emailCard.textContent = c.email;
+    }
+    // Social links
+    const socialMap = {
+      github: '[aria-label="GitHub"]',
+      linkedin: '[aria-label="LinkedIn"]',
+      twitter: '[aria-label="Twitter"]',
+      instagram: '[aria-label="Instagram"]'
+    };
+    Object.entries(socialMap).forEach(([key, sel]) => {
+      if (c[key]) {
+        document.querySelectorAll(sel).forEach(el => { el.href = c[key]; });
+      }
+    });
+    // Location
+    if (c.location) {
+      document.querySelectorAll('.contact-card').forEach(card => {
+        if (card.querySelector('.fa-map-marker-alt')) {
+          const p = card.querySelector('p');
+          if (p) p.textContent = c.location + ' 🇳🇵';
+        }
+      });
+    }
+  }
+
+  /* ---- SECTION VISIBILITY TOGGLES ---- */
+  if (content?.sections) {
+    const s = content.sections;
+    if (s.showFeaturedMarquee === false) {
+      const el = document.querySelector('.featured');
+      if (el) el.style.display = 'none';
+    }
+    if (s.showServices === false) {
+      const el = document.getElementById('services');
+      if (el) el.style.display = 'none';
+    }
+    if (s.showGithubActivity === false) {
+      const el = document.getElementById('github');
+      if (el) el.style.display = 'none';
+    }
+  }
+
+  /* ---- TECHNICAL SKILL BARS ---- */
+  const techSkills = skills?.filter(s => s.type === 'technical') || [];
+  if (techSkills.length > 0) {
+    const container = document.querySelector('.tech-skills');
+    if (container) {
+      // Remove existing skill items (keep the heading and assessment note)
+      container.querySelectorAll('.skill-item').forEach(el => el.remove());
+      techSkills.forEach(skill => {
+        const item = document.createElement('div');
+        item.className = 'skill-item';
+        item.innerHTML = `
+          <div class="skill-header">
+            <span class="skill-name">${skill.name}</span>
+            <span class="skill-level">${skill.level}</span>
+            <span class="skill-pct">${skill.percentage}%</span>
+          </div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${skill.percentage}" style="width:0%"></div></div>
+          ${skill.details ? `<div class="skill-details">${skill.details}</div>` : ''}
+        `;
+        container.appendChild(item);
+      });
+      // Re-attach IntersectionObserver for new bars
+      const newBars = container.querySelectorAll('.skill-bar-fill');
+      const sbObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.width = e.target.dataset.width + '%';
+            sbObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      newBars.forEach(b => sbObs.observe(b));
+    }
+  }
+
+  /* ---- PROFESSIONAL SKILLS (HEX SHAPES) ---- */
+  const proSkills = skills?.filter(s => s.type === 'professional') || [];
+  if (proSkills.length > 0) {
+    const hexGrid = document.querySelector('.hex-skills-grid');
+    if (hexGrid) {
+      hexGrid.innerHTML = '';
+      proSkills.forEach(skill => {
+        const hex = document.createElement('div');
+        hex.className = 'hex-skill';
+        hex.innerHTML = `
+          <div class="hex-shape" data-progress="${skill.percentage}">
+            <div class="hex-fill"></div>
+            <span class="hex-pct">${skill.percentage}%</span>
+          </div>
+          <h4>${skill.name}</h4>
+          ${skill.details ? `<p>${skill.details}</p>` : ''}
+        `;
+        hexGrid.appendChild(hex);
+      });
+      // Re-attach IntersectionObserver for hex fills
+      const hexObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.querySelector('.hex-fill').style.height = e.target.dataset.progress + '%';
+            hexObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      hexGrid.querySelectorAll('.hex-shape').forEach(h => hexObs.observe(h));
+    }
+  }
+
+  /* ---- PORTFOLIO GRID ---- */
+  if (projects?.length > 0) {
+    const grid = document.getElementById('portfolioGrid');
+    if (grid) {
+      grid.innerHTML = '';
+      projects.forEach(project => {
+        const techHtml = (project.tech || []).map(t => `<span>${t}</span>`).join('');
+        const catLabel = (project.category || 'web').charAt(0).toUpperCase() + (project.category || 'web').slice(1);
+        const item = document.createElement('div');
+        item.className = 'port-item';
+        item.dataset.category = project.category || 'web';
+        item.dataset.title = project.title;
+        item.innerHTML = `
+          <div class="port-flipper">
+            <div class="port-front">
+              <img src="${project.image}" alt="${project.title}" loading="lazy" width="400" height="220">
+              <div class="port-front-overlay">
+                <h3>${project.title}</h3>
+                <span class="port-cat-badge">${catLabel}</span>
+              </div>
+            </div>
+            <div class="port-back">
+              <div>
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="port-tech">${techHtml}</div>
+              </div>
+              <div class="port-actions">
+                <a href="${project.github || 'https://github.com/nis6hal'}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+                ${project.demo && project.demo !== '#contact' ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
+
+      // Re-attach filter logic for dynamically rendered items
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const searchInput = document.getElementById('portfolioSearch');
+      let activeFilter = 'all';
+      function applyPortfolioFilters() {
+        const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        document.querySelectorAll('.port-item').forEach(item => {
+          const matchFilter = activeFilter === 'all' || item.dataset.category === activeFilter;
+          const matchSearch = !q || item.dataset.title.toLowerCase().includes(q);
+          item.classList.toggle('hidden', !(matchFilter && matchSearch));
+        });
+      }
+      filterBtns.forEach(btn => {
+        btn.replaceWith(btn.cloneNode(true)); // remove old listeners
+      });
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = btn.dataset.filter;
+          applyPortfolioFilters();
+        });
+      });
+      if (searchInput) {
+        searchInput.oninput = applyPortfolioFilters;
+      }
+
+      // Re-trigger IntersectionObserver for stagger animation
+      const piObs = new IntersectionObserver((entries) => {
+        entries.forEach((e, idx) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), idx * 80);
+            piObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.port-item').forEach(p => piObs.observe(p));
+    }
+  }
+
+  /* ---- FEATURED MARQUEE ---- */
+  if (projects?.length > 0) {
+    const track = document.getElementById('marqueeTrack');
+    if (track) {
+      const buildCard = (project, hidden) => {
+        const techHtml = (project.tech || []).slice(0, 3).map(t => `<span>${t}</span>`).join('');
+        return `
+          <article class="marquee-card"${hidden ? ' aria-hidden="true"' : ''}>
+            <div class="marquee-card-shine" aria-hidden="true"></div>
+            <img src="${project.image}" alt="${hidden ? '' : project.title + ' preview'}" loading="lazy" width="340" height="180">
+            <div class="marquee-meta">
+              <h3>${project.title}</h3>
+              <p>${project.description.length > 60 ? project.description.slice(0, 60) + '…' : project.description}</p>
+              <div class="marquee-tags">${techHtml}</div>
+            </div>
+          </article>
+        `;
+      };
+      const originals = projects.map(p => buildCard(p, false)).join('');
+      const dupes = projects.map(p => buildCard(p, true)).join('');
+      track.innerHTML = originals + dupes;
+
+      // Re-attach marquee tilt
+      track.querySelectorAll('.marquee-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const dx = (e.clientX - r.left - r.width/2) / r.width * 24;
+          const dy = (e.clientY - r.top - r.height/2) / r.height * 24;
+          card.style.transform = `perspective(800px) rotateX(${-dy}deg) rotateY(${dx}deg)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      });
+    }
+  }
+}
+
+// Run on DOM ready
+document.addEventListener('DOMContentLoaded', loadLiveData);
 </script>
 </body>
 </html>
