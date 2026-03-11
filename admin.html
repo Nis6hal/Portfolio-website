@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Nischal Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root{
+  --bg-base:#04040f;--bg-surface:#090918;--bg-card:#0d0d24;
+  --accent-primary:#00e5ff;--accent-secondary:#7c3aed;
+  --accent-glow:#00e5ff33;--text-primary:#f0f0ff;--text-muted:#8888aa;
+  --border:#1a1a3a;--danger:#ef4444;--success:#22c55e;--warning:#f59e0b;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:15px;}
+body{font-family:'Outfit',sans-serif;background:var(--bg-base);color:var(--text-primary);min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+
+/* ── Login ── */
+#loginScreen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at center,#0d0520 0%,#04040f 70%);
+}
+.login-box{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-top:3px solid var(--accent-primary);
+  border-radius:20px;padding:48px 40px;width:100%;max-width:420px;
+  box-shadow:0 20px 60px rgba(0,229,255,0.1);
+}
+.login-logo{
+  font-family:'Syne',sans-serif;font-size:32px;font-weight:800;
+  color:var(--accent-primary);text-align:center;margin-bottom:8px;
+  text-shadow:0 0 20px var(--accent-primary);
+}
+.login-sub{text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:32px;font-family:'IBM Plex Mono',monospace;}
+.field{margin-bottom:20px;}
+.field label{display:block;font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;letter-spacing:1px;margin-bottom:8px;}
+.field input{
+  width:100%;background:var(--bg-surface);border:1px solid var(--border);
+  border-radius:8px;padding:12px 14px;color:var(--text-primary);font-size:14px;
+  font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.3s;
+}
+.field input:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px var(--accent-glow);}
+.login-btn{
+  width:100%;padding:13px;background:var(--accent-primary);color:#000;
+  font-weight:700;font-size:15px;border:none;border-radius:8px;
+  transition:all 0.3s;box-shadow:0 0 20px rgba(0,229,255,0.3);
+}
+.login-btn:hover{box-shadow:0 0 30px rgba(0,229,255,0.6);transform:translateY(-1px);}
+.login-error{color:var(--danger);font-size:13px;text-align:center;margin-top:12px;display:none;}
+
+/* ── App Shell ── */
+#app{display:none;min-height:100vh;}
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:240px;
+  background:var(--bg-card);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:100;
+}
+.sidebar-brand{
+  padding:24px 20px;border-bottom:1px solid var(--border);
+  font-family:'Syne',sans-serif;font-weight:800;font-size:18px;
+  color:var(--accent-primary);
+}
+.sidebar-brand span{color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace;display:block;font-weight:400;margin-top:2px;}
+.sidebar-nav{flex:1;padding:16px 0;overflow-y:auto;}
+.nav-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;color:var(--text-muted);font-size:14px;
+  cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;
+}
+.nav-item:hover{color:var(--text-primary);background:rgba(255,255,255,0.03);}
+.nav-item.active{color:var(--accent-primary);border-left-color:var(--accent-primary);background:rgba(0,229,255,0.05);}
+.nav-item i{width:18px;text-align:center;}
+.sidebar-footer{
+  padding:16px 20px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.sidebar-user{flex:1;}
+.sidebar-user strong{display:block;font-size:14px;color:var(--text-primary);}
+.sidebar-user span{font-size:11px;color:var(--success);font-family:'IBM Plex Mono',monospace;}
+.logout-btn{
+  color:var(--text-muted);font-size:16px;padding:6px;
+  background:none;border:none;transition:color 0.2s;
+}
+.logout-btn:hover{color:var(--danger);}
+
+.main{margin-left:240px;padding:32px;min-height:100vh;}
+.page{display:none;}
+.page.active{display:block;}
+
+/* ── Page Header ── */
+.page-header{margin-bottom:32px;}
+.page-header h1{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--text-primary);}
+.page-header p{color:var(--text-muted);font-size:14px;margin-top:4px;}
+
+/* ── Stats Row ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;
+  position:relative;overflow:hidden;
+}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));}
+.stat-card i{font-size:22px;color:var(--accent-primary);margin-bottom:10px;display:block;}
+.stat-card .num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text-primary);}
+.stat-card .lbl{font-size:12px;color:var(--text-muted);margin-top:2px;}
+
+/* ── Toolbar ── */
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.toolbar-left{display:flex;gap:10px;align-items:center;}
+
+/* ── Buttons ── */
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;
+  border:none;transition:all 0.2s;font-family:'Outfit',sans-serif;
+}
+.btn-primary{background:var(--accent-primary);color:#000;}
+.btn-primary:hover{box-shadow:0 0 20px rgba(0,229,255,0.4);transform:translateY(-1px);}
+.btn-secondary{background:transparent;color:var(--accent-primary);border:1px solid var(--accent-primary);}
+.btn-secondary:hover{background:rgba(0,229,255,0.08);}
+.btn-danger{background:transparent;color:var(--danger);border:1px solid var(--danger);}
+.btn-danger:hover{background:rgba(239,68,68,0.1);}
+.btn-sm{padding:6px 12px;font-size:12px;}
+.btn-icon{padding:7px 10px;}
+
+/* ── Table ── */
+.table-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead{background:var(--bg-surface);}
+th{padding:12px 16px;text-align:left;font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--text-muted);letter-spacing:1px;font-weight:500;}
+td{padding:12px 16px;font-size:13px;border-top:1px solid var(--border);vertical-align:middle;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.td-img{width:60px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--border);}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-family:'IBM Plex Mono',monospace;}
+.badge-web{background:rgba(0,229,255,0.1);color:var(--accent-primary);border:1px solid rgba(0,229,255,0.2);}
+.badge-ai{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
+.badge-mobile{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2);}
+.badge-on{background:rgba(34,197,94,0.1);color:var(--success);border:1px solid rgba(34,197,94,0.2);}
+.badge-off{background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.2);}
+.tag{display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;padding:1px 7px;font-size:11px;color:var(--text-muted);margin:1px;}
+
+/* ── Skill bars ── */
+.skill-bar-bg{height:6px;background:var(--border);border-radius:3px;overflow:hidden;width:120px;}
+.skill-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));}
+
+/* ── Modal ── */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);
+  z-index:999;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-backdrop.open{display:flex;}
+.modal{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-top:3px solid var(--accent-primary);
+  border-radius:16px;width:100%;max-width:560px;max-height:90vh;
+  overflow-y:auto;animation:modalIn 0.25s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
+.modal-header{
+  padding:22px 24px 0;display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:20px;
+}
+.modal-header h2{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;}
+.modal-close{color:var(--text-muted);font-size:18px;background:none;border:none;padding:4px 8px;border-radius:6px;transition:color 0.2s;}
+.modal-close:hover{color:var(--danger);}
+.modal-body{padding:0 24px 24px;}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
+
+/* ── Form ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{margin-bottom:16px;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{display:block;font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--text-muted);letter-spacing:1px;margin-bottom:7px;}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;background:var(--bg-surface);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;color:var(--text-primary);font-size:13px;
+  font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.3s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--accent-primary);box-shadow:0 0 0 3px var(--accent-glow);
+}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group select option{background:var(--bg-card);}
+.range-wrap{display:flex;align-items:center;gap:12px;}
+.range-wrap input[type=range]{flex:1;accent-color:var(--accent-primary);}
+.range-val{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  color:var(--accent-primary);min-width:36px;text-align:right;
+}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);}
+.toggle-row:last-child{border-bottom:none;}
+.toggle-label{font-size:14px;color:var(--text-primary);}
+.toggle-desc{font-size:12px;color:var(--text-muted);margin-top:2px;}
+.toggle{position:relative;width:44px;height:24px;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{
+  position:absolute;inset:0;background:var(--border);border-radius:12px;
+  transition:0.3s;cursor:pointer;
+}
+.toggle-slider::before{
+  content:'';position:absolute;width:18px;height:18px;
+  left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.3s;
+}
+.toggle input:checked + .toggle-slider{background:var(--accent-primary);}
+.toggle input:checked + .toggle-slider::before{transform:translateX(20px);}
+
+/* ── Toast ── */
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;padding:12px 20px;font-size:13px;
+  display:flex;align-items:center;gap:10px;z-index:9999;
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.success{border-color:var(--success);color:var(--success);}
+#toast.error{border-color:var(--danger);color:var(--danger);}
+
+/* ── Content editor ── */
+.content-section{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:24px;margin-bottom:20px;
+}
+.content-section h3{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:16px;
+  color:var(--text-primary);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.content-section h3 i{color:var(--accent-primary);}
+
+/* ── Empty state ── */
+.empty-state{
+  text-align:center;padding:48px 24px;
+  color:var(--text-muted);
+}
+.empty-state i{font-size:40px;margin-bottom:12px;display:block;opacity:0.4;}
+
+/* ── Loading ── */
+.loading{text-align:center;padding:40px;color:var(--text-muted);}
+.loading i{font-size:24px;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform 0.3s;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;padding:20px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Toast ── -->
+<div id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<!-- ══════════════════════════════════════════════
+     LOGIN
+══════════════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">NB Admin</div>
+    <div class="login-sub">PORTFOLIO CONTROL PANEL</div>
+    <div class="field">
+      <label>USERNAME</label>
+      <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username">
+    </div>
+    <div class="field">
+      <label>PASSWORD</label>
+      <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password">
+    </div>
+    <button class="login-btn" id="loginBtn">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </button>
+    <div class="login-error" id="loginError">Invalid username or password</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     APP
+══════════════════════════════════════════════ -->
+<div id="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      NB Admin
+      <span>PORTFOLIO PANEL</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-page="dashboard"><i class="fas fa-th-large"></i> Dashboard</div>
+      <div class="nav-item" data-page="projects"><i class="fas fa-folder"></i> Projects</div>
+      <div class="nav-item" data-page="skills"><i class="fas fa-code"></i> Skills</div>
+      <div class="nav-item" data-page="content"><i class="fas fa-edit"></i> Content</div>
+      <div class="nav-item" data-page="settings"><i class="fas fa-cog"></i> Settings</div>
+      <div class="nav-item" onclick="window.open('index.html','_blank')"><i class="fas fa-external-link-alt"></i> View Portfolio</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <strong id="sidebarUsername">Admin</strong>
+        <span>● Online</span>
+      </div>
+      <button class="logout-btn" id="logoutBtn" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- ── Dashboard ── -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Overview of your portfolio content</p>
+      </div>
+      <div class="stats-row" id="dashStats">
+        <div class="stat-card"><i class="fas fa-folder"></i><div class="num" id="statProjects">–</div><div class="lbl">Projects</div></div>
+        <div class="stat-card"><i class="fas fa-code"></i><div class="num" id="statSkills">–</div><div class="lbl">Skills</div></div>
+        <div class="stat-card"><i class="fas fa-eye"></i><div class="num" id="statVisible">–</div><div class="lbl">Visible Projects</div></div>
+        <div class="stat-card"><i class="fas fa-server"></i><div class="num" id="statApi">–</div><div class="lbl">API Status</div></div>
+      </div>
+      <div class="content-section">
+        <h3><i class="fas fa-info-circle"></i> Quick Actions</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="goTo('projects')"><i class="fas fa-plus"></i> Add Project</button>
+          <button class="btn btn-secondary" onclick="goTo('skills')"><i class="fas fa-edit"></i> Edit Skills</button>
+          <button class="btn btn-secondary" onclick="goTo('content')"><i class="fas fa-file-alt"></i> Edit Content</button>
+          <button class="btn btn-secondary" onclick="window.open('index.html','_blank')"><i class="fas fa-external-link-alt"></i> View Live Portfolio</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Projects ── -->
+    <div class="page" id="page-projects">
+      <div class="page-header">
+        <h1>Projects</h1>
+        <p>Manage your portfolio projects</p>
+      </div>
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="btn btn-primary" id="addProjectBtn"><i class="fas fa-plus"></i> Add Project</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>IMAGE</th><th>TITLE</th><th>CATEGORY</th><th>TECH</th><th>VISIBLE</th><th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="projectsTable">
+            <tr><td colspan="6"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Skills ── -->
+    <div class="page" id="page-skills">
+      <div class="page-header">
+        <h1>Skills</h1>
+        <p>Manage technical and professional skills</p>
+      </div>
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="btn btn-primary" id="addSkillBtn"><i class="fas fa-plus"></i> Add Skill</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>NAME</th><th>TYPE</th><th>LEVEL</th><th>PERCENTAGE</th><th>ACTIONS</th></tr>
+          </thead>
+          <tbody id="skillsTable">
+            <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Content ── -->
+    <div class="page" id="page-content">
+      <div class="page-header">
+        <h1>Content</h1>
+        <p>Edit your portfolio text and contact info</p>
+      </div>
+
+      <!-- Hero -->
+      <div class="content-section">
+        <h3><i class="fas fa-home"></i> Hero Section</h3>
+        <div class="form-row">
+          <div class="form-group"><label>NAME</label><input type="text" id="heroName"></div>
+          <div class="form-group"><label>TAGLINE</label><input type="text" id="heroTagline"></div>
+        </div>
+        <div class="form-group"><label>DESCRIPTION</label><textarea id="heroDesc" rows="3"></textarea></div>
+        <button class="btn btn-primary" id="saveHeroBtn"><i class="fas fa-save"></i> Save Hero</button>
+      </div>
+
+      <!-- About -->
+      <div class="content-section">
+        <h3><i class="fas fa-user"></i> About Section</h3>
+        <div class="form-group"><label>PARAGRAPH 1</label><textarea id="aboutBio1" rows="3"></textarea></div>
+        <div class="form-group"><label>PARAGRAPH 2</label><textarea id="aboutBio2" rows="3"></textarea></div>
+        <div class="form-group"><label>PARAGRAPH 3</label><textarea id="aboutBio3" rows="3"></textarea></div>
+        <button class="btn btn-primary" id="saveAboutBtn"><i class="fas fa-save"></i> Save About</button>
+      </div>
+
+      <!-- Contact -->
+      <div class="content-section">
+        <h3><i class="fas fa-envelope"></i> Contact & Social Links</h3>
+        <div class="form-row">
+          <div class="form-group"><label>EMAIL</label><input type="email" id="contactEmail"></div>
+          <div class="form-group"><label>LOCATION</label><input type="text" id="contactLocation"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>GITHUB URL</label><input type="url" id="contactGithub"></div>
+          <div class="form-group"><label>LINKEDIN URL</label><input type="url" id="contactLinkedin"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>TWITTER URL</label><input type="url" id="contactTwitter"></div>
+          <div class="form-group"><label>INSTAGRAM URL</label><input type="url" id="contactInstagram"></div>
+        </div>
+        <button class="btn btn-primary" id="saveContactBtn"><i class="fas fa-save"></i> Save Contact</button>
+      </div>
+    </div>
+
+    <!-- ── Settings ── -->
+    <div class="page" id="page-settings">
+      <div class="page-header">
+        <h1>Settings</h1>
+        <p>Toggle portfolio sections on or off</p>
+      </div>
+      <div class="content-section">
+        <h3><i class="fas fa-sliders-h"></i> Section Visibility</h3>
+        <div id="sectionToggles">
+          <div class="toggle-row">
+            <div><div class="toggle-label">Featured Projects Marquee</div><div class="toggle-desc">The scrolling marquee strip below the hero</div></div>
+            <label class="toggle"><input type="checkbox" id="toggleMarquee"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">Services Section</div><div class="toggle-desc">Web Dev, Full Stack, AI, Cloud, Consulting</div></div>
+            <label class="toggle"><input type="checkbox" id="toggleServices"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div><div class="toggle-label">GitHub Activity Section</div><div class="toggle-desc">The decorative commit heatmap</div></div>
+            <label class="toggle"><input type="checkbox" id="toggleGithub"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <button class="btn btn-primary" id="saveSettingsBtn"><i class="fas fa-save"></i> Save Settings</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PROJECT MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="projectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="projectModalTitle">Add Project</h2>
+      <button class="modal-close" onclick="closeModal('projectModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="projectId">
+      <div class="form-row">
+        <div class="form-group"><label>TITLE *</label><input type="text" id="pTitle" placeholder="Project name"></div>
+        <div class="form-group">
+          <label>CATEGORY *</label>
+          <select id="pCategory">
+            <option value="web">Web App</option>
+            <option value="ai">AI</option>
+            <option value="mobile">Mobile</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group full"><label>DESCRIPTION *</label><textarea id="pDesc" rows="3" placeholder="Short description"></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>IMAGE PATH</label><input type="text" id="pImage" placeholder="Images/PixelPrompt.png"></div>
+        <div class="form-group"><label>GITHUB URL</label><input type="url" id="pGithub" placeholder="https://github.com/nis6hal"></div>
+      </div>
+      <div class="form-group"><label>TECH STACK (comma separated)</label><input type="text" id="pTech" placeholder="React, Node.js, MongoDB"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>ORDER</label>
+          <input type="number" id="pOrder" value="1" min="1">
+        </div>
+        <div class="form-group">
+          <label>VISIBLE</label>
+          <select id="pVisible">
+            <option value="true">Visible</option>
+            <option value="false">Hidden</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('projectModal')">Cancel</button>
+      <button class="btn btn-primary" id="saveProjectBtn"><i class="fas fa-save"></i> Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SKILL MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="skillModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="skillModalTitle">Add Skill</h2>
+      <button class="modal-close" onclick="closeModal('skillModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="skillId">
+      <div class="form-row">
+        <div class="form-group"><label>SKILL NAME *</label><input type="text" id="sName" placeholder="JavaScript"></div>
+        <div class="form-group">
+          <label>TYPE *</label>
+          <select id="sType">
+            <option value="technical">Technical</option>
+            <option value="professional">Professional</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>PERCENTAGE: <span id="sPctDisplay">50</span>%</label>
+        <div class="range-wrap">
+          <input type="range" id="sPct" min="0" max="100" value="50" oninput="document.getElementById('sPctDisplay').textContent=this.value">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>LEVEL</label>
+          <select id="sLevel">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+          </select>
+        </div>
+        <div class="form-group"><label>ORDER</label><input type="number" id="sOrder" value="1" min="1"></div>
+      </div>
+      <div class="form-group"><label>DETAILS</label><input type="text" id="sDetails" placeholder="2+ years • React • Redux"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('skillModal')">Cancel</button>
+      <button class="btn btn-primary" id="saveSkillBtn"><i class="fas fa-save"></i> Save Skill</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     CONFIRM DELETE MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="confirmModal">
+  <div class="modal" style="max-width:380px;">
+    <div class="modal-header">
+      <h2>Confirm Delete</h2>
+      <button class="modal-close" onclick="closeModal('confirmModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--text-muted);font-size:14px;">Are you sure you want to delete <strong id="confirmName" style="color:var(--text-primary)"></strong>? This cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
+      <button class="btn btn-danger" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────────
+// Change this to your Render.com backend URL after deployment
+const API = localStorage.getItem('adminApiUrl') || 'http://localhost:3000';
+let TOKEN = localStorage.getItem('adminToken') || '';
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(API + path, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  const icon = el.querySelector('i');
+  document.getElementById('toastMsg').textContent = msg;
+  el.className = type;
+  icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function goTo(page) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${page}`)?.classList.add('active');
+  if (page === 'projects') loadProjects();
+  if (page === 'skills')   loadSkills();
+  if (page === 'content')  loadContent();
+  if (page === 'settings') loadSettings();
+  if (page === 'dashboard') loadDashboard();
+}
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+async function login() {
+  const username = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  try {
+    const data = await fetch(API + '/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    }).then(r => r.json());
+    if (!data.token) throw new Error(data.error || 'Login failed');
+    TOKEN = data.token;
+    localStorage.setItem('adminToken', TOKEN);
+    document.getElementById('sidebarUsername').textContent = username;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadDashboard();
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+  }
+}
+
+// Auto-login if token exists
+async function tryAutoLogin() {
+  if (!TOKEN) return;
+  try {
+    const data = await api('GET', '/api/auth/verify');
+    if (data.valid) {
+      document.getElementById('sidebarUsername').textContent = data.user.username;
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadDashboard();
+    }
+  } catch { TOKEN = ''; localStorage.removeItem('adminToken'); }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  TOKEN = '';
+  localStorage.removeItem('adminToken');
+  location.reload();
+});
+
+// Sidebar nav
+document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+  item.addEventListener('click', () => goTo(item.dataset.page));
+});
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
+async function loadDashboard() {
+  try {
+    const [projects, skills] = await Promise.all([
+      api('GET', '/api/admin/projects'),
+      api('GET', '/api/admin/skills')
+    ]);
+    document.getElementById('statProjects').textContent = projects.length;
+    document.getElementById('statSkills').textContent = skills.length;
+    document.getElementById('statVisible').textContent = projects.filter(p => p.visible).length;
+    document.getElementById('statApi').textContent = '✅';
+  } catch {
+    document.getElementById('statApi').textContent = '❌';
+  }
+}
+
+// ── Projects ──────────────────────────────────────────────────────────────────
+async function loadProjects() {
+  const tbody = document.getElementById('projectsTable');
+  tbody.innerHTML = '<tr><td colspan="6"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  try {
+    const projects = await api('GET', '/api/admin/projects');
+    if (!projects.length) {
+      tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-folder-open"></i>No projects yet</div></td></tr>';
+      return;
+    }
+    tbody.innerHTML = projects.map(p => `
+      <tr>
+        <td><img class="td-img" src="${p.image}" alt="${p.title}" onerror="this.src='https://placehold.co/60x40/0d0d24/00e5ff?text=IMG'"></td>
+        <td><strong>${p.title}</strong></td>
+        <td><span class="badge badge-${p.category}">${p.category}</span></td>
+        <td>${(p.tech||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</td>
+        <td><span class="badge ${p.visible?'badge-on':'badge-off'}">${p.visible?'Visible':'Hidden'}</span></td>
+        <td>
+          <button class="btn btn-secondary btn-sm btn-icon" onclick="editProject('${p._id}')" title="Edit"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('project','${p._id}','${p.title}')" title="Delete"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>`).join('');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('addProjectBtn').addEventListener('click', () => {
+  document.getElementById('projectModalTitle').textContent = 'Add Project';
+  document.getElementById('projectId').value = '';
+  document.getElementById('pTitle').value = '';
+  document.getElementById('pDesc').value = '';
+  document.getElementById('pCategory').value = 'web';
+  document.getElementById('pImage').value = '';
+  document.getElementById('pGithub').value = 'https://github.com/nis6hal';
+  document.getElementById('pTech').value = '';
+  document.getElementById('pOrder').value = '1';
+  document.getElementById('pVisible').value = 'true';
+  openModal('projectModal');
+});
+
+async function editProject(id) {
+  try {
+    const projects = await api('GET', '/api/admin/projects');
+    const p = projects.find(x => x._id === id);
+    if (!p) return;
+    document.getElementById('projectModalTitle').textContent = 'Edit Project';
+    document.getElementById('projectId').value = p._id;
+    document.getElementById('pTitle').value = p.title;
+    document.getElementById('pDesc').value = p.description;
+    document.getElementById('pCategory').value = p.category;
+    document.getElementById('pImage').value = p.image;
+    document.getElementById('pGithub').value = p.github || '';
+    document.getElementById('pTech').value = (p.tech||[]).join(', ');
+    document.getElementById('pOrder').value = p.order;
+    document.getElementById('pVisible').value = String(p.visible);
+    openModal('projectModal');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('saveProjectBtn').addEventListener('click', async () => {
+  const id = document.getElementById('projectId').value;
+  const payload = {
+    title:       document.getElementById('pTitle').value.trim(),
+    description: document.getElementById('pDesc').value.trim(),
+    category:    document.getElementById('pCategory').value,
+    image:       document.getElementById('pImage').value.trim(),
+    github:      document.getElementById('pGithub').value.trim(),
+    tech:        document.getElementById('pTech').value.split(',').map(t=>t.trim()).filter(Boolean),
+    order:       parseInt(document.getElementById('pOrder').value) || 1,
+    visible:     document.getElementById('pVisible').value === 'true'
+  };
+  if (!payload.title || !payload.description) { toast('Title and description are required', 'error'); return; }
+  try {
+    id ? await api('PUT', `/api/admin/projects/${id}`, payload)
+       : await api('POST', '/api/admin/projects', payload);
+    toast(id ? 'Project updated!' : 'Project added!');
+    closeModal('projectModal');
+    loadProjects();
+  } catch (err) { toast(err.message, 'error'); }
+});
+
+// ── Skills ────────────────────────────────────────────────────────────────────
+async function loadSkills() {
+  const tbody = document.getElementById('skillsTable');
+  tbody.innerHTML = '<tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  try {
+    const skills = await api('GET', '/api/admin/skills');
+    if (!skills.length) {
+      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-code"></i>No skills yet</div></td></tr>';
+      return;
+    }
+    tbody.innerHTML = skills.map(s => `
+      <tr>
+        <td><strong>${s.name}</strong></td>
+        <td><span class="badge ${s.type==='technical'?'badge-web':'badge-ai'}">${s.type}</span></td>
+        <td>${s.level}</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:${s.percentage}%"></div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-primary)">${s.percentage}%</span>
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-secondary btn-sm btn-icon" onclick="editSkill('${s._id}')" title="Edit"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('skill','${s._id}','${s.name}')" title="Delete"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>`).join('');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('addSkillBtn').addEventListener('click', () => {
+  document.getElementById('skillModalTitle').textContent = 'Add Skill';
+  document.getElementById('skillId').value = '';
+  document.getElementById('sName').value = '';
+  document.getElementById('sType').value = 'technical';
+  document.getElementById('sPct').value = 50;
+  document.getElementById('sPctDisplay').textContent = '50';
+  document.getElementById('sLevel').value = 'Beginner';
+  document.getElementById('sOrder').value = '1';
+  document.getElementById('sDetails').value = '';
+  openModal('skillModal');
+});
+
+async function editSkill(id) {
+  try {
+    const skills = await api('GET', '/api/admin/skills');
+    const s = skills.find(x => x._id === id);
+    if (!s) return;
+    document.getElementById('skillModalTitle').textContent = 'Edit Skill';
+    document.getElementById('skillId').value = s._id;
+    document.getElementById('sName').value = s.name;
+    document.getElementById('sType').value = s.type;
+    document.getElementById('sPct').value = s.percentage;
+    document.getElementById('sPctDisplay').textContent = s.percentage;
+    document.getElementById('sLevel').value = s.level;
+    document.getElementById('sOrder').value = s.order;
+    document.getElementById('sDetails').value = s.details || '';
+    openModal('skillModal');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('saveSkillBtn').addEventListener('click', async () => {
+  const id = document.getElementById('skillId').value;
+  const payload = {
+    name:       document.getElementById('sName').value.trim(),
+    type:       document.getElementById('sType').value,
+    percentage: parseInt(document.getElementById('sPct').value),
+    level:      document.getElementById('sLevel').value,
+    order:      parseInt(document.getElementById('sOrder').value) || 1,
+    details:    document.getElementById('sDetails').value.trim()
+  };
+  if (!payload.name) { toast('Skill name is required', 'error'); return; }
+  try {
+    id ? await api('PUT',  `/api/admin/skills/${id}`, payload)
+       : await api('POST', '/api/admin/skills', payload);
+    toast(id ? 'Skill updated!' : 'Skill added!');
+    closeModal('skillModal');
+    loadSkills();
+  } catch (err) { toast(err.message, 'error'); }
+});
+
+// ── Content ───────────────────────────────────────────────────────────────────
+async function loadContent() {
+  try {
+    const [hero, about, contact] = await Promise.all([
+      api('GET', '/api/content/hero'),
+      api('GET', '/api/content/about'),
+      api('GET', '/api/content/contact')
+    ]);
+    document.getElementById('heroName').value     = hero.name || '';
+    document.getElementById('heroTagline').value  = hero.tagline || '';
+    document.getElementById('heroDesc').value     = hero.description || '';
+    document.getElementById('aboutBio1').value    = about.bio1 || '';
+    document.getElementById('aboutBio2').value    = about.bio2 || '';
+    document.getElementById('aboutBio3').value    = about.bio3 || '';
+    document.getElementById('contactEmail').value    = contact.email || '';
+    document.getElementById('contactLocation').value = contact.location || '';
+    document.getElementById('contactGithub').value   = contact.github || '';
+    document.getElementById('contactLinkedin').value = contact.linkedin || '';
+    document.getElementById('contactTwitter').value  = contact.twitter || '';
+    document.getElementById('contactInstagram').value= contact.instagram || '';
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('saveHeroBtn').addEventListener('click', async () => {
+  try {
+    await api('PUT', '/api/admin/content/hero', {
+      name:        document.getElementById('heroName').value,
+      tagline:     document.getElementById('heroTagline').value,
+      description: document.getElementById('heroDesc').value
+    });
+    toast('Hero content saved!');
+  } catch (err) { toast(err.message, 'error'); }
+});
+
+document.getElementById('saveAboutBtn').addEventListener('click', async () => {
+  try {
+    await api('PUT', '/api/admin/content/about', {
+      bio1: document.getElementById('aboutBio1').value,
+      bio2: document.getElementById('aboutBio2').value,
+      bio3: document.getElementById('aboutBio3').value
+    });
+    toast('About content saved!');
+  } catch (err) { toast(err.message, 'error'); }
+});
+
+document.getElementById('saveContactBtn').addEventListener('click', async () => {
+  try {
+    await api('PUT', '/api/admin/content/contact', {
+      email:     document.getElementById('contactEmail').value,
+      location:  document.getElementById('contactLocation').value,
+      github:    document.getElementById('contactGithub').value,
+      linkedin:  document.getElementById('contactLinkedin').value,
+      twitter:   document.getElementById('contactTwitter').value,
+      instagram: document.getElementById('contactInstagram').value
+    });
+    toast('Contact info saved!');
+  } catch (err) { toast(err.message, 'error'); }
+});
+
+// ── Settings ──────────────────────────────────────────────────────────────────
+async function loadSettings() {
+  try {
+    const sections = await api('GET', '/api/content/sections');
+    document.getElementById('toggleMarquee').checked  = sections.showFeaturedMarquee !== false;
+    document.getElementById('toggleServices').checked = sections.showServices !== false;
+    document.getElementById('toggleGithub').checked   = sections.showGithubActivity !== false;
+  } catch {}
+}
+
+document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
+  try {
+    await api('PUT', '/api/admin/content/sections', {
+      showFeaturedMarquee: document.getElementById('toggleMarquee').checked,
+      showServices:        document.getElementById('toggleServices').checked,
+      showGithubActivity:  document.getElementById('toggleGithub').checked
+    });
+    toast('Settings saved!');
+  } catch (err) { toast(err.message, 'error'); }
+});
+
+// ── Delete ────────────────────────────────────────────────────────────────────
+let pendingDelete = null;
+
+function deleteItem(type, id, name) {
+  document.getElementById('confirmName').textContent = name;
+  pendingDelete = { type, id };
+  openModal('confirmModal');
+}
+
+document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+  if (!pendingDelete) return;
+  try {
+    const { type, id } = pendingDelete;
+    await api('DELETE', `/api/admin/${type}s/${id}`);
+    toast(`${type === 'project' ? 'Project' : 'Skill'} deleted`);
+    closeModal('confirmModal');
+    type === 'project' ? loadProjects() : loadSkills();
+  } catch (err) { toast(err.message, 'error'); }
+  pendingDelete = null;
+});
+
+// Close modals on backdrop click
+document.querySelectorAll('.modal-backdrop').forEach(bd => {
+  bd.addEventListener('click', e => { if (e.target === bd) bd.classList.remove('open'); });
+});
+
+// Escape key closes modals
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+});
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+tryAutoLogin();
+</script>
+</body>
+</html>
