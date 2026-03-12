@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 const crypto = require('crypto');
 
 const app = express();
@@ -72,22 +73,7 @@ const ContactRequestSchema = new mongoose.Schema({
 const ContactRequest = mongoose.model('ContactRequest', ContactRequestSchema);
 
 // ─── Nodemailer Transporter ───────────────────────────────────────────────────
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD
-  }
-});
 
-// Verify Gmail connection on startup
-transporter.verify((error) => {
-  if (error) {
-    console.error('❌ Gmail SMTP error:', error.message);
-  } else {
-    console.log('✅ Gmail SMTP ready');
-  }
-});
 
 // ─── Auth Middleware ──────────────────────────────────────────────────────────
 function authMiddleware(req, res, next) {
@@ -260,8 +246,8 @@ app.post('/api/contact/submit', async (req, res) => {
     const verifyUrl = `${process.env.BACKEND_URL || 'https://nischal-portfolio-api.onrender.com'}/api/contact/verify/${token}`;
 
     // Send verification email to the submitter
-    await transporter.sendMail({
-      from: `"Nischal Bhandari Portfolio" <${process.env.GMAIL_USER}>`,
+    await resend.emails.send({
+      from: 'Nischal Bhandari Portfolio <noreply@nischal-bhandari.com.np>',
       to: email,
       subject: '✅ Confirm your message to Nischal Bhandari',
       html: `
@@ -347,9 +333,9 @@ app.get('/api/contact/verify/:token', async (req, res) => {
     await request.save();
 
     // Forward the message to Nischal
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
+    await resend.emails.send({
+      from: 'Portfolio Contact <noreply@nischal-bhandari.com.np>',
+      to: 'itisnischal@gmail.com',
       replyTo: request.email,
       subject: `📬 New Verified Message: ${request.subject}`,
       html: `
