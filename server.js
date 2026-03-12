@@ -80,6 +80,15 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Verify Gmail connection on startup
+transporter.verify((error) => {
+  if (error) {
+    console.error('❌ Gmail SMTP error:', error.message);
+  } else {
+    console.log('✅ Gmail SMTP ready');
+  }
+});
+
 // ─── Auth Middleware ──────────────────────────────────────────────────────────
 function authMiddleware(req, res, next) {
   const auth = req.headers.authorization;
@@ -309,8 +318,8 @@ app.post('/api/contact/submit', async (req, res) => {
     res.json({ message: 'Verification email sent! Please check your inbox and confirm your message.' });
 
   } catch (err) {
-    console.error('Contact submit error:', err);
-    res.status(500).json({ error: 'Failed to send verification email. Please try again.' });
+    console.error('Contact submit error:', err.message, err.code);
+    res.status(500).json({ error: 'Failed to send verification email. Please try again.', detail: err.message });
   }
 });
 
