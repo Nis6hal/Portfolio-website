@@ -1300,6 +1300,9 @@ section{padding:120px 0;}
   #chatToggle{
     bottom:24px;right:16px;
   }
+  body.chat-is-open #chatToggle{
+    display:none !important;
+  }
   #scrollToTop{
     bottom:90px;right:16px;
   }
@@ -1399,7 +1402,7 @@ section{padding:120px 0;}
       <div class="hero-typewriter" id="typewriter" aria-live="polite"></div>
       <p class="hero-desc">Computer Engineering student building production-grade experiences for the past 2+ years with a focus on performance, maintainability, and user-first solutions.</p>
       <div class="hero-buttons">
-        <a href="mailto:itisnischal@gmail.com" class="btn btn-cyan"><i class="fas fa-envelope"></i> Email Me</a>
+        <a href="/cdn-cgi/l/email-protection#640d100d170a0d17070c0508240309050d084a070b09" class="btn btn-cyan"><i class="fas fa-envelope"></i> Email Me</a>
         <a href="assets/Nischal-Bhandari-CV.pdf" class="btn btn-cyan-outline" download aria-label="Download CV PDF"><i class="fas fa-download"></i> Download CV</a>
         <a href="#contact" class="btn btn-violet"><i class="fas fa-handshake"></i> Hire Me Now</a>
         <button class="btn btn-ghost" id="talkAI"><i class="fas fa-comment-dots"></i> Talk to My AI ↓</button>
@@ -1943,8 +1946,8 @@ section{padding:120px 0;}
           <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
           <div>
             <h4>Email</h4>
-            <p>itisnischal@gmail.com</p>
-            <a href="mailto:itisnischal@gmail.com" class="contact-link">Send Email</a>
+            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9df4e9f4eef3f4eefef5fcf1ddfaf0fcf4f1b3fef2f0">[email&#160;protected]</a></p>
+            <a href="/cdn-cgi/l/email-protection#dfb6abb6acb1b6acbcb7beb39fb8b2beb6b3f1bcb0b2" class="contact-link">Send Email</a>
           </div>
         </div>
         <div class="contact-card">
@@ -2082,7 +2085,7 @@ section{padding:120px 0;}
 </div>
 
 <!-- ==================== SCRIPTS ==================== -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // CHATBOT: To add new Q&A pairs, add entries to the RESPONSES array in getBotResponse()
 // Each entry needs: keywords (array of strings) and reply (string, use \n for line breaks)
 
@@ -3101,9 +3104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.addEventListener('mouseup', () => {
         if (!dragging) return;
-        dragging = false;
-        w
-      
+     
         wrapper.classList.remove('is-dragging');
       });
     }
