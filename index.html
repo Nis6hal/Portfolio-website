@@ -245,7 +245,6 @@ body.cursor-click #cursor-dot{
   min-height:40px;margin-bottom:20px;
   white-space:nowrap;overflow:hidden;
 }
-.hero-badges-mobile{display:none;}
 .hero-desc{
   color:var(--text-muted);font-size:16px;
   max-width:500px;margin-bottom:32px;line-height:1.8;
@@ -1229,11 +1228,9 @@ section{padding:120px 0;}
   }
   .hero-title{font-size:38px;}
   .hero-visual{order:-1;}
-  .profile-hex-wrap{width:200px;height:200px;}
-  .profile-hex{width:180px;height:180px;}
-  .badge-1{display:none;}
-  .badge-2,.badge-3{display:flex;position:static;transform:none;animation:none;margin:4px;}
-  .hero-badges-mobile{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:16px;}
+  .profile-hex-wrap{width:240px;height:240px;}
+  .profile-hex{width:220px;height:220px;}
+  .badge-1,.badge-2,.badge-3{display:none;}
   .hero-buttons,.hero-socials{justify-content:center;}
   .hero-desc{margin:0 auto 32px;}
 
@@ -1270,9 +1267,9 @@ section{padding:120px 0;}
 
   #chatWindow{
     position:fixed;
-    top:0;bottom:0;right:0;left:0;
+    top:0;left:0;right:0;
     width:100%;
-    height:100%;
+    height:100dvh;
     border-radius:0;
     display:flex;flex-direction:column;
     transform:translateY(100%);
@@ -1286,10 +1283,15 @@ section{padding:120px 0;}
   #chatMessages{
     flex:1;min-height:0;
     overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
   }
   .chat-input-row{
     flex-shrink:0;
+    position:sticky;
+    bottom:0;
+    background:var(--bg-card);
     padding:10px 12px 20px;
+    z-index:10;
   }
   .quick-chips{flex-shrink:0;}
   #cursor-dot,#cursor-ring{display:none;}
@@ -1418,10 +1420,6 @@ section{padding:120px 0;}
           <img src="Images/Profile.jpg" alt="Nischal Bhandari" loading="eager" fetchpriority="high" width="260" height="260">
         </div>
         <div class="badge badge-1" aria-label="8 plus projects"><i class="fas fa-code"></i> 8+ Projects</div>
-        <div class="badge badge-2" aria-label="2 plus years experience"><i class="fas fa-clock"></i> 2+ Years</div>
-        <div class="badge badge-3" aria-label="Location Nepal"><i class="fas fa-map-marker-alt"></i> Pokhara, Nepal 🇳🇵</div>
-      </div>
-      <div class="hero-badges-mobile">
         <div class="badge badge-2" aria-label="2 plus years experience"><i class="fas fa-clock"></i> 2+ Years</div>
         <div class="badge badge-3" aria-label="Location Nepal"><i class="fas fa-map-marker-alt"></i> Pokhara, Nepal 🇳🇵</div>
       </div>
@@ -3105,6 +3103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!dragging) return;
         dragging = false;
         w
+      
         wrapper.classList.remove('is-dragging');
       });
     }
@@ -3113,7 +3112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 } // end loadLiveData
 
-// ── Mobile viewport height fix ──
 function setVH() {
   document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
 }
