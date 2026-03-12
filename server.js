@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const app = express();
 
@@ -55,6 +57,28 @@ const ContentSchema = new mongoose.Schema({
 const Project = mongoose.model('Project', ProjectSchema);
 const Skill   = mongoose.model('Skill',   SkillSchema);
 const Content = mongoose.model('Content', ContentSchema);
+
+// ─── Contact Request Schema ───────────────────────────────────────────────────
+const ContactRequestSchema = new mongoose.Schema({
+  name:      { type: String, required: true },
+  email:     { type: String, required: true },
+  subject:   { type: String, required: true },
+  message:   { type: String, required: true },
+  token:     { type: String, required: true, unique: true },
+  verified:  { type: Boolean, default: false },
+  expiresAt: { type: Date, required: true }
+}, { timestamps: true });
+
+const ContactRequest = mongoose.model('ContactRequest', ContactRequestSchema);
+
+// ─── Nodemailer Transporter ───────────────────────────────────────────────────
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD
+  }
+});
 
 // ─── Auth Middleware ──────────────────────────────────────────────────────────
 function authMiddleware(req, res, next) {
@@ -193,6 +217,184 @@ app.get('/api/content/:key', async (req, res) => {
     res.json(doc.value);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// ─── CONTACT ROUTES ───────────────────────────────────────────────────────────
+
+// Step 1: User submits form → send verification email to them
+app.post('/api/contact/submit', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+    if (!name || !email || !subject || !message)
+      return res.status(400).json({ error: 'All fields are required' });
+
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      return res.status(400).json({ error: 'Invalid email address' });
+
+    // Rate limit: max 2 unverified requests per email in last hour
+    const recentCount = await ContactRequest.countDocuments({
+      email,
+      verified: false,
+      createdAt: { $gt: new Date(Date.now() - 60 * 60 * 1000) }
+    });
+    if (recentCount >= 2)
+      return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+
+    // Create verification token
+    const token     = crypto.randomBytes(32).toString('hex');
+    const expiresAt = new Date(Date.now() + 30 * 60 * 1000); // 30 min expiry
+
+    await ContactRequest.create({ name, email, subject, message, token, expiresAt });
+
+    const verifyUrl = `${process.env.BACKEND_URL || 'https://nischal-portfolio-api.onrender.com'}/api/contact/verify/${token}`;
+
+    // Send verification email to the submitter
+    await transporter.sendMail({
+      from: `"Nischal Bhandari Portfolio" <${process.env.GMAIL_USER}>`,
+      to: email,
+      subject: '✅ Confirm your message to Nischal Bhandari',
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+        <body style="margin:0;padding:0;background:#04040f;font-family:'Segoe UI',Arial,sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#04040f;padding:40px 20px;">
+            <tr><td align="center">
+              <table width="560" cellpadding="0" cellspacing="0" style="background:#0d0d24;border:1px solid #1a1a3a;border-top:3px solid #F5B800;border-radius:16px;overflow:hidden;max-width:560px;width:100%;">
+                <!-- Header -->
+                <tr><td style="padding:32px 36px 24px;border-bottom:1px solid #1a1a3a;">
+                  <div style="font-size:22px;font-weight:800;color:#F5B800;letter-spacing:-0.5px;">NB</div>
+                  <div style="font-size:12px;color:#8888aa;font-family:monospace;margin-top:2px;">PORTFOLIO · VERIFY REQUEST</div>
+                </td></tr>
+                <!-- Body -->
+                <tr><td style="padding:32px 36px;">
+                  <h2 style="margin:0 0 12px;font-size:20px;color:#f0f0ff;font-weight:700;">Hi ${name} 👋</h2>
+                  <p style="margin:0 0 20px;color:#8888aa;font-size:14px;line-height:1.7;">
+                    You submitted a contact request to <strong style="color:#f0f0ff;">Nischal Bhandari's</strong> portfolio. 
+                    Please confirm it was really you by clicking the button below.
+                  </p>
+                  <!-- Message preview -->
+                  <div style="background:#090918;border:1px solid #1a1a3a;border-left:3px solid #F5B800;border-radius:8px;padding:16px 20px;margin-bottom:28px;">
+                    <div style="font-size:11px;color:#F5B800;font-family:monospace;letter-spacing:1px;margin-bottom:10px;">YOUR MESSAGE</div>
+                    <div style="font-size:13px;color:#8888aa;margin-bottom:6px;"><strong style="color:#f0f0ff;">Subject:</strong> ${subject}</div>
+                    <div style="font-size:13px;color:#8888aa;line-height:1.6;">${message.replace(/\n/g, '<br>')}</div>
+                  </div>
+                  <!-- CTA Button -->
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr><td align="center">
+                      <a href="${verifyUrl}" style="display:inline-block;background:#F5B800;color:#000;font-weight:700;font-size:14px;padding:14px 36px;border-radius:8px;text-decoration:none;letter-spacing:0.3px;">
+                        ✅ Confirm My Message
+                      </a>
+                    </td></tr>
+                  </table>
+                  <p style="margin:24px 0 0;font-size:12px;color:#555577;text-align:center;line-height:1.6;">
+                    This link expires in <strong style="color:#8888aa;">30 minutes</strong>.<br>
+                    If you didn't submit this form, you can safely ignore this email.
+                  </p>
+                </td></tr>
+                <!-- Footer -->
+                <tr><td style="padding:20px 36px;border-top:1px solid #1a1a3a;text-align:center;">
+                  <p style="margin:0;font-size:11px;color:#555577;">nischal-bhandari.com.np · Pokhara, Nepal</p>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+        </body>
+        </html>
+      `
+    });
+
+    res.json({ message: 'Verification email sent! Please check your inbox and confirm your message.' });
+
+  } catch (err) {
+    console.error('Contact submit error:', err);
+    res.status(500).json({ error: 'Failed to send verification email. Please try again.' });
+  }
+});
+
+// Step 2: User clicks link → forward message to Nischal
+app.get('/api/contact/verify/:token', async (req, res) => {
+  try {
+    const request = await ContactRequest.findOne({
+      token: req.params.token,
+      verified: false,
+      expiresAt: { $gt: new Date() }
+    });
+
+    if (!request) {
+      return res.send(`
+        <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Link Expired</title>
+        <style>body{background:#04040f;color:#f0f0ff;font-family:'Segoe UI',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;}
+        .box{text-align:center;padding:48px;background:#0d0d24;border:1px solid #1a1a3a;border-top:3px solid #ef4444;border-radius:16px;max-width:420px;}
+        h2{color:#ef4444;margin:0 0 12px;}p{color:#8888aa;font-size:14px;}</style></head>
+        <body><div class="box"><h2>❌ Link Expired</h2><p>This verification link has expired or already been used.<br>Please submit the form again.</p></div></body></html>
+      `);
+    }
+
+    // Mark as verified
+    request.verified = true;
+    await request.save();
+
+    // Forward the message to Nischal
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
+      to: process.env.GMAIL_USER,
+      replyTo: request.email,
+      subject: `📬 New Verified Message: ${request.subject}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <body style="margin:0;padding:0;background:#04040f;font-family:'Segoe UI',Arial,sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#04040f;padding:40px 20px;">
+            <tr><td align="center">
+              <table width="560" cellpadding="0" cellspacing="0" style="background:#0d0d24;border:1px solid #1a1a3a;border-top:3px solid #F5B800;border-radius:16px;max-width:560px;width:100%;">
+                <tr><td style="padding:32px 36px 24px;border-bottom:1px solid #1a1a3a;">
+                  <div style="font-size:22px;font-weight:800;color:#F5B800;">NB</div>
+                  <div style="font-size:12px;color:#8888aa;font-family:monospace;margin-top:2px;">PORTFOLIO · NEW VERIFIED MESSAGE</div>
+                </td></tr>
+                <tr><td style="padding:32px 36px;">
+                  <div style="background:#090918;border:1px solid #1a1a3a;border-radius:8px;padding:16px 20px;margin-bottom:20px;">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr><td style="padding:6px 0;font-size:13px;color:#8888aa;width:80px;">From</td><td style="font-size:13px;color:#f0f0ff;font-weight:600;">${request.name}</td></tr>
+                      <tr><td style="padding:6px 0;font-size:13px;color:#8888aa;">Email</td><td style="font-size:13px;color:#F5B800;">${request.email}</td></tr>
+                      <tr><td style="padding:6px 0;font-size:13px;color:#8888aa;">Subject</td><td style="font-size:13px;color:#f0f0ff;">${request.subject}</td></tr>
+                    </table>
+                  </div>
+                  <div style="background:#090918;border:1px solid #1a1a3a;border-left:3px solid #F5B800;border-radius:8px;padding:16px 20px;">
+                    <div style="font-size:11px;color:#F5B800;font-family:monospace;letter-spacing:1px;margin-bottom:10px;">MESSAGE</div>
+                    <p style="margin:0;font-size:14px;color:#c0c0d0;line-height:1.8;">${request.message.replace(/\n/g, '<br>')}</p>
+                  </div>
+                  <p style="margin:20px 0 0;font-size:12px;color:#555577;text-align:center;">Hit Reply to respond directly to ${request.email}</p>
+                </td></tr>
+                <tr><td style="padding:20px 36px;border-top:1px solid #1a1a3a;text-align:center;">
+                  <p style="margin:0;font-size:11px;color:#555577;">nischal-bhandari.com.np · Verified submission</p>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+        </body></html>
+      `
+    });
+
+    // Show success page
+    res.send(`
+      <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Message Confirmed</title>
+      <style>body{background:#04040f;color:#f0f0ff;font-family:'Segoe UI',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;}
+      .box{text-align:center;padding:48px;background:#0d0d24;border:1px solid #1a1a3a;border-top:3px solid #F5B800;border-radius:16px;max-width:420px;}
+      h2{color:#F5B800;margin:0 0 12px;}p{color:#8888aa;font-size:14px;line-height:1.7;}
+      a{color:#F5B800;text-decoration:none;font-size:13px;}</style></head>
+      <body><div class="box">
+        <h2>✅ Message Sent!</h2>
+        <p>Your message has been verified and forwarded to Nischal.<br>He'll get back to you at <strong style="color:#f0f0ff;">${request.email}</strong> soon.</p>
+        <br><a href="https://nischal-bhandari.com.np">← Back to portfolio</a>
+      </div></body></html>
+    `);
+
+  } catch (err) {
+    console.error('Contact verify error:', err);
+    res.status(500).send('Something went wrong. Please try again.');
   }
 });
 
