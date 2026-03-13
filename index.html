@@ -2975,6 +2975,18 @@ async function loadLiveData() {
       projects.forEach(project => {
         const techHtml = (project.tech || []).map(t => `<span>${t}</span>`).join('');
         const catLabel = (project.category || 'web').charAt(0).toUpperCase() + (project.category || 'web').slice(1);
+
+        // Register in projectData so Details modal works
+        projectData[project._id] = {
+          title: project.title,
+          content: `
+            <p>${project.description}</p>
+            <h3>Tech Stack</h3>
+            <div class="modal-tech">${(project.tech || []).map(t => `<span>${t}</span>`).join('')}</div>
+            ${project.github ? `<h3>Links</h3><p><a href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>` : ''}
+          `
+        };
+
         const item = document.createElement('div');
         item.className = 'port-item';
         item.dataset.category = project.category || 'web';
@@ -2995,6 +3007,7 @@ async function loadLiveData() {
                 <div class="port-tech">${techHtml}</div>
               </div>
               <div class="port-actions">
+                <button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>
                 <a href="${project.github || 'https://github.com/nis6hal'}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
                 ${project.demo && project.demo !== '#contact' ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
               </div>
@@ -3002,6 +3015,11 @@ async function loadLiveData() {
           </div>
         `;
         grid.appendChild(item);
+      });
+
+      // Re-attach details-btn listeners for dynamically rendered cards
+      grid.querySelectorAll('.details-btn').forEach(btn => {
+        btn.addEventListener('click', () => openModal('projectModal', btn.dataset.project, 'project'));
       });
 
       // Re-attach filter logic for dynamically rendered items
