@@ -963,7 +963,8 @@ document.getElementById('saveContactBtn').addEventListener('click', async () => 
 // ── Settings ──────────────────────────────────────────────────────────────────
 async function loadSettings() {
   try {
-    const sections = await api('GET', '/api/content/sections');
+    const portfolioData = await fetch(API + '/api/portfolio', { cache: 'no-store' }).then(r => r.json());
+    const sections = portfolioData.content?.sections || {};
     document.getElementById('toggleMarquee').checked  = sections.showFeaturedMarquee !== false;
     document.getElementById('toggleServices').checked = sections.showServices !== false;
     document.getElementById('toggleGithub').checked   = sections.showGithubActivity !== false;
