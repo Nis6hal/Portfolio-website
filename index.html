@@ -2908,8 +2908,16 @@ async function loadLiveData() {
             sbObs.unobserve(e.target);
           }
         });
-      }, { threshold: 0.5 });
-      newBars.forEach(b => sbObs.observe(b));
+      }, { threshold: 0.1 });
+      newBars.forEach(b => {
+        // If already visible, animate immediately
+        const rect = b.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          setTimeout(() => { b.style.width = b.dataset.width + '%'; }, 100);
+        } else {
+          sbObs.observe(b);
+        }
+      });
     }
   }
 
