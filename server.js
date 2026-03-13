@@ -171,6 +171,7 @@ app.get('/api/health', (req, res) => {
 // Get all portfolio data in one call (used by frontend on load)
 app.get('/api/portfolio', async (req, res) => {
   try {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
     const [projects, skills, contentDocs] = await Promise.all([
       Project.find({ visible: true }).sort({ order: 1 }),
       Skill.find().sort({ order: 1 }),
