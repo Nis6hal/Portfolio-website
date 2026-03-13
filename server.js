@@ -488,7 +488,7 @@ app.put('/api/admin/content/:key', authMiddleware, async (req, res) => {
   try {
     const doc = await Content.findOneAndUpdate(
       { key: req.params.key },
-      { value: req.body },
+      { $set: { value: req.body } },
       { new: true, upsert: true }
     );
     res.json(doc.value);
