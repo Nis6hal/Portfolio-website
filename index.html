@@ -2800,14 +2800,21 @@ const API_URL = 'https://nischal-portfolio-api.onrender.com';
 
 async function loadLiveData() {
   let data;
-  try {
-    const res = await fetch(API_URL + '/api/portfolio', { signal: AbortSignal.timeout(8000) });
-    if (!res.ok) throw new Error('API response not OK');
-    data = await res.json();
-  } catch (err) {
-    // Silent fallback — hardcoded content stays in place
-    console.info('[Portfolio] API unavailable, using static content.', err.message);
-    return;
+  // Try up to 3 times with 15s timeout to handle Render cold starts
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(API_URL + '/api/portfolio', { signal: AbortSignal.timeout(15000) });
+      if (!res.ok) throw new Error('API response not OK');
+      data = await res.json();
+      break; // success
+    } catch (err) {
+      console.info(`[Portfolio] API attempt ${attempt} failed:`, err.message);
+      if (attempt === 3) {
+        console.info('[Portfolio] All attempts failed, using static content.');
+        return;
+      }
+      await new Promise(r => setTimeout(r, 2000)); // wait 2s before retry
+    }
   }
 
   const { projects, skills, content } = data;
