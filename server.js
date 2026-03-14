@@ -35,8 +35,9 @@ const ProjectSchema = new mongoose.Schema({
   category:    { type: String, enum: ['web', 'mobile', 'ai'], required: true },
   image:       { type: String, required: true },
   tech:        [String],
+  details:     { type: String, default: '' },
   github:      { type: String, default: 'https://github.com/nis6hal' },
-  demo:        { type: String, default: '#contact' },
+  demo:        { type: String, default: '' },
   order:       { type: Number, default: 0 },
   visible:     { type: Boolean, default: true }
 }, { timestamps: true });
@@ -101,6 +102,7 @@ async function seedDefaults() {
         category: 'web',
         image: 'Images/PixelPrompt.png',
         tech: ['React', 'Node.js', 'OpenAI'],
+        details: '<p>An AI-powered tool that converts hand-drawn wireframe sketches into fully responsive websites.</p><h3>Key Features</h3><ul><li>Sketch-to-code conversion using OpenAI Vision API</li><li>Responsive HTML/CSS generation</li><li>Live preview and export functionality</li><li>Multi-page site generation</li></ul><h3>Highlights</h3><p>Reduced wireframe-to-prototype time by 80%. Supports complex layouts including grids, navbars, and forms.</p>',
         order: 1
       },
       {
@@ -109,6 +111,7 @@ async function seedDefaults() {
         category: 'ai',
         image: 'Images/Slpd.png',
         tech: ['Python', 'OpenCV', 'TensorFlow'],
+        details: '<p>An edge AI system for real-time license plate recognition, designed for automated gate control and parking management.</p><h3>Key Features</h3><ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control</li><li>Vehicle entry/exit logging</li></ul><h3>Highlights</h3><p>98%+ detection accuracy in varied lighting. Runs efficiently on low-power hardware with sub-100ms latency.</p>',
         order: 2
       },
       {
@@ -117,6 +120,7 @@ async function seedDefaults() {
         category: 'mobile',
         image: 'Images/Sbad.png',
         tech: ['React Native', 'Firebase', 'Google Maps'],
+        details: '<p>A mobile app providing real-time bus arrival times and ML-powered ETAs for Pokhara city routes.</p><h3>Key Features</h3><ul><li>Real-time bus tracking on live map</li><li>ML-powered arrival time prediction</li><li>Push notifications for upcoming buses</li><li>Route planning and optimization</li></ul><h3>Highlights</h3><p>Serves daily commuters across 12 major Pokhara routes. Prediction accuracy within ±2 minutes.</p>',
         order: 3
       },
       {
@@ -125,6 +129,7 @@ async function seedDefaults() {
         category: 'web',
         image: 'Images/Portfolio.png',
         tech: ['HTML5', 'CSS3', 'JavaScript', 'Three.js'],
+        details: '<p>The 3D-first portfolio website you\'re currently viewing — built from scratch with Three.js, GSAP, and zero frameworks.</p><h3>Key Features</h3><ul><li>3D particle system and wireframe geometries</li><li>Rule-based AI chatbot with keyword matching</li><li>3D flip-card portfolio section</li><li>Animated skill bars and hexagonal progress displays</li></ul><h3>Highlights</h3><p>Single-file architecture, zero build tools. Custom cursor, loading screen, and immersive hero scene.</p>',
         order: 4
       }
     ]);

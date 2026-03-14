@@ -107,6 +107,18 @@ body.cursor-click #cursor-dot{
   transition:opacity 0.5s ease;
 }
 #loading-screen.hidden{opacity:0;pointer-events:none;}
+
+/* Refresh indicator */
+#refresh-toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#0d0d24;border:1px solid #1a1a3a;border-left:3px solid #F5B800;
+  color:#8888aa;font-size:12px;font-family:'JetBrains Mono',monospace;
+  padding:8px 16px;border-radius:8px;z-index:9999;
+  opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+}
+#refresh-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#refresh-toast .spin{animation:spinRing 1s linear infinite;display:inline-block;}
 .loading-logo{
   font-family:'Fraunces',serif;
   font-size:64px;font-weight:800;
@@ -1355,6 +1367,8 @@ section{padding:120px 0;}
   <div class="loading-bar-wrap"><div class="loading-bar" id="loadBar"></div></div>
   <div class="loading-text">INITIALISING...</div>
 </div>
+
+<div id="refresh-toast"><span class="spin">⟳</span> Refreshing content...</div>
 
 <!-- Mobile Nav Overlay -->
 <div id="mobileNav" aria-hidden="true">
@@ -2803,6 +2817,8 @@ const API_URL = 'https://nischal-portfolio-api.onrender.com';
 
 async function loadLiveData() {
   console.log('[Portfolio] loadLiveData started');
+  const refreshToast = document.getElementById('refresh-toast');
+  if (refreshToast) refreshToast.classList.add('show');
   let data;
   // Try up to 3 times with 15s timeout to handle Render cold starts
   for (let attempt = 1; attempt <= 3; attempt++) {
@@ -2818,11 +2834,13 @@ async function loadLiveData() {
       console.warn('[Portfolio] API attempt ' + attempt + ' failed:', err.message);
       if (attempt === 3) {
         console.warn('[Portfolio] All attempts failed, using static content.');
+        if (refreshToast) refreshToast.classList.remove('show');
         return;
       }
       await new Promise(r => setTimeout(r, 2000)); // wait 2s before retry
     }
   }
+  if (refreshToast) refreshToast.classList.remove('show');
 
   const { projects, skills, content } = data;
 
@@ -2979,12 +2997,14 @@ async function loadLiveData() {
         // Register in projectData so Details modal works
         projectData[project._id] = {
           title: project.title,
-          content: `
-            <p>${project.description}</p>
-            <h3>Tech Stack</h3>
-            <div class="modal-tech">${(project.tech || []).map(t => `<span>${t}</span>`).join('')}</div>
-            ${project.github ? `<h3>Links</h3><p><a href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>` : ''}
-          `
+          content: project.details && project.details.trim()
+            ? project.details
+            : `
+              <p>${project.description}</p>
+              <h3>Tech Stack</h3>
+              <div class="modal-tech">${(project.tech || []).map(t => `<span>${t}</span>`).join('')}</div>
+              ${project.github ? `<h3>Links</h3><p><a href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>` : ''}
+            `
         };
 
         const item = document.createElement('div');
@@ -3009,7 +3029,7 @@ async function loadLiveData() {
               <div class="port-actions">
                 <button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>
                 <a href="${project.github || 'https://github.com/nis6hal'}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
-                ${project.demo && project.demo !== '#contact' ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
+                ${project.demo && project.demo.trim() !== '' ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
               </div>
             </div>
           </div>

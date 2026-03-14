@@ -517,6 +517,8 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         <div class="form-group"><label>IMAGE PATH</label><input type="text" id="pImage" placeholder="Images/PixelPrompt.png"></div>
         <div class="form-group"><label>GITHUB URL</label><input type="url" id="pGithub" placeholder="https://github.com/nis6hal"></div>
       </div>
+      <div class="form-group full"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
+      <div class="form-group full"><label>DETAILS <span style="color:var(--text-muted);font-size:11px;">(HTML supported — shown in Details modal)</span></label><textarea id="pDetails" rows="5" placeholder="&lt;p&gt;Project overview...&lt;/p&gt;&#10;&lt;h3&gt;Key Features&lt;/h3&gt;&#10;&lt;ul&gt;&lt;li&gt;Feature one&lt;/li&gt;&lt;/ul&gt;"></textarea></div>
       <div class="form-group"><label>TECH STACK (comma separated)</label><input type="text" id="pTech" placeholder="React, Node.js, MongoDB"></div>
       <div class="form-row">
         <div class="form-group">
@@ -534,6 +536,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeModal('projectModal')">Cancel</button>
+      <a class="btn btn-secondary" href="https://nischal-bhandari.com.np" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><i class="fas fa-eye"></i> Preview Site</a>
       <button class="btn btn-primary" id="saveProjectBtn"><i class="fas fa-save"></i> Save Project</button>
     </div>
   </div>
@@ -774,6 +777,8 @@ document.getElementById('addProjectBtn').addEventListener('click', () => {
   document.getElementById('pCategory').value = 'web';
   document.getElementById('pImage').value = '';
   document.getElementById('pGithub').value = 'https://github.com/nis6hal';
+  document.getElementById('pDemo').value = '';
+  document.getElementById('pDetails').value = '';
   document.getElementById('pTech').value = '';
   document.getElementById('pOrder').value = '1';
   document.getElementById('pVisible').value = 'true';
@@ -792,6 +797,8 @@ async function editProject(id) {
     document.getElementById('pCategory').value = p.category;
     document.getElementById('pImage').value = p.image;
     document.getElementById('pGithub').value = p.github || '';
+    document.getElementById('pDemo').value = p.demo || '';
+    document.getElementById('pDetails').value = p.details || '';
     document.getElementById('pTech').value = (p.tech||[]).join(', ');
     document.getElementById('pOrder').value = p.order;
     document.getElementById('pVisible').value = String(p.visible);
@@ -801,12 +808,15 @@ async function editProject(id) {
 
 document.getElementById('saveProjectBtn').addEventListener('click', async () => {
   const id = document.getElementById('projectId').value;
+  const demo = document.getElementById('pDemo').value.trim();
   const payload = {
     title:       document.getElementById('pTitle').value.trim(),
     description: document.getElementById('pDesc').value.trim(),
     category:    document.getElementById('pCategory').value,
     image:       document.getElementById('pImage').value.trim(),
     github:      document.getElementById('pGithub').value.trim(),
+    demo:        demo || '',
+    details:     document.getElementById('pDetails').value.trim(),
     tech:        document.getElementById('pTech').value.split(',').map(t=>t.trim()).filter(Boolean),
     order:       parseInt(document.getElementById('pOrder').value) || 1,
     visible:     document.getElementById('pVisible').value === 'true'
