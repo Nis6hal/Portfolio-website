@@ -505,4 +505,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
   await seedDefaults();
+
+  // One-time migration: clear legacy "#contact" demo values
+  const migrated = await Project.updateMany({ demo: '#contact' }, { $set: { demo: '' } });
+  if (migrated.modifiedCount > 0) {
+    console.log(`✅ Migrated ${migrated.modifiedCount} project(s): cleared "#contact" demo values`);
+  }
 });
