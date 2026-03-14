@@ -3029,7 +3029,7 @@ async function loadLiveData() {
               <div class="port-actions">
                 <button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>
                 <a href="${project.github || 'https://github.com/nis6hal'}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
-                ${project.demo && project.demo.trim() !== '' ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
+                <a href="${project.demo && project.demo.trim() !== '' ? project.demo : '#contact'}" ${project.demo && project.demo.trim() !== '' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
               </div>
             </div>
           </div>
