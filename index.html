@@ -1463,16 +1463,7 @@ section{padding:120px 0;}
   <div class="marquee-wrapper">
     <div class="marquee-track" id="marqueeTrack">
       <!-- original 4 -->
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/PixelPrompt.png" alt="PixelPrompt preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>PixelPrompt</h3><p>AI that turns sketches into responsive sites.</p>
-          <div class="marquee-tags"><span>AI</span><span>React</span><span>Node</span></div>
-          <button class="details-btn" data-project="pixelprompt">Details</button>
-        </div>
-      </article>
-      <article class="marquee-card">
+       <article class="marquee-card">
         <div class="marquee-card-shine" aria-hidden="true"></div>
         <img src="Images/Slpd.png" alt="Smart License Plate Detection preview" loading="lazy" width="340" height="180">
         <div class="marquee-meta">
@@ -1500,11 +1491,6 @@ section{padding:120px 0;}
         </div>
       </article>
       <!-- duplicates for seamless loop -->
-      <article class="marquee-card" aria-hidden="true">
-        <div class="marquee-card-shine"></div>
-        <img src="Images/PixelPrompt.png" alt="" loading="lazy" width="340" height="180">
-        <div class="marquee-meta"><h3>PixelPrompt</h3><p>AI that turns sketches into responsive sites.</p><div class="marquee-tags"><span>AI</span><span>React</span><span>Node</span></div><button class="details-btn" data-project="pixelprompt">Details</button></div>
-      </article>
       <article class="marquee-card" aria-hidden="true">
         <div class="marquee-card-shine"></div>
         <img src="Images/Slpd.png" alt="" loading="lazy" width="340" height="180">
@@ -1592,7 +1578,7 @@ section{padding:120px 0;}
             <h4>AI-Integrated Projects</h4>
             <div class="tl-inst">Independent / Academic</div>
             <div class="tl-period">2024</div>
-            <p>Moved into AI-integrated projects — SLPD, SBAD, and PixelPrompt — combining computer vision and ML with full-stack development.</p>
+            <p>Moved into AI-integrated projects — SLPD, SBAD, and UniLib — combining computer vision and ML with full-stack development.</p>
           </div>
           <div class="tl-node"><i class="fas fa-robot"></i></div>
           <div class="tl-empty"></div>
@@ -1792,29 +1778,6 @@ section{padding:120px 0;}
       </div>
     </div>
     <div class="portfolio-grid" id="portfolioGrid">
-      <div class="port-item" data-category="web" data-title="PixelPrompt">
-        <div class="port-flipper">
-          <div class="port-front">
-            <img src="Images/PixelPrompt.png" alt="PixelPrompt" loading="lazy" width="400" height="220">
-            <div class="port-front-overlay">
-              <h3>PixelPrompt</h3>
-              <span class="port-cat-badge">Web</span>
-            </div>
-          </div>
-          <div class="port-back">
-            <div>
-              <h3>PixelPrompt</h3>
-              <p>AI-powered wireframe to website generator. Draw a sketch, get a live responsive site.</p>
-              <div class="port-tech"><span>React</span><span>Node.js</span><span>OpenAI</span></div>
-            </div>
-            <div class="port-actions">
-              <button class="port-btn details-btn" data-project="pixelprompt"><i class="fas fa-info-circle"></i> Details</button>
-              <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
-              <a href="#contact" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="port-item" data-category="ai" data-title="Smart License Plate Detection">
         <div class="port-flipper">
           <div class="port-front">
@@ -2617,12 +2580,9 @@ const RESPONSES = [
 
   /* ── All projects ───────────────────────────────────────────────────────── */
   { keywords:['project','work','built','made','portfolio','what have you','show me','examples'],
-    reply:'Nischal has shipped 8+ projects. Key highlights:\n\n🚀 PixelPrompt — working prototype that converts wireframe sketches into live websites (React, Node.js, OpenAI)\n🚗 Smart License Plate Detection — Edge AI for automated gates (Python, OpenCV, TensorFlow)\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs (React Native, Firebase)\n🌐 This Portfolio — the 3D site you\'re on right now (Three.js, GSAP)\n\nSome projects are private. Reach out to see a specific project in action or check github.com/nis6hal for public repos!' },
+    reply:'Nischal has shipped 8+ projects. Key highlights:\n\n🚀 UniLib — working prototype that stores library databases (python, html)\n🚗 Smart License Plate Detection — Edge AI for automated gates (Python, OpenCV, TensorFlow)\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs (React Native, Firebase)\n🌐 This Portfolio — the 3D site you\'re on right now (Three.js, GSAP)\n\nSome projects are private. Reach out to see a specific project in action or check github.com/nis6hal for public repos!' },
 
-  /* ── PixelPrompt ────────────────────────────────────────────────────────── */
-  { keywords:['pixelprompt','pixel prompt','sketch','wireframe','website generator'],
-    reply:'🚀 PixelPrompt — Working Prototype\nAn AI tool that takes a hand-drawn wireframe sketch and converts it into a fully responsive website.\n\n✨ What it does:\n• Sketch-to-code via OpenAI Vision API\n• Generates clean HTML/CSS/JS instantly\n• Live preview with multi-page support\n• Cuts wireframe-to-prototype time by ~80%\n\nCurrently a working prototype — want to see it in action? Contact Nischal directly!\n\nStack: React · Node.js · OpenAI API · Canvas API · Express.js' },
-
+ 
   /* ── SLPD ───────────────────────────────────────────────────────────────── */
   { keywords:['license plate','slpd','gate','parking','detection','opencv','plate'],
     reply:'🚗 Smart License Plate Detection (SLPD)\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n• Vehicle entry/exit logging\n\nStack: Python · OpenCV · TensorFlow · Raspberry Pi · SQLite' },
@@ -2645,7 +2605,7 @@ const RESPONSES = [
 
   /* ── AI Integration service ─────────────────────────────────────────────── */
   { keywords:['ai integration','machine learning','chatbot','openai','vision','llm','ml'],
-    reply:'🤖 AI Integration\nNischal can wire AI into your product — OpenAI APIs, computer vision with OpenCV/TensorFlow, custom chatbots, or LLM-powered features.\n\nHis projects SLPD (CV) and PixelPrompt (OpenAI Vision) are direct proof of this in practice.\n\nInterested? → itisnischal@gmail.com or Instagram @nis6hal' },
+    reply:'🤖 AI Integration\nNischal can wire AI into your product — OpenAI APIs, computer vision with OpenCV/TensorFlow, custom chatbots, or LLM-powered features.\n\nHis projects SLPD (CV) and UniLib (Smart LMS) are direct proof of this in practice.\n\nInterested? → itisnischal@gmail.com or Instagram @nis6hal' },
 
   /* ── Pricing ────────────────────────────────────────────────────────────── */
   { keywords:['price','pricing','cost','rate','charge','how much','fee','budget','quote'],
@@ -2673,7 +2633,7 @@ const RESPONSES = [
 
   /* ── Experience ─────────────────────────────────────────────────────────── */
   { keywords:['experience','year','how long','background','journey','started','when did','paid','client'],
-    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University, caught the coding bug immediately\n2023 — First production web projects, mastered the React + Node.js ecosystem\n2024 — Levelled into AI: SLPD, SBAD, and the PixelPrompt prototype\n2025–26 — Final semester, actively looking for his first big professional opportunity\n\n2+ years of hands-on building, mostly personal and academic projects, 8+ shipped. 🔥' },
+    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University, caught the coding bug immediately\n2023 — First production web projects, mastered the React + Node.js ecosystem\n2024 — Levelled into AI: SLPD, SBAD, and the UniLib\n2025–26 — Final semester, actively looking for his first big professional opportunity\n\n2+ years of hands-on building, mostly personal and academic projects, 8+ shipped. 🔥' },
 
   /* ── Contact ────────────────────────────────────────────────────────────── */
   { keywords:['contact','reach','email','message','dm','instagram','insta','get in touch','how to contact'],
