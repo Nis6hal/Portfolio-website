@@ -97,15 +97,6 @@ async function seedDefaults() {
   if (projectCount === 0) {
     await Project.insertMany([
       {
-        title: 'PixelPrompt',
-        description: 'AI-powered wireframe to website generator. Draw a sketch, get a live responsive site.',
-        category: 'web',
-        image: 'Images/PixelPrompt.png',
-        tech: ['React', 'Node.js', 'OpenAI'],
-        details: '<p>An AI-powered tool that converts hand-drawn wireframe sketches into fully responsive websites.</p><h3>Key Features</h3><ul><li>Sketch-to-code conversion using OpenAI Vision API</li><li>Responsive HTML/CSS generation</li><li>Live preview and export functionality</li><li>Multi-page site generation</li></ul><h3>Highlights</h3><p>Reduced wireframe-to-prototype time by 80%. Supports complex layouts including grids, navbars, and forms.</p>',
-        order: 1
-      },
-      {
         title: 'Smart License Plate Detection',
         description: 'Edge AI system for real-time license plate recognition and automated gate control.',
         category: 'ai',
