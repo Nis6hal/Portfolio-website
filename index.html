@@ -6,25 +6,25 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Nischal Bhandari – Full Stack Developer. Projects, services, skills, and contact.">
+  <meta name="description" content="Portfolio of Nischal Bhandari – Computer Engineering Student. Projects, certifications, skills, and contact.">
   <meta name="keywords" content="Nischal Bhandari, Full Stack Developer, Web Development, React, Node.js, JavaScript, Portfolio">
   <meta name="author" content="Nischal Bhandari">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#04040f">
   <link rel="canonical" href="https://nischal-bhandari.com.np/">
   <meta property="og:title" content="Nischal Bhandari - Portfolio"/>
-  <meta property="og:description" content="Full Stack Developer – projects, services, skills, and contact."/>
+  <meta property="og:description" content="Computer Engineering Student – projects, certifications, skills, and contact."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://nischal-bhandari.com.np/"/>
   <meta property="og:image" content="https://nischal-bhandari.com.np/Images/Profile.jpg"/>
   <meta property="og:site_name" content="Nischal Bhandari Portfolio"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Nischal Bhandari - Portfolio"/>
-  <meta name="twitter:description" content="Full Stack Developer – projects, services, skills, and contact."/>
+  <meta name="twitter:description" content="Computer Engineering Student – projects, certifications, skills, and contact."/>
   <meta name="twitter:image" content="https://nischal-bhandari.com.np/Images/Profile.jpg"/>
   <meta name="twitter:creator" content="@nis6hal"/>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Nischal Bhandari","jobTitle":"Full Stack Developer","description":"Computer Engineering Student and Digital Creative Developer working in development field for 2+ years","url":"https://nischal-bhandari.com.np","image":"https://nischal-bhandari.com.np/Images/Profile.jpg","email":"itisnischal@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Pokhara","addressCountry":"Nepal"},"knowsAbout":["Web Development","Full Stack Development","JavaScript","React","Node.js","Mobile Development"],"alumniOf":{"@type":"Organization","name":"Pokhara University"},"sameAs":["https://github.com/nis6hal","https://linkedin.com/in/nis6hal","https://twitter.com/nis6hal"]}
+  {"@context":"https://schema.org","@type":"Person","name":"Nischal Bhandari","jobTitle":"Computer Engineering Student","description":"Computer Engineering Student at Pokhara University with 2+ years of development experience","url":"https://nischal-bhandari.com.np","image":"https://nischal-bhandari.com.np/Images/Profile.jpg","email":"itisnischal@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Pokhara","addressCountry":"Nepal"},"knowsAbout":["Web Development","Full Stack Development","JavaScript","React","Node.js","Python","AI/ML"],"alumniOf":{"@type":"Organization","name":"Pokhara University"},"sameAs":["https://github.com/nis6hal","https://linkedin.com/in/nis6hal","https://twitter.com/nis6hal"]}
   </script>
   <title>Nischal Bhandari - Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -32,23 +32,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800;1,9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
 <style>
 /* ===================== DESIGN TOKENS ===================== */
 :root {
-  --bg-base: #04040f;
-  --bg-surface: #090918;
-  --bg-card: #0d0d24;
-  --accent-primary: #F5B800;
-  --accent-secondary: #7c3aed;
-  --accent-glow: #F5B80033;
-  --text-primary: #f0f0ff;
-  --text-muted: #8888aa;
-  --border: #1a1a3a;
-  --gradient-hero: linear-gradient(135deg,#04040f 0%,#0a0a1f 50%,#0d0520 100%);
+  --bg-base: #060606;
+  --bg-surface: #0d0d0d;
+  --bg-card: #121212;
+  --accent-primary: #ff173d;
+  --accent-secondary: #a3001f;
+  --accent-glow: rgba(255, 23, 61, 0.35);
+  --text-primary: #ffffff;
+  --text-muted: #b8b8b8;
+  --border: #2a2a2a;
+  --gradient-hero: radial-gradient(circle at 85% 38%, rgba(255, 23, 61, 0.2), transparent 38%), linear-gradient(145deg, #060606 0%, #0d0d0d 52%, #080808 100%);
 }
 
 /* ===================== RESET & BASE ===================== */
@@ -153,13 +151,13 @@ body.cursor-click #cursor-dot{
 /* ===================== HEADER / NAV ===================== */
 .header{
   position:fixed;top:0;left:0;width:100%;z-index:1000;
-  background:rgba(4,4,15,0.85);
+  background:rgba(23,24,30,0.88);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #343640;
   transition:backdrop-filter 0.3s,background 0.3s;
 }
 .header.scrolled{
-  background:rgba(4,4,15,0.97);
+  background:rgba(23,24,30,0.97);
   backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
 }
 .nav-container{
@@ -168,40 +166,54 @@ body.cursor-click #cursor-dot{
   display:flex;align-items:center;justify-content:space-between;
 }
 .brand-link{
-  font-family:'Fraunces',serif;
-  font-size:22px;font-weight:800;
-  color:var(--text-primary);
-  display:flex;align-items:center;gap:4px;
+  font-family:'DM Sans',sans-serif;
+  font-size:24px;font-weight:700;
+  color:#f8f8f8;
+  display:flex;align-items:center;gap:10px;
+  letter-spacing:0.3px;
 }
 .brand-link::after{
-  content:'';display:inline-block;
-  width:8px;height:8px;
-  background:var(--accent-primary);border-radius:50%;
-  box-shadow:0 0 8px var(--accent-primary);
-  animation:brandDot 2s ease-in-out infinite;
+  content:'nb';display:inline-flex;
+  width:30px;height:30px;border-radius:50%;
+  border:1.5px solid #f3f3f3;
+  color:#f3f3f3;
+  align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;
+  font-size:16px;
+  order:-1;
 }
-@keyframes brandDot{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
 .nav-menu{display:flex;align-items:center;gap:32px;}
 .nav-link{
   font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
-  color:var(--text-muted);
+  color:#aeb0ba;
   position:relative;padding:4px 0;
   transition:color 0.3s;letter-spacing:0.5px;
 }
 .nav-link::after{
   content:'';position:absolute;bottom:0;left:0;
-  width:0;height:1.5px;background:var(--accent-primary);
+  width:0;height:1.5px;background:#f2f2f2;
   transition:width 0.3s ease;
 }
-.nav-link:hover,.nav-link.active{color:var(--text-primary);}
+.nav-link:hover,.nav-link.active{color:#f8f8f8;}
 .nav-link:hover::after,.nav-link.active::after{width:100%;}
 .nav-link.active::before{
   content:'';position:absolute;bottom:-2px;left:50%;
   transform:translateX(-50%);
-  width:4px;height:4px;background:var(--accent-primary);
+  width:4px;height:4px;background:#f2f2f2;
   border-radius:50%;
 }
+.nav-link.nav-cta{
+  background:transparent;
+  border:1px solid #f1f1f1;
+  color:#f8f8f8;
+  padding:7px 16px;
+  border-radius:999px;
+  font-weight:500;
+  box-shadow:none;
+}
+.nav-link.nav-cta::after,.nav-link.nav-cta::before{display:none;}
+.nav-link.nav-cta:hover{background:#f3f3f3;color:#1b1c22;}
 
 .nav-toggle{
   display:none;color:var(--text-primary);font-size:20px;
@@ -214,12 +226,19 @@ body.cursor-click #cursor-dot{
   position:relative;min-height:100vh;
   display:flex;align-items:center;
   overflow:hidden;
-  background:var(--gradient-hero);
+  background:linear-gradient(140deg,#1b1c22 0%,#22242d 55%,#1d1f27 100%);
 }
-#heroCanvas{
-  position:absolute;top:0;left:0;
-  width:100%;height:100%;
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 78% 56%, rgba(255,255,255,0.05), transparent 50%),
+    radial-gradient(circle at 90% 18%, rgba(255,255,255,0.03), transparent 20%);
+  animation:heroGlow 8s ease-in-out infinite alternate;
   z-index:1;
+}
+@keyframes heroGlow{
+  0%{opacity:0.6;}
+  100%{opacity:1;}
 }
 .hero-container{
   position:relative;z-index:10;
@@ -231,10 +250,7 @@ body.cursor-click #cursor-dot{
 }
 /* left col */
 .hero-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:13px;color:var(--accent-primary);
-  letter-spacing:2px;margin-bottom:16px;
-  display:flex;align-items:center;gap:8px;
+  display:none;
 }
 .hero-label .cursor-blink{
   display:inline-block;width:8px;height:14px;
@@ -245,27 +261,28 @@ body.cursor-click #cursor-dot{
 
 .hero-title{
   font-family:'Fraunces',serif;
-  font-size:clamp(42px,6vw,72px);
-  font-weight:800;line-height:1.1;
-  color:var(--text-primary);margin-bottom:16px;
+  font-size:clamp(52px,7.2vw,92px);
+  font-weight:700;line-height:1.02;
+  color:#f4f4f4;margin-bottom:14px;
+  letter-spacing:-0.5px;
 }
 .hero-title span.word{
   display:inline-block;opacity:0;
   transform:translateY(30px);
 }
 .hero-typewriter{
-  font-family:'Fraunces',serif;
-  font-size:clamp(20px,3vw,32px);
-  font-weight:600;color:var(--accent-primary);
-  min-height:40px;margin-bottom:20px;
+  font-family:'DM Sans',sans-serif;
+  font-size:clamp(22px,2.7vw,34px);
+  font-weight:400;color:#e6e6e8;
+  min-height:46px;margin-bottom:14px;
   white-space:nowrap;overflow:hidden;
 }
 .hero-desc{
-  color:var(--text-muted);font-size:16px;
-  max-width:500px;margin-bottom:32px;line-height:1.8;
+  color:#c0c2ca;font-size:18px;
+  max-width:520px;margin-bottom:34px;line-height:1.65;
 }
 .hero-buttons{
-  display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;
+  display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px;
 }
 .btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -281,13 +298,16 @@ body.cursor-click #cursor-dot{
 }
 .btn:hover::before{opacity:1;}
 .btn-cyan{
-  background:var(--accent-primary);color:#000;
-  box-shadow:0 0 20px rgba(245,184,0,0.3);
+  background:transparent;
+  color:#f1f1f3;
+  border:1px solid #eaebef;
+  border-radius:999px;
+  padding:10px 24px;
+  box-shadow:none;
 }
-.btn-cyan:hover{box-shadow:0 0 30px rgba(245,184,0,0.6);transform:translateY(-2px);}
+.btn-cyan:hover{background:#f1f1f3;color:#1c1d25;transform:translateY(-2px);}
 .btn-cyan-outline{
-  background:transparent;color:var(--accent-primary);
-  border:1.5px solid var(--accent-primary);
+  display:none;
 }
 .btn-cyan-outline:hover{background:rgba(245,184,0,0.1);box-shadow:0 0 20px var(--accent-glow);transform:translateY(-2px);}
 .btn-violet{
@@ -295,13 +315,9 @@ body.cursor-click #cursor-dot{
   box-shadow:0 0 20px rgba(124,58,237,0.3);
 }
 .btn-violet:hover{box-shadow:0 0 30px rgba(124,58,237,0.6);transform:translateY(-2px);}
-.btn-ghost{
-  background:transparent;color:var(--text-muted);
-  border:1.5px solid var(--border);
-}
-.btn-ghost:hover{border-color:var(--accent-primary);color:var(--accent-primary);transform:translateY(-2px);}
+.btn-ghost{display:none;}
 
-.hero-socials{display:flex;gap:16px;}
+.hero-socials{display:none;}
 .social-icon{
   width:40px;height:40px;border-radius:10px;
   border:1px solid var(--border);
@@ -320,36 +336,54 @@ body.cursor-click #cursor-dot{
   align-items:center;justify-content:center;
 }
 .profile-hex-wrap{
-  position:relative;width:280px;height:280px;
+  position:relative;width:500px;height:500px;
   display:flex;align-items:center;justify-content:center;
 }
 .hex-ring{
-  position:absolute;inset:-20px;
+  position:absolute;inset:32px;
   border-radius:50%;
-  border:2px solid transparent;
-  background:linear-gradient(var(--bg-base),var(--bg-base)) padding-box,
-             linear-gradient(45deg,var(--accent-primary),var(--accent-secondary),var(--accent-primary)) border-box;
-  animation:spinRing 8s linear infinite;
+  border:1px solid rgba(235,237,243,0.45);
+  background:transparent;
+  animation:none;
 }
 @keyframes spinRing{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 .hex-glow-blob{
-  position:absolute;inset:-30px;
-  background:radial-gradient(circle,rgba(124,58,237,0.4) 0%,transparent 70%);
-  border-radius:50%;filter:blur(20px);z-index:-1;
+  display:none;
 }
 .profile-hex{
-  width:260px;height:260px;
-  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  width:430px;height:430px;
+  clip-path:none;border-radius:50%;
   overflow:hidden;
-  border:3px solid var(--accent-primary);
+  border:none;
   position:relative;z-index:1;
 }
 .profile-hex img{width:100%;height:100%;object-fit:cover;}
+.orbit-node{
+  position:absolute;
+  width:52px;height:52px;
+  border-radius:50%;
+  border:1px solid rgba(237,239,244,0.75);
+  display:flex;align-items:center;justify-content:center;
+  color:#f2f2f3;
+  background:rgba(29,31,40,0.9);
+  font-size:16px;
+  z-index:3;
+  transition:all 0.2s ease;
+}
+.orbit-node:hover{
+  border-color:#ffffff;
+  transform:translateY(-2px);
+}
+.orbit-node.n1{top:78px;right:52px;}
+.orbit-node.n2{top:146px;right:24px;}
+.orbit-node.n3{top:228px;right:6px;}
+.orbit-node.n4{bottom:116px;left:42px;}
+.orbit-node.n5{bottom:38px;left:84px;}
 
 /* stat badges */
 .badge{
   position:absolute;
-  background:rgba(9,9,24,0.9);
+  background:rgba(18,18,18,0.9);
   border:1px solid var(--border);
   backdrop-filter:blur(10px);
   border-radius:12px;padding:8px 14px;
@@ -530,18 +564,35 @@ section{padding:120px 0;}
 .timeline{position:relative;padding:0 20px;}
 .timeline::before{
   content:'';position:absolute;left:50%;top:0;bottom:0;
-  width:1px;background:linear-gradient(180deg,var(--accent-secondary),var(--accent-primary));
+  width:3px;background:linear-gradient(180deg,var(--accent-secondary),var(--accent-primary));
   transform:translateX(-50%);
+  border-radius:6px;
 }
 .tl-item{
   display:grid;grid-template-columns:1fr 60px 1fr;
   gap:20px;align-items:center;margin-bottom:48px;
   opacity:0;transform:translateY(30px);
+  position:relative;
 }
 .tl-item.visible{opacity:1;transform:translateY(0);transition:all 0.6s ease;}
+.tl-item::before{
+  content:attr(data-year);
+  position:absolute;
+  left:50%;
+  top:-16px;
+  transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:1px;
+  color:#ff9aac;
+  background:#171717;
+  border:1px solid rgba(255,23,61,0.35);
+  border-radius:999px;
+  padding:3px 9px;
+}
 .tl-left{text-align:right;}
 .tl-right{text-align:left;}
-.tl-empty{} /* empty side */
+.tl-empty{min-height:1px;} /* keeps grid structure consistent */
 .tl-node{
   width:48px;height:48px;border-radius:50%;
   background:var(--bg-card);
@@ -554,8 +605,10 @@ section{padding:120px 0;}
 }
 .tl-node:hover{transform:scale(1.2);}
 .tl-card{
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:12px;padding:20px;
+  background:linear-gradient(145deg, #121212, #171717);
+  border:1px solid var(--border);
+  border-radius:16px;padding:22px;
+  box-shadow:0 14px 30px rgba(0,0,0,0.35);
 }
 .tl-card:hover{border-color:var(--accent-primary);box-shadow:0 0 20px var(--accent-glow);}
 .tl-card h4{
@@ -618,7 +671,7 @@ section{padding:120px 0;}
 
 /* ===================== SKILLS ===================== */
 .skills{background:var(--bg-base);}
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+.skills-grid{display:grid;grid-template-columns:1fr;gap:40px;max-width:940px;margin:0 auto;}
 
 .tech-skills h3,.pro-skills h3{
   font-family:'Fraunces',serif;font-weight:700;font-size:22px;
@@ -627,10 +680,16 @@ section{padding:120px 0;}
 .skill-assessment{
   font-size:12px;color:var(--text-muted);
   font-family:'JetBrains Mono',monospace;
-  background:var(--bg-card);border:1px solid var(--border);
-  padding:8px 12px;border-radius:6px;margin-bottom:24px;
+  background:#121212;border:1px solid var(--border);
+  padding:10px 14px;border-radius:10px;margin-bottom:24px;
 }
-.skill-item{margin-bottom:24px;}
+.skill-item{
+  margin-bottom:16px;
+  background:linear-gradient(145deg, #101010, #161616);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+}
 .skill-header{
   display:flex;align-items:center;gap:8px;margin-bottom:8px;
 }
@@ -640,18 +699,18 @@ section{padding:120px 0;}
 .skill-level{
   font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--accent-primary);
-  background:rgba(245,184,0,0.1);
-  border:1px solid rgba(245,184,0,0.2);
+  background:rgba(255,23,61,0.1);
+  border:1px solid rgba(255,23,61,0.25);
   padding:2px 8px;border-radius:4px;
 }
 .skill-pct{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-muted);}
 .skill-bar-bg{
-  height:6px;background:var(--border);border-radius:3px;overflow:hidden;
+  height:8px;background:#252525;border-radius:999px;overflow:hidden;
 }
 .skill-bar-fill{
   height:100%;width:0%;border-radius:3px;
   background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));
-  box-shadow:0 0 10px rgba(245,184,0,0.4);
+  box-shadow:0 0 10px rgba(255,23,61,0.4);
   position:relative;overflow:hidden;
   transition:width 1s ease;
 }
@@ -670,6 +729,10 @@ section{padding:120px 0;}
 }
 .hex-skill{
   display:flex;flex-direction:column;align-items:center;gap:12px;
+  background:linear-gradient(145deg, #101010, #161616);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px 12px;
 }
 .hex-shape{
   width:80px;height:80px;
@@ -694,30 +757,44 @@ section{padding:120px 0;}
 .hex-skill h4{font-family:'Fraunces',serif;font-weight:600;font-size:14px;color:var(--text-primary);}
 .hex-skill p{font-size:12px;color:var(--text-muted);text-align:center;}
 
-/* Tech cloud */
+/* Tech stack board */
 .tech-cloud{margin-top:60px;}
 .tech-cloud h3{
   font-family:'Fraunces',serif;font-weight:700;font-size:22px;
   color:var(--text-primary);margin-bottom:32px;text-align:center;
 }
-.tech-tags{
-  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+.tech-stack-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
 }
+.tech-group{
+  background:linear-gradient(145deg, #101010, #161616);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+}
+.tech-group h4{
+  font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:11px;
+  color:#ff8ca0;
+  margin-bottom:10px;
+}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;}
 .tech-tag{
-  font-family:'JetBrains Mono',monospace;font-size:13px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;
   color:var(--text-primary);
-  background:var(--bg-card);border:1px solid var(--border);
-  padding:8px 16px;border-radius:8px;
-  transition:all 0.3s;
-  animation:tagFloat var(--duration,4s) ease-in-out infinite;
-  animation-delay:var(--delay,0s);
+  background:#1b1b1b;border:1px solid #2f2f2f;
+  padding:7px 11px;border-radius:999px;
+  transition:all 0.2s;
 }
 .tech-tag:hover{
-  border-color:var(--accent-primary);color:var(--accent-primary);
-  box-shadow:0 0 14px var(--accent-glow);
-  transform:translateY(-4px);
+  border-color:var(--accent-primary);color:#ffdce2;
+  box-shadow:0 0 12px var(--accent-glow);
+  transform:translateY(-2px);
 }
-@keyframes tagFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
 
 /* ===================== PORTFOLIO ===================== */
 .portfolio{background:var(--bg-surface);}
@@ -1233,6 +1310,10 @@ section{padding:120px 0;}
   .services-grid{grid-template-columns:repeat(2,1fr);}
   .portfolio-grid{grid-template-columns:repeat(2,1fr);}
   .footer-grid{grid-template-columns:1fr 1fr;}
+  .profile-hex-wrap{width:380px;height:380px;}
+  .profile-hex{width:300px;height:300px;}
+  .hex-ring{inset:22px;}
+  .orbit-node{width:46px;height:46px;font-size:15px;}
 }
 @media(max-width:768px){
   section{padding:80px 0;}
@@ -1241,10 +1322,12 @@ section{padding:120px 0;}
     text-align:center;
     gap:40px;
   }
-  .hero-title{font-size:38px;}
+  .hero-title{font-size:54px;}
   .hero-visual{order:-1;}
-  .profile-hex-wrap{width:240px;height:240px;}
-  .profile-hex{width:220px;height:220px;}
+  .profile-hex-wrap{width:300px;height:300px;}
+  .profile-hex{width:230px;height:230px;}
+  .hex-ring{inset:18px;}
+  .orbit-node{display:none;}
   .badge-1,.badge-2,.badge-3{display:none;}
   .hero-buttons,.hero-socials{justify-content:center;}
   .hero-desc{margin:0 auto 32px;}
@@ -1260,6 +1343,11 @@ section{padding:120px 0;}
     gap:10px 14px;
   }
   .tl-node{grid-column:1;grid-row:1;}
+  .tl-item::before{
+    left:22px;
+    transform:none;
+    top:-10px;
+  }
   .tl-right{grid-column:2;grid-row:1;}
   .tl-left{
     display:block;
@@ -1273,6 +1361,7 @@ section{padding:120px 0;}
 
   .services-grid{grid-template-columns:1fr;}
   .skills-grid{grid-template-columns:1fr;}
+  .tech-stack-grid{grid-template-columns:1fr;}
   .portfolio-grid{grid-template-columns:1fr;}
   .contact-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr 1fr;}
@@ -1374,7 +1463,7 @@ section{padding:120px 0;}
 <div id="mobileNav" aria-hidden="true">
   <a href="#home" class="nav-link" onclick="closeMobileNav()">Home</a>
   <a href="#about" class="nav-link" onclick="closeMobileNav()">About</a>
-  <a href="#services" class="nav-link" onclick="closeMobileNav()">Services</a>
+  <a href="#certifications" class="nav-link" onclick="closeMobileNav()">Certifications</a>
   <a href="#skills" class="nav-link" onclick="closeMobileNav()">Skills</a>
   <a href="#portfolio" class="nav-link" onclick="closeMobileNav()">Portfolio</a>
   <a href="#contact" class="nav-link" onclick="closeMobileNav()">Contact</a>
@@ -1383,17 +1472,17 @@ section{padding:120px 0;}
 <!-- Header -->
 <header class="header" id="mainHeader">
   <div class="nav-container">
-    <a href="#home" class="brand-link" aria-label="Nischal Bhandari Home">Nischal</a>
+    <a href="#home" class="brand-link" aria-label="Nischal Bhandari Home">nischal</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
       <i class="fas fa-bars"></i>
     </button>
     <nav class="nav-menu" id="primaryNav" aria-label="Primary">
       <a href="#home" class="nav-link active">Home</a>
       <a href="#about" class="nav-link">About</a>
-      <a href="#services" class="nav-link">Services</a>
+      <a href="#certifications" class="nav-link">Certifications</a>
       <a href="#skills" class="nav-link">Skills</a>
       <a href="#portfolio" class="nav-link">Portfolio</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#contact" class="nav-link nav-cta">Hire Me</a>
     </nav>
   </div>
 </header>
@@ -1402,33 +1491,23 @@ section{padding:120px 0;}
 
 <!-- ==================== HERO ==================== -->
 <section id="home" class="hero">
-  <canvas id="heroCanvas" aria-hidden="true"></canvas>
   <div class="hero-container">
     <!-- left -->
     <div class="hero-text">
       <div class="hero-label">
-        &lt; FULL STACK DEVELOPER /&gt;
+        &lt; COMPUTER ENGINEERING STUDENT /&gt;
         <span class="cursor-blink" aria-hidden="true"></span>
       </div>
       <h1 class="hero-title" aria-label="Hi, I'm Nischal Bhandari">
-        <span class="word">Hi,</span>
+        <span class="word">Hello</span>
         <span class="word">I'm</span>
-        <span class="word" style="color:var(--accent-primary)">Nischal</span>
-        <span class="word" style="color:var(--accent-primary)">Bhandari</span>
+        <span class="word">Nischal</span>
+        <span class="word">Bhandari</span>
       </h1>
       <div class="hero-typewriter" id="typewriter" aria-live="polite"></div>
-      <p class="hero-desc">Computer Engineering student building production-grade experiences for the past 2+ years with a focus on performance, maintainability, and user-first solutions.</p>
+      <p class="hero-desc">Computer Engineering student building clean digital products across web, AI, and backend systems.</p>
       <div class="hero-buttons">
-        <a href="#" onclick="var e='itisnischal'+'@'+ 'gmail.com';window.location.href='mailto:'+e;return false;" class="btn btn-cyan"><i class="fas fa-envelope"></i> Email Me</a>
-        <a href="assets/Nischal-Bhandari-CV.pdf" class="btn btn-cyan-outline" download aria-label="Download CV PDF"><i class="fas fa-download"></i> Download CV</a>
-        <a href="#contact" class="btn btn-violet"><i class="fas fa-handshake"></i> Hire Me Now</a>
-        <button class="btn btn-ghost" id="talkAI"><i class="fas fa-comment-dots"></i> Talk to My AI ↓</button>
-      </div>
-      <div class="hero-socials" aria-label="Social links">
-        <a href="https://github.com/nis6hal" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/nis6hal" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://twitter.com/nis6hal" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com/nis6hal" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#about" class="btn btn-cyan"><i class="fas fa-arrow-right"></i> Learn More</a>
       </div>
     </div>
     <!-- right -->
@@ -1439,9 +1518,11 @@ section{padding:120px 0;}
         <div class="profile-hex">
           <img src="Images/Profile.jpg" alt="Nischal Bhandari" loading="eager" fetchpriority="high" width="260" height="260">
         </div>
-        <div class="badge badge-1" aria-label="8 plus projects"><i class="fas fa-code"></i> 8+ Projects</div>
-        <div class="badge badge-2" aria-label="2 plus years experience"><i class="fas fa-clock"></i> 2+ Years</div>
-        <div class="badge badge-3" aria-label="Location Nepal"><i class="fas fa-map-marker-alt"></i> Pokhara, Nepal 🇳🇵</div>
+        <a class="orbit-node n1" href="https://www.behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="fab fa-behance"></i></a>
+        <a class="orbit-node n2" href="https://www.linkedin.com/in/nis6hal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a class="orbit-node n3" href="https://instagram.com/nis6hal" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a class="orbit-node n4" href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a class="orbit-node n5" href="https://twitter.com/nis6hal" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
   </div>
@@ -1462,50 +1543,61 @@ section{padding:120px 0;}
   </div>
   <div class="marquee-wrapper">
     <div class="marquee-track" id="marqueeTrack">
-      <!-- original 4 -->
-       <article class="marquee-card">
+      <article class="marquee-card">
         <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/Slpd.png" alt="Smart License Plate Detection preview" loading="lazy" width="340" height="180">
+        <img src="Images/sbad.png" alt="Smart Bus Arrival Detector preview" loading="lazy" width="340" height="180">
         <div class="marquee-meta">
-          <h3>License Plate Detection</h3><p>Edge AI for automated gates and parking.</p>
+          <h3>Smart Bus Arrival Detector</h3><p>Real-time bus tracking with ML-powered ETA prediction.</p>
+          <div class="marquee-tags"><span>React Native</span><span>Firebase</span><span>Google Maps</span></div>
+        </div>
+      </article>
+      <article class="marquee-card">
+        <div class="marquee-card-shine" aria-hidden="true"></div>
+        <img src="Images/slpd.png" alt="Gate Automation preview" loading="lazy" width="340" height="180">
+        <div class="marquee-meta">
+          <h3>Gate Automation</h3><p>License plate detection for automated gate control.</p>
           <div class="marquee-tags"><span>Python</span><span>OpenCV</span><span>TensorFlow</span></div>
-          <button class="details-btn" data-project="license-plate">Details</button>
         </div>
       </article>
       <article class="marquee-card">
         <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/Sbad.png" alt="Bus Arrival Detector preview" loading="lazy" width="340" height="180">
+        <img src="Images/Portfolio.png" alt="Portfolio Website preview" loading="lazy" width="340" height="180">
         <div class="marquee-meta">
-          <h3>Bus Arrival Detector</h3><p>Realtime tracking and ML-powered ETAs.</p>
-          <div class="marquee-tags"><span>React Native</span><span>Firebase</span><span>Maps</span></div>
-          <button class="details-btn" data-project="bus-tracker">Details</button>
-        </div>
-      </article>
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/Portfolio.png" alt="Portfolio preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>Portfolio Site</h3><p>Fast, responsive personal site you're viewing.</p>
+          <h3>Portfolio Website</h3><p>Minimalist portfolio you're currently viewing.</p>
           <div class="marquee-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
-          <button class="details-btn" data-project="portfolio">Details</button>
+        </div>
+      </article>
+      <article class="marquee-card">
+        <div class="marquee-card-shine" aria-hidden="true"></div>
+        <img src="Images/cinevault.png" alt="CineVault preview" loading="lazy" width="340" height="180">
+        <div class="marquee-meta">
+          <h3>CineVault</h3><p>Movie discovery app powered by TMDb API.</p>
+          <div class="marquee-tags"><span>React</span><span>TMDb API</span><span>CSS</span></div>
+        </div>
+      </article>
+      <article class="marquee-card">
+        <div class="marquee-card-shine" aria-hidden="true"></div>
+        <img src="Images/readlib.png" alt="ReadLib preview" loading="lazy" width="340" height="180">
+        <div class="marquee-meta">
+          <h3>ReadLib</h3><p>Local-first book management with PDF reader.</p>
+          <div class="marquee-tags"><span>React</span><span>IndexedDB</span><span>pdf.js</span></div>
+        </div>
+      </article>
+      <article class="marquee-card">
+        <div class="marquee-card-shine" aria-hidden="true"></div>
+        <img src="Images/unilib.png" alt="UniLib preview" loading="lazy" width="340" height="180">
+        <div class="marquee-meta">
+          <h3>UniLib</h3><p>Full-stack library management system.</p>
+          <div class="marquee-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
         </div>
       </article>
       <!-- duplicates for seamless loop -->
-      <article class="marquee-card" aria-hidden="true">
-        <div class="marquee-card-shine"></div>
-        <img src="Images/Slpd.png" alt="" loading="lazy" width="340" height="180">
-        <div class="marquee-meta"><h3>License Plate Detection</h3><p>Edge AI for automated gates and parking.</p><div class="marquee-tags"><span>Python</span><span>OpenCV</span><span>TensorFlow</span></div><button class="details-btn" data-project="license-plate">Details</button></div>
-      </article>
-      <article class="marquee-card" aria-hidden="true">
-        <div class="marquee-card-shine"></div>
-        <img src="Images/Sbad.png" alt="" loading="lazy" width="340" height="180">
-        <div class="marquee-meta"><h3>Bus Arrival Detector</h3><p>Realtime tracking and ML-powered ETAs.</p><div class="marquee-tags"><span>React Native</span><span>Firebase</span><span>Maps</span></div><button class="details-btn" data-project="bus-tracker">Details</button></div>
-      </article>
-      <article class="marquee-card" aria-hidden="true">
-        <div class="marquee-card-shine"></div>
-        <img src="Images/Portfolio.png" alt="" loading="lazy" width="340" height="180">
-        <div class="marquee-meta"><h3>Portfolio Site</h3><p>Fast, responsive personal site you're viewing.</p><div class="marquee-tags"><span>HTML</span><span>CSS</span><span>JS</span></div><button class="details-btn" data-project="portfolio">Details</button></div>
-      </article>
+      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/sbad.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>Smart Bus Arrival Detector</h3><p>Real-time bus tracking with ML ETAs.</p><div class="marquee-tags"><span>React Native</span><span>Firebase</span><span>Google Maps</span></div></div></article>
+      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/slpd.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>Gate Automation</h3><p>License plate detection for gate control.</p><div class="marquee-tags"><span>Python</span><span>OpenCV</span><span>TensorFlow</span></div></div></article>
+      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/Portfolio.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>Portfolio Website</h3><p>Minimalist portfolio site.</p><div class="marquee-tags"><span>HTML</span><span>CSS</span><span>JS</span></div></div></article>
+      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/cinevault.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>CineVault</h3><p>Movie discovery app.</p><div class="marquee-tags"><span>React</span><span>TMDb API</span><span>CSS</span></div></div></article>
+      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/readlib.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>ReadLib</h3><p>Book management system.</p><div class="marquee-tags"><span>React</span><span>IndexedDB</span><span>pdf.js</span></div></div></article>
+      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/unilib.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>UniLib</h3><p>Library management system.</p><div class="marquee-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div></div></article>
     </div>
   </div>
 </section>
@@ -1528,7 +1620,7 @@ section{padding:120px 0;}
         <div class="about-stats-row">
           <div class="about-stat-card">
             <i class="fas fa-code"></i>
-            <span class="stat-num" data-count="8">0</span><span class="stat-num">+</span>
+            <span class="stat-num" data-count="6">0</span><span class="stat-num">+</span>
             <span class="stat-lbl">Projects</span>
           </div>
           <div class="about-stat-card">
@@ -1537,15 +1629,29 @@ section{padding:120px 0;}
             <span class="stat-lbl">Years Exp.</span>
           </div>
           <div class="about-stat-card">
-            <i class="fas fa-users"></i>
-            <span class="stat-num">NA</span><span class="stat-num">+</span>
-            <span class="stat-lbl">Clients</span>
+            <i class="fas fa-layer-group"></i>
+            <span class="stat-num" data-count="14">0</span><span class="stat-num">+</span>
+            <span class="stat-lbl">Technologies</span>
           </div>
         </div>
       </div>
-      <div class="globe-wrap">
-        <canvas id="aboutCanvas" aria-label="3D globe showing Nepal location" width="400" height="400"></canvas>
-        <div class="globe-label" id="globeLabel" aria-live="polite">📍 Pokhara, Nepal</div>
+      <div style="display:flex;flex-direction:column;gap:20px;justify-content:center;">
+        <div class="contact-card" style="border-color:var(--accent-primary);">
+          <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h4>Based in</h4>
+            <p>Pokhara, Nepal 🇳🇵</p>
+            <p style="font-size:12px;color:var(--text-muted);margin:0;">Open to remote work globally</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div>
+            <h4>Education</h4>
+            <p>BE Computer Engineering</p>
+            <p style="font-size:12px;color:var(--text-muted);margin:0;">Pokhara University • Graduating 2026</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1578,7 +1684,7 @@ section{padding:120px 0;}
             <h4>AI-Integrated Projects</h4>
             <div class="tl-inst">Independent / Academic</div>
             <div class="tl-period">2024</div>
-            <p>Moved into AI-integrated projects — SLPD, SBAD, and UniLib — combining computer vision and ML with full-stack development.</p>
+            <p>Moved into AI-integrated projects — SLPD, SBAD, and PixelPrompt — combining computer vision and ML with full-stack development.</p>
           </div>
           <div class="tl-node"><i class="fas fa-robot"></i></div>
           <div class="tl-empty"></div>
@@ -1598,43 +1704,27 @@ section{padding:120px 0;}
   </div>
 </section>
 
-<!-- ==================== SERVICES ==================== -->
-<section id="services" class="services">
+<!-- ==================== CERTIFICATIONS ==================== -->
+<section id="certifications" class="services">
   <div class="container">
     <div class="section-header">
-      <p class="section-subtitle">WHAT I WILL DO FOR YOU</p>
-      <h2 class="section-title">Our Services</h2>
+      <p class="section-subtitle">CREDENTIALS</p>
+      <h2 class="section-title">Certifications</h2>
     </div>
-    <div class="services-grid">
+    <div class="services-grid" style="grid-template-columns:repeat(2,1fr);">
       <div class="service-card">
-        <div class="service-icon-wrap"><i class="fas fa-palette"></i></div>
-        <h3>Web Development</h3>
-        <p>Creating modern, responsive websites with cutting-edge technologies. From simple landing pages to complex web applications.</p>
-        <button class="read-more-btn" data-service="web">Read More</button>
+        <div class="service-icon-wrap"><i class="fab fa-aws"></i></div>
+        <h3>Cloud & DevOps Training</h3>
+        <p>Comprehensive training covering AWS core services, cloud architecture, CI/CD pipelines, containerization with Docker, and infrastructure automation.</p>
+        <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">AWS • Docker • CI/CD</div>
+        <a href="#" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
       </div>
       <div class="service-card">
-        <div class="service-icon-wrap"><i class="fas fa-code"></i></div>
-        <h3>Full Stack Development</h3>
-        <p>End-to-end development solutions including frontend, backend, database design, and API development.</p>
-        <button class="read-more-btn" data-service="fullstack">Read More</button>
-      </div>
-      <div class="service-card">
-        <div class="service-icon-wrap"><i class="fas fa-robot"></i></div>
-        <h3>AI Integration</h3>
-        <p>Implementing artificial intelligence and machine learning solutions to enhance your applications with smart features.</p>
-        <button class="read-more-btn" data-service="ai">Read More</button>
-      </div>
-      <div class="service-card">
-        <div class="service-icon-wrap"><i class="fas fa-cloud"></i></div>
-        <h3>Cloud Solutions</h3>
-        <p>Deploying and managing applications on cloud platforms like AWS, Google Cloud, and Azure for optimal performance.</p>
-        <button class="read-more-btn" data-service="cloud">Read More</button>
-      </div>
-      <div class="service-card">
-        <div class="service-icon-wrap"><i class="fas fa-cog"></i></div>
-        <h3>Technical Consulting</h3>
-        <p>Providing expert advice on technology stack selection, architecture design, and best practices for your projects.</p>
-        <button class="read-more-btn" data-service="consulting">Read More</button>
+        <div class="service-icon-wrap"><i class="fas fa-chart-bar"></i></div>
+        <h3>Fundamentals of Data Science</h3>
+        <p>Foundation in statistical analysis, data visualization, exploratory data analysis, and introductory machine learning concepts using Python and popular data science libraries.</p>
+        <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">Python • Pandas • NumPy • Matplotlib</div>
+        <a href="#" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
       </div>
     </div>
   </div>
@@ -1644,60 +1734,10 @@ section{padding:120px 0;}
 <section id="skills" class="skills">
   <div class="container">
     <div class="section-header">
-      <p class="section-subtitle">TECHNICAL AND PROFESSIONAL</p>
+      <p class="section-subtitle">CORE STRENGTHS AND STACK</p>
       <h2 class="section-title">My Skills</h2>
     </div>
     <div class="skills-grid">
-      <!-- Technical -->
-      <div class="tech-skills">
-        <h3>Technical Skills</h3>
-        <div class="skill-assessment">Skills assessed based on projects completed and industry experience</div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">HTML/CSS</span>
-            <span class="skill-level">Expert</span>
-            <span class="skill-pct">85%</span>
-          </div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
-          <div class="skill-details">2+ years • Responsive Design • CSS Grid/Flexbox • Animations</div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">JavaScript</span>
-            <span class="skill-level">Beginner</span>
-            <span class="skill-pct">45%</span>
-          </div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="45"></div></div>
-          <div class="skill-details">2+ years • ES6+ • Async Programming • DOM Manipulation</div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">React</span>
-            <span class="skill-level">Beginner</span>
-            <span class="skill-pct">45%</span>
-          </div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="45"></div></div>
-          <div class="skill-details">2+ years • Hooks • Context API • Redux • Next.js</div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">Node.js</span>
-            <span class="skill-level">Beginner</span>
-            <span class="skill-pct">35%</span>
-          </div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="35"></div></div>
-          <div class="skill-details">2+ years • Express.js • RESTful APIs • Database Integration</div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">Python</span>
-            <span class="skill-level">Beginner</span>
-            <span class="skill-pct">40%</span>
-          </div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="40"></div></div>
-          <div class="skill-details">1+ years • Django • Flask • Data Science • AI/ML</div>
-        </div>
-      </div>
       <!-- Professional -->
       <div class="pro-skills">
         <h3>Professional Skills</h3>
@@ -1738,19 +1778,42 @@ section{padding:120px 0;}
         <!-- Tech Cloud -->
         <div class="tech-cloud">
           <h3>Tech Stack</h3>
-          <div class="tech-tags">
-            <span class="tech-tag" style="--duration:3.5s;--delay:0s">HTML5</span>
-            <span class="tech-tag" style="--duration:4.2s;--delay:0.3s">CSS3</span>
-            <span class="tech-tag" style="--duration:3.8s;--delay:0.6s">JavaScript</span>
-            <span class="tech-tag" style="--duration:4.5s;--delay:0.1s">React</span>
-            <span class="tech-tag" style="--duration:3.3s;--delay:0.9s">Node.js</span>
-            <span class="tech-tag" style="--duration:4.1s;--delay:0.4s">Python</span>
-            <span class="tech-tag" style="--duration:3.7s;--delay:0.7s">Git</span>
-            <span class="tech-tag" style="--duration:4.3s;--delay:0.2s">Firebase</span>
-            <span class="tech-tag" style="--duration:3.9s;--delay:0.8s">OpenCV</span>
-            <span class="tech-tag" style="--duration:4.0s;--delay:0.5s">TensorFlow</span>
-            <span class="tech-tag" style="--duration:3.6s;--delay:1.0s">Linux</span>
-            <span class="tech-tag" style="--duration:4.4s;--delay:0.15s">Figma</span>
+          <div class="tech-stack-grid">
+            <article class="tech-group">
+              <h4>Frontend</h4>
+              <div class="tech-tags">
+                <span class="tech-tag"><i class="devicon-html5-plain colored"></i> HTML5</span>
+                <span class="tech-tag"><i class="devicon-css3-plain colored"></i> CSS3</span>
+                <span class="tech-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                <span class="tech-tag"><i class="devicon-react-original colored"></i> React</span>
+              </div>
+            </article>
+            <article class="tech-group">
+              <h4>Backend</h4>
+              <div class="tech-tags">
+                <span class="tech-tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+                <span class="tech-tag"><i class="devicon-python-plain colored"></i> Python</span>
+                <span class="tech-tag"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
+                <span class="tech-tag"><i class="devicon-firebase-plain colored"></i> Firebase</span>
+              </div>
+            </article>
+            <article class="tech-group">
+              <h4>AI & Data</h4>
+              <div class="tech-tags">
+                <span class="tech-tag"><i class="devicon-opencv-plain colored"></i> OpenCV</span>
+                <span class="tech-tag"><i class="devicon-tensorflow-original colored"></i> TensorFlow</span>
+                <span class="tech-tag"><i class="fas fa-brain"></i> ML Workflows</span>
+              </div>
+            </article>
+            <article class="tech-group">
+              <h4>Tools</h4>
+              <div class="tech-tags">
+                <span class="tech-tag"><i class="devicon-git-plain colored"></i> Git</span>
+                <span class="tech-tag"><i class="devicon-docker-plain colored"></i> Docker</span>
+                <span class="tech-tag"><i class="devicon-linux-plain"></i> Linux</span>
+                <span class="tech-tag"><i class="devicon-figma-plain colored"></i> Figma</span>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -1772,54 +1835,48 @@ section{padding:120px 0;}
       </div>
       <div class="filter-btns" role="group" aria-label="Filter projects">
         <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="web">Web App</button>
-        <button class="filter-btn" data-filter="mobile">Mobile</button>
+        <button class="filter-btn" data-filter="web">Web</button>
         <button class="filter-btn" data-filter="ai">AI</button>
+        <button class="filter-btn" data-filter="mobile">Mobile</button>
       </div>
     </div>
     <div class="portfolio-grid" id="portfolioGrid">
-      <div class="port-item" data-category="ai" data-title="Smart License Plate Detection">
-        <div class="port-flipper">
-          <div class="port-front">
-            <img src="Images/Slpd.png" alt="Smart License Plate Detection" loading="lazy" width="400" height="220">
-            <div class="port-front-overlay">
-              <h3>License Plate Detection</h3>
-              <span class="port-cat-badge">AI</span>
-            </div>
-          </div>
-          <div class="port-back">
-            <div>
-              <h3>Smart License Plate Detection</h3>
-              <p>Edge AI system for real-time license plate recognition and automated gate control.</p>
-              <div class="port-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span></div>
-            </div>
-            <div class="port-actions">
-              <button class="port-btn details-btn" data-project="license-plate"><i class="fas fa-info-circle"></i> Details</button>
-              <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
-              <a href="#contact" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="port-item" data-category="mobile" data-title="Smart Bus Arrival Detector">
         <div class="port-flipper">
           <div class="port-front">
-            <img src="Images/Sbad.png" alt="Smart Bus Arrival Detector" loading="lazy" width="400" height="220">
-            <div class="port-front-overlay">
-              <h3>Bus Arrival Detector</h3>
-              <span class="port-cat-badge">Mobile</span>
-            </div>
+            <img src="Images/sbad.png" alt="Smart Bus Arrival Detector" loading="lazy" width="400" height="220">
+            <div class="port-front-overlay"><h3>Smart Bus Arrival Detector</h3><span class="port-cat-badge">Mobile</span></div>
           </div>
           <div class="port-back">
             <div>
               <h3>Smart Bus Arrival Detector</h3>
-              <p>Real-time bus tracking and ML-powered ETAs for Pokhara city routes.</p>
-              <div class="port-tech"><span>React Native</span><span>Firebase</span><span>Google Maps</span></div>
+              <p>A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.</p>
+              <div class="port-tech"><span>React Native</span><span>Firebase</span><span>Google Maps</span><span>Machine Learning</span></div>
             </div>
             <div class="port-actions">
-              <button class="port-btn details-btn" data-project="bus-tracker"><i class="fas fa-info-circle"></i> Details</button>
-              <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
-              <a href="#contact" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
+              <button class="port-btn details-btn" data-project="smart-bus"><i class="fas fa-info-circle"></i> Details</button>
+              <a href="#" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item" data-category="ai" data-title="Gate Automation">
+        <div class="port-flipper">
+          <div class="port-front">
+            <img src="Images/slpd.png" alt="Gate Automation" loading="lazy" width="400" height="220">
+            <div class="port-front-overlay"><h3>Gate Automation</h3><span class="port-cat-badge">AI</span></div>
+          </div>
+          <div class="port-back">
+            <div>
+              <h3>Gate Automation — License Plate Detection</h3>
+              <p>Edge AI system for real-time license plate recognition designed for automated gate and parking control. Achieves 98%+ detection accuracy across varied lighting conditions on low-power hardware.</p>
+              <div class="port-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span></div>
+            </div>
+            <div class="port-actions">
+              <button class="port-btn details-btn" data-project="gate-automation"><i class="fas fa-info-circle"></i> Details</button>
+              <a href="#" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
             </div>
           </div>
         </div>
@@ -1828,20 +1885,77 @@ section{padding:120px 0;}
         <div class="port-flipper">
           <div class="port-front">
             <img src="Images/Portfolio.png" alt="Portfolio Website" loading="lazy" width="400" height="220">
-            <div class="port-front-overlay">
-              <h3>Portfolio Website</h3>
-              <span class="port-cat-badge">Web</span>
-            </div>
+            <div class="port-front-overlay"><h3>Portfolio Website</h3><span class="port-cat-badge">Web</span></div>
           </div>
           <div class="port-back">
             <div>
               <h3>Portfolio Website</h3>
-              <p>You are currently viewing it! 😅 3D immersive portfolio with chatbot.</p>
-              <div class="port-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Three.js</span></div>
+              <p>The minimalist portfolio you're currently viewing. Features an AI chatbot, animated sections, responsive design, and a Node.js backend with admin panel for content management.</p>
+              <div class="port-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Node.js</span></div>
             </div>
             <div class="port-actions">
               <button class="port-btn details-btn" data-project="portfolio"><i class="fas fa-info-circle"></i> Details</button>
-              <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item" data-category="web" data-title="CineVault">
+        <div class="port-flipper">
+          <div class="port-front">
+            <img src="Images/cinevault.png" alt="CineVault" loading="lazy" width="400" height="220">
+            <div class="port-front-overlay"><h3>CineVault</h3><span class="port-cat-badge">Web</span></div>
+          </div>
+          <div class="port-back">
+            <div>
+              <h3>CineVault</h3>
+              <p>A movie discovery and tracking application powered by the TMDb API. Browse trending films, search by title or genre, view detailed info, trailers, and cast — all with a sleek, responsive dark UI.</p>
+              <div class="port-tech"><span>React</span><span>TMDb API</span><span>CSS3</span></div>
+            </div>
+            <div class="port-actions">
+              <button class="port-btn details-btn" data-project="cinevault"><i class="fas fa-info-circle"></i> Details</button>
+              <a href="#" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item" data-category="web" data-title="ReadLib">
+        <div class="port-flipper">
+          <div class="port-front">
+            <img src="Images/readlib.png" alt="ReadLib" loading="lazy" width="400" height="220">
+            <div class="port-front-overlay"><h3>ReadLib</h3><span class="port-cat-badge">Web</span></div>
+          </div>
+          <div class="port-back">
+            <div>
+              <h3>ReadLib — Book Management System</h3>
+              <p>A local-first book management app with an integrated PDF reader. Uses IndexedDB for persistent storage, supports reading progress tracking, and features a glassmorphism UI with sort/filter capabilities.</p>
+              <div class="port-tech"><span>React</span><span>IndexedDB</span><span>pdf.js</span></div>
+            </div>
+            <div class="port-actions">
+              <button class="port-btn details-btn" data-project="readlib"><i class="fas fa-info-circle"></i> Details</button>
+              <a href="#" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item" data-category="web" data-title="UniLib">
+        <div class="port-flipper">
+          <div class="port-front">
+            <img src="Images/unilib.png" alt="UniLib" loading="lazy" width="400" height="220">
+            <div class="port-front-overlay"><h3>UniLib</h3><span class="port-cat-badge">Web</span></div>
+          </div>
+          <div class="port-back">
+            <div>
+              <h3>UniLib — Library Management System</h3>
+              <p>A full-stack library management system for universities. Includes book inventory, member management, borrowing/returning workflows, and admin analytics — all backed by a MongoDB database and REST API.</p>
+              <div class="port-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>
+            </div>
+            <div class="port-actions">
+              <button class="port-btn details-btn" data-project="unilib"><i class="fas fa-info-circle"></i> Details</button>
+              <a href="#" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
             </div>
           </div>
         </div>
@@ -1959,7 +2073,7 @@ section{padding:120px 0;}
     <div class="footer-grid">
       <div class="footer-brand">
         <h3>Nischal Bhandari</h3>
-        <p>Full Stack Developer passionate about creating innovative digital solutions.</p>
+        <p>Computer Engineering Student passionate about building impactful digital solutions.</p>
         <div class="footer-socials">
           <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="GitHub"><i class="fab fa-github"></i></a>
           <a href="https://linkedin.com/in/nis6hal" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -1971,17 +2085,16 @@ section{padding:120px 0;}
         <h4>Quick Links</h4>
         <nav>
           <a href="#about">About</a>
-          <a href="#services">Services</a>
+          <a href="#certifications">Certifications</a>
           <a href="#portfolio">Portfolio</a>
         </nav>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Explore</h4>
         <nav>
-          <a href="#services">Web Development</a>
-          <a href="#services">Mobile Apps</a>
-          <a href="#services">AI Integration</a>
-          <a href="#services">Consulting</a>
+          <a href="#skills">Skills</a>
+          <a href="#github">GitHub Activity</a>
+          <a href="#contact">Contact</a>
         </nav>
       </div>
       <div class="footer-col">
@@ -2014,15 +2127,7 @@ section{padding:120px 0;}
   </div>
 </div>
 
-<div id="serviceModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h2 id="serviceModalTitle">Service Details</h2>
-      <button class="modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="modal-body" id="serviceModalContent"></div>
-  </div>
-</div>
+<!-- serviceModal removed (services section removed in minimalist redesign) -->
 
 <!-- ==================== SCROLL TO TOP ==================== -->
 <button id="scrollToTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
@@ -2048,9 +2153,8 @@ section{padding:120px 0;}
     <button class="quick-chip">🛠️ Skills?</button>
     <button class="quick-chip">💼 Projects?</button>
     <button class="quick-chip">🎓 Education?</button>
-    <button class="quick-chip">💡 Services?</button>
-    <button class="quick-chip">💰 Available for hire?</button>
-    <button class="quick-chip">💵 Pricing?</button>
+    <button class="quick-chip">🏆 Certifications?</button>
+    <button class="quick-chip">💼 Open to opportunities?</button>
     <button class="quick-chip">🎮 Hobbies?</button>
     <button class="quick-chip">🌍 Languages?</button>
     <button class="quick-chip">🏆 Goals?</button>
@@ -2109,129 +2213,9 @@ section{padding:120px 0;}
   document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
 })();
 
-/* ============ THREE.JS HERO ============ */
-(function(){
-  if(!window.THREE) return;
-  const canvas = document.getElementById('heroCanvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
-  renderer.setClearColor(0x04040f,1);
+/* ============ THREE.JS HERO — REMOVED (minimalist redesign) ============ */
 
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x04040f, 0.035);
-
-  const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth/canvas.offsetHeight, 0.1, 100);
-  camera.position.z = 5;
-
-  // Particles
-  const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 800 : 3000;
-  const positions = new Float32Array(particleCount * 3);
-  for(let i=0;i<particleCount;i++){
-    const theta = Math.random()*Math.PI*2;
-    const phi = Math.acos(2*Math.random()-1);
-    const r = 3 + Math.random()*5;
-    positions[i*3] = r*Math.sin(phi)*Math.cos(theta);
-    positions[i*3+1] = r*Math.sin(phi)*Math.sin(theta);
-    positions[i*3+2] = r*Math.cos(phi);
-  }
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));
-  const pMat = new THREE.PointsMaterial({color:0x88eeff,size:0.015,transparent:true,opacity:0.7});
-  scene.add(new THREE.Points(pGeo,pMat));
-
-  // Geometric objects
-  const objects = [];
-  function addObj(geo, color, pos, speeds){
-    const mat = new THREE.MeshBasicMaterial({color,wireframe:true,transparent:true,opacity:0.5});
-    const m = new THREE.Mesh(geo,mat);
-    m.position.set(...pos);
-    m.userData.speeds = speeds;
-    scene.add(m);
-    objects.push(m);
-  }
-  addObj(new THREE.IcosahedronGeometry(1.2,0), 0xF5B800, [-2,0.5,-1], [0.003,0.005,0]);
-  addObj(new THREE.TorusGeometry(0.9,0.3,8,16), 0x7c3aed, [2,-0.5,-1.5], [0,0,0.006]);
-  addObj(new THREE.OctahedronGeometry(0.8,0), 0xffffff, [-1.5,-1,-2], [0.004,0.003,0.004]);
-  addObj(new THREE.TetrahedronGeometry(0.7,0), 0xF5B800, [2,1,-2], [0.002,0.001,0.003]);
-
-  // Mouse parallax
-  let mouseX=0, mouseY=0;
-  window.addEventListener('mousemove',(e)=>{ mouseX=(e.clientX/window.innerWidth-0.5)*0.1; mouseY=(e.clientY/window.innerHeight-0.5)*0.1; });
-
-  // Resize
-  window.addEventListener('resize',()=>{
-    camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
-  });
-
-  // IntersectionObserver to pause off-screen
-  let active = true;
-  new IntersectionObserver(([e])=>{ active = e.isIntersecting; }).observe(canvas);
-
-  let t=0;
-  (function animate(){
-    requestAnimationFrame(animate);
-    if(!active) return;
-    t += 0.001;
-    camera.position.x += (mouseX - camera.position.x) * 0.03;
-    camera.position.y += (-mouseY - camera.position.y) * 0.03;
-    camera.position.x += Math.sin(t*0.5)*0.0003;
-    objects.forEach(o=>{
-      const s = o.userData.speeds;
-      o.rotation.x += s[0]; o.rotation.y += s[1]; o.rotation.z += s[2];
-    });
-    renderer.render(scene,camera);
-  })();
-})();
-
-/* ============ THREE.JS GLOBE ============ */
-(function(){
-  if(!window.THREE) return;
-  const canvas = document.getElementById('aboutCanvas');
-  if(!canvas) return;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(400,400);
-  renderer.setClearColor(0x000000,0);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60,1,0.1,100);
-  camera.position.z = 2.5;
-
-  // Globe wireframe
-  const gGeo = new THREE.SphereGeometry(1,12,12);
-  const gMat = new THREE.MeshBasicMaterial({color:0xF5B800,wireframe:true,transparent:true,opacity:0.25});
-  const globe = new THREE.Mesh(gGeo,gMat);
-  scene.add(globe);
-
-  // Nepal pin (lat 28°N, lon 84°E)
-  const lat = 28*Math.PI/180;
-  const lon = 84*Math.PI/180;
-  const pinX = Math.cos(lat)*Math.cos(lon);
-  const pinY = Math.sin(lat);
-  const pinZ = Math.cos(lat)*Math.sin(lon);
-  const pinGeo = new THREE.SphereGeometry(0.04,8,8);
-  const pinMat = new THREE.MeshBasicMaterial({color:0xF5B800});
-  const pin = new THREE.Mesh(pinGeo,pinMat);
-  pin.position.set(pinX,pinY,pinZ);
-  globe.add(pin);
-
-  let active = true;
-  new IntersectionObserver(([e])=>{ active = e.isIntersecting; }).observe(canvas);
-
-  let t=0;
-  (function animate(){
-    requestAnimationFrame(animate);
-    if(!active) return;
-    t += 0.005;
-    globe.rotation.y += 0.004;
-    pin.material.opacity = 0.5 + 0.5*Math.sin(t*3);
-    renderer.render(scene,camera);
-  })();
-})();
+/* ============ THREE.JS GLOBE — REMOVED (minimalist redesign) ============ */
 
 /* ============ MARQUEE TILT ============ */
 document.querySelectorAll('.marquee-card').forEach(card=>{
@@ -2286,7 +2270,7 @@ function closeMobileNav(){
 /* ============ TYPEWRITER ============ */
 (function(){
   const el = document.getElementById('typewriter');
-  const phrases = ['Full Stack Developer','Problem Solver','Open Source Contributor','CS Student @ Pokhara University'];
+  const phrases = ['Computer Engineering Student','Problem Solver','Open Source Contributor','Open to Opportunities'];
   let pi=0,ci=0,deleting=false;
   function tick(){
     const phrase = phrases[pi];
@@ -2429,55 +2413,63 @@ function closeMobileNav(){
 
 /* ============ PROJECT MODAL DATA ============ */
 const projectData = {
-  pixelprompt: {
-    title: 'PixelPrompt',
-    content: `<p>An AI-powered tool that converts hand-drawn wireframe sketches into fully responsive websites.</p>
-    <h3>Key Features</h3>
-    <ul><li>Sketch-to-code conversion using OpenAI Vision API</li><li>Responsive HTML/CSS generation</li><li>Live preview and export functionality</li><li>Multi-page site generation</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>OpenAI API</span><span>Canvas API</span><span>Express.js</span></div>
-    <h3>Highlights</h3><p>Reduced wireframe-to-prototype time by 80%. Supports complex layouts including grids, navbars, and forms.</p>`
-  },
-  'license-plate': {
-    title: 'Smart License Plate Detection',
-    content: `<p>An edge AI system for real-time license plate recognition, designed for automated gate control and parking management.</p>
-    <h3>Key Features</h3>
-    <ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control</li><li>Vehicle entry/exit logging</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span><span>SQLite</span></div>
-    <h3>Highlights</h3><p>98%+ detection accuracy in varied lighting. Runs efficiently on low-power hardware with sub-100ms latency.</p>`
-  },
-  'bus-tracker': {
+  'smart-bus': {
     title: 'Smart Bus Arrival Detector',
-    content: `<p>A mobile app providing real-time bus arrival times and ML-powered ETAs for Pokhara city routes.</p>
+    content: `<p>A mobile app that helps daily commuters track buses live and receive ML-powered arrival estimates across Pokhara routes.</p>
     <h3>Key Features</h3>
-    <ul><li>Real-time bus tracking on live map</li><li>ML-powered arrival time prediction</li><li>Push notifications for upcoming buses</li><li>Route planning and optimization</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>React Native</span><span>Firebase</span><span>Google Maps API</span><span>TensorFlow Lite</span></div>
-    <h3>Highlights</h3><p>Serves daily commuters across 12 major Pokhara routes. Prediction accuracy within ±2 minutes.</p>`
+    <ul><li>Live bus location updates on an interactive map</li><li>ML-powered ETA predictions with route awareness</li><li>Push alerts for approaching buses</li><li>Route-level commute planning support</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React Native</span><span>Firebase</span><span>Google Maps</span><span>Machine Learning</span></div>
+    <h3>Highlights</h3><p>Built for real commuter scenarios with practical ETA accuracy and lightweight mobile performance.</p>`
+  },
+  'gate-automation': {
+    title: 'Gate Automation — License Plate Detection',
+    content: `<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p>
+    <h3>Key Features</h3>
+    <ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control integration</li><li>Vehicle entry/exit logging with timestamps</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span><span>SQLite</span></div>
+    <h3>Highlights</h3><p>98%+ detection accuracy across varied lighting conditions. Sub-100ms latency on low-power hardware.</p>`
   },
   portfolio: {
     title: 'Portfolio Website',
-    content: `<p>The 3D-first portfolio website you're currently viewing — built from scratch with Three.js, GSAP, and zero frameworks.</p>
+    content: `<p>The minimalist portfolio website you're currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.</p>
     <h3>Key Features</h3>
-    <ul><li>3D particle system and wireframe geometries</li><li>Rule-based AI chatbot with keyword matching</li><li>3D flip-card portfolio section</li><li>Animated skill bars and hexagonal progress displays</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Three.js</span><span>GSAP</span></div>
-    <h3>Highlights</h3><p>Single-file architecture, zero build tools. Custom cursor, loading screen, and immersive hero scene.</p>`
+    <ul><li>Rule-based AI chatbot with score-based keyword matching</li><li>Animated skill bars and hexagonal progress displays</li><li>Node.js backend with admin panel for content management</li><li>Responsive design with custom cursor and micro-animations</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Node.js</span><span>Express</span></div>
+    <h3>Highlights</h3><p>Single-file frontend architecture, zero build tools. Dynamic content loaded from backend API with admin CMS.</p>`
+  },
+  cinevault: {
+    title: 'CineVault',
+    content: `<p>A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.</p>
+    <h3>Key Features</h3>
+    <ul><li>Browse trending, top-rated, and upcoming films</li><li>Search by title, genre, or keyword</li><li>Detailed movie pages with trailers, cast, and reviews</li><li>Responsive dark theme with smooth transitions</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>TMDb API</span><span>CSS3</span><span>React Router</span></div>
+    <h3>Highlights</h3><p>Lazy-loaded images, infinite scroll, and debounced search for a fluid browsing experience.</p>`
+  },
+  readlib: {
+    title: 'ReadLib — Book Management System',
+    content: `<p>A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.</p>
+    <h3>Key Features</h3>
+    <ul><li>Add and manage books with cover thumbnails</li><li>Track reading progress (Planned / Reading / Completed)</li><li>Built-in PDF reader powered by pdf.js</li><li>Sort, filter, and search your library</li><li>Glassmorphism UI with toast notifications</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>IndexedDB</span><span>pdf.js</span><span>Vite</span></div>
+    <h3>Highlights</h3><p>Fully local-first — no server needed. Persistent storage survives browser restarts. Deployed on Vercel.</p>`
+  },
+  unilib: {
+    title: 'UniLib — Library Management System',
+    content: `<p>A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.</p>
+    <h3>Key Features</h3>
+    <ul><li>Book inventory with search and filtering</li><li>Member registration and management</li><li>Borrow/return workflows with due dates</li><li>Admin analytics dashboard with charts</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>
+    <h3>Highlights</h3><p>REST API with JWT auth. Role-based access for admins and members. Deployed with Docker.</p>`
   }
-};
-
-const serviceData = {
-  web: { title: 'Web Development', content: `<p>Creating modern, responsive websites with cutting-edge technologies.</p><h3>What's Included</h3><ul><li>Responsive design for all devices</li><li>Performance-optimised HTML/CSS/JS</li><li>SEO best practices</li><li>Accessibility compliance (WCAG 2.1)</li><li>CMS integration if needed</li></ul><h3>Technologies</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React</span><span>Next.js</span></div>` },
-  fullstack: { title: 'Full Stack Development', content: `<p>End-to-end development covering frontend, backend, database, and APIs.</p><h3>What's Included</h3><ul><li>Frontend UI with React or Next.js</li><li>REST/GraphQL API design</li><li>Database modelling (SQL & NoSQL)</li><li>Authentication & authorisation</li><li>Deployment and CI/CD setup</li></ul><div class="modal-tech"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>PostgreSQL</span></div>` },
-  ai: { title: 'AI Integration', content: `<p>Integrating AI and machine learning features into your existing or new applications.</p><h3>What's Included</h3><ul><li>OpenAI / LLM API integration</li><li>Computer Vision with OpenCV / TensorFlow</li><li>Chatbot development</li><li>Recommendation engines</li><li>Data pipeline design</li></ul><div class="modal-tech"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>OpenAI API</span></div>` },
-  cloud: { title: 'Cloud Solutions', content: `<p>Deploying and managing applications on cloud platforms for optimal performance and scalability.</p><h3>What's Included</h3><ul><li>AWS / GCP / Azure deployment</li><li>Docker & container orchestration</li><li>CDN configuration</li><li>Auto-scaling setup</li><li>Monitoring and alerting</li></ul><div class="modal-tech"><span>AWS</span><span>GCP</span><span>Docker</span><span>Firebase</span><span>Vercel</span></div>` },
-  consulting: { title: 'Technical Consulting', content: `<p>Expert advice on technology decisions, architecture design, and engineering best practices.</p><h3>What's Included</h3><ul><li>Tech stack selection and comparison</li><li>Architecture review and planning</li><li>Code review and refactoring guidance</li><li>Performance auditing</li><li>Security best practices</li></ul>` }
 };
 
 /* ============ MODAL LOGIC ============ */
 function openModal(id, data, type){
   const modal = document.getElementById(id);
-  const d = type==='project' ? projectData[data] : serviceData[data];
+  const d = projectData[data];
   if(!d) return;
-  document.getElementById(type==='project'?'modalTitle':'serviceModalTitle').textContent = d.title;
-  document.getElementById(type==='project'?'modalContent':'serviceModalContent').innerHTML = d.content;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalContent').innerHTML = d.content;
   modal.classList.add('open');
   document.body.style.overflow='hidden';
   modal.querySelector('.modal-close').focus();
@@ -2490,16 +2482,13 @@ function closeModal(id){
 document.querySelectorAll('.details-btn').forEach(btn=>{
   btn.addEventListener('click',()=>openModal('projectModal', btn.dataset.project, 'project'));
 });
-document.querySelectorAll('.read-more-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>openModal('serviceModal', btn.dataset.service, 'service'));
-});
 document.querySelectorAll('.modal-close').forEach(btn=>{
-  btn.addEventListener('click',()=>{ closeModal('projectModal'); closeModal('serviceModal'); });
+  btn.addEventListener('click',()=>{ closeModal('projectModal'); });
 });
 document.querySelectorAll('.modal').forEach(m=>{
-  m.addEventListener('click',(e)=>{ if(e.target===m){ closeModal('projectModal'); closeModal('serviceModal'); } });
+  m.addEventListener('click',(e)=>{ if(e.target===m){ closeModal('projectModal'); } });
 });
-document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ closeModal('projectModal'); closeModal('serviceModal'); closeChatWindow(); } });
+document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ closeModal('projectModal'); closeChatWindow(); } });
 
 /* ============ CONTACT FORM ============ */
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
@@ -2558,116 +2547,141 @@ document.getElementById('contactForm').addEventListener('submit', async function
 /* ============ CHATBOT ============ */
 const RESPONSES = [
 
-  /* ── Greetings ──────────────────────────────────────────────────────────── */
+  /* ── Greetings ── */
   { keywords:['hello','hi','hey','sup','good morning','good evening','howdy','what\'s up','wassup'],
-    reply:'Hey there! 👋 I\'m Nischal\'s virtual assistant.\nAsk me about his skills, projects, services, availability — or anything else.\nWhat would you like to know?' },
+    reply:'Hey there! 👋 I\'m Nischal\'s virtual assistant.\nAsk me about his skills, projects, certifications, availability — or anything else.\nWhat would you like to know?' },
 
-  /* ── Who is Nischal ─────────────────────────────────────────────────────── */
+  /* ── Who is Nischal ── */
   { keywords:['who','about','tell me about','introduce','yourself','nischal'],
-    reply:'Nischal Bhandari is a Full Stack Developer in his final (8th) semester of BE Computer Engineering at Pokhara University, Nepal — graduating in 2026.\n\nHe has 2+ years of experience across paid client work and personal projects, building web apps, mobile apps, and AI-integrated tools.\n\nOutside the keyboard: gaming 🎮, music 🎵, and hiking the trails around Pokhara 🥾.' },
+    reply:'Nischal Bhandari is a Computer Engineering student in his final semester at Pokhara University, Nepal — graduating in 2026.\n\nHe has 2+ years of hands-on experience building web apps, AI-integrated tools, and full-stack solutions.\n\nOutside the keyboard: gaming 🎮, music 🎵, and hiking the trails around Pokhara 🥾.' },
 
-  /* ── Education ──────────────────────────────────────────────────────────── */
-  { keywords:['study','university','college','degree','education','student','pokhara university','where','course','graduating','graduation','semester'],
-    reply:'🎓 Nischal is in his 8th and final semester of BE Computer Engineering at Pokhara University, Nepal — graduating in 2026.\n\nHis studies span algorithms, system design, computer networks, AI/ML, and software engineering. He\'s been complementing that with real freelance work and personal builds the whole way through.' },
+  /* ── Education ── */
+  { keywords:['study','university','college','degree','education','student','pokhara university','course','graduating','graduation','semester'],
+    reply:'🎓 Nischal is in his final semester of BE Computer Engineering at Pokhara University, Nepal — graduating in 2026.\n\nHis studies span algorithms, system design, computer networks, AI/ML, and software engineering. He\'s been complementing academics with real project builds the whole way through.' },
 
-  /* ── Skills ─────────────────────────────────────────────────────────────── */
-  { keywords:['skill','know','tech','stack','language','what can you','capable','proficient'],
-    reply:'Here\'s Nischal\'s skill snapshot:\n\n⚙️ Technical\n🔹 HTML/CSS — 85% (Expert)\n🔹 JavaScript — 45%\n🔹 React — 45%\n🔹 Node.js — 35%\n🔹 Python — 40%\n\n🤝 Professional\n🔹 Problem Solving — 90%\n🔹 Communication — 80%\n🔹 Team Work — 80%\n🔹 Creativity — 85%\n\nCheck the Skills section on this page for the full breakdown!' },
+  /* ── Skills ── */
+  { keywords:['skill','know','tech','stack','what can you','capable','proficient'],
+    reply:'Here\'s Nischal\'s skill snapshot:\n\n⚙️ Technical\n🔹 HTML/CSS — 85% (Expert)\n🔹 JavaScript — 45%\n🔹 React — 45%\n🔹 Node.js — 35%\n🔹 Python — 40%\n\n🤝 Professional\n🔹 Problem Solving — 90%\n🔹 Communication — 80%\n🔹 Team Work — 80%\n🔹 Creativity — 85%\n\nCheck the Skills section for the full breakdown!' },
 
-  /* ── Favourite tech ─────────────────────────────────────────────────────── */
+  /* ── Favourite tech ── */
   { keywords:['favourite','favorite','enjoy','love','prefer','best tech','fav','fun to use','enjoy working'],
-    reply:'Nischal genuinely loves:\n\n⚛️ React / Next.js — building fast, interactive UIs\n🐍 Python + AI/ML — turning data into something actually useful\n🎨 Three.js / creative coding — making the web feel alive (like this very page!)\n🔧 Node.js — clean, expressive backend APIs\n\nHe\'s happiest when all of these collide in one project. 😄' },
+    reply:'Nischal genuinely loves:\n\n⚛️ React — building fast, interactive UIs\n🐍 Python + AI/ML — turning data into something useful\n🔧 Node.js — clean, expressive backend APIs\n🐳 Docker — containerizing everything\n\nHe\'s happiest when these collide in one project. 😄' },
 
-  /* ── All projects ───────────────────────────────────────────────────────── */
-  { keywords:['project','work','built','made','portfolio','what have you','show me','examples'],
-    reply:'Nischal has shipped 8+ projects. Key highlights:\n\n🚀 UniLib — working prototype that stores library databases (python, html)\n🚗 Smart License Plate Detection — Edge AI for automated gates (Python, OpenCV, TensorFlow)\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs (React Native, Firebase)\n🌐 This Portfolio — the 3D site you\'re on right now (Three.js, GSAP)\n\nSome projects are private. Reach out to see a specific project in action or check github.com/nis6hal for public repos!' },
+  /* ── All projects ── */
+  { keywords:['project','work','built','made','what have you','show me','examples'],
+    reply:'Nischal has built 6 flagship projects:\n\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs\n🚗 Gate Automation — Smart license plate detection for automated gate flow\n🌐 Portfolio Website — this site! (HTML, CSS, JS, Node.js)\n🎬 CineVault — Movie discovery app (React, TMDb API)\n📚 ReadLib — Local-first book manager with built-in PDF reader\n📖 UniLib — Full-stack university library management system\n\nOpen the Portfolio section for details or check github.com/nis6hal.' },
 
- 
-  /* ── SLPD ───────────────────────────────────────────────────────────────── */
-  { keywords:['license plate','slpd','gate','parking','detection','opencv','plate'],
-    reply:'🚗 Smart License Plate Detection (SLPD)\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n• Vehicle entry/exit logging\n\nStack: Python · OpenCV · TensorFlow · Raspberry Pi · SQLite' },
+  /* ── Smart Bus ── */
+  { keywords:['smart bus','bus','eta','arrival','commute','pokhara routes','route tracking'],
+    reply:'🚌 Smart Bus Arrival Detector\nA commuter-first mobile app that tracks bus locations in real time and predicts ETAs.\n\n✨ Highlights:\n• Live bus tracking on map\n• ML-powered ETA predictions\n• Push alerts for approaching buses\n• Built around Pokhara route patterns\n\nStack: React Native · Firebase · Google Maps · ML' },
 
-  /* ── SBAD ───────────────────────────────────────────────────────────────── */
-  { keywords:['bus','sbad','arrival','tracker','tracking','transport','pokhara bus'],
-    reply:'🚌 Smart Bus Arrival Detector (SBAD)\nMobile app with real-time bus arrival times and ML-powered ETAs for Pokhara city routes.\n\n✨ Highlights:\n• Live bus tracking on Google Maps\n• Predictions accurate within ±2 minutes\n• Push notifications for upcoming buses\n• Covers 12 major Pokhara routes\n\nStack: React Native · Firebase · Google Maps API · TensorFlow Lite' },
+  /* ── Gate Automation / SLPD ── */
+  { keywords:['license plate','slpd','gate','parking','detection','opencv','plate','automation'],
+    reply:'🚗 Gate Automation — License Plate Detection\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n\nStack: Python · OpenCV · TensorFlow · Raspberry Pi · SQLite' },
 
-  /* ── Services ───────────────────────────────────────────────────────────── */
-  { keywords:['service','offer','do for','help with','what do you do'],
-    reply:'Nischal actively takes client work in three areas:\n\n🌐 Web Development — responsive sites, landing pages, web apps\n⚙️ Full Stack Development — frontend + backend + database + APIs end-to-end\n🤖 AI Integration — adding smart features: chatbots, vision APIs, LLMs\n\nHe also lists Cloud Solutions and Technical Consulting on his portfolio — feel free to ask about those too.\n\nInterested? Email itisnischal@gmail.com or DM @nis6hal on Instagram!' },
+  /* ── CineVault ── */
+  { keywords:['cinevault','cine vault','movie','film','tmdb'],
+    reply:'🎬 CineVault\nA movie discovery and tracking app powered by the TMDb API.\n\n✨ Highlights:\n• Browse trending, top-rated, and upcoming films\n• Search by title or genre with debounced input\n• Detailed pages with trailers, cast, and reviews\n• Sleek dark responsive UI\n\nStack: React · TMDb API · CSS3 · React Router' },
 
-  /* ── Web dev service ─────────────────────────────────────────────────────── */
-  { keywords:['web development','website','landing page','responsive'],
-    reply:'🌐 Web Development\nNischal builds modern, responsive websites and web apps — from clean landing pages to full dynamic platforms.\n\nThis is his primary service offering right now. He knows how to ship something that looks great, loads fast, and works on every device.\n\nInterested? → itisnischal@gmail.com or Instagram @nis6hal' },
+  /* ── ReadLib ── */
+  { keywords:['readlib','read lib','book','pdf','reader','library management'],
+    reply:'📚 ReadLib — Book Management System\nA local-first book management app with an integrated PDF reader.\n\n✨ Highlights:\n• All data stays on your device (IndexedDB)\n• Track reading progress: Planned / Reading / Completed\n• Built-in PDF reader powered by pdf.js\n• Glassmorphism UI with sort/filter\n\nStack: React · IndexedDB · pdf.js · Vite' },
 
-  /* ── Full stack service ─────────────────────────────────────────────────── */
-  { keywords:['full stack','fullstack','backend','api','database','end to end'],
-    reply:'⚙️ Full Stack Development\nNischal has strong full-stack experience from personal and academic projects — React frontend, Node.js/Express backend, MongoDB/PostgreSQL, REST APIs, authentication, deployment.\n\nWhile his primary client service right now is Web Development, he\'s comfortable owning an entire stack.\n\nWant to discuss a full-stack project? → itisnischal@gmail.com or Instagram @nis6hal' },
+  /* ── UniLib ── */
+  { keywords:['unilib','uni lib','university library','full stack library'],
+    reply:'📖 UniLib — Library Management System\nA full-stack library system designed for universities.\n\n✨ Highlights:\n• Book inventory, member management, borrow/return workflows\n• Admin analytics dashboard with charts\n• REST API with JWT auth and role-based access\n• Deployed with Docker\n\nStack: React · Node.js · MongoDB · Express' },
 
-  /* ── AI Integration service ─────────────────────────────────────────────── */
-  { keywords:['ai integration','machine learning','chatbot','openai','vision','llm','ml'],
-    reply:'🤖 AI Integration\nNischal can wire AI into your product — OpenAI APIs, computer vision with OpenCV/TensorFlow, custom chatbots, or LLM-powered features.\n\nHis projects SLPD (CV) and UniLib (Smart LMS) are direct proof of this in practice.\n\nInterested? → itisnischal@gmail.com or Instagram @nis6hal' },
+  /* ── Certifications ── */
+  { keywords:['certification','certificate','certified','credential','aws','cloud','devops','data science'],
+    reply:'🏆 Nischal holds certifications in:\n\n☁️ Cloud & DevOps Training — AWS core services, Docker, CI/CD pipelines, infrastructure automation\n📊 Fundamentals of Data Science — Statistical analysis, data visualization, intro ML with Python, Pandas, NumPy\n\nCheck the Certifications section on this page for credential links!' },
 
-  /* ── Pricing ────────────────────────────────────────────────────────────── */
-  { keywords:['price','pricing','cost','rate','charge','how much','fee','budget','quote'],
-    reply:'💵 Pricing is scoped per project — no fixed packages, because every project is different.\n\nTo get a quote, just share a quick brief:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nHe usually responds within 24 hours! 🚀' },
+  /* ── Availability / hire / internship ── */
+  { keywords:['available','hire','hiring','freelance','internship','job','work with','open to work','opportunity','looking for work','intern'],
+    reply:'✅ Yes — Nischal is open to opportunities.\n\nHe\'s currently open to:\n💼 Developer positions and project work\n🎓 Internships with real-world impact\n🤝 Remote work globally\n🚀 Collaborations and interesting builds\n\nBest way to reach him:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nHe replies fast ⚡' },
 
-  /* ── Availability / hire ────────────────────────────────────────────────── */
-  { keywords:['available','hire','hiring','freelance','internship','job','work with','open to work','opportunity','looking for work'],
-    reply:'✅ Yes — Nischal is actively looking for opportunities!\n\nHe\'s open to:\n💼 Web development client projects\n🎓 Internships — especially roles with real-world impact\n🤝 Remote work globally\n🚀 Collaborations and interesting builds\n\nBest way to reach him:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nHe replies fast ⚡' },
-
-  /* ── Collaborate ────────────────────────────────────────────────────────── */
+  /* ── Collaborate ── */
   { keywords:['collab','collaborate','team up','partner','work together','co-found','build together'],
-    reply:'Nischal loves teaming up on interesting problems! 🤝\n\nStartup idea, side project, hackathon, open-source effort — he\'s genuinely open.\n\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nBring the idea, he\'ll bring the code. 🚀' },
+    reply:'Nischal loves teaming up on interesting problems! 🤝\n\nStartup idea, side project, hackathon, open-source — he\'s genuinely open.\n\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nBring the idea, he\'ll bring the code. 🚀' },
 
-  /* ── Goals ──────────────────────────────────────────────────────────────── */
+  /* ── Goals ── */
   { keywords:['goal','dream','aspire','future','plan','ambition','next step','vision','where do you see'],
-    reply:'🏆 Nischal\'s goals:\n\n🎓 Graduate from Pokhara University in 2026\n💼 Land a meaningful developer role or internship — ideally in a product company making real impact\n🌍 Work globally, build products used by thousands\n🤖 Keep pushing into AI/ML and creative coding\n\nFinal semester, strong portfolio, actively looking. 🔥' },
+    reply:'🏆 Nischal\'s goals:\n\n🎓 Graduate from Pokhara University in 2026\n💼 Land a meaningful developer role or internship\n🌍 Work globally, build products used by thousands\n🤖 Keep pushing into AI/ML and full-stack development\n\nFinal semester, strong portfolio, actively looking. 🔥' },
 
-  /* ── Hobbies ────────────────────────────────────────────────────────────── */
+  /* ── Hobbies ── */
   { keywords:['hobby','hobbies','fun','free time','outside coding','interest','personal','besides work','when not coding'],
-    reply:'Outside of coding, Nischal is into:\n\n🎮 Gaming — unwinding after a long build session\n🎵 Music — always something playing while he codes\n🥾 Hiking — Pokhara has incredible trails, he makes the most of them\n\nHe finds stepping away from the screen genuinely makes him a sharper problem-solver. 🧠' },
+    reply:'Outside of coding, Nischal is into:\n\n🎮 Gaming — unwinding after a long build session\n🎵 Music — always something playing while he codes\n🥾 Hiking — Pokhara has incredible trails\n\nStepping away from the screen genuinely makes him a sharper problem-solver. 🧠' },
 
-  /* ── Languages spoken ───────────────────────────────────────────────────── */
+  /* ── Languages spoken ── */
   { keywords:['language','speak','nepali','english','hindi','fluent','tongue'],
-    reply:'Nischal speaks:\n\n🇬🇧 English — professional fluency\n🇳🇵 Nepali — native\n🇮🇳 Hindi — conversational\n\nProject briefs welcome in any of the three! 😊' },
+    reply:'Nischal speaks:\n\n🇬🇧 English — professional fluency\n🇳🇵 Nepali — native\n🇮🇳 Hindi — conversational\n\nHappy to communicate in any of the three! 😊' },
 
-  /* ── Experience ─────────────────────────────────────────────────────────── */
-  { keywords:['experience','year','how long','background','journey','started','when did','paid','client'],
-    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University, caught the coding bug immediately\n2023 — First production web projects, mastered the React + Node.js ecosystem\n2024 — Levelled into AI: SLPD, SBAD, and the UniLib\n2025–26 — Final semester, actively looking for his first big professional opportunity\n\n2+ years of hands-on building, mostly personal and academic projects, 8+ shipped. 🔥' },
+  /* ── Experience ── */
+  { keywords:['experience','year','how long','background','journey','started','when did'],
+    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University\n2023 — First production web projects, learned React + Node.js\n2024 — AI-integrated projects: Gate Automation, Sentiment Analyzer\n2025–26 — Final semester, building portfolio projects (CineVault, ReadLib, UniLib)\n\n2+ years of hands-on building, 6+ projects shipped. 🔥' },
 
-  /* ── Contact ────────────────────────────────────────────────────────────── */
+  /* ── Contact ── */
   { keywords:['contact','reach','email','message','dm','instagram','insta','get in touch','how to contact'],
-    reply:'Best ways to reach Nischal:\n\n📧 Email: itisnischal@gmail.com\n📸 Instagram: @nis6hal — DMs very welcome!\n\nOr use the Contact form at the bottom of this page.\nHe typically replies within 24 hours, often faster. ⚡' },
+    reply:'Best ways to reach Nischal:\n\n📧 Email: itisnischal@gmail.com\n📸 Instagram: @nis6hal — DMs very welcome!\n\nOr use the Contact form at the bottom of this page.\nHe typically replies within 24 hours. ⚡' },
 
-  /* ── GitHub ─────────────────────────────────────────────────────────────── */
+  /* ── GitHub ── */
   { keywords:['github','code','repository','repo','open source','source code'],
-    reply:'💻 github.com/nis6hal\n\nAll of Nischal\'s public project repos live here. He builds in public and keeps things active — worth a browse!' },
+    reply:'💻 github.com/nis6hal\n\nAll of Nischal\'s public project repos live here — worth a browse!' },
 
-  /* ── Social links ───────────────────────────────────────────────────────── */
+  /* ── Social links ── */
   { keywords:['linkedin','twitter','social','follow','network'],
     reply:'Find Nischal across the web:\n\n📸 Instagram: @nis6hal (best for DMs)\n💼 LinkedIn: linkedin.com/in/nis6hal\n🐦 Twitter/X: @nis6hal\n💻 GitHub: github.com/nis6hal' },
 
-  /* ── CV / Resume ────────────────────────────────────────────────────────── */
+  /* ── CV / Resume ── */
   { keywords:['cv','resume','download','pdf'],
     reply:'📄 Hit the "Download CV" button in the hero section at the top of this page — it downloads directly!' },
 
-  /* ── Location ───────────────────────────────────────────────────────────── */
+  /* ── Location ── */
   { keywords:['location','nepal','pokhara','based','from','where are you','city','country'],
-    reply:'📍 Pokhara, Nepal 🇳🇵 — a city at the foot of the Annapurna Himalayas.\n\nNischal works fully remotely and is open to clients and teams anywhere in the world.' },
+    reply:'📍 Pokhara, Nepal 🇳🇵 — a city at the foot of the Annapurna Himalayas.\n\nNischal works fully remotely and is open to teams anywhere in the world.' },
 
-  /* ── Thanks ─────────────────────────────────────────────────────────────── */
+  /* ── Thanks ── */
   { keywords:['thank','thanks','appreciate','great','awesome','helpful','nice','cool','cheers'],
-    reply:'You\'re welcome! 😊 Feel free to ask anything else.\nIf you\'d like to work with Nischal: itisnischal@gmail.com or DM @nis6hal on Instagram. Good luck! 🚀' }
+    reply:'You\'re welcome! 😊 Feel free to ask anything else.\nIf you\'d like to connect with Nischal: itisnischal@gmail.com or DM @nis6hal on Instagram. 🚀' }
 
 ];
 const FALLBACK = "Hmm, I\'m not sure about that one! 🤔\n\nBest to reach Nischal directly:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nOr try one of the quick questions below — I\'m better with those! 😄";
 
 function getBotResponse(input){
   const lower = input.toLowerCase().trim();
+  if(!lower) return FALLBACK;
+
+  const words = lower.split(/[^a-z0-9+.#-]+/).filter(Boolean);
+  let best = { score: 0, reply: FALLBACK, matches: 0 };
+
   for(const item of RESPONSES){
-    if(item.keywords.some(kw=>lower.includes(kw))) return item.reply;
+    let score = 0;
+    let matches = 0;
+
+    for(const kw of item.keywords){
+      const needle = kw.toLowerCase().trim();
+      if(!needle) continue;
+
+      if(needle.includes(' ')){
+        if(lower.includes(needle)){
+          matches++;
+          score += 8 + needle.length;
+        }
+      } else {
+        const exactWordHit = words.includes(needle);
+        const partialHit = lower.includes(needle);
+        if(exactWordHit || partialHit){
+          matches++;
+          score += exactWordHit ? 6 + needle.length : 2 + Math.floor(needle.length / 2);
+        }
+      }
+    }
+
+    if(score > best.score || (score === best.score && matches > best.matches)){
+      best = { score, reply: item.reply, matches };
+    }
   }
-  return FALLBACK;
+
+  return best.score > 0 ? best.reply : FALLBACK;
 }
 
 const chatToggle = document.getElementById('chatToggle');
@@ -2753,24 +2767,9 @@ document.querySelectorAll('.quick-chip').forEach(chip=>{
   });
 });
 
-document.getElementById('talkAI').addEventListener('click',()=>{
-  openChat();
-  setTimeout(()=>chatWindow.scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
-});
+// talkAI button removed in minimalist redesign (was "Hire Me Now")
 
-/* ============ GSAP SCROLL ANIMATIONS (if available) ============ */
-if(window.gsap && window.ScrollTrigger){
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray('.service-card').forEach((card,i)=>{
-    gsap.from(card, { opacity:0, y:40, duration:0.6, delay:i*0.1, scrollTrigger:{ trigger:card, start:'top 85%' } });
-  });
-  gsap.utils.toArray('.about-stat-card').forEach((c,i)=>{
-    gsap.from(c, { opacity:0, scale:0.8, duration:0.5, delay:i*0.1, scrollTrigger:{ trigger:c, start:'top 85%' } });
-  });
-  gsap.utils.toArray('.gh-stat-card').forEach((c,i)=>{
-    gsap.from(c, { opacity:0, y:30, duration:0.5, delay:i*0.1, scrollTrigger:{ trigger:c, start:'top 85%' } });
-  });
-}
+/* ============ GSAP SCROLL ANIMATIONS — REMOVED (minimalist redesign) ============ */
 
 /* ============ LIVE DATA LOADER ============ */
 const API_URL = 'https://nischal-portfolio-api.onrender.com';
@@ -2860,56 +2859,9 @@ async function loadLiveData() {
       const el = document.querySelector('.featured');
       if (el) el.style.display = 'none';
     }
-    if (s.showServices === false) {
-      const el = document.getElementById('services');
-      if (el) el.style.display = 'none';
-    }
     if (s.showGithubActivity === false) {
       const el = document.getElementById('github');
       if (el) el.style.display = 'none';
-    }
-  }
-
-  /* ---- TECHNICAL SKILL BARS ---- */
-  const techSkills = skills?.filter(s => s.type === 'technical') || [];
-  if (techSkills.length > 0) {
-    const container = document.querySelector('.tech-skills');
-    if (container) {
-      // Remove existing skill items (keep the heading and assessment note)
-      container.querySelectorAll('.skill-item').forEach(el => el.remove());
-      techSkills.forEach(skill => {
-        const item = document.createElement('div');
-        item.className = 'skill-item';
-        item.innerHTML = `
-          <div class="skill-header">
-            <span class="skill-name">${skill.name}</span>
-            <span class="skill-level">${skill.level}</span>
-            <span class="skill-pct">${skill.percentage}%</span>
-          </div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${skill.percentage}" style="width:0%"></div></div>
-          ${skill.details ? `<div class="skill-details">${skill.details}</div>` : ''}
-        `;
-        container.appendChild(item);
-      });
-      // Re-attach IntersectionObserver for new bars
-      const newBars = container.querySelectorAll('.skill-bar-fill');
-      const sbObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.style.width = e.target.dataset.width + '%';
-            sbObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      newBars.forEach(b => {
-        // If already visible, animate immediately
-        const rect = b.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          setTimeout(() => { b.style.width = b.dataset.width + '%'; }, 100);
-        } else {
-          sbObs.observe(b);
-        }
-      });
     }
   }
 

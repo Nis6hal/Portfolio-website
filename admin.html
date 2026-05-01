@@ -326,6 +326,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="nav-item active" data-page="dashboard"><i class="fas fa-th-large"></i> Dashboard</div>
       <div class="nav-item" data-page="projects"><i class="fas fa-folder"></i> Projects</div>
       <div class="nav-item" data-page="skills"><i class="fas fa-code"></i> Skills</div>
+      <div class="nav-item" data-page="certifications"><i class="fas fa-certificate"></i> Certifications</div>
       <div class="nav-item" data-page="content"><i class="fas fa-edit"></i> Content</div>
       <div class="nav-item" data-page="settings"><i class="fas fa-cog"></i> Settings</div>
       <div class="nav-item" onclick="window.open('index.html','_blank')"><i class="fas fa-external-link-alt"></i> View Portfolio</div>
@@ -351,7 +352,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="stats-row" id="dashStats">
         <div class="stat-card"><i class="fas fa-folder"></i><div class="num" id="statProjects">–</div><div class="lbl">Projects</div></div>
         <div class="stat-card"><i class="fas fa-code"></i><div class="num" id="statSkills">–</div><div class="lbl">Skills</div></div>
-        <div class="stat-card"><i class="fas fa-eye"></i><div class="num" id="statVisible">–</div><div class="lbl">Visible Projects</div></div>
+        <div class="stat-card"><i class="fas fa-certificate"></i><div class="num" id="statCertifications">–</div><div class="lbl">Certifications</div></div>
         <div class="stat-card"><i class="fas fa-server"></i><div class="num" id="statApi">–</div><div class="lbl">API Status</div></div>
       </div>
       <div class="content-section">
@@ -359,6 +360,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <button class="btn btn-primary" onclick="goTo('projects')"><i class="fas fa-plus"></i> Add Project</button>
           <button class="btn btn-secondary" onclick="goTo('skills')"><i class="fas fa-edit"></i> Edit Skills</button>
+          <button class="btn btn-secondary" onclick="goTo('certifications')"><i class="fas fa-certificate"></i> Edit Certifications</button>
           <button class="btn btn-secondary" onclick="goTo('content')"><i class="fas fa-file-alt"></i> Edit Content</button>
           <button class="btn btn-secondary" onclick="window.open('index.html','_blank')"><i class="fas fa-external-link-alt"></i> View Live Portfolio</button>
         </div>
@@ -406,6 +408,29 @@ tr:hover td{background:rgba(255,255,255,0.02);}
             <tr><th>NAME</th><th>TYPE</th><th>LEVEL</th><th>PERCENTAGE</th><th>ACTIONS</th></tr>
           </thead>
           <tbody id="skillsTable">
+            <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+          </tbody>
+        </table>
+</div>
+      </div>
+    </div>
+
+    <!-- ── Certifications ── -->
+    <div class="page" id="page-certifications">
+      <div class="page-header">
+        <h1>Certifications</h1>
+        <p>Manage certificates shown on your portfolio</p>
+      </div>
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="btn btn-primary" id="addCertificationBtn"><i class="fas fa-plus"></i> Add Certification</button>
+        </div>
+      </div>
+      <div class="table-wrap"><div class="table-scroll"><table>
+          <thead>
+            <tr><th>NAME</th><th>ISSUER</th><th>DATE</th><th>CREDENTIAL URL</th><th>ACTIONS</th></tr>
+          </thead>
+          <tbody id="certificationsTable">
             <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
           </tbody>
         </table>
@@ -473,10 +498,6 @@ tr:hover td{background:rgba(255,255,255,0.02);}
             <label class="toggle"><input type="checkbox" id="toggleMarquee"><span class="toggle-slider"></span></label>
           </div>
           <div class="toggle-row">
-            <div><div class="toggle-label">Services Section</div><div class="toggle-desc">Web Dev, Full Stack, AI, Cloud, Consulting</div></div>
-            <label class="toggle"><input type="checkbox" id="toggleServices"><span class="toggle-slider"></span></label>
-          </div>
-          <div class="toggle-row">
             <div><div class="toggle-label">GitHub Activity Section</div><div class="toggle-desc">The decorative commit heatmap</div></div>
             <label class="toggle"><input type="checkbox" id="toggleGithub"><span class="toggle-slider"></span></label>
           </div>
@@ -488,6 +509,31 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     </div>
 
   </main>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     CERTIFICATION MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="certificationModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="certificationModalTitle">Add Certification</h2>
+      <button class="modal-close" onclick="closeModal('certificationModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="certificationId">
+      <div class="form-group"><label>NAME *</label><input type="text" id="cName" placeholder="Cloud & DevOps Training"></div>
+      <div class="form-group"><label>ISSUER *</label><input type="text" id="cIssuer" placeholder="Issuer name"></div>
+      <div class="form-row">
+        <div class="form-group"><label>DATE *</label><input type="text" id="cDate" placeholder="2025"></div>
+        <div class="form-group"><label>CREDENTIAL URL</label><input type="url" id="cCredentialUrl" placeholder="https://credential-link"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('certificationModal')">Cancel</button>
+      <button class="btn btn-primary" id="saveCertificationBtn"><i class="fas fa-save"></i> Save Certification</button>
+    </div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════
@@ -514,6 +560,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="form-group full"><label>DESCRIPTION *</label><textarea id="pDesc" rows="3" placeholder="Short description"></textarea></div>
       <div class="form-row">
+        <div class="form-group"><label>IMAGE PATH</label><input type="text" id="pImage" placeholder="Images/PixelPrompt.png"></div>
         <div class="form-group"><label>GITHUB URL</label><input type="url" id="pGithub" placeholder="https://github.com/nis6hal"></div>
       </div>
       <div class="form-group full"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
@@ -646,6 +693,7 @@ function goTo(page) {
   document.getElementById(`page-${page}`)?.classList.add('active');
   if (page === 'projects') loadProjects();
   if (page === 'skills')   loadSkills();
+  if (page === 'certifications') loadCertifications();
   if (page === 'content')  loadContent();
   if (page === 'settings') loadSettings();
   if (page === 'dashboard') loadDashboard();
@@ -730,13 +778,14 @@ document.querySelectorAll('.nav-item[data-page]').forEach(item => {
 // ── Dashboard ─────────────────────────────────────────────────────────────────
 async function loadDashboard() {
   try {
-    const [projects, skills] = await Promise.all([
+    const [projects, skills, certifications] = await Promise.all([
       api('GET', '/api/admin/projects'),
-      api('GET', '/api/admin/skills')
+      api('GET', '/api/admin/skills'),
+      api('GET', '/api/admin/certifications')
     ]);
     document.getElementById('statProjects').textContent = projects.length;
     document.getElementById('statSkills').textContent = skills.length;
-    document.getElementById('statVisible').textContent = projects.filter(p => p.visible).length;
+    document.getElementById('statCertifications').textContent = certifications.length;
     document.getElementById('statApi').textContent = '✅';
   } catch {
     document.getElementById('statApi').textContent = '❌';
@@ -910,6 +959,76 @@ document.getElementById('saveSkillBtn').addEventListener('click', async () => {
   } catch (err) { toast(err.message, 'error'); }
 });
 
+// ── Certifications ─────────────────────────────────────────────────────────────
+async function loadCertifications() {
+  const tbody = document.getElementById('certificationsTable');
+  tbody.innerHTML = '<tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  try {
+    const certifications = await api('GET', '/api/admin/certifications');
+    if (!certifications.length) {
+      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-certificate"></i>No certifications yet</div></td></tr>';
+      return;
+    }
+    tbody.innerHTML = certifications.map(c => `
+      <tr>
+        <td><strong>${c.name}</strong></td>
+        <td>${c.issuer}</td>
+        <td>${c.date}</td>
+        <td>${c.credentialUrl ? `<a href="${c.credentialUrl}" target="_blank" rel="noopener noreferrer">Open link</a>` : '<span style="color:var(--text-muted)">—</span>'}</td>
+        <td>
+          <button class="btn btn-secondary btn-sm btn-icon" onclick="editCertification('${c._id}')" title="Edit"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('certification','${c._id}','${c.name}')" title="Delete"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>`).join('');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('addCertificationBtn').addEventListener('click', () => {
+  document.getElementById('certificationModalTitle').textContent = 'Add Certification';
+  document.getElementById('certificationId').value = '';
+  document.getElementById('cName').value = '';
+  document.getElementById('cIssuer').value = '';
+  document.getElementById('cDate').value = '';
+  document.getElementById('cCredentialUrl').value = '';
+  openModal('certificationModal');
+});
+
+async function editCertification(id) {
+  try {
+    const certifications = await api('GET', '/api/admin/certifications');
+    const c = certifications.find(x => x._id === id);
+    if (!c) return;
+    document.getElementById('certificationModalTitle').textContent = 'Edit Certification';
+    document.getElementById('certificationId').value = c._id;
+    document.getElementById('cName').value = c.name || '';
+    document.getElementById('cIssuer').value = c.issuer || '';
+    document.getElementById('cDate').value = c.date || '';
+    document.getElementById('cCredentialUrl').value = c.credentialUrl || '';
+    openModal('certificationModal');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('saveCertificationBtn').addEventListener('click', async () => {
+  const id = document.getElementById('certificationId').value;
+  const payload = {
+    name: document.getElementById('cName').value.trim(),
+    issuer: document.getElementById('cIssuer').value.trim(),
+    date: document.getElementById('cDate').value.trim(),
+    credentialUrl: document.getElementById('cCredentialUrl').value.trim()
+  };
+  if (!payload.name || !payload.issuer || !payload.date) {
+    toast('Name, issuer, and date are required', 'error');
+    return;
+  }
+  try {
+    id ? await api('PUT', `/api/certifications/${id}`, payload)
+       : await api('POST', '/api/certifications', payload);
+    toast(id ? 'Certification updated!' : 'Certification added!');
+    closeModal('certificationModal');
+    loadCertifications();
+  } catch (err) { toast(err.message, 'error'); }
+});
+
 // ── Content ───────────────────────────────────────────────────────────────────
 async function loadContent() {
   try {
@@ -975,7 +1094,6 @@ async function loadSettings() {
     const portfolioData = await fetch(API + '/api/portfolio', { cache: 'no-store' }).then(r => r.json());
     const sections = portfolioData.content?.sections || {};
     document.getElementById('toggleMarquee').checked  = sections.showFeaturedMarquee !== false;
-    document.getElementById('toggleServices').checked = sections.showServices !== false;
     document.getElementById('toggleGithub').checked   = sections.showGithubActivity !== false;
   } catch {}
 }
@@ -984,7 +1102,6 @@ document.getElementById('saveSettingsBtn').addEventListener('click', async () =>
   try {
     await api('PUT', '/api/admin/content/sections', {
       showFeaturedMarquee: document.getElementById('toggleMarquee').checked,
-      showServices:        document.getElementById('toggleServices').checked,
       showGithubActivity:  document.getElementById('toggleGithub').checked
     });
     toast('Settings saved!');
@@ -1004,10 +1121,13 @@ document.getElementById('confirmDeleteBtn').addEventListener('click', async () =
   if (!pendingDelete) return;
   try {
     const { type, id } = pendingDelete;
-    await api('DELETE', `/api/admin/${type}s/${id}`);
-    toast(`${type === 'project' ? 'Project' : 'Skill'} deleted`);
+    const endpoint = type === 'certification' ? `/api/certifications/${id}` : `/api/admin/${type}s/${id}`;
+    await api('DELETE', endpoint);
+    toast(`${type === 'project' ? 'Project' : type === 'skill' ? 'Skill' : 'Certification'} deleted`);
     closeModal('confirmModal');
-    type === 'project' ? loadProjects() : loadSkills();
+    if (type === 'project') loadProjects();
+    if (type === 'skill') loadSkills();
+    if (type === 'certification') loadCertifications();
   } catch (err) { toast(err.message, 'error'); }
   pendingDelete = null;
 });

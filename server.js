@@ -56,9 +56,17 @@ const ContentSchema = new mongoose.Schema({
   value: { type: mongoose.Schema.Types.Mixed, required: true }
 }, { timestamps: true });
 
+const CertificationSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  issuer: { type: String, required: true },
+  date: { type: String, required: true },
+  credentialUrl: { type: String, default: '' }
+}, { timestamps: true });
+
 const Project = mongoose.model('Project', ProjectSchema);
 const Skill   = mongoose.model('Skill',   SkillSchema);
 const Content = mongoose.model('Content', ContentSchema);
+const Certification = mongoose.model('Certification', CertificationSchema);
 
 // ─── Contact Request Schema ───────────────────────────────────────────────────
 const ContactRequestSchema = new mongoose.Schema({
@@ -97,6 +105,15 @@ async function seedDefaults() {
   if (projectCount === 0) {
     await Project.insertMany([
       {
+        title: 'PixelPrompt',
+        description: 'AI-powered wireframe to website generator. Draw a sketch, get a live responsive site.',
+        category: 'web',
+        image: 'Images/PixelPrompt.png',
+        tech: ['React', 'Node.js', 'OpenAI'],
+        details: '<p>An AI-powered tool that converts hand-drawn wireframe sketches into fully responsive websites.</p><h3>Key Features</h3><ul><li>Sketch-to-code conversion using OpenAI Vision API</li><li>Responsive HTML/CSS generation</li><li>Live preview and export functionality</li><li>Multi-page site generation</li></ul><h3>Highlights</h3><p>Reduced wireframe-to-prototype time by 80%. Supports complex layouts including grids, navbars, and forms.</p>',
+        order: 1
+      },
+      {
         title: 'Smart License Plate Detection',
         description: 'Edge AI system for real-time license plate recognition and automated gate control.',
         category: 'ai',
@@ -116,11 +133,11 @@ async function seedDefaults() {
       },
       {
         title: 'Portfolio Website',
-        description: 'The 3D-first portfolio website you\'re currently viewing.',
+        description: 'The minimalist portfolio website you\'re currently viewing.',
         category: 'web',
         image: 'Images/Portfolio.png',
-        tech: ['HTML5', 'CSS3', 'JavaScript', 'Three.js'],
-        details: '<p>The 3D-first portfolio website you\'re currently viewing — built from scratch with Three.js, GSAP, and zero frameworks.</p><h3>Key Features</h3><ul><li>3D particle system and wireframe geometries</li><li>Rule-based AI chatbot with keyword matching</li><li>3D flip-card portfolio section</li><li>Animated skill bars and hexagonal progress displays</li></ul><h3>Highlights</h3><p>Single-file architecture, zero build tools. Custom cursor, loading screen, and immersive hero scene.</p>',
+        tech: ['HTML5', 'CSS3', 'JavaScript', 'Node.js'],
+        details: '<p>The minimalist portfolio website you\'re currently viewing — built from scratch with vanilla HTML, CSS, JavaScript, and a Node.js backend.</p><h3>Key Features</h3><ul><li>Rule-based AI chatbot with score-based keyword matching</li><li>Responsive flip-card portfolio and interactive UI</li><li>Admin panel for managing content and projects</li><li>Animated skill bars and hexagonal progress displays</li></ul><h3>Highlights</h3><p>Single-file frontend architecture with dynamic API-driven content and zero build tools.</p>',
         order: 4
       }
     ]);
@@ -151,9 +168,29 @@ async function seedDefaults() {
       { key: 'hero',    value: { name: 'Nischal Bhandari', tagline: 'Full Stack Developer', description: 'Computer Engineering student building production-grade experiences for the past 2+ years with a focus on performance, maintainability, and user-first solutions.' } },
       { key: 'about',   value: { bio1: "I'm a passionate Computer Engineering student at Pokhara University, Nepal, with a strong foundation in full-stack development.", bio2: "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.", bio3: "My journey in technology started with curiosity and has evolved into a passion for creating digital solutions that impact people's lives positively." } },
       { key: 'contact', value: { email: 'itisnischal@gmail.com', location: 'Pokhara, Nepal', github: 'https://github.com/nis6hal', linkedin: 'https://linkedin.com/in/nis6hal', twitter: 'https://twitter.com/nis6hal', instagram: 'https://instagram.com/nis6hal' } },
-      { key: 'sections', value: { showGithubActivity: true, showServices: true, showFeaturedMarquee: true } }
+      { key: 'sections', value: { showGithubActivity: true, showFeaturedMarquee: true } }
     ]);
     console.log('✅ Default content seeded');
+  }
+
+  // Seed certifications if empty
+  const certCount = await Certification.countDocuments();
+  if (certCount === 0) {
+    await Certification.insertMany([
+      {
+        name: 'Cloud & DevOps Training',
+        issuer: 'TechAxis Nepal',
+        date: '2025',
+        credentialUrl: ''
+      },
+      {
+        name: 'Fundamentals of Data Science',
+        issuer: 'IBM SkillsBuild',
+        date: '2024',
+        credentialUrl: ''
+      }
+    ]);
+    console.log('✅ Default certifications seeded');
   }
 }
 
@@ -168,14 +205,15 @@ app.get('/api/health', (req, res) => {
 app.get('/api/portfolio', async (req, res) => {
   try {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
-    const [projects, skills, contentDocs] = await Promise.all([
+    const [projects, skills, contentDocs, certifications] = await Promise.all([
       Project.find({ visible: true }).sort({ order: 1 }),
       Skill.find().sort({ order: 1 }),
-      Content.find()
+      Content.find(),
+      Certification.find().sort({ createdAt: -1 })
     ]);
     const content = {};
     contentDocs.forEach(c => { content[c.key] = c.value; });
-    res.json({ projects, skills, content });
+    res.json({ projects, skills, certifications, content });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -196,6 +234,16 @@ app.get('/api/skills', async (req, res) => {
   try {
     const skills = await Skill.find().sort({ order: 1 });
     res.json(skills);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get certifications
+app.get('/api/certifications', async (req, res) => {
+  try {
+    const certifications = await Certification.find().sort({ createdAt: -1 });
+    res.json(certifications);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -476,6 +524,38 @@ app.delete('/api/admin/skills/:id', authMiddleware, async (req, res) => {
   try {
     await Skill.findByIdAndDelete(req.params.id);
     res.json({ message: 'Skill deleted' });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// --- Certifications ---
+app.get('/api/admin/certifications', authMiddleware, async (req, res) => {
+  try {
+    const certifications = await Certification.find().sort({ createdAt: -1 });
+    res.json(certifications);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/certifications', authMiddleware, async (req, res) => {
+  try {
+    const cert = new Certification(req.body);
+    await cert.save();
+    res.status(201).json(cert);
+  } catch (err) { res.status(400).json({ error: err.message }); }
+});
+
+app.put('/api/certifications/:id', authMiddleware, async (req, res) => {
+  try {
+    const cert = await Certification.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!cert) return res.status(404).json({ error: 'Certification not found' });
+    res.json(cert);
+  } catch (err) { res.status(400).json({ error: err.message }); }
+});
+
+app.delete('/api/certifications/:id', authMiddleware, async (req, res) => {
+  try {
+    const cert = await Certification.findByIdAndDelete(req.params.id);
+    if (!cert) return res.status(404).json({ error: 'Certification not found' });
+    res.json({ message: 'Certification deleted' });
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
