@@ -797,6 +797,7 @@ section{padding:120px 0;}
   transition:transform 0.6s ease;
 }
 .port-item:hover .port-flipper{transform:rotateY(180deg);}
+.port-item.is-flipped .port-flipper{transform:rotateY(180deg);}
 .port-front,.port-back{
   position:absolute;inset:0;
   backface-visibility:hidden;-webkit-backface-visibility:hidden;
@@ -1331,6 +1332,7 @@ section{padding:120px 0;}
   .skills-grid{grid-template-columns:1fr;}
   .tech-stack-grid{grid-template-columns:1fr;}
   .portfolio-grid{grid-template-columns:1fr;}
+  .port-item:hover .port-flipper{transform:none;}
   .contact-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr 1fr;}
 
@@ -1743,7 +1745,7 @@ section{padding:120px 0;}
       <div class="port-item" data-category="mobile" data-title="Smart Bus Arrival Detector">
         <div class="port-flipper">
           <div class="port-front">
-            <img src="Images/sbad.png" alt="Smart Bus Arrival Detector" loading="lazy" width="400" height="220">
+            <img src="Images/Sbad.png" alt="Smart Bus Arrival Detector" loading="lazy" width="400" height="220">
             <div class="port-front-overlay"><h3>Smart Bus Arrival Detector</h3><span class="port-cat-badge">Mobile</span></div>
           </div>
           <div class="port-back">
@@ -1763,7 +1765,7 @@ section{padding:120px 0;}
       <div class="port-item" data-category="ai" data-title="Gate Automation">
         <div class="port-flipper">
           <div class="port-front">
-            <img src="Images/slpd.png" alt="Gate Automation" loading="lazy" width="400" height="220">
+            <img src="Images/Slpd.png" alt="Gate Automation" loading="lazy" width="400" height="220">
             <div class="port-front-overlay"><h3>Gate Automation</h3><span class="port-cat-badge">AI</span></div>
           </div>
           <div class="port-back">
@@ -1802,7 +1804,7 @@ section{padding:120px 0;}
       <div class="port-item" data-category="web" data-title="CineVault">
         <div class="port-flipper">
           <div class="port-front">
-            <img src="Images/cinevault.png" alt="CineVault" loading="lazy" width="400" height="220">
+            <img src="Images/CineVault.png" alt="CineVault" loading="lazy" width="400" height="220">
             <div class="port-front-overlay"><h3>CineVault</h3><span class="port-cat-badge">Web</span></div>
           </div>
           <div class="port-back">
@@ -1822,7 +1824,7 @@ section{padding:120px 0;}
       <div class="port-item" data-category="web" data-title="ReadLib">
         <div class="port-flipper">
           <div class="port-front">
-            <img src="Images/readlib.png" alt="ReadLib" loading="lazy" width="400" height="220">
+            <img src="Images/ReadLib.png" alt="ReadLib" loading="lazy" width="400" height="220">
             <div class="port-front-overlay"><h3>ReadLib</h3><span class="port-cat-badge">Web</span></div>
           </div>
           <div class="port-back">
@@ -1842,7 +1844,7 @@ section{padding:120px 0;}
       <div class="port-item" data-category="web" data-title="UniLib">
         <div class="port-flipper">
           <div class="port-front">
-            <img src="Images/unilib.png" alt="UniLib" loading="lazy" width="400" height="220">
+            <img src="Images/UniLib.png" alt="UniLib" loading="lazy" width="400" height="220">
             <div class="port-front-overlay"><h3>UniLib</h3><span class="port-cat-badge">Web</span></div>
           </div>
           <div class="port-back">
@@ -2266,6 +2268,35 @@ function closeMobileNav(){
     });
   });
   searchInput.addEventListener('input', applyFilters);
+})();
+
+/* ============ MOBILE PORTFOLIO FLIP (TAP TO OPEN/CLOSE) ============ */
+(function(){
+  if (window.innerWidth > 768) return;
+  const items = Array.from(document.querySelectorAll('.port-item'));
+  if (!items.length) return;
+
+  function closeAll(except = null){
+    items.forEach(item => {
+      if (item !== except) item.classList.remove('is-flipped');
+    });
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('.port-btn')) return;
+      if (e.target.closest('a')) return;
+      const willOpen = !item.classList.contains('is-flipped');
+      closeAll(item);
+      item.classList.toggle('is-flipped', willOpen);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.port-item')) closeAll();
+  });
+
+  window.addEventListener('scroll', () => closeAll(), { passive: true });
 })();
 
 /* ============ GITHUB COMMIT GRAPH ============ */

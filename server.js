@@ -131,7 +131,7 @@ function getDefaultProjects() {
       title: 'CineVault',
       description: 'A movie discovery and tracking application powered by the TMDb API.',
       category: 'web',
-      image: 'Images/cinevault.png',
+      image: 'Images/CineVault.png',
       tech: ['React', 'TMDb API', 'CSS3'],
       details: '<p>A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>TMDb API</span><span>CSS3</span><span>React Router</span></div>',
       order: 4
@@ -140,7 +140,7 @@ function getDefaultProjects() {
       title: 'ReadLib',
       description: 'A local-first book management app with an integrated PDF reader.',
       category: 'web',
-      image: 'Images/readlib.png',
+      image: 'Images/ReadLib.png',
       tech: ['React', 'IndexedDB', 'pdf.js'],
       details: '<p>A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>IndexedDB</span><span>pdf.js</span><span>Vite</span></div>',
       order: 5
@@ -149,7 +149,7 @@ function getDefaultProjects() {
       title: 'UniLib',
       description: 'A full-stack library management system for universities.',
       category: 'web',
-      image: 'Images/Unilib.png',
+      image: 'Images/UniLib.png',
       tech: ['React', 'Node.js', 'MongoDB', 'Express'],
       details: '<p>A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>',
       order: 6
