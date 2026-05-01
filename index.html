@@ -1611,7 +1611,7 @@ section{padding:120px 0;}
       <p class="section-subtitle">CREDENTIALS</p>
       <h2 class="section-title">Certifications</h2>
     </div>
-    <div class="services-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="services-grid" id="certificationsGrid" style="grid-template-columns:repeat(2,1fr);">
       <div class="service-card">
         <div class="service-icon-wrap"><i class="fab fa-aws"></i></div>
         <h3>Cloud & DevOps Training</h3>
@@ -2373,16 +2373,19 @@ function openCertModal(imageSrc, title){
   document.body.style.overflow = 'hidden';
   modal.querySelector('.modal-close').focus();
 }
+function bindCertificationPreviewButtons() {
+  document.querySelectorAll('.read-more-btn[data-cert-image]').forEach(btn=>{
+    btn.onclick = (e) => {
+      e.preventDefault();
+      openCertModal(btn.dataset.certImage, btn.dataset.certTitle);
+    };
+  });
+}
 
 document.querySelectorAll('.details-btn').forEach(btn=>{
   btn.addEventListener('click',()=>openModal('projectModal', btn.dataset.project, 'project'));
 });
-document.querySelectorAll('.read-more-btn[data-cert-image]').forEach(btn=>{
-  btn.addEventListener('click',(e)=>{
-    e.preventDefault();
-    openCertModal(btn.dataset.certImage, btn.dataset.certTitle);
-  });
-});
+bindCertificationPreviewButtons();
 document.querySelectorAll('.modal-close').forEach(btn=>{
   btn.addEventListener('click',()=>{ closeModal('projectModal'); });
 });
@@ -2702,7 +2705,7 @@ async function loadLiveData() {
   }
   if (refreshToast) refreshToast.classList.remove('show');
 
-  const { projects, skills, content } = data;
+  const { projects, skills, content, certifications } = data;
 
   /* ---- HERO DESCRIPTION ---- */
   if (content?.hero?.description) {
@@ -2762,6 +2765,23 @@ async function loadLiveData() {
     }
   }
 
+  /* ---- CERTIFICATIONS ---- */
+  if (certifications?.length > 0) {
+    const certGrid = document.getElementById('certificationsGrid');
+    if (certGrid) {
+      certGrid.innerHTML = certifications.map(cert => `
+        <div class="service-card">
+          <div class="service-icon-wrap"><i class="fas fa-certificate"></i></div>
+          <h3>${cert.name}</h3>
+          <p>${cert.issuer}</p>
+          <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">${cert.date}</div>
+          ${cert.credentialUrl ? `<a href="${cert.credentialUrl}" data-cert-image="${cert.credentialUrl}" data-cert-title="${cert.name}" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>` : ''}
+        </div>
+      `).join('');
+      bindCertificationPreviewButtons();
+    }
+  }
+
   /* ---- PROFESSIONAL SKILLS (HEX SHAPES) ---- */
   const proSkills = skills?.filter(s => s.type === 'professional') || [];
   if (proSkills.length > 0) {
@@ -2803,7 +2823,6 @@ async function loadLiveData() {
         const techHtml = (project.tech || []).map(t => `<span>${t}</span>`).join('');
         const catLabel = (project.category || 'web').charAt(0).toUpperCase() + (project.category || 'web').slice(1);
 
-        // Register in projectData so Details modal works
         projectData[project._id] = {
           title: project.title,
           content: project.details && project.details.trim()
@@ -2846,12 +2865,10 @@ async function loadLiveData() {
         grid.appendChild(item);
       });
 
-      // Re-attach details-btn listeners for dynamically rendered cards
       grid.querySelectorAll('.details-btn').forEach(btn => {
         btn.addEventListener('click', () => openModal('projectModal', btn.dataset.project, 'project'));
       });
 
-      // Re-attach filter logic for dynamically rendered items
       const filterBtns = document.querySelectorAll('.filter-btn');
       const searchInput = document.getElementById('portfolioSearch');
       let activeFilter = 'all';
@@ -2864,7 +2881,7 @@ async function loadLiveData() {
         });
       }
       filterBtns.forEach(btn => {
-        btn.replaceWith(btn.cloneNode(true)); // remove old listeners
+        btn.replaceWith(btn.cloneNode(true));
       });
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2878,7 +2895,6 @@ async function loadLiveData() {
         searchInput.oninput = applyPortfolioFilters;
       }
 
-      // Re-trigger IntersectionObserver for stagger animation
       const piObs = new IntersectionObserver((entries) => {
         entries.forEach((e, idx) => {
           if (e.isIntersecting) {

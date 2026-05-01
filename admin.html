@@ -9,10 +9,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
 :root{
-  --bg-base:#04040f;--bg-surface:#090918;--bg-card:#0d0d24;
-  --accent-primary:#F5B800;--accent-secondary:#7c3aed;
-  --accent-glow:#F5B80033;--text-primary:#f0f0ff;--text-muted:#8888aa;
-  --border:#1a1a3a;--danger:#ef4444;--success:#22c55e;--warning:#f59e0b;
+  --bg-base:#060606;--bg-surface:#0d0d0d;--bg-card:#121212;
+  --accent-primary:#66d9ff;--accent-secondary:#2f8bd9;
+  --accent-glow:rgba(102,217,255,0.22);--text-primary:#ffffff;--text-muted:#b8b8b8;
+  --border:#2a2a2a;--danger:#ef4444;--success:#22c55e;--warning:#f59e0b;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:15px;}
@@ -80,7 +80,7 @@ button{cursor:pointer;font-family:inherit;}
   border-left:3px solid transparent;
 }
 .nav-item:hover{color:var(--text-primary);background:rgba(255,255,255,0.03);}
-.nav-item.active{color:var(--accent-primary);border-left-color:var(--accent-primary);background:rgba(245,184,0,0.05);}
+.nav-item.active{color:var(--accent-primary);border-left-color:var(--accent-primary);background:rgba(102,217,255,0.08);}
 .nav-item i{width:18px;text-align:center;}
 .sidebar-footer{
   padding:16px 20px;border-top:1px solid var(--border);
@@ -165,11 +165,10 @@ tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(255,255,255,0.02);}
 .td-img{width:48px;height:36px;object-fit:cover;border-radius:4px;}
 .badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:11px;font-family:'JetBrains Mono',monospace;}
-.badge-web{background:rgba(245,184,0,0.1);color:var(--accent-primary);border:1px solid rgba(245,184,0,0.2);}
-.badge-ai{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
+.badge-web{background:rgba(102,217,255,0.1);color:var(--accent-primary);border:1px solid rgba(102,217,255,0.25);}
+.badge-ai{background:rgba(47,139,217,0.18);color:#9edbff;border:1px solid rgba(102,217,255,0.28);}
 .badge-mobile{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2);}
-.badge-technical{background:rgba(245,184,0,0.1);color:var(--accent-primary);border:1px solid rgba(245,184,0,0.2);}
-.badge-professional{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2);}
+.badge-professional{background:rgba(47,139,217,0.18);color:#9edbff;border:1px solid rgba(102,217,255,0.28);}
 .actions{display:flex;gap:6px;flex-wrap:nowrap;}
 
 /* ── Forms ── */
@@ -396,7 +395,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     <div class="page" id="page-skills">
       <div class="page-header">
         <h1>Skills</h1>
-        <p>Manage technical and professional skills</p>
+        <p>Manage professional skills shown in portfolio</p>
       </div>
       <div class="toolbar">
         <div class="toolbar-left">
@@ -405,10 +404,10 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="table-wrap"><div class="table-scroll"><table>
           <thead>
-            <tr><th>NAME</th><th>TYPE</th><th>LEVEL</th><th>PERCENTAGE</th><th>ACTIONS</th></tr>
+            <tr><th>NAME</th><th>LEVEL</th><th>PERCENTAGE</th><th>ACTIONS</th></tr>
           </thead>
           <tbody id="skillsTable">
-            <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+            <tr><td colspan="4"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
           </tbody>
         </table>
 </div>
@@ -428,7 +427,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="table-wrap"><div class="table-scroll"><table>
           <thead>
-            <tr><th>NAME</th><th>ISSUER</th><th>DATE</th><th>CREDENTIAL URL</th><th>ACTIONS</th></tr>
+            <tr><th>NAME</th><th>ISSUER</th><th>DATE</th><th>CERT IMAGE</th><th>ACTIONS</th></tr>
           </thead>
           <tbody id="certificationsTable">
             <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
@@ -494,10 +493,6 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         <h3><i class="fas fa-sliders-h"></i> Section Visibility</h3>
         <div id="sectionToggles">
           <div class="toggle-row">
-            <div><div class="toggle-label">Featured Projects Marquee</div><div class="toggle-desc">The scrolling marquee strip below the hero</div></div>
-            <label class="toggle"><input type="checkbox" id="toggleMarquee"><span class="toggle-slider"></span></label>
-          </div>
-          <div class="toggle-row">
             <div><div class="toggle-label">GitHub Activity Section</div><div class="toggle-desc">The decorative commit heatmap</div></div>
             <label class="toggle"><input type="checkbox" id="toggleGithub"><span class="toggle-slider"></span></label>
           </div>
@@ -526,7 +521,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="form-group"><label>ISSUER *</label><input type="text" id="cIssuer" placeholder="Issuer name"></div>
       <div class="form-row">
         <div class="form-group"><label>DATE *</label><input type="text" id="cDate" placeholder="2025"></div>
-        <div class="form-group"><label>CREDENTIAL URL</label><input type="url" id="cCredentialUrl" placeholder="https://credential-link"></div>
+        <div class="form-group"><label>CERTIFICATE IMAGE PATH</label><input type="text" id="cCredentialUrl" placeholder="Images/Certs/Cloud%26Devops.jpg"></div>
       </div>
     </div>
     <div class="modal-footer">
@@ -560,12 +555,12 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="form-group full"><label>DESCRIPTION *</label><textarea id="pDesc" rows="3" placeholder="Short description"></textarea></div>
       <div class="form-row">
-        <div class="form-group"><label>IMAGE PATH</label><input type="text" id="pImage" placeholder="Images/PixelPrompt.png"></div>
+        <div class="form-group"><label>IMAGE PATH</label><input type="text" id="pImage" placeholder="Images/cinevault.png"></div>
         <div class="form-group"><label>GITHUB URL</label><input type="url" id="pGithub" placeholder="https://github.com/nis6hal"></div>
       </div>
       <div class="form-group full"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
       <div class="form-group full"><label>DETAILS <span style="color:var(--text-muted);font-size:11px;">(HTML supported — shown in Details modal)</span></label><textarea id="pDetails" rows="5" placeholder="&lt;p&gt;Project overview...&lt;/p&gt;&#10;&lt;h3&gt;Key Features&lt;/h3&gt;&#10;&lt;ul&gt;&lt;li&gt;Feature one&lt;/li&gt;&lt;/ul&gt;"></textarea></div>
-      <div class="form-group"><label>TECH STACK (comma separated)</label><input type="text" id="pTech" placeholder="React, Node.js, MongoDB"></div>
+      <div class="form-group"><label>TECH STACK (comma separated)</label><input type="text" id="pTech" placeholder="React, TMDb API, CSS3"></div>
       <div class="form-row">
         <div class="form-group">
           <label>ORDER</label>
@@ -601,13 +596,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <input type="hidden" id="skillId">
       <div class="form-row">
         <div class="form-group"><label>SKILL NAME *</label><input type="text" id="sName" placeholder="JavaScript"></div>
-        <div class="form-group">
-          <label>TYPE *</label>
-          <select id="sType">
-            <option value="technical">Technical</option>
-            <option value="professional">Professional</option>
-          </select>
-        </div>
+        <div class="form-group"><label>CATEGORY</label><input type="text" value="Professional" disabled></div>
       </div>
       <div class="form-group">
         <label>PERCENTAGE: <span id="sPctDisplay">50</span>%</label>
@@ -626,7 +615,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         </div>
         <div class="form-group"><label>ORDER</label><input type="number" id="sOrder" value="1" min="1"></div>
       </div>
-      <div class="form-group"><label>DETAILS</label><input type="text" id="sDetails" placeholder="2+ years • React • Redux"></div>
+      <div class="form-group"><label>DETAILS</label><input type="text" id="sDetails" placeholder="Clear client interaction and team collaboration"></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeModal('skillModal')">Cancel</button>
@@ -882,17 +871,17 @@ document.getElementById('saveProjectBtn').addEventListener('click', async () => 
 // ── Skills ────────────────────────────────────────────────────────────────────
 async function loadSkills() {
   const tbody = document.getElementById('skillsTable');
-  tbody.innerHTML = '<tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  tbody.innerHTML = '<tr><td colspan="4"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
   try {
-    const skills = await api('GET', '/api/admin/skills');
+    const allSkills = await api('GET', '/api/admin/skills');
+    const skills = allSkills.filter(s => s.type === 'professional');
     if (!skills.length) {
-      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-code"></i>No skills yet</div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><i class="fas fa-code"></i>No professional skills yet</div></td></tr>';
       return;
     }
     tbody.innerHTML = skills.map(s => `
       <tr>
         <td><strong>${s.name}</strong></td>
-        <td><span class="badge ${s.type==='technical'?'badge-web':'badge-ai'}">${s.type}</span></td>
         <td>${s.level}</td>
         <td>
           <div style="display:flex;align-items:center;gap:10px;">
@@ -912,7 +901,6 @@ document.getElementById('addSkillBtn').addEventListener('click', () => {
   document.getElementById('skillModalTitle').textContent = 'Add Skill';
   document.getElementById('skillId').value = '';
   document.getElementById('sName').value = '';
-  document.getElementById('sType').value = 'technical';
   document.getElementById('sPct').value = 50;
   document.getElementById('sPctDisplay').textContent = '50';
   document.getElementById('sLevel').value = 'Beginner';
@@ -929,7 +917,6 @@ async function editSkill(id) {
     document.getElementById('skillModalTitle').textContent = 'Edit Skill';
     document.getElementById('skillId').value = s._id;
     document.getElementById('sName').value = s.name;
-    document.getElementById('sType').value = s.type;
     document.getElementById('sPct').value = s.percentage;
     document.getElementById('sPctDisplay').textContent = s.percentage;
     document.getElementById('sLevel').value = s.level;
@@ -943,7 +930,7 @@ document.getElementById('saveSkillBtn').addEventListener('click', async () => {
   const id = document.getElementById('skillId').value;
   const payload = {
     name:       document.getElementById('sName').value.trim(),
-    type:       document.getElementById('sType').value,
+    type:       'professional',
     percentage: parseInt(document.getElementById('sPct').value),
     level:      document.getElementById('sLevel').value,
     order:      parseInt(document.getElementById('sOrder').value) || 1,
@@ -974,7 +961,7 @@ async function loadCertifications() {
         <td><strong>${c.name}</strong></td>
         <td>${c.issuer}</td>
         <td>${c.date}</td>
-        <td>${c.credentialUrl ? `<a href="${c.credentialUrl}" target="_blank" rel="noopener noreferrer">Open link</a>` : '<span style="color:var(--text-muted)">—</span>'}</td>
+        <td>${c.credentialUrl ? `<a href="${c.credentialUrl}" target="_blank" rel="noopener noreferrer">Preview image</a>` : '<span style="color:var(--text-muted)">—</span>'}</td>
         <td>
           <button class="btn btn-secondary btn-sm btn-icon" onclick="editCertification('${c._id}')" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('certification','${c._id}','${c.name}')" title="Delete"><i class="fas fa-trash"></i></button>
@@ -1093,7 +1080,6 @@ async function loadSettings() {
   try {
     const portfolioData = await fetch(API + '/api/portfolio', { cache: 'no-store' }).then(r => r.json());
     const sections = portfolioData.content?.sections || {};
-    document.getElementById('toggleMarquee').checked  = sections.showFeaturedMarquee !== false;
     document.getElementById('toggleGithub').checked   = sections.showGithubActivity !== false;
   } catch {}
 }
@@ -1101,7 +1087,6 @@ async function loadSettings() {
 document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
   try {
     await api('PUT', '/api/admin/content/sections', {
-      showFeaturedMarquee: document.getElementById('toggleMarquee').checked,
       showGithubActivity:  document.getElementById('toggleGithub').checked
     });
     toast('Settings saved!');

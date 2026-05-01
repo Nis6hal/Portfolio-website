@@ -100,59 +100,81 @@ function authMiddleware(req, res, next) {
 
 // ─── Seed Default Data ────────────────────────────────────────────────────────
 async function seedDefaults() {
+  const defaultProjects = [
+    {
+      title: 'Smart Bus Arrival Detector',
+      description: 'Real-time bus tracking and ML-powered ETAs for Pokhara city routes.',
+      category: 'mobile',
+      image: 'Images/Sbad.png',
+      tech: ['React Native', 'Firebase', 'Google Maps', 'Machine Learning'],
+      details: '<p>A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React Native</span><span>Firebase</span><span>Google Maps</span><span>Machine Learning</span></div>',
+      order: 1
+    },
+    {
+      title: 'Gate Automation',
+      description: 'Edge AI system for real-time license plate recognition designed for automated gate and parking control.',
+      category: 'ai',
+      image: 'Images/Slpd.png',
+      tech: ['Python', 'OpenCV', 'TensorFlow', 'Raspberry Pi'],
+      details: '<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p><h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span><span>SQLite</span></div>',
+      order: 2
+    },
+    {
+      title: 'Portfolio Website',
+      description: 'The minimalist portfolio you\'re currently viewing. Features an AI chatbot, animated sections, and responsive layouts with a clean single-page architecture.',
+      category: 'web',
+      image: 'Images/Portfolio.png',
+      tech: ['HTML5', 'CSS3', 'JavaScript'],
+      details: '<p>The minimalist portfolio website you\'re currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.</p><h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>',
+      order: 3
+    },
+    {
+      title: 'CineVault',
+      description: 'A movie discovery and tracking application powered by the TMDb API.',
+      category: 'web',
+      image: 'Images/cinevault.png',
+      tech: ['React', 'TMDb API', 'CSS3'],
+      details: '<p>A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>TMDb API</span><span>CSS3</span><span>React Router</span></div>',
+      order: 4
+    },
+    {
+      title: 'ReadLib',
+      description: 'A local-first book management app with an integrated PDF reader.',
+      category: 'web',
+      image: 'Images/readlib.png',
+      tech: ['React', 'IndexedDB', 'pdf.js'],
+      details: '<p>A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>IndexedDB</span><span>pdf.js</span><span>Vite</span></div>',
+      order: 5
+    },
+    {
+      title: 'UniLib',
+      description: 'A full-stack library management system for universities.',
+      category: 'web',
+      image: 'Images/Unilib.png',
+      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
+      details: '<p>A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>',
+      order: 6
+    }
+  ];
+
   // Seed projects if empty
   const projectCount = await Project.countDocuments();
   if (projectCount === 0) {
-    await Project.insertMany([
-      {
-        title: 'PixelPrompt',
-        description: 'AI-powered wireframe to website generator. Draw a sketch, get a live responsive site.',
-        category: 'web',
-        image: 'Images/PixelPrompt.png',
-        tech: ['React', 'Node.js', 'OpenAI'],
-        details: '<p>An AI-powered tool that converts hand-drawn wireframe sketches into fully responsive websites.</p><h3>Key Features</h3><ul><li>Sketch-to-code conversion using OpenAI Vision API</li><li>Responsive HTML/CSS generation</li><li>Live preview and export functionality</li><li>Multi-page site generation</li></ul><h3>Highlights</h3><p>Reduced wireframe-to-prototype time by 80%. Supports complex layouts including grids, navbars, and forms.</p>',
-        order: 1
-      },
-      {
-        title: 'Smart License Plate Detection',
-        description: 'Edge AI system for real-time license plate recognition and automated gate control.',
-        category: 'ai',
-        image: 'Images/Slpd.png',
-        tech: ['Python', 'OpenCV', 'TensorFlow'],
-        details: '<p>An edge AI system for real-time license plate recognition, designed for automated gate control and parking management.</p><h3>Key Features</h3><ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control</li><li>Vehicle entry/exit logging</li></ul><h3>Highlights</h3><p>98%+ detection accuracy in varied lighting. Runs efficiently on low-power hardware with sub-100ms latency.</p>',
-        order: 2
-      },
-      {
-        title: 'Smart Bus Arrival Detector',
-        description: 'Real-time bus tracking and ML-powered ETAs for Pokhara city routes.',
-        category: 'mobile',
-        image: 'Images/Sbad.png',
-        tech: ['React Native', 'Firebase', 'Google Maps'],
-        details: '<p>A mobile app providing real-time bus arrival times and ML-powered ETAs for Pokhara city routes.</p><h3>Key Features</h3><ul><li>Real-time bus tracking on live map</li><li>ML-powered arrival time prediction</li><li>Push notifications for upcoming buses</li><li>Route planning and optimization</li></ul><h3>Highlights</h3><p>Serves daily commuters across 12 major Pokhara routes. Prediction accuracy within ±2 minutes.</p>',
-        order: 3
-      },
-      {
-        title: 'Portfolio Website',
-        description: 'The minimalist portfolio website you\'re currently viewing.',
-        category: 'web',
-        image: 'Images/Portfolio.png',
-        tech: ['HTML5', 'CSS3', 'JavaScript', 'Node.js'],
-        details: '<p>The minimalist portfolio website you\'re currently viewing — built from scratch with vanilla HTML, CSS, JavaScript, and a Node.js backend.</p><h3>Key Features</h3><ul><li>Rule-based AI chatbot with score-based keyword matching</li><li>Responsive flip-card portfolio and interactive UI</li><li>Admin panel for managing content and projects</li><li>Animated skill bars and hexagonal progress displays</li></ul><h3>Highlights</h3><p>Single-file frontend architecture with dynamic API-driven content and zero build tools.</p>',
-        order: 4
-      }
-    ]);
+    await Project.insertMany(defaultProjects);
     console.log('✅ Default projects seeded');
+  } else {
+    const legacyCount = await Project.countDocuments({ title: { $in: ['PixelPrompt', 'Smart License Plate Detection'] } });
+    if (legacyCount > 0) {
+      await Project.deleteMany({});
+      await Project.insertMany(defaultProjects);
+      console.log('✅ Legacy project data replaced with current portfolio set');
+    }
   }
 
   // Seed skills if empty
   const skillCount = await Skill.countDocuments();
   if (skillCount === 0) {
     await Skill.insertMany([
-      { name: 'HTML/CSS',    percentage: 85, level: 'Expert',   type: 'technical',     details: '2+ years • Responsive Design • CSS Grid/Flexbox', order: 1 },
-      { name: 'JavaScript', percentage: 45, level: 'Beginner',  type: 'technical',     details: '2+ years • ES6+ • Async • DOM',                   order: 2 },
-      { name: 'React',       percentage: 45, level: 'Beginner',  type: 'technical',     details: '2+ years • Hooks • Context • Redux',              order: 3 },
-      { name: 'Node.js',     percentage: 35, level: 'Beginner',  type: 'technical',     details: '2+ years • Express • RESTful APIs',               order: 4 },
-      { name: 'Python',      percentage: 40, level: 'Beginner',  type: 'technical',     details: '1+ years • Django • Flask • AI/ML',               order: 5 },
       { name: 'Problem Solving', percentage: 90, level: 'Expert', type: 'professional', details: 'Analytical thinking and debugging expertise',      order: 1 },
       { name: 'Communication',   percentage: 80, level: 'Expert', type: 'professional', details: 'Clear client interaction and team collaboration', order: 2 },
       { name: 'Team Work',       percentage: 80, level: 'Expert', type: 'professional', details: 'Agile methodology and project coordination',      order: 3 },
@@ -165,10 +187,10 @@ async function seedDefaults() {
   const contentCount = await Content.countDocuments();
   if (contentCount === 0) {
     await Content.insertMany([
-      { key: 'hero',    value: { name: 'Nischal Bhandari', tagline: 'Full Stack Developer', description: 'Computer Engineering student building production-grade experiences for the past 2+ years with a focus on performance, maintainability, and user-first solutions.' } },
+      { key: 'hero',    value: { name: 'Nischal Bhandari', tagline: 'Computer Engineering Student', description: 'Computer Engineering student building clean digital products across web, AI, and backend systems.' } },
       { key: 'about',   value: { bio1: "I'm a passionate Computer Engineering student at Pokhara University, Nepal, with a strong foundation in full-stack development.", bio2: "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.", bio3: "My journey in technology started with curiosity and has evolved into a passion for creating digital solutions that impact people's lives positively." } },
       { key: 'contact', value: { email: 'itisnischal@gmail.com', location: 'Pokhara, Nepal', github: 'https://github.com/nis6hal', linkedin: 'https://linkedin.com/in/nis6hal', twitter: 'https://twitter.com/nis6hal', instagram: 'https://instagram.com/nis6hal' } },
-      { key: 'sections', value: { showGithubActivity: true, showFeaturedMarquee: true } }
+      { key: 'sections', value: { showGithubActivity: true } }
     ]);
     console.log('✅ Default content seeded');
   }
@@ -181,13 +203,13 @@ async function seedDefaults() {
         name: 'Cloud & DevOps Training',
         issuer: 'TechAxis Nepal',
         date: '2025',
-        credentialUrl: ''
+        credentialUrl: 'Images/Certs/Cloud%26Devops.jpg'
       },
       {
         name: 'Fundamentals of Data Science',
         issuer: 'IBM SkillsBuild',
         date: '2024',
-        credentialUrl: ''
+        credentialUrl: 'Images/Certs/FundsofDS.jpg'
       }
     ]);
     console.log('✅ Default certifications seeded');
