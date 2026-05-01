@@ -98,9 +98,8 @@ function authMiddleware(req, res, next) {
   }
 }
 
-// ─── Seed Default Data ────────────────────────────────────────────────────────
-async function seedDefaults() {
-  const defaultProjects = [
+function getDefaultProjects() {
+  return [
     {
       title: 'Smart Bus Arrival Detector',
       description: 'Real-time bus tracking and ML-powered ETAs for Pokhara city routes.',
@@ -156,7 +155,11 @@ async function seedDefaults() {
       order: 6
     }
   ];
+}
 
+// ─── Seed Default Data ────────────────────────────────────────────────────────
+async function seedDefaults() {
+  const defaultProjects = getDefaultProjects();
   // Seed projects if empty
   const projectCount = await Project.countDocuments();
   if (projectCount === 0) {
@@ -516,6 +519,17 @@ app.delete('/api/admin/projects/:id', authMiddleware, async (req, res) => {
     await Project.findByIdAndDelete(req.params.id);
     res.json({ message: 'Project deleted' });
   } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/admin/projects/sync-defaults', authMiddleware, async (req, res) => {
+  try {
+    const defaultProjects = getDefaultProjects();
+    await Project.deleteMany({});
+    const inserted = await Project.insertMany(defaultProjects);
+    res.json({ message: 'Projects synced to current defaults', count: inserted.length });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // --- Skills ---

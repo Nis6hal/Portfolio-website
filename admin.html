@@ -375,6 +375,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="toolbar">
         <div class="toolbar-left">
           <button class="btn btn-primary" id="addProjectBtn"><i class="fas fa-plus"></i> Add Project</button>
+          <button class="btn btn-secondary" id="syncProjectsBtn"><i class="fas fa-rotate"></i> Sync Defaults</button>
         </div>
       </div>
       <div class="table-wrap"><div class="table-scroll"><table>
@@ -521,8 +522,12 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="form-group"><label>ISSUER *</label><input type="text" id="cIssuer" placeholder="Issuer name"></div>
       <div class="form-row">
         <div class="form-group"><label>DATE *</label><input type="text" id="cDate" placeholder="2025"></div>
-        <div class="form-group"><label>CERTIFICATE IMAGE PATH</label><input type="text" id="cCredentialUrl" placeholder="Images/Certs/Cloud%26Devops.jpg"></div>
+        <div class="form-group"><label>CERTIFICATE IMAGE PATH</label><input type="text" id="cCredentialUrl" list="certImagePaths" placeholder="Images/Certs/Cloud%26Devops.jpg"></div>
       </div>
+      <datalist id="certImagePaths">
+        <option value="Images/Certs/Cloud%26Devops.jpg"></option>
+        <option value="Images/Certs/FundsofDS.jpg"></option>
+      </datalist>
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeModal('certificationModal')">Cancel</button>
@@ -820,6 +825,19 @@ document.getElementById('addProjectBtn').addEventListener('click', () => {
   document.getElementById('pOrder').value = '1';
   document.getElementById('pVisible').value = 'true';
   openModal('projectModal');
+});
+
+document.getElementById('syncProjectsBtn').addEventListener('click', async () => {
+  const ok = confirm('This will replace all current projects with the default set that matches index.html. Continue?');
+  if (!ok) return;
+  try {
+    const result = await api('POST', '/api/admin/projects/sync-defaults');
+    toast(result.message || 'Projects synced!');
+    loadProjects();
+    loadDashboard();
+  } catch (err) {
+    toast(err.message, 'error');
+  }
 });
 
 async function editProject(id) {
