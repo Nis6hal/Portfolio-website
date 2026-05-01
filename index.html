@@ -1072,6 +1072,18 @@ section{padding:120px 0;}
   border:1px solid rgba(102,217,255,0.2);
   padding:4px 12px;border-radius:6px;
 }
+.cert-preview-wrap{
+  margin-top:6px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--bg-surface);
+}
+.cert-preview-wrap img{
+  width:100%;
+  height:auto;
+  display:block;
+}
 
 /* ===================== CHATBOT ===================== */
 #chatToggle{
@@ -1603,14 +1615,14 @@ section{padding:120px 0;}
         <h3>Cloud & DevOps Training</h3>
         <p>Hands-on training in AWS core services, cloud architecture basics, CI/CD pipelines, and containerized deployment workflows.</p>
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">AWS • Docker • CI/CD</div>
-        <a href="#" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
+        <a href="Images/Certs/Cloud%26Devops.jpg" data-cert-image="Images/Certs/Cloud%26Devops.jpg" data-cert-title="Cloud & DevOps Training Certificate" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
       </div>
       <div class="service-card">
         <div class="service-icon-wrap"><i class="fas fa-chart-bar"></i></div>
         <h3>Fundamentals of Data Science</h3>
         <p>Core foundation in data analysis, visualization, exploratory workflows, and introductory machine learning using Python libraries.</p>
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">Python • Pandas • NumPy • Matplotlib</div>
-        <a href="#" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
+        <a href="Images/Certs/FundsofDS.jpg" data-cert-image="Images/Certs/FundsofDS.jpg" data-cert-title="Fundamentals of Data Science Certificate" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
       </div>
     </div>
   </div>
@@ -2345,9 +2357,29 @@ function closeModal(id){
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow='';
 }
+function openCertModal(imageSrc, title){
+  const modal = document.getElementById('projectModal');
+  if(!modal) return;
+  document.getElementById('modalTitle').textContent = title || 'Certificate';
+  document.getElementById('modalContent').innerHTML = `
+    <p>Credential preview</p>
+    <div class="cert-preview-wrap">
+      <img src="${imageSrc}" alt="${title || 'Certificate image'}" loading="lazy">
+    </div>
+  `;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modal.querySelector('.modal-close').focus();
+}
 
 document.querySelectorAll('.details-btn').forEach(btn=>{
   btn.addEventListener('click',()=>openModal('projectModal', btn.dataset.project, 'project'));
+});
+document.querySelectorAll('.read-more-btn[data-cert-image]').forEach(btn=>{
+  btn.addEventListener('click',(e)=>{
+    e.preventDefault();
+    openCertModal(btn.dataset.certImage, btn.dataset.certTitle);
+  });
 });
 document.querySelectorAll('.modal-close').forEach(btn=>{
   btn.addEventListener('click',()=>{ closeModal('projectModal'); });
