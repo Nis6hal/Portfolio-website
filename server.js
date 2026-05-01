@@ -114,8 +114,8 @@ function getDefaultProjects() {
       description: 'Edge AI system for real-time license plate recognition designed for automated gate and parking control.',
       category: 'ai',
       image: 'Images/Slpd.png',
-      tech: ['Python', 'OpenCV', 'TensorFlow', 'Raspberry Pi'],
-      details: '<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p><h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span><span>SQLite</span></div>',
+      tech: ['Python', 'OpenCV', 'TensorFlow', 'Arduino'],
+      details: '<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p><h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Arduino</span><span>SQLite</span></div>',
       order: 2
     },
     {

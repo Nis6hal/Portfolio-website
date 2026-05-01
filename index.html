@@ -1772,7 +1772,7 @@ section{padding:120px 0;}
             <div>
               <h3>Gate Automation — License Plate Detection</h3>
               <p>Edge AI system for real-time license plate recognition designed for automated gate and parking control. Achieves 98%+ detection accuracy across varied lighting conditions on low-power hardware.</p>
-              <div class="port-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span></div>
+              <div class="port-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Arduino</span></div>
             </div>
             <div class="port-actions">
               <button class="port-btn details-btn" data-project="gate-automation"><i class="fas fa-info-circle"></i> Details</button>
@@ -2272,7 +2272,10 @@ function closeMobileNav(){
 
 /* ============ MOBILE PORTFOLIO FLIP (TAP TO OPEN/CLOSE) ============ */
 (function(){
-  if (window.innerWidth > 768) return;
+  const isTouchDevice =
+    window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+    navigator.maxTouchPoints > 0;
+  if (!isTouchDevice) return;
   const items = Array.from(document.querySelectorAll('.port-item'));
   if (!items.length) return;
 
@@ -2283,9 +2286,10 @@ function closeMobileNav(){
   }
 
   items.forEach(item => {
-    item.addEventListener('click', (e) => {
+    item.addEventListener('pointerup', (e) => {
       if (e.target.closest('.port-btn')) return;
       if (e.target.closest('a')) return;
+      if (e.target.closest('.port-actions')) return;
       const willOpen = !item.classList.contains('is-flipped');
       closeAll(item);
       item.classList.toggle('is-flipped', willOpen);
@@ -2297,6 +2301,7 @@ function closeMobileNav(){
   });
 
   window.addEventListener('scroll', () => closeAll(), { passive: true });
+  window.addEventListener('orientationchange', () => closeAll(), { passive: true });
 })();
 
 /* ============ GITHUB COMMIT GRAPH ============ */
@@ -2338,7 +2343,7 @@ const projectData = {
     content: `<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p>
     <h3>Key Features</h3>
     <ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control integration</li><li>Vehicle entry/exit logging with timestamps</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Raspberry Pi</span><span>SQLite</span></div>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Arduino</span><span>SQLite</span></div>
     <h3>Highlights</h3><p>98%+ detection accuracy across varied lighting conditions. Sub-100ms latency on low-power hardware.</p>`
   },
   portfolio: {
@@ -2512,7 +2517,7 @@ const RESPONSES = [
 
   /* ── Gate Automation / SLPD ── */
   { keywords:['license plate','slpd','gate','parking','detection','opencv','plate','automation'],
-    reply:'🚗 Gate Automation — License Plate Detection\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n\nStack: Python · OpenCV · TensorFlow · Raspberry Pi · SQLite' },
+    reply:'🚗 Gate Automation — License Plate Detection\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n\nStack: Python · OpenCV · TensorFlow · Arduino · SQLite' },
 
   /* ── CineVault ── */
   { keywords:['cinevault','cine vault','movie','film','tmdb'],
