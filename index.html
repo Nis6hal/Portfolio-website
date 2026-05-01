@@ -7,7 +7,7 @@
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio of Nischal Bhandari – Computer Engineering Student. Projects, certifications, skills, and contact.">
-  <meta name="keywords" content="Nischal Bhandari, Full Stack Developer, Web Development, React, Node.js, JavaScript, Portfolio">
+  <meta name="keywords" content="Nischal Bhandari, Full Stack Developer, Web Development, React, JavaScript, Portfolio">
   <meta name="author" content="Nischal Bhandari">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#04040f">
@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://nischal-bhandari.com.np/Images/Profile.jpg"/>
   <meta name="twitter:creator" content="@nis6hal"/>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Nischal Bhandari","jobTitle":"Computer Engineering Student","description":"Computer Engineering Student at Pokhara University with development experience on projects like GAWSLPD, CineVault","url":"https://nischal-bhandari.com.np","image":"https://nischal-bhandari.com.np/Images/Profile.jpg","email":"itisnischal@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Pokhara","addressCountry":"Nepal"},"knowsAbout":["Web Development","Full Stack Development","JavaScript","React","Node.js","Python","AI/ML"],"alumniOf":{"@type":"Organization","name":"Pokhara University"},"sameAs":["https://github.com/nis6hal","https://linkedin.com/in/nis6hal","https://twitter.com/nis6hal"]}
+  {"@context":"https://schema.org","@type":"Person","name":"Nischal Bhandari","jobTitle":"Computer Engineering Student","description":"Computer Engineering student at Pokhara University currently in 8th semester, building web and AI-integrated projects.","url":"https://nischal-bhandari.com.np","image":"https://nischal-bhandari.com.np/Images/Profile.jpg","email":"itisnischal@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Pokhara","addressCountry":"Nepal"},"knowsAbout":["Web Development","Full Stack Development","JavaScript","React","Python","AI/ML"],"alumniOf":{"@type":"Organization","name":"Pokhara University"},"sameAs":["https://github.com/nis6hal","https://linkedin.com/in/nis6hal","https://twitter.com/nis6hal"]}
   </script>
   <title>Nischal Bhandari - Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -40,13 +40,13 @@
   --bg-base: #060606;
   --bg-surface: #0d0d0d;
   --bg-card: #121212;
-  --accent-primary: #ff173d;
-  --accent-secondary: #a3001f;
-  --accent-glow: rgba(255, 23, 61, 0.35);
+  --accent-primary: #66d9ff;
+  --accent-secondary: #2f8bd9;
+  --accent-glow: rgba(102, 217, 255, 0.35);
   --text-primary: #ffffff;
   --text-muted: #b8b8b8;
   --border: #2a2a2a;
-  --gradient-hero: radial-gradient(circle at 85% 38%, rgba(255, 23, 61, 0.2), transparent 38%), linear-gradient(145deg, #060606 0%, #0d0d0d 52%, #080808 100%);
+  --gradient-hero: radial-gradient(circle at 85% 38%, rgba(102, 217, 255, 0.16), transparent 38%), linear-gradient(145deg, #060606 0%, #0d0d0d 52%, #080808 100%);
 }
 
 /* ===================== RESET & BASE ===================== */
@@ -89,7 +89,7 @@ body.touch-device button{cursor:pointer;}
 }
 body.cursor-hover #cursor-ring{
   width:48px;height:48px;
-  background:rgba(245,184,0,0.12);
+  background:rgba(102,217,255,0.12);
   border-color:var(--accent-primary);
 }
 body.cursor-click #cursor-dot{
@@ -109,7 +109,7 @@ body.cursor-click #cursor-dot{
 /* Refresh indicator */
 #refresh-toast{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:#0d0d24;border:1px solid #1a1a3a;border-left:3px solid #F5B800;
+  background:#0d0d24;border:1px solid #1a1a3a;border-left:3px solid var(--accent-primary);
   color:#8888aa;font-size:12px;font-family:'JetBrains Mono',monospace;
   padding:8px 16px;border-radius:8px;z-index:9999;
   opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;
@@ -121,14 +121,14 @@ body.cursor-click #cursor-dot{
   font-family:'Fraunces',serif;
   font-size:64px;font-weight:800;
   color:var(--accent-primary);
-  text-shadow:0 0 30px var(--accent-primary),0 0 60px rgba(245,184,0,0.4);
+  text-shadow:0 0 30px var(--accent-primary),0 0 60px rgba(102,217,255,0.35);
   letter-spacing:8px;
   animation:logoPulse 1s ease-in-out infinite alternate;
   margin-bottom:40px;
 }
 @keyframes logoPulse{
-  from{text-shadow:0 0 20px var(--accent-primary),0 0 40px rgba(245,184,0,0.3);}
-  to{text-shadow:0 0 40px var(--accent-primary),0 0 80px rgba(245,184,0,0.6),0 0 120px rgba(245,184,0,0.2);}
+  from{text-shadow:0 0 20px var(--accent-primary),0 0 40px rgba(102,217,255,0.25);}
+  to{text-shadow:0 0 40px var(--accent-primary),0 0 80px rgba(102,217,255,0.45),0 0 120px rgba(102,217,255,0.18);}
 }
 .loading-bar-wrap{
   width:240px;height:3px;
@@ -309,7 +309,7 @@ body.cursor-click #cursor-dot{
 .btn-cyan-outline{
   display:none;
 }
-.btn-cyan-outline:hover{background:rgba(245,184,0,0.1);box-shadow:0 0 20px var(--accent-glow);transform:translateY(-2px);}
+.btn-cyan-outline:hover{background:rgba(102,217,255,0.1);box-shadow:0 0 20px var(--accent-glow);transform:translateY(-2px);}
 .btn-violet{
   background:var(--accent-secondary);color:#fff;
   box-shadow:0 0 20px rgba(124,58,237,0.3);
@@ -437,66 +437,6 @@ section{padding:120px 0;}
 }
 .section-desc{color:var(--text-muted);font-size:16px;max-width:500px;margin:0 auto;}
 
-/* ===================== FEATURED MARQUEE ===================== */
-.featured{background:var(--bg-surface);padding:80px 0;overflow:hidden;}
-.marquee-wrapper{overflow:hidden;position:relative;}
-.marquee-wrapper::before,.marquee-wrapper::after{
-  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;
-}
-.marquee-wrapper::before{left:0;background:linear-gradient(90deg,var(--bg-surface),transparent);}
-.marquee-wrapper::after{right:0;background:linear-gradient(-90deg,var(--bg-surface),transparent);}
-.marquee-track{
-  display:flex;gap:24px;
-  width:max-content;
-  animation:marqueeScroll 30s linear infinite;
-}
-.marquee-track.is-paused{animation-play-state:paused;}
-.marquee-wrapper:hover .marquee-track{animation-play-state:paused;}
-.marquee-wrapper{cursor:grab;user-select:none;}
-.marquee-wrapper.is-dragging{cursor:grabbing;}
-@keyframes marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%)}}
-@media(max-width:768px){
-  .marquee-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;cursor:default;}
-  .marquee-wrapper::-webkit-scrollbar{height:3px;}
-  .marquee-wrapper::-webkit-scrollbar-track{background:transparent;}
-  .marquee-wrapper::-webkit-scrollbar-thumb{background:var(--accent-primary);border-radius:2px;}
-  .marquee-track{animation:none !important;transform:none !important;}
-}
-
-.marquee-card{
-  width:300px;flex-shrink:0;
-  background:var(--bg-card);
-  border:1px solid var(--accent-primary);
-  border-radius:16px;overflow:hidden;
-  transition:transform 0.1s ease,box-shadow 0.3s;
-  transform-style:preserve-3d;
-  position:relative;
-}
-.marquee-card:hover{box-shadow:0 0 30px var(--accent-glow);}
-.marquee-card-shine{
-  position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.08),transparent 60%);
-  pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:2;
-}
-.marquee-card:hover .marquee-card-shine{opacity:1;}
-.marquee-card img{
-  width:100%;height:180px;object-fit:cover;
-  transition:transform 0.4s ease;
-}
-.marquee-card:hover img{transform:scale(1.05);}
-.marquee-meta{padding:16px;}
-.marquee-meta h3{
-  font-family:'Fraunces',serif;font-weight:700;font-size:16px;
-  margin-bottom:6px;color:var(--text-primary);
-}
-.marquee-meta p{color:var(--text-muted);font-size:13px;margin-bottom:12px;}
-.marquee-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
-.marquee-tags span{
-  background:rgba(245,184,0,0.1);border:1px solid rgba(245,184,0,0.3);
-  color:var(--accent-primary);font-size:11px;
-  font-family:'JetBrains Mono',monospace;
-  padding:2px 8px;border-radius:4px;
-}
 .details-btn,.btn-sm{
   padding:6px 16px;border-radius:6px;font-size:12px;font-weight:600;
   background:transparent;border:1px solid var(--accent-primary);
@@ -516,10 +456,23 @@ section{padding:120px 0;}
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:12px;padding:20px;text-align:center;
   position:relative;overflow:hidden;
+  transition:transform 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease;
+  animation:achievementFloat 6s ease-in-out infinite;
+}
+.about-stat-card:nth-child(2){animation-delay:0.2s;}
+.about-stat-card:nth-child(3){animation-delay:0.4s;}
+.about-stat-card:hover{
+  transform:translateY(-6px);
+  border-color:var(--accent-primary);
+  box-shadow:0 10px 28px var(--accent-glow);
 }
 .about-stat-card::after{
   content:'';position:absolute;bottom:0;left:0;right:0;
   height:2px;background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));
+}
+@keyframes achievementFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-4px);}
 }
 .about-stat-card i{
   font-size:24px;color:var(--accent-primary);margin-bottom:8px;
@@ -584,9 +537,9 @@ section{padding:120px 0;}
   font-family:'JetBrains Mono',monospace;
   font-size:10px;
   letter-spacing:1px;
-  color:#ff9aac;
+  color:var(--accent-primary);
   background:#171717;
-  border:1px solid rgba(255,23,61,0.35);
+  border:1px solid rgba(102,217,255,0.35);
   border-radius:999px;
   padding:3px 9px;
 }
@@ -637,21 +590,21 @@ section{padding:120px 0;}
 }
 .service-card::before{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% -20%,rgba(245,184,0,0.05),transparent 60%);
+  background:radial-gradient(circle at 50% -20%,rgba(102,217,255,0.07),transparent 60%);
   pointer-events:none;
 }
 .service-card:hover{
   transform:translateZ(30px) rotateX(-5deg);
   border-color:var(--accent-primary);
-  box-shadow:0 20px 60px rgba(245,184,0,0.12);
+  box-shadow:0 20px 60px rgba(102,217,255,0.14);
 }
 .service-icon-wrap{
   width:64px;height:64px;border-radius:50%;
-  background:linear-gradient(135deg,rgba(245,184,0,0.15),rgba(124,58,237,0.15));
-  border:1px solid rgba(245,184,0,0.3);
+  background:linear-gradient(135deg,rgba(102,217,255,0.14),rgba(47,139,217,0.16));
+  border:1px solid rgba(102,217,255,0.3);
   display:flex;align-items:center;justify-content:center;
   margin-bottom:20px;
-  box-shadow:0 0 20px rgba(245,184,0,0.15);
+  box-shadow:0 0 20px rgba(102,217,255,0.16);
 }
 .service-icon-wrap i{font-size:24px;color:var(--accent-primary);}
 .service-card h3{
@@ -699,8 +652,8 @@ section{padding:120px 0;}
 .skill-level{
   font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--accent-primary);
-  background:rgba(255,23,61,0.1);
-  border:1px solid rgba(255,23,61,0.25);
+  background:rgba(102,217,255,0.1);
+  border:1px solid rgba(102,217,255,0.25);
   padding:2px 8px;border-radius:4px;
 }
 .skill-pct{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-muted);}
@@ -710,7 +663,7 @@ section{padding:120px 0;}
 .skill-bar-fill{
   height:100%;width:0%;border-radius:3px;
   background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));
-  box-shadow:0 0 10px rgba(255,23,61,0.4);
+  box-shadow:0 0 10px rgba(102,217,255,0.4);
   position:relative;overflow:hidden;
   transition:width 1s ease;
 }
@@ -746,7 +699,7 @@ section{padding:120px 0;}
 .hex-shape .hex-fill{
   position:absolute;bottom:0;left:0;right:0;
   height:0%;
-  background:linear-gradient(180deg,rgba(245,184,0,0.3),rgba(245,184,0,0.15));
+  background:linear-gradient(180deg,rgba(102,217,255,0.3),rgba(102,217,255,0.15));
   transition:height 1s ease;
 }
 .hex-shape .hex-pct{
@@ -779,7 +732,7 @@ section{padding:120px 0;}
   text-transform:uppercase;
   letter-spacing:1px;
   font-size:11px;
-  color:#ff8ca0;
+  color:var(--accent-primary);
   margin-bottom:10px;
 }
 .tech-tags{display:flex;flex-wrap:wrap;gap:8px;}
@@ -791,7 +744,7 @@ section{padding:120px 0;}
   transition:all 0.2s;
 }
 .tech-tag:hover{
-  border-color:var(--accent-primary);color:#ffdce2;
+  border-color:var(--accent-primary);color:#d9f4ff;
   box-shadow:0 0 12px var(--accent-glow);
   transform:translateY(-2px);
 }
@@ -825,7 +778,7 @@ section{padding:120px 0;}
 }
 .filter-btn:hover,.filter-btn.active{
   border-color:var(--accent-primary);color:var(--accent-primary);
-  background:rgba(245,184,0,0.08);
+  background:rgba(102,217,255,0.08);
 }
 
 /* 3D flip cards */
@@ -864,8 +817,8 @@ section{padding:120px 0;}
 .port-cat-badge{
   font-family:'JetBrains Mono',monospace;font-size:11px;
   color:var(--accent-primary);
-  background:rgba(245,184,0,0.1);
-  border:1px solid rgba(245,184,0,0.2);
+  background:rgba(102,217,255,0.1);
+  border:1px solid rgba(102,217,255,0.2);
   padding:2px 8px;border-radius:4px;
   display:inline-block;margin-top:4px;
 }
@@ -883,8 +836,8 @@ section{padding:120px 0;}
 .port-tech span{
   font-size:11px;font-family:'JetBrains Mono',monospace;
   color:var(--accent-primary);
-  background:rgba(245,184,0,0.1);
-  border:1px solid rgba(245,184,0,0.2);
+  background:rgba(102,217,255,0.1);
+  border:1px solid rgba(102,217,255,0.2);
   padding:2px 8px;border-radius:4px;
 }
 .port-actions{display:flex;gap:8px;flex-wrap:wrap;}
@@ -965,12 +918,12 @@ section{padding:120px 0;}
   background:var(--accent-primary);color:#000;
   font-weight:700;font-size:15px;border-radius:8px;
   transition:all 0.3s;letter-spacing:0.5px;
-  box-shadow:0 0 20px rgba(245,184,0,0.3);
+  box-shadow:0 0 20px rgba(102,217,255,0.3);
 }
-.submit-btn:hover{box-shadow:0 0 40px rgba(245,184,0,0.6);transform:translateY(-2px);}
+.submit-btn:hover{box-shadow:0 0 40px rgba(102,217,255,0.5);transform:translateY(-2px);}
 .reply-badge{
   display:inline-flex;align-items:center;gap:6px;
-  background:rgba(245,184,0,0.1);border:1px solid rgba(245,184,0,0.2);
+  background:rgba(102,217,255,0.1);border:1px solid rgba(102,217,255,0.2);
   color:var(--accent-primary);font-size:12px;
   font-family:'JetBrains Mono',monospace;
   padding:4px 12px;border-radius:20px;margin-bottom:20px;
@@ -986,8 +939,8 @@ section{padding:120px 0;}
 .contact-card:hover{border-color:var(--accent-primary);box-shadow:0 0 20px var(--accent-glow);}
 .contact-card-icon{
   width:48px;height:48px;border-radius:12px;
-  background:linear-gradient(135deg,rgba(245,184,0,0.15),rgba(124,58,237,0.15));
-  border:1px solid rgba(245,184,0,0.2);
+  background:linear-gradient(135deg,rgba(102,217,255,0.14),rgba(47,139,217,0.16));
+  border:1px solid rgba(102,217,255,0.2);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .contact-card-icon i{color:var(--accent-primary);font-size:18px;}
@@ -1061,12 +1014,12 @@ section{padding:120px 0;}
   background:var(--accent-primary);color:#000;
   font-size:16px;border:none;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 20px rgba(245,184,0,0.4);
+  box-shadow:0 0 20px rgba(102,217,255,0.4);
   opacity:0;transform:translateY(20px);
   transition:all 0.3s;pointer-events:none;
 }
 #scrollToTop.visible{opacity:1;transform:translateY(0);pointer-events:all;}
-#scrollToTop:hover{box-shadow:0 0 30px rgba(245,184,0,0.7);transform:translateY(-3px);}
+#scrollToTop:hover{box-shadow:0 0 30px rgba(102,217,255,0.55);transform:translateY(-3px);}
 
 /* ===================== MODALS ===================== */
 .modal{
@@ -1102,7 +1055,7 @@ section{padding:120px 0;}
   color:var(--text-muted);font-size:18px;padding:4px 8px;
   border-radius:6px;transition:color 0.2s,background 0.2s;
 }
-.modal-close:hover{color:#ff4444;background:rgba(255,68,68,0.1);}
+.modal-close:hover{color:var(--accent-primary);background:rgba(102,217,255,0.1);}
 .modal-body{padding:0 24px 24px;}
 .modal-body p{color:var(--text-muted);font-size:14px;margin-bottom:12px;}
 .modal-body ul{color:var(--text-muted);font-size:14px;padding-left:20px;}
@@ -1115,8 +1068,8 @@ section{padding:120px 0;}
 .modal-tech span{
   font-size:12px;font-family:'JetBrains Mono',monospace;
   color:var(--accent-primary);
-  background:rgba(245,184,0,0.1);
-  border:1px solid rgba(245,184,0,0.2);
+  background:rgba(102,217,255,0.1);
+  border:1px solid rgba(102,217,255,0.2);
   padding:4px 12px;border-radius:6px;
 }
 
@@ -1127,11 +1080,11 @@ section{padding:120px 0;}
   background:linear-gradient(135deg,var(--accent-secondary),var(--accent-primary));
   color:#fff;font-size:22px;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 24px rgba(245,184,0,0.3);
+  box-shadow:0 4px 24px rgba(102,217,255,0.3);
   transition:transform 0.3s,box-shadow 0.3s;
   position:fixed;
 }
-#chatToggle:hover{transform:scale(1.1);box-shadow:0 4px 32px rgba(245,184,0,0.5);}
+#chatToggle:hover{transform:scale(1.1);box-shadow:0 4px 32px rgba(102,217,255,0.45);}
 .chat-online-dot{
   position:absolute;top:2px;right:2px;
   width:12px;height:12px;border-radius:50%;
@@ -1156,7 +1109,7 @@ section{padding:120px 0;}
   background:var(--bg-card);
   border:1px solid var(--border);border-radius:20px;
   display:flex;flex-direction:column;overflow:hidden;
-  box-shadow:0 20px 60px rgba(245,184,0,0.15);
+  box-shadow:0 20px 60px rgba(102,217,255,0.16);
   transform:translateY(20px);opacity:0;pointer-events:none;
   transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s;
 }
@@ -1186,7 +1139,7 @@ section{padding:120px 0;}
   content:'';width:6px;height:6px;border-radius:50%;background:#22c55e;
 }
 .chat-close{color:var(--text-muted);font-size:16px;transition:color 0.2s;}
-.chat-close:hover{color:#ff4444;}
+.chat-close:hover{color:var(--accent-primary);}
 
 #chatMessages{
   flex:1;overflow-y:auto;padding:16px;
@@ -1274,9 +1227,9 @@ section{padding:120px 0;}
   color:#fff;font-size:14px;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;transition:transform 0.2s,box-shadow 0.2s;
-  box-shadow:0 0 10px rgba(245,184,0,0.3);
+  box-shadow:0 0 10px rgba(102,217,255,0.3);
 }
-#chatSend:hover{transform:scale(1.1);box-shadow:0 0 16px rgba(245,184,0,0.5);}
+#chatSend:hover{transform:scale(1.1);box-shadow:0 0 16px rgba(102,217,255,0.45);}
 
 /* ===================== MOBILE NAV OVERLAY ===================== */
 #mobileNav{
@@ -1336,28 +1289,31 @@ section{padding:120px 0;}
   #aboutCanvas{display:none;}
   .about-stats-row{grid-template-columns:repeat(3,1fr);}
 
-  .timeline::before{left:20px;transform:none;}
+  .timeline-title{margin-bottom:30px;}
+  .timeline{padding:0;}
+  .timeline::before{left:18px;transform:none;}
   .tl-item{
-    grid-template-columns:48px 1fr;
-    grid-template-rows:auto auto;
-    gap:10px 14px;
-  }
-  .tl-node{grid-column:1;grid-row:1;}
-  .tl-item::before{
-    left:22px;
-    transform:none;
-    top:-10px;
-  }
-  .tl-right{grid-column:2;grid-row:1;}
-  .tl-left{
     display:block;
-    grid-column:2;grid-row:2;
-    text-align:left;
-    padding-bottom:8px;
-    border-left:2px solid var(--border);
-    padding-left:12px;
-    margin-left:0;
+    position:relative;
+    margin-bottom:28px;
+    padding-left:56px;
   }
+  .tl-node{
+    position:absolute;
+    left:0;
+    top:14px;
+    width:36px;
+    height:36px;
+    font-size:13px;
+  }
+  .tl-item::before{
+    left:18px;
+    top:-12px;
+    transform:translateX(-50%);
+  }
+  .tl-empty{display:none;}
+  .tl-right,.tl-left{text-align:left;}
+  .tl-card{padding:16px;border-radius:12px;}
 
   .services-grid{grid-template-columns:1fr;}
   .skills-grid{grid-template-columns:1fr;}
@@ -1415,12 +1371,12 @@ section{padding:120px 0;}
     display:none;
   }
 
-  .marquee-card{width:240px;}
-  .marquee-card img{height:130px;}
-  .marquee-wrapper::before,.marquee-wrapper::after{width:40px;}
   .portfolio-controls{flex-direction:column;align-items:flex-start;}
   .search-input{width:100%;}
   .gh-stats{grid-template-columns:1fr;}
+  #certifications .services-grid{grid-template-columns:1fr !important;}
+  #certifications .service-card{padding:24px 18px;}
+  #certifications .service-card p{font-size:13px;line-height:1.55;}
 }
 @media(max-width:480px){
   .hero-buttons{flex-direction:column;align-items:center;}
@@ -1532,76 +1488,6 @@ section{padding:120px 0;}
   </div>
 </section>
 
-<!-- ==================== FEATURED MARQUEE ==================== -->
-<section class="featured" aria-label="Featured projects">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-subtitle">FEATURED WORK</p>
-      <h2 class="section-title">Highlighted Projects</h2>
-      <p class="section-desc">Hover to pause, click Details for more.</p>
-    </div>
-  </div>
-  <div class="marquee-wrapper">
-    <div class="marquee-track" id="marqueeTrack">
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/sbad.png" alt="Smart Bus Arrival Detector preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>Smart Bus Arrival Detector</h3><p>Real-time bus tracking with ML-powered ETA prediction.</p>
-          <div class="marquee-tags"><span>React Native</span><span>Firebase</span><span>Google Maps</span></div>
-        </div>
-      </article>
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/slpd.png" alt="Gate Automation preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>Gate Automation</h3><p>License plate detection for automated gate control.</p>
-          <div class="marquee-tags"><span>Python</span><span>OpenCV</span><span>TensorFlow</span></div>
-        </div>
-      </article>
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/Portfolio.png" alt="Portfolio Website preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>Portfolio Website</h3><p>Minimalist portfolio you're currently viewing.</p>
-          <div class="marquee-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
-        </div>
-      </article>
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/cinevault.png" alt="CineVault preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>CineVault</h3><p>Movie discovery app powered by TMDb API.</p>
-          <div class="marquee-tags"><span>React</span><span>TMDb API</span><span>CSS</span></div>
-        </div>
-      </article>
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/readlib.png" alt="ReadLib preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>ReadLib</h3><p>Local-first book management with PDF reader.</p>
-          <div class="marquee-tags"><span>React</span><span>IndexedDB</span><span>pdf.js</span></div>
-        </div>
-      </article>
-      <article class="marquee-card">
-        <div class="marquee-card-shine" aria-hidden="true"></div>
-        <img src="Images/unilib.png" alt="UniLib preview" loading="lazy" width="340" height="180">
-        <div class="marquee-meta">
-          <h3>UniLib</h3><p>Full-stack library management system.</p>
-          <div class="marquee-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
-        </div>
-      </article>
-      <!-- duplicates for seamless loop -->
-      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/sbad.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>Smart Bus Arrival Detector</h3><p>Real-time bus tracking with ML ETAs.</p><div class="marquee-tags"><span>React Native</span><span>Firebase</span><span>Google Maps</span></div></div></article>
-      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/slpd.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>Gate Automation</h3><p>License plate detection for gate control.</p><div class="marquee-tags"><span>Python</span><span>OpenCV</span><span>TensorFlow</span></div></div></article>
-      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/Portfolio.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>Portfolio Website</h3><p>Minimalist portfolio site.</p><div class="marquee-tags"><span>HTML</span><span>CSS</span><span>JS</span></div></div></article>
-      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/cinevault.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>CineVault</h3><p>Movie discovery app.</p><div class="marquee-tags"><span>React</span><span>TMDb API</span><span>CSS</span></div></div></article>
-      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/readlib.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>ReadLib</h3><p>Book management system.</p><div class="marquee-tags"><span>React</span><span>IndexedDB</span><span>pdf.js</span></div></div></article>
-      <article class="marquee-card" aria-hidden="true"><div class="marquee-card-shine"></div><img src="Images/unilib.png" alt="" loading="lazy" width="340" height="180"><div class="marquee-meta"><h3>UniLib</h3><p>Library management system.</p><div class="marquee-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div></div></article>
-    </div>
-  </div>
-</section>
-
 <!-- ==================== ABOUT ==================== -->
 <section id="about" class="about">
   <div class="container">
@@ -1624,9 +1510,9 @@ section{padding:120px 0;}
             <span class="stat-lbl">Projects</span>
           </div>
           <div class="about-stat-card">
-            <i class="fas fa-clock"></i>
-            <span class="stat-num" data-count="2">0</span><span class="stat-num">+</span>
-            <span class="stat-lbl">Years Exp.</span>
+            <i class="fas fa-graduation-cap"></i>
+            <span class="stat-num" data-count="8">0</span>
+            <span class="stat-lbl">Semester</span>
           </div>
           <div class="about-stat-card">
             <i class="fas fa-layer-group"></i>
@@ -1676,7 +1562,7 @@ section{padding:120px 0;}
             <h4>First Production Projects</h4>
             <div class="tl-inst">Freelance</div>
             <div class="tl-period">2023</div>
-            <p>Built first production web projects. Started mastering React and Node.js ecosystem, delivering client solutions with real-world impact.</p>
+            <p>Built first production web projects. Started mastering React and backend fundamentals, delivering client solutions with real-world impact.</p>
           </div>
         </div>
         <div class="tl-item" data-year="2024">
@@ -1684,7 +1570,7 @@ section{padding:120px 0;}
             <h4>AI-Integrated Projects</h4>
             <div class="tl-inst">Independent / Academic</div>
             <div class="tl-period">2024</div>
-            <p>Moved into AI-integrated projects — SLPD, SBAD, and PixelPrompt — combining computer vision and ML with full-stack development.</p>
+            <p>Moved into AI-integrated and product-focused builds — SLPD, CineVault, and ReadLib — combining computer vision, polished UI, and practical user workflows.</p>
           </div>
           <div class="tl-node"><i class="fas fa-robot"></i></div>
           <div class="tl-empty"></div>
@@ -1715,14 +1601,14 @@ section{padding:120px 0;}
       <div class="service-card">
         <div class="service-icon-wrap"><i class="fab fa-aws"></i></div>
         <h3>Cloud & DevOps Training</h3>
-        <p>Comprehensive training covering AWS core services, cloud architecture, CI/CD pipelines, containerization with Docker, and infrastructure automation.</p>
+        <p>Hands-on training in AWS core services, cloud architecture basics, CI/CD pipelines, and containerized deployment workflows.</p>
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">AWS • Docker • CI/CD</div>
         <a href="#" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
       </div>
       <div class="service-card">
         <div class="service-icon-wrap"><i class="fas fa-chart-bar"></i></div>
         <h3>Fundamentals of Data Science</h3>
-        <p>Foundation in statistical analysis, data visualization, exploratory data analysis, and introductory machine learning concepts using Python and popular data science libraries.</p>
+        <p>Core foundation in data analysis, visualization, exploratory workflows, and introductory machine learning using Python libraries.</p>
         <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">Python • Pandas • NumPy • Matplotlib</div>
         <a href="#" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>
       </div>
@@ -1791,10 +1677,9 @@ section{padding:120px 0;}
             <article class="tech-group">
               <h4>Backend</h4>
               <div class="tech-tags">
-                <span class="tech-tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
                 <span class="tech-tag"><i class="devicon-python-plain colored"></i> Python</span>
                 <span class="tech-tag"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
-                <span class="tech-tag"><i class="devicon-firebase-plain colored"></i> Firebase</span>
+                <span class="tech-tag"><i class="devicon-express-original"></i> Express</span>
               </div>
             </article>
             <article class="tech-group">
@@ -1802,7 +1687,6 @@ section{padding:120px 0;}
               <div class="tech-tags">
                 <span class="tech-tag"><i class="devicon-opencv-plain colored"></i> OpenCV</span>
                 <span class="tech-tag"><i class="devicon-tensorflow-original colored"></i> TensorFlow</span>
-                <span class="tech-tag"><i class="fas fa-brain"></i> ML Workflows</span>
               </div>
             </article>
             <article class="tech-group">
@@ -1810,7 +1694,8 @@ section{padding:120px 0;}
               <div class="tech-tags">
                 <span class="tech-tag"><i class="devicon-git-plain colored"></i> Git</span>
                 <span class="tech-tag"><i class="devicon-docker-plain colored"></i> Docker</span>
-                <span class="tech-tag"><i class="devicon-linux-plain"></i> Linux</span>
+                <span class="tech-tag"><i class="fas fa-rocket"></i> Vercel</span>
+                <span class="tech-tag"><i class="fas fa-server"></i> Render</span>
                 <span class="tech-tag"><i class="devicon-figma-plain colored"></i> Figma</span>
               </div>
             </article>
@@ -1890,8 +1775,8 @@ section{padding:120px 0;}
           <div class="port-back">
             <div>
               <h3>Portfolio Website</h3>
-              <p>The minimalist portfolio you're currently viewing. Features an AI chatbot, animated sections, responsive design, and a Node.js backend with admin panel for content management.</p>
-              <div class="port-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Node.js</span></div>
+              <p>The minimalist portfolio you're currently viewing. Features an AI chatbot, animated sections, and responsive layouts with a clean single-page architecture.</p>
+              <div class="port-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
             </div>
             <div class="port-actions">
               <button class="port-btn details-btn" data-project="portfolio"><i class="fas fa-info-circle"></i> Details</button>
@@ -2217,24 +2102,6 @@ section{padding:120px 0;}
 
 /* ============ THREE.JS GLOBE — REMOVED (minimalist redesign) ============ */
 
-/* ============ MARQUEE TILT ============ */
-document.querySelectorAll('.marquee-card').forEach(card=>{
-  card.addEventListener('mousemove',(e)=>{
-    const r = card.getBoundingClientRect();
-    const cx = r.left + r.width/2, cy = r.top + r.height/2;
-    const dx = (e.clientX-cx)/r.width*24;
-    const dy = (e.clientY-cy)/r.height*24;
-    card.style.transform = `perspective(800px) rotateX(${-dy}deg) rotateY(${dx}deg)`;
-    const shine = card.querySelector('.marquee-card-shine');
-    if(shine){ shine.style.background = `radial-gradient(circle at ${e.clientX-r.left}px ${e.clientY-r.top}px, rgba(255,255,255,0.12), transparent 60%)`; shine.style.opacity='1'; }
-  });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform='';
-    const shine = card.querySelector('.marquee-card-shine');
-    if(shine){ shine.style.opacity='0'; }
-  });
-});
-
 /* ============ HEADER SCROLL ============ */
 window.addEventListener('scroll',()=>{
   document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50);
@@ -2433,9 +2300,9 @@ const projectData = {
     title: 'Portfolio Website',
     content: `<p>The minimalist portfolio website you're currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.</p>
     <h3>Key Features</h3>
-    <ul><li>Rule-based AI chatbot with score-based keyword matching</li><li>Animated skill bars and hexagonal progress displays</li><li>Node.js backend with admin panel for content management</li><li>Responsive design with custom cursor and micro-animations</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Node.js</span><span>Express</span></div>
-    <h3>Highlights</h3><p>Single-file frontend architecture, zero build tools. Dynamic content loaded from backend API with admin CMS.</p>`
+    <ul><li>Rule-based AI chatbot with score-based keyword matching</li><li>Animated skill bars and hexagonal progress displays</li><li>Section-wise motion and scroll-triggered interactions</li><li>Responsive design with custom cursor and micro-animations</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+    <h3>Highlights</h3><p>Single-file frontend architecture with smooth performance and responsive behavior across devices.</p>`
   },
   cinevault: {
     title: 'CineVault',
@@ -2524,7 +2391,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     if (res.ok) {
       // Show success message
       const successEl = document.createElement('div');
-      successEl.style.cssText = 'margin-bottom:16px;padding:14px 18px;background:rgba(245,184,0,0.1);border:1px solid rgba(245,184,0,0.3);border-radius:10px;color:#F5B800;font-size:13px;line-height:1.6;';
+      successEl.style.cssText = 'margin-bottom:16px;padding:14px 18px;background:rgba(102,217,255,0.1);border:1px solid rgba(102,217,255,0.3);border-radius:10px;color:#66d9ff;font-size:13px;line-height:1.6;';
       successEl.innerHTML = '✅ <strong>Verification email sent!</strong> Please check your inbox and click the confirm link to send your message.';
       form.insertBefore(successEl, form.firstChild);
       form.reset();
@@ -2553,7 +2420,7 @@ const RESPONSES = [
 
   /* ── Who is Nischal ── */
   { keywords:['who','about','tell me about','introduce','yourself','nischal'],
-    reply:'Nischal Bhandari is a Computer Engineering student in his final semester at Pokhara University, Nepal — graduating in 2026.\n\nHe has hands-on experience building web apps, AI-integrated tools, and full-stack solutions.\n\nOutside the keyboard: gaming 🎮, music 🎵, and hiking the trails around Pokhara 🥾.' },
+    reply:'Nischal Bhandari is a Computer Engineering student in his 8th semester at Pokhara University, Nepal — graduating in 2026.\n\nHe builds web apps, AI-integrated tools, and full-stack solutions through academic and independent projects.\n\nOutside the keyboard: gaming 🎮, music 🎵, and hiking the trails around Pokhara 🥾.' },
 
   /* ── Education ── */
   { keywords:['study','university','college','degree','education','student','pokhara university','course','graduating','graduation','semester'],
@@ -2561,15 +2428,15 @@ const RESPONSES = [
 
   /* ── Skills ── */
   { keywords:['skill','know','tech','stack','what can you','capable','proficient'],
-    reply:'Here\'s Nischal\'s skill snapshot:\n\n⚙️ Technical\n🔹 HTML/CSS — 85% (Expert)\n🔹 JavaScript — 45%\n🔹 React — 45%\n🔹 Node.js — 35%\n🔹 Python — 40%\n\n🤝 Professional\n🔹 Problem Solving — 90%\n🔹 Communication — 80%\n🔹 Team Work — 80%\n🔹 Creativity — 85%\n\nCheck the Skills section for the full breakdown!' },
+    reply:'Here\'s Nischal\'s skill snapshot:\n\n⚙️ Technical\n🔹 HTML/CSS — 85% (Expert)\n🔹 JavaScript — 45%\n🔹 React — 45%\n🔹 Python — 40%\n🔹 MongoDB — 35%\n\n🤝 Professional\n🔹 Problem Solving — 90%\n🔹 Communication — 80%\n🔹 Team Work — 80%\n🔹 Creativity — 85%\n\nCheck the Skills section for the full breakdown!' },
 
   /* ── Favourite tech ── */
   { keywords:['favourite','favorite','enjoy','love','prefer','best tech','fav','fun to use','enjoy working'],
-    reply:'Nischal genuinely loves:\n\n⚛️ React — building fast, interactive UIs\n🐍 Python + AI/ML — turning data into something useful\n🔧 Node.js — clean, expressive backend APIs\n🐳 Docker — containerizing everything\n\nHe\'s happiest when these collide in one project. 😄' },
+    reply:'Nischal genuinely loves:\n\n⚛️ React — building fast, interactive UIs\n🐍 Python + AI/ML — turning data into something useful\n🗄️ MongoDB — modeling practical app data\n🐳 Docker — containerizing everything\n\nHe\'s happiest when these collide in one project. 😄' },
 
   /* ── All projects ── */
   { keywords:['project','work','built','made','what have you','show me','examples'],
-    reply:'Nischal has built 6 flagship projects:\n\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs\n🚗 Gate Automation — Smart license plate detection for automated gate flow\n🌐 Portfolio Website — this site! (HTML, CSS, JS, Node.js)\n🎬 CineVault — Movie discovery app (React, TMDb API)\n📚 ReadLib — Local-first book manager with built-in PDF reader\n📖 UniLib — Full-stack university library management system\n\nOpen the Portfolio section for details or check github.com/nis6hal.' },
+    reply:'Nischal has built 6 flagship projects:\n\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs\n🚗 Gate Automation — Smart license plate detection for automated gate flow\n🌐 Portfolio Website — this site! (HTML, CSS, JS)\n🎬 CineVault — Movie discovery app (React, TMDb API)\n📚 ReadLib — Local-first book manager with built-in PDF reader\n📖 UniLib — Full-stack university library management system\n\nOpen the Portfolio section for details or check github.com/nis6hal.' },
 
   /* ── Smart Bus ── */
   { keywords:['smart bus','bus','eta','arrival','commute','pokhara routes','route tracking'],
@@ -2617,7 +2484,7 @@ const RESPONSES = [
 
   /* ── Experience ── */
   { keywords:['experience','year','how long','background','journey','started','when did'],
-    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University\n2023 — First production web projects, learned React + Node.js\n2024 — AI-integrated projects: Gate Automation, Sentiment Analyzer\n2025–26 — Final semester, building portfolio projects (CineVault, ReadLib, UniLib)\n\nhands-on building, 6+ projects shipped. 🔥' },
+    reply:'⏱️ Nischal\'s journey:\n\n2022 — Started BE Computer Engineering at Pokhara University\n2023 — Built first production web projects and strengthened React + backend fundamentals\n2024 — AI-integrated and product projects: Gate Automation, CineVault, ReadLib\n2025–26 — Final semester, expanding portfolio depth and real-world project quality\n\nCurrently in 8th semester with 6+ projects shipped. 🔥' },
 
   /* ── Contact ── */
   { keywords:['contact','reach','email','message','dm','instagram','insta','get in touch','how to contact'],
@@ -2855,10 +2722,6 @@ async function loadLiveData() {
   /* ---- SECTION VISIBILITY TOGGLES ---- */
   if (content?.sections) {
     const s = content.sections;
-    if (s.showFeaturedMarquee === false) {
-      const el = document.querySelector('.featured');
-      if (el) el.style.display = 'none';
-    }
     if (s.showGithubActivity === false) {
       const el = document.getElementById('github');
       if (el) el.style.display = 'none';
@@ -2993,93 +2856,6 @@ async function loadLiveData() {
       document.querySelectorAll('.port-item').forEach(p => piObs.observe(p));
     }
   }
-
-  /* ---- FEATURED MARQUEE ---- */
-  if (projects?.length > 0) {
-    const track = document.getElementById('marqueeTrack');
-    if (track) {
-      const buildCard = (project, hidden) => {
-        const techHtml = (project.tech || []).slice(0, 3).map(t => `<span>${t}</span>`).join('');
-        return `
-          <article class="marquee-card"${hidden ? ' aria-hidden="true"' : ''}>
-            <div class="marquee-card-shine" aria-hidden="true"></div>
-            <img src="${project.image}" alt="${hidden ? '' : project.title + ' preview'}" loading="lazy" width="340" height="180">
-            <div class="marquee-meta">
-              <h3>${project.title}</h3>
-              <p>${project.description.length > 60 ? project.description.slice(0, 60) + '…' : project.description}</p>
-              <div class="marquee-tags">${techHtml}</div>
-            </div>
-          </article>
-        `;
-      };
-      const originals = projects.map(p => buildCard(p, false)).join('');
-      const isMobile = window.innerWidth <= 768;
-      const dupes = isMobile ? '' : projects.map(p => buildCard(p, true)).join('');
-      track.innerHTML = originals + dupes;
-
-      // Re-attach marquee tilt
-      track.querySelectorAll('.marquee-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const r = card.getBoundingClientRect();
-          const dx = (e.clientX - r.left - r.width/2) / r.width * 24;
-          const dy = (e.clientY - r.top - r.height/2) / r.height * 24;
-          card.style.transform = `perspective(800px) rotateX(${-dy}deg) rotateY(${dx}deg)`;
-        });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-      });
-
-      // ── Drag-while-paused + resume-on-leave ───────────────────────────────
-      if (window.innerWidth > 768) {
-        const wrapper = track.parentElement;
-        let isDragging = false;
-        let startX = 0;
-        let scrollOffset = 0; // px offset applied via translateX while paused
-    }
-  }
-}
-
-// Run on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-  // ── Marquee: drag to scrub while hovered (CSS handles pause) ──
-  if (window.innerWidth > 768) {
-    const track   = document.getElementById('marqueeTrack');
-    const wrapper = track?.parentElement;
-    if (track && wrapper) {
-      let dragging = false, startX = 0, startDelay = 0;
-
-      function getCurrentDelay() {
-        const matrix = window.getComputedStyle(track).transform;
-        if (!matrix || matrix === 'none') return 0;
-        const tx   = parseFloat(matrix.split(',')[4]) || 0;
-        const half = track.scrollWidth / 2;
-        return (Math.abs(tx) / half) * 30;
-      }
-
-      wrapper.addEventListener('mousedown', (e) => {
-        dragging   = true;
-        startX     = e.clientX;
-        startDelay = getCurrentDelay();
-        wrapper.classList.add('is-dragging');
-        e.preventDefault();
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!dragging) return;
-        const half     = track.scrollWidth / 2;
-        const deltaSec = ((e.clientX - startX) / half) * 30;
-        let newDelay   = startDelay + deltaSec;
-        newDelay = ((newDelay % 30) + 30) % 30;
-        track.style.animationDelay = `-${newDelay}s`;
-      });
-
-      window.addEventListener('mouseup', () => {
-        if (!dragging) return;
-     
-        wrapper.classList.remove('is-dragging');
-      });
-    }
-  }
-});
 
 } // end loadLiveData
 
