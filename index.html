@@ -1569,7 +1569,7 @@
     }
 
     .port-item.is-flipped .port-flipper {
-      transform: rotateY(180deg);
+      transform: rotateY(180deg) !important;
     }
 
     .port-front,
@@ -3908,11 +3908,7 @@
 
       // Use event delegation on the grid container
       grid.onclick = (e) => {
-        // Only proceed if it's a touch-capable device or if we want to allow click-to-flip
-        // The user specifically asked for mobile (touchable)
-        const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches || navigator.maxTouchPoints > 0;
-        if (!isTouchDevice) return;
-
+        // Find the card that was clicked
         const item = e.target.closest('.port-item');
         if (!item) return;
 
