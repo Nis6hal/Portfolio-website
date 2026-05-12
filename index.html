@@ -339,17 +339,25 @@
     }
 
     /* ===================== HEADER / NAV ===================== */
-    .header {
+        .header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1001;
-      background: var(--bg-surface);
+      height: 80px;
+      background: transparent;
+      transition: all 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .header.scrolled {
+      height: 70px;
+      background: var(--bg-glass);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      transition: backdrop-filter 0.3s, background 0.3s;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
     }
 
     .header.scrolled {
@@ -732,20 +740,21 @@
       object-fit: cover;
     }
 
-    .orbit-node {
+        .orbit-node {
       position: absolute;
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-primary);
       border-radius: 50%;
-      border: 1px solid rgba(237, 239, 244, 0.75);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #f2f2f3;
-      background: var(--bg-surface);
-      font-size: 16px;
-      z-index: 3;
-      transition: all 0.2s ease;
+      color: var(--text-primary);
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 5;
     }
 
     .orbit-node:hover {
@@ -2850,11 +2859,22 @@
         inset: 22px;
       }
 
-      .orbit-node {
-        width: 46px;
-        height: 46px;
-        font-size: 15px;
-      }
+          .orbit-node {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 5;
+    }
     }
 
     @media(max-width:768px) {
@@ -2890,9 +2910,22 @@
         inset: 18px;
       }
 
-      .orbit-node {
-        display: none;
-      }
+          .orbit-node {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 5;
+    }
 
       .badge-1,
       .badge-2,
