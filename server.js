@@ -190,33 +190,32 @@ async function seedDefaults() {
     }
   }
 
-  // Seed skills if empty
-  const skillCount = await Skill.countDocuments();
-  if (skillCount === 0) {
-    await Skill.insertMany([
-      // Professional
-      { name: 'Problem Solving', percentage: 90, level: 'Expert', type: 'professional', details: 'Analytical thinking and debugging expertise',      order: 1 },
-      { name: 'Communication',   percentage: 80, level: 'Expert', type: 'professional', details: 'Clear client interaction and team collaboration', order: 2 },
-      { name: 'Team Work',       percentage: 80, level: 'Expert', type: 'professional', details: 'Agile methodology and project coordination',      order: 3 },
-      { name: 'Creativity',      percentage: 85, level: 'Expert', type: 'professional', details: 'Innovative solutions and UI/UX design',           order: 4 },
-      // Technical - Frontend
-      { name: 'HTML5',      percentage: 95, level: 'Expert', type: 'technical', category: 'frontend', order: 1 },
-      { name: 'CSS3',       percentage: 90, level: 'Expert', type: 'technical', category: 'frontend', order: 2 },
-      { name: 'JavaScript', percentage: 90, level: 'Expert', type: 'technical', category: 'frontend', order: 3 },
-      { name: 'React',      percentage: 85, level: 'Expert', type: 'technical', category: 'frontend', order: 4 },
-      // Technical - Backend
-      { name: 'Python',     percentage: 85, level: 'Expert', type: 'technical', category: 'backend',  order: 5 },
-      { name: 'Node.js',    percentage: 80, level: 'Expert', type: 'technical', category: 'backend',  order: 6 },
-      { name: 'MongoDB',    percentage: 80, level: 'Expert', type: 'technical', category: 'backend',  order: 7 },
-      // Technical - AI & Data
-      { name: 'OpenCV',     percentage: 75, level: 'Intermediate', type: 'technical', category: 'ai', order: 8 },
-      { name: 'TensorFlow', percentage: 70, level: 'Intermediate', type: 'technical', category: 'ai', order: 9 },
-      // Technical - Tools
-      { name: 'Git',        percentage: 85, level: 'Expert', type: 'technical', category: 'tools', order: 10 },
-      { name: 'Docker',     percentage: 75, level: 'Intermediate', type: 'technical', category: 'tools', order: 11 },
-    ]);
-    console.log('✅ Default skills seeded');
+  // Intelligent Skill Sync (Upsert defaults)
+  const defaultSkills = [
+    { name: 'Problem Solving', percentage: 90, level: 'Expert', type: 'professional', details: 'Analytical thinking and debugging expertise', order: 1 },
+    { name: 'Communication', percentage: 80, level: 'Expert', type: 'professional', details: 'Clear client interaction and team collaboration', order: 2 },
+    { name: 'Team Work', percentage: 80, level: 'Expert', type: 'professional', details: 'Agile methodology and project coordination', order: 3 },
+    { name: 'Creativity', percentage: 85, level: 'Expert', type: 'professional', details: 'Innovative solutions and UI/UX design', order: 4 },
+    { name: 'HTML5', percentage: 95, level: 'Expert', type: 'technical', category: 'frontend', order: 1 },
+    { name: 'CSS3', percentage: 90, level: 'Expert', type: 'technical', category: 'frontend', order: 2 },
+    { name: 'JavaScript', percentage: 90, level: 'Expert', type: 'technical', category: 'frontend', order: 3 },
+    { name: 'React', percentage: 85, level: 'Expert', type: 'technical', category: 'frontend', order: 4 },
+    { name: 'Python', percentage: 85, level: 'Expert', type: 'technical', category: 'backend', order: 5 },
+    { name: 'Node.js', percentage: 80, level: 'Expert', type: 'technical', category: 'backend', order: 6 },
+    { name: 'MongoDB', percentage: 80, level: 'Expert', type: 'technical', category: 'backend', order: 7 },
+    { name: 'OpenCV', percentage: 75, level: 'Intermediate', type: 'technical', category: 'ai', order: 8 },
+    { name: 'TensorFlow', percentage: 70, level: 'Intermediate', type: 'technical', category: 'ai', order: 9 },
+    { name: 'Git', percentage: 85, level: 'Expert', type: 'technical', category: 'tools', order: 10 },
+    { name: 'Docker', percentage: 75, level: 'Intermediate', type: 'technical', category: 'tools', order: 11 },
+    { name: 'Vercel', percentage: 85, level: 'Expert', type: 'technical', category: 'tools', order: 12 },
+    { name: 'Render', percentage: 80, level: 'Expert', type: 'technical', category: 'tools', order: 13 },
+    { name: 'Figma', percentage: 75, level: 'Intermediate', type: 'technical', category: 'tools', order: 14 }
+  ];
+
+  for (const s of defaultSkills) {
+    await Skill.findOneAndUpdate({ name: s.name }, s, { upsert: true });
   }
+  console.log('✅ Skills synchronized (upserted)');
 
   // Seed content if empty
   const contentCount = await Content.countDocuments();
@@ -593,6 +592,15 @@ app.delete('/api/admin/skills/:id', authMiddleware, async (req, res) => {
     await Skill.findByIdAndDelete(req.params.id);
     res.json({ message: 'Skill deleted' });
   } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/admin/skills/sync-defaults', authMiddleware, async (req, res) => {
+  try {
+    await seedDefaults(); // seedDefaults now handles skills with upsert
+    res.json({ message: 'Skills synchronized with current defaults' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // --- Certifications ---

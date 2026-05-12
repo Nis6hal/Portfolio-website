@@ -405,6 +405,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="toolbar">
         <div class="toolbar-left">
           <button class="btn btn-primary" id="addSkillBtn"><i class="fas fa-plus"></i> Add Skill</button>
+          <button class="btn btn-secondary" id="syncSkillsBtn"><i class="fas fa-rotate"></i> Sync Defaults</button>
         </div>
       </div>
       <div class="table-wrap"><div class="table-scroll"><table class="skills-table-v2">
@@ -1010,6 +1011,15 @@ async function editSkill(id) {
     openModal('skillModal');
   } catch (err) { toast(err.message, 'error'); }
 }
+
+document.getElementById('syncSkillsBtn').addEventListener('click', async () => {
+  if (!confirm('This will synchronize all technical and professional skills with the latest defaults (Categorized). Existing skills with the same name will be updated. Proceed?')) return;
+  try {
+    const res = await api('POST', '/api/admin/skills/sync-defaults');
+    toast(res.message || 'Skills synchronized', 'success');
+    loadSkills();
+  } catch (err) { toast(err.message, 'error'); }
+});
 
 document.getElementById('saveSkillBtn').addEventListener('click', async () => {
   const id = document.getElementById('skillId').value;
