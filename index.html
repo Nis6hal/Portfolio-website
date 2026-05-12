@@ -46,6 +46,8 @@
       --bg-base: #060606;
       --bg-surface: #0d0d0d;
       --bg-card: #121212;
+      --bg-card-alt: #171717;
+      --bg-glass: rgba(18, 18, 18, 0.75);
       --accent-primary: #66d9ff;
       --accent-secondary: #2f8bd9;
       --accent-glow: rgba(102, 217, 255, 0.35);
@@ -53,19 +55,25 @@
       --text-muted: #b8b8b8;
       --border: #2a2a2a;
       --gradient-hero: radial-gradient(circle at 85% 38%, rgba(102, 217, 255, 0.16), transparent 38%), linear-gradient(145deg, #060606 0%, #0d0d0d 52%, #080808 100%);
+      --card-gradient: linear-gradient(145deg, #121212, #171717);
+      --modal-bg: rgba(0, 0, 0, 0.85);
     }
 
     [data-theme="light"] {
       --bg-base: #f8f9fa;
       --bg-surface: #ffffff;
-      --bg-card: #f1f3f5;
-      --accent-primary: #0088cc;
-      --accent-secondary: #005580;
-      --accent-glow: rgba(0, 136, 204, 0.15);
+      --bg-card: #ffffff;
+      --bg-card-alt: #f1f3f5;
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --accent-primary: #0077b6;
+      --accent-secondary: #0096c7;
+      --accent-glow: rgba(0, 119, 182, 0.12);
       --text-primary: #1a1a1a;
-      --text-muted: #495057;
+      --text-muted: #555555;
       --border: #dee2e6;
-      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 136, 204, 0.08), transparent 38%), linear-gradient(145deg, #f8f9fa 0%, #ffffff 52%, #f1f3f5 100%);
+      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.05), transparent 38%), linear-gradient(145deg, #f8f9fa 0%, #ffffff 52%, #f1f3f5 100%);
+      --card-gradient: linear-gradient(145deg, #ffffff, #f1f3f5);
+      --modal-bg: rgba(0, 0, 0, 0.45);
     }
 
     /* Selection Color */
@@ -337,15 +345,15 @@
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(23, 24, 30, 0.88);
+      background: var(--bg-surface);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid #343640;
+      border-bottom: 1px solid var(--border);
       transition: backdrop-filter 0.3s, background 0.3s;
     }
 
     .header.scrolled {
-      background: rgba(23, 24, 30, 0.97);
+      background: var(--bg-base);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
     }
@@ -540,7 +548,7 @@
       font-size: clamp(52px, 7.2vw, 92px);
       font-weight: 700;
       line-height: 1.02;
-      color: #f4f4f4;
+      color: var(--text-primary);
       margin-bottom: 14px;
       letter-spacing: -0.5px;
     }
@@ -555,7 +563,8 @@
       font-family: 'DM Sans', sans-serif;
       font-size: clamp(22px, 2.7vw, 34px);
       font-weight: 400;
-      color: #e6e6e8;
+      color: var(--text-primary);
+      opacity: 0.9;
       min-height: 46px;
       margin-bottom: 14px;
       white-space: nowrap;
@@ -563,7 +572,7 @@
     }
 
     .hero-desc {
-      color: #c0c2ca;
+      color: var(--text-muted);
       font-size: 18px;
       max-width: 520px;
       margin-bottom: 34px;
@@ -736,7 +745,7 @@
       align-items: center;
       justify-content: center;
       color: #f2f2f3;
-      background: rgba(29, 31, 40, 0.9);
+      background: var(--bg-surface);
       font-size: 16px;
       z-index: 3;
       transition: all 0.2s ease;
@@ -775,7 +784,7 @@
     /* stat badges */
     .badge {
       position: absolute;
-      background: rgba(18, 18, 18, 0.9);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       backdrop-filter: blur(10px);
       border-radius: 12px;
@@ -1122,7 +1131,7 @@
       font-size: 10px;
       letter-spacing: 1px;
       color: var(--accent-primary);
-      background: #171717;
+      background: var(--bg-card);
       border: 1px solid rgba(102, 217, 255, 0.35);
       border-radius: 999px;
       padding: 3px 9px;
@@ -1164,7 +1173,7 @@
     }
 
     .tl-card {
-      background: linear-gradient(145deg, #121212, #171717);
+      background: var(--card-gradient);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 22px;
@@ -1318,7 +1327,7 @@
       font-size: 12px;
       color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
-      background: #121212;
+      background: var(--bg-card);
       border: 1px solid var(--border);
       padding: 10px 14px;
       border-radius: 10px;
@@ -1327,7 +1336,7 @@
 
     .skill-item {
       margin-bottom: 16px;
-      background: linear-gradient(145deg, #101010, #161616);
+      background: var(--card-gradient);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
@@ -1417,7 +1426,7 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      background: linear-gradient(145deg, #101010, #161616);
+      background: var(--card-gradient);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 24px 20px;
@@ -1495,7 +1504,7 @@
     }
 
     .tech-group {
-      background: linear-gradient(145deg, #101010, #161616);
+      background: var(--card-gradient);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
@@ -1961,7 +1970,7 @@
     }
 
     .contact-card {
-      background: rgba(9, 9, 24, 0.8);
+      background: var(--bg-glass);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -2183,7 +2192,7 @@
       position: fixed;
       inset: 0;
       z-index: 9000;
-      background: rgba(0, 0, 0, 0.85);
+      background: var(--modal-bg);
       backdrop-filter: blur(8px);
       display: none;
       align-items: center;
@@ -2468,8 +2477,8 @@
       z-index: 9998;
       width: 360px;
       height: 500px;
-      background: rgba(18, 18, 18, 0.75);
-      border: 1px solid rgba(102, 217, 255, 0.25);
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: 20px;
