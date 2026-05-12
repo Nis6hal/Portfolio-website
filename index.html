@@ -54,7 +54,7 @@
       --text-primary: #ffffff;
       --text-muted: #b8b8b8;
       --border: #2a2a2a;
-      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(102, 217, 255, 0.16), transparent 38%), linear-gradient(145deg, #060606 0%, #0d0d0d 52%, #080808 100%);
+      --gradient-hero: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 50%, #000000 100%);
       --card-gradient: linear-gradient(145deg, #121212, #171717);
       --modal-bg: rgba(0, 0, 0, 0.85);
     }
@@ -344,7 +344,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 1001;
       background: var(--bg-surface);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -1445,7 +1445,7 @@
     .strength-card:hover {
       transform: translateY(-5px);
       border-color: rgba(102, 217, 255, 0.3);
-      background: linear-gradient(145deg, #161616, #1c1c1c);
+      background: var(--bg-card-alt);
     }
 
     .strength-card:hover::before {
@@ -2767,8 +2767,8 @@
     #mobileNav {
       position: fixed;
       inset: 0;
-      z-index: 999;
-      background: rgba(4, 4, 15, 0.98);
+      z-index: 1000;
+      background: var(--bg-base);
       display: flex;
       flex-direction: column;
       align-items: center;
