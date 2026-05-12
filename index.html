@@ -4631,19 +4631,15 @@
     const API_URL = 'https://nischal-portfolio-api.onrender.com';
 
     async function loadLiveData() {
-      console.log('[Portfolio] loadLiveData started');
       const refreshToast = document.getElementById('refresh-toast');
       if (refreshToast) refreshToast.classList.add('show');
       let data;
       // Try up to 3 times with 15s timeout to handle Render cold starts
       for (let attempt = 1; attempt <= 3; attempt++) {
         try {
-          console.log('[Portfolio] Fetching attempt', attempt);
           const res = await fetch(API_URL + '/api/portfolio', { signal: AbortSignal.timeout(15000), cache: 'no-store' });
-          console.log('[Portfolio] Response status:', res.status);
           if (!res.ok) throw new Error('API response not OK');
           data = await res.json();
-          console.log('[Portfolio] Data loaded successfully');
           break; // success
         } catch (err) {
           console.warn('[Portfolio] API attempt ' + attempt + ' failed:', err.message);
