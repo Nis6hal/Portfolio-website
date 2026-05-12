@@ -4591,9 +4591,11 @@
               content: project.details && project.details.trim()
                 ? project.details
                 : `
-              <p>${project.description}</p>
+              <p>${project.overview || project.description}</p>
+              ${project.features?.length ? `<h3>Key Features</h3><ul>${project.features.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
               <h3>Tech Stack</h3>
               <div class="modal-tech">${(project.tech || []).map(t => `<span>${t}</span>`).join('')}</div>
+              ${project.highlights?.length ? `<h3>Highlights</h3><ul>${project.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
               ${project.github ? `<h3>Links</h3><p><a href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>` : ''}
             `
             };

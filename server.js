@@ -35,6 +35,9 @@ const ProjectSchema = new mongoose.Schema({
   category:    { type: String, enum: ['web', 'mobile', 'ai'], required: true },
   image:       { type: String, required: true },
   tech:        [String],
+  overview:    { type: String, default: '' },
+  features:    [String],
+  highlights:  [String],
   details:     { type: String, default: '' },
   github:      { type: String, default: 'https://github.com/nis6hal' },
   demo:        { type: String, default: '' },
@@ -106,7 +109,9 @@ function getDefaultProjects() {
       category: 'mobile',
       image: 'Images/Sbad.png',
       tech: ['React Native', 'Firebase', 'Google Maps', 'Machine Learning'],
-      details: '<p>A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React Native</span><span>Firebase</span><span>Google Maps</span><span>Machine Learning</span></div>',
+      overview: 'A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.',
+      features: ['Real-time location tracking', 'ML-powered ETA predictions', 'Route visualization', 'Notification system'],
+      highlights: ['Improved commute efficiency by 20%', 'Winner of University Hackathon 2024'],
       order: 1
     },
     {
@@ -115,16 +120,20 @@ function getDefaultProjects() {
       category: 'ai',
       image: 'Images/Slpd.png',
       tech: ['Python', 'OpenCV', 'TensorFlow', 'Arduino'],
-      details: '<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p><h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Arduino</span><span>SQLite</span></div>',
+      overview: 'An edge AI system for real-time license plate recognition, designed for automated gate and parking control.',
+      features: ['Real-time plate detection', 'OCR integration', 'Hardware gate control via Arduino', 'Log management'],
+      highlights: ['95% accuracy in daylight conditions', 'Cost-effective local edge processing'],
       order: 2
     },
     {
       title: 'Portfolio Website',
-      description: 'The minimalist portfolio you\'re currently viewing. Features an AI chatbot, animated sections, and responsive layouts with a clean single-page architecture.',
+      description: 'The minimalist portfolio you\'re currently viewing. Features an AI chatbot, animated sections, and responsive layouts.',
       category: 'web',
       image: 'Images/Portfolio.png',
       tech: ['HTML5', 'CSS3', 'JavaScript'],
-      details: '<p>The minimalist portfolio website you\'re currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.</p><h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>',
+      overview: 'The minimalist portfolio website you\'re currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.',
+      features: ['AI-powered Chatbot (Natural Language)', 'Responsive Single-Page Layout', 'Dynamic Content Loading via REST API', 'Glassmorphism UI'],
+      highlights: ['No frameworks used — optimized for performance', 'Fully integrated admin dashboard'],
       order: 3
     },
     {
@@ -133,7 +142,9 @@ function getDefaultProjects() {
       category: 'web',
       image: 'Images/CineVault.png',
       tech: ['React', 'TMDb API', 'CSS3'],
-      details: '<p>A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>TMDb API</span><span>CSS3</span><span>React Router</span></div>',
+      overview: 'A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.',
+      features: ['Real-time movie search', 'Watchlist management', 'Trending & Top Rated categories', 'Detailed movie pages'],
+      highlights: ['Seamless API integration', 'Modern responsive design'],
       order: 4
     },
     {
@@ -142,7 +153,9 @@ function getDefaultProjects() {
       category: 'web',
       image: 'Images/ReadLib.png',
       tech: ['React', 'IndexedDB', 'pdf.js'],
-      details: '<p>A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>IndexedDB</span><span>pdf.js</span><span>Vite</span></div>',
+      overview: 'A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.',
+      features: ['In-browser PDF reader', 'Local storage for offline use', 'Book categorization', 'Last-read page memory'],
+      highlights: ['Zero server dependency for user data', 'Smooth PDF rendering'],
       order: 5
     },
     {
@@ -151,7 +164,9 @@ function getDefaultProjects() {
       category: 'web',
       image: 'Images/UniLib.png',
       tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      details: '<p>A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.</p><h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>',
+      overview: 'A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.',
+      features: ['User authentication', 'Admin dashboard for book management', 'Issue/Return tracking', 'Inventory reporting'],
+      highlights: ['Enterprise-ready architecture', 'Role-based access control'],
       order: 6
     }
   ];

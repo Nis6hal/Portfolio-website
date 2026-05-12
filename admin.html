@@ -564,8 +564,33 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         <div class="form-group"><label>GITHUB URL</label><input type="url" id="pGithub" placeholder="https://github.com/nis6hal"></div>
       </div>
       <div class="form-group full"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
-      <div class="form-group full"><label>DETAILS <span style="color:var(--text-muted);font-size:11px;">(HTML supported — shown in index.html Details modal)</span></label><textarea id="pDetails" rows="8" placeholder="&lt;p&gt;Short overview of the project...&lt;/p&gt;&#10;&lt;h3&gt;Key Features&lt;/h3&gt;&#10;&lt;ul&gt;&#10;  &lt;li&gt;Feature one&lt;/li&gt;&#10;  &lt;li&gt;Feature two&lt;/li&gt;&#10;  &lt;li&gt;Feature three&lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;h3&gt;Tech Stack&lt;/h3&gt;&#10;&lt;div class=&quot;modal-tech&quot;&gt;&lt;span&gt;React&lt;/span&gt;&lt;span&gt;API&lt;/span&gt;&lt;span&gt;CSS3&lt;/span&gt;&lt;/div&gt;&#10;&lt;h3&gt;Highlights&lt;/h3&gt;&#10;&lt;p&gt;One clear impact/result line...&lt;/p&gt;"></textarea></div>
-      <div class="form-group"><label>TECH STACK (comma separated)</label><input type="text" id="pTech" placeholder="React, TMDb API, CSS3"></div>
+      <div class="form-group full"><label>OVERVIEW <span style="color:var(--text-muted);font-size:11px;">(Short summary of the project)</span></label><textarea id="pOverview" rows="2" placeholder="A commuter-first mobile app for tracking buses..."></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>FEATURES <span style="color:var(--text-muted);font-size:11px;">(One per line)</span></label><textarea id="pFeatures" rows="4" placeholder="Real-time tracking&#10;ML predictions&#10;Route visualization"></textarea></div>
+        <div class="form-group"><label>HIGHLIGHTS <span style="color:var(--text-muted);font-size:11px;">(One per line)</span></label><textarea id="pHighlights" rows="4" placeholder="Winner of Hackathon 2024&#10;Improved efficiency by 20%"></textarea></div>
+      </div>
+      <div class="form-group full"><label>CUSTOM DETAILS / HTML <span style="color:var(--text-muted);font-size:11px;">(Optional override — leave blank to use structured fields)</span></label><textarea id="pDetails" rows="4" placeholder="<p>Custom HTML content...</p>"></textarea></div>
+      <div class="form-group"><label>TECH STACK (comma separated)</label><input type="text" id="pTech" list="techStacks" placeholder="React, TMDb API, CSS3"></div>
+      <datalist id="techStacks">
+        <option value="React"></option>
+        <option value="React Native"></option>
+        <option value="Node.js"></option>
+        <option value="Express"></option>
+        <option value="MongoDB"></option>
+        <option value="Python"></option>
+        <option value="OpenCV"></option>
+        <option value="TensorFlow"></option>
+        <option value="Firebase"></option>
+        <option value="Google Maps"></option>
+        <option value="HTML5"></option>
+        <option value="CSS3"></option>
+        <option value="JavaScript"></option>
+        <option value="Arduino"></option>
+        <option value="SQLite"></option>
+        <option value="TMDb API"></option>
+        <option value="IndexedDB"></option>
+        <option value="pdf.js"></option>
+      </datalist>
       <div class="form-row">
         <div class="form-group">
           <label>ORDER</label>
@@ -831,6 +856,9 @@ document.getElementById('addProjectBtn').addEventListener('click', () => {
   document.getElementById('pImage').value = '';
   document.getElementById('pGithub').value = 'https://github.com/nis6hal';
   document.getElementById('pDemo').value = '';
+  document.getElementById('pOverview').value = '';
+  document.getElementById('pFeatures').value = '';
+  document.getElementById('pHighlights').value = '';
   document.getElementById('pDetails').value = '';
   document.getElementById('pTech').value = '';
   document.getElementById('pOrder').value = '1';
@@ -864,6 +892,9 @@ async function editProject(id) {
     document.getElementById('pImage').value = p.image;
     document.getElementById('pGithub').value = p.github || '';
     document.getElementById('pDemo').value = p.demo || '';
+    document.getElementById('pOverview').value = p.overview || '';
+    document.getElementById('pFeatures').value = (p.features || []).join('\n');
+    document.getElementById('pHighlights').value = (p.highlights || []).join('\n');
     document.getElementById('pDetails').value = p.details || '';
     document.getElementById('pTech').value = (p.tech||[]).join(', ');
     document.getElementById('pOrder').value = p.order;
@@ -882,6 +913,9 @@ document.getElementById('saveProjectBtn').addEventListener('click', async () => 
     image:       document.getElementById('pImage').value.trim(),
     github:      document.getElementById('pGithub').value.trim(),
     demo:        demo || '',
+    overview:    document.getElementById('pOverview').value.trim(),
+    features:    document.getElementById('pFeatures').value.split('\n').map(f=>f.trim()).filter(Boolean),
+    highlights:  document.getElementById('pHighlights').value.split('\n').map(h=>h.trim()).filter(Boolean),
     details:     document.getElementById('pDetails').value.trim(),
     tech:        document.getElementById('pTech').value.split(',').map(t=>t.trim()).filter(Boolean),
     order:       parseInt(document.getElementById('pOrder').value) || 1,
