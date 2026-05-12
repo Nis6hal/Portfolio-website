@@ -47,7 +47,6 @@ const ProjectSchema = new mongoose.Schema({
 
 const SkillSchema = new mongoose.Schema({
   name:       { type: String, required: true },
-  percentage: { type: Number, required: true },
   level:      { type: String, required: true },
   details:    { type: String, default: '' },
   type:       { type: String, enum: ['technical', 'professional'], required: true },
@@ -183,24 +182,24 @@ async function seedDefaults() {
 
   // Intelligent Skill Sync (Upsert defaults)
   const defaultSkills = [
-    { name: 'Problem Solving', percentage: 90, level: 'Expert', type: 'professional', details: 'Analytical thinking and debugging expertise', order: 1 },
-    { name: 'Communication', percentage: 80, level: 'Expert', type: 'professional', details: 'Clear client interaction and team collaboration', order: 2 },
-    { name: 'Team Work', percentage: 80, level: 'Expert', type: 'professional', details: 'Agile methodology and project coordination', order: 3 },
-    { name: 'Creativity', percentage: 85, level: 'Expert', type: 'professional', details: 'Innovative solutions and UI/UX design', order: 4 },
-    { name: 'HTML5', percentage: 95, level: 'Expert', type: 'technical', category: 'frontend', order: 1 },
-    { name: 'CSS3', percentage: 90, level: 'Expert', type: 'technical', category: 'frontend', order: 2 },
-    { name: 'JavaScript', percentage: 90, level: 'Expert', type: 'technical', category: 'frontend', order: 3 },
-    { name: 'React', percentage: 85, level: 'Expert', type: 'technical', category: 'frontend', order: 4 },
-    { name: 'Python', percentage: 85, level: 'Expert', type: 'technical', category: 'backend', order: 5 },
-    { name: 'Node.js', percentage: 80, level: 'Expert', type: 'technical', category: 'backend', order: 6 },
-    { name: 'MongoDB', percentage: 80, level: 'Expert', type: 'technical', category: 'backend', order: 7 },
-    { name: 'OpenCV', percentage: 75, level: 'Intermediate', type: 'technical', category: 'ai', order: 8 },
-    { name: 'TensorFlow', percentage: 70, level: 'Intermediate', type: 'technical', category: 'ai', order: 9 },
-    { name: 'Git', percentage: 85, level: 'Expert', type: 'technical', category: 'tools', order: 10 },
-    { name: 'Docker', percentage: 75, level: 'Intermediate', type: 'technical', category: 'tools', order: 11 },
-    { name: 'Vercel', percentage: 85, level: 'Expert', type: 'technical', category: 'tools', order: 12 },
-    { name: 'Render', percentage: 80, level: 'Expert', type: 'technical', category: 'tools', order: 13 },
-    { name: 'Figma', percentage: 75, level: 'Intermediate', type: 'technical', category: 'tools', order: 14 }
+    { name: 'Problem Solving', level: 'Expert', type: 'professional', details: 'Analytical thinking and debugging expertise', order: 1 },
+    { name: 'Communication', level: 'Expert', type: 'professional', details: 'Clear client interaction and team collaboration', order: 2 },
+    { name: 'Team Work', level: 'Expert', type: 'professional', details: 'Agile methodology and project coordination', order: 3 },
+    { name: 'Creativity', level: 'Expert', type: 'professional', details: 'Innovative solutions and UI/UX design', order: 4 },
+    { name: 'HTML5', level: 'Expert', type: 'technical', category: 'frontend', order: 1 },
+    { name: 'CSS3', level: 'Expert', type: 'technical', category: 'frontend', order: 2 },
+    { name: 'JavaScript', level: 'Expert', type: 'technical', category: 'frontend', order: 3 },
+    { name: 'React', level: 'Expert', type: 'technical', category: 'frontend', order: 4 },
+    { name: 'Python', level: 'Expert', type: 'technical', category: 'backend', order: 5 },
+    { name: 'Node.js', level: 'Expert', type: 'technical', category: 'backend', order: 6 },
+    { name: 'MongoDB', level: 'Expert', type: 'technical', category: 'backend', order: 7 },
+    { name: 'OpenCV', level: 'Intermediate', type: 'technical', category: 'ai', order: 8 },
+    { name: 'TensorFlow', level: 'Intermediate', type: 'technical', category: 'ai', order: 9 },
+    { name: 'Git', level: 'Expert', type: 'technical', category: 'tools', order: 10 },
+    { name: 'Docker', level: 'Intermediate', type: 'technical', category: 'tools', order: 11 },
+    { name: 'Vercel', level: 'Expert', type: 'technical', category: 'tools', order: 12 },
+    { name: 'Render', level: 'Expert', type: 'technical', category: 'tools', order: 13 },
+    { name: 'Figma', level: 'Intermediate', type: 'technical', category: 'tools', order: 14 }
   ];
 
   for (const s of defaultSkills) {

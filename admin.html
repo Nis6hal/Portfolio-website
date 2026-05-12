@@ -647,12 +647,6 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <option value="tools"></option>
         </datalist>
       </div>
-      <div class="form-group">
-        <label>PERCENTAGE: <span id="sPctDisplay">50</span>%</label>
-        <div class="range-wrap">
-          <input type="range" id="sPct" min="0" max="100" value="50" oninput="document.getElementById('sPctDisplay').textContent=this.value">
-        </div>
-      </div>
       <div class="form-row">
         <div class="form-group">
           <label>LEVEL</label>
@@ -985,8 +979,6 @@ document.getElementById('addSkillBtn').addEventListener('click', () => {
   document.getElementById('sName').value = '';
   document.getElementById('sType').value = 'technical';
   document.getElementById('sCategory').value = '';
-  document.getElementById('sPct').value = '80';
-  document.getElementById('sPctDisplay').textContent = '80';
   document.getElementById('sLevel').value = 'Expert';
   document.getElementById('sOrder').value = '1';
   document.getElementById('sDetails').value = '';
@@ -1003,8 +995,6 @@ async function editSkill(id) {
     document.getElementById('sName').value = s.name;
     document.getElementById('sType').value = s.type || 'technical';
     document.getElementById('sCategory').value = s.category || '';
-    document.getElementById('sPct').value = s.percentage || 80;
-    document.getElementById('sPctDisplay').textContent = s.percentage || 80;
     document.getElementById('sLevel').value = s.level;
     document.getElementById('sOrder').value = s.order;
     document.getElementById('sDetails').value = s.details || '';
@@ -1027,7 +1017,6 @@ document.getElementById('saveSkillBtn').addEventListener('click', async () => {
     name:       document.getElementById('sName').value.trim(),
     type:       document.getElementById('sType').value,
     category:   document.getElementById('sCategory').value.trim().toLowerCase(),
-    percentage: parseInt(document.getElementById('sPct').value) || 80,
     level:      document.getElementById('sLevel').value,
     order:      parseInt(document.getElementById('sOrder').value) || 1,
     details:    document.getElementById('sDetails').value.trim()
