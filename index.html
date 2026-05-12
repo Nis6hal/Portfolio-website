@@ -2069,7 +2069,7 @@
     /* ===================== SCROLL TO TOP ===================== */
     #scrollToTop {
       position: fixed;
-      bottom: 80px;
+      bottom: 100px;
       right: 28px;
       z-index: 998;
       width: 44px;
@@ -2531,6 +2531,18 @@
     .quick-chip:hover {
       border-color: var(--accent-primary);
       color: var(--accent-primary);
+    }
+
+    /* Animation for Skills quick-chip */
+    @keyframes pulse-subtle {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(102, 217, 255, 0.4); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(102, 217, 255, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(102, 217, 255, 0); }
+    }
+    .pulse-animation {
+      animation: pulse-subtle 2s infinite;
+      border-color: var(--accent-primary) !important;
+      color: var(--accent-primary) !important;
     }
 
     .chat-input-row {
@@ -3044,6 +3056,7 @@
             systems.</p>
           <div class="hero-buttons">
             <a href="#about" class="btn btn-cyan"><i class="fas fa-arrow-right"></i> Learn More</a>
+            <a href="assets/Nischal-Bhandari-CV.pdf" class="btn btn-cyan" download><i class="fas fa-download"></i> Download CV</a>
           </div>
         </div>
         <!-- right -->
@@ -3632,6 +3645,7 @@
           <h4>Resources</h4>
           <nav>
             <a href="#contact">Get in Touch</a>
+            <a href="assets/Nischal-Bhandari-CV.pdf" download>Download CV</a>
             <a href="#portfolio">View Projects</a>
             <a href="#skills">My Skills</a>
           </nav>
@@ -3681,7 +3695,7 @@
     </div>
     <div id="chatMessages" aria-live="polite" aria-label="Chat messages"></div>
     <div class="quick-chips" id="quickChips" aria-label="Quick questions">
-      <button class="quick-chip">🛠️ Skills?</button>
+      <button class="quick-chip pulse-animation">🛠️ Skills?</button>
       <button class="quick-chip">💼 Projects?</button>
       <button class="quick-chip">🎓 Education?</button>
       <button class="quick-chip">🏆 Certifications?</button>
@@ -4194,7 +4208,7 @@
       /* ── Availability / hire / internship ── */
       {
         keywords: ['available', 'hire', 'hiring', 'freelance', 'internship', 'job', 'work with', 'open to work', 'opportunity', 'looking for work', 'intern'],
-        reply: '✅ Yes — Nischal is open to opportunities.\n\nHe\'s currently open to:\n💼 Developer positions and project work\n🎓 Internships with real-world impact\n🤝 Remote work globally\n🚀 Collaborations and interesting builds\n\nBest way to reach him:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal\n\nHe replies fast ⚡'
+        reply: '🚀 Absolutely! Nischal is highly motivated and actively seeking new challenges and impact-driven roles.\n\nHe is currently open to:\n✨ BE Computer Engineering Internships (Academic/Independent)\n💻 Junior Developer positions (Full-stack / Frontend / Python)\n🤝 Exciting project collaborations & Freelance work\n🌍 Remote-first teams globally\n\nDirect Contact:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal (Fastest response!)\n\nLet\'s build something great together! 🔥'
       },
 
       /* ── Collaborate ── */
