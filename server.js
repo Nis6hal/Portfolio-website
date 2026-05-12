@@ -176,19 +176,10 @@ function getDefaultProjects() {
 // ─── Seed Default Data ────────────────────────────────────────────────────────
 async function seedDefaults() {
   const defaultProjects = getDefaultProjects();
-  // Seed projects if empty
-  const projectCount = await Project.countDocuments();
-  if (projectCount === 0) {
-    await Project.insertMany(defaultProjects);
-    console.log('✅ Default projects seeded');
-  } else {
-    const legacyCount = await Project.countDocuments({ title: { $in: ['PixelPrompt', 'Smart License Plate Detection'] } });
-    if (legacyCount > 0) {
-      await Project.deleteMany({});
-      await Project.insertMany(defaultProjects);
-      console.log('✅ Legacy project data replaced with current portfolio set');
-    }
+  for (const p of defaultProjects) {
+    await Project.findOneAndUpdate({ title: p.title }, p, { upsert: true });
   }
+  console.log("✅ Projects synchronized (upserted)");
 
   // Intelligent Skill Sync (Upsert defaults)
   const defaultSkills = [
@@ -554,10 +545,18 @@ app.delete('/api/admin/projects/:id', authMiddleware, async (req, res) => {
 
 app.post('/api/admin/projects/sync-defaults', authMiddleware, async (req, res) => {
   try {
-    const defaultProjects = getDefaultProjects();
-    await Project.deleteMany({});
-    const inserted = await Project.insertMany(defaultProjects);
-    res.json({ message: 'Projects synced to current defaults', count: inserted.length });
+    await seedDefaults(); // Now handles both projects and skills with upsert
+    res.json({ message: 'Projects synchronized with current defaults' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+app.post('/api/admin/projects/sync-defaults', authMiddleware, async (req, res) => {
+  try {
+    await seedDefaults();
+    res.json({ message: 'Projects synchronized with current defaults' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
