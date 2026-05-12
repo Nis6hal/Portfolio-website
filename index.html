@@ -1354,68 +1354,73 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Hexagon grid */
-    .hex-skills-grid {
+    /* Strength Grid */
+    .strength-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
 
-    .hex-skill {
+    .strength-card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       background: linear-gradient(145deg, #101010, #161616);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 12px;
+      border-radius: 18px;
+      padding: 24px 20px;
+      transition: all 0.4s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hex-shape {
-      width: 80px;
-      height: 80px;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      background: var(--bg-card);
-      border: 0px solid transparent;
+    .strength-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .strength-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(102, 217, 255, 0.3);
+      background: linear-gradient(145deg, #161616, #1c1c1c);
+    }
+
+    .strength-card:hover::before {
+      opacity: 1;
+    }
+
+    .strength-icon {
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.6s;
+      background: rgba(102, 217, 255, 0.1);
+      color: var(--accent-primary);
+      border-radius: 12px;
+      font-size: 24px;
+      margin-bottom: 8px;
     }
 
-    .hex-shape .hex-fill {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 0%;
-      background: linear-gradient(180deg, rgba(102, 217, 255, 0.3), rgba(102, 217, 255, 0.15));
-      transition: height 1s ease;
-    }
-
-    .hex-shape .hex-pct {
-      position: relative;
-      z-index: 1;
+    .strength-card h4 {
       font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 800;
+      font-weight: 700;
+      font-size: 16px;
       color: var(--text-primary);
+      margin: 0;
     }
 
-    .hex-skill h4 {
-      font-family: 'Fraunces', serif;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-primary);
-    }
-
-    .hex-skill p {
-      font-size: 12px;
+    .strength-card p {
+      font-size: 13px;
+      line-height: 1.6;
       color: var(--text-muted);
-      text-align: center;
+      margin: 0;
     }
 
     /* Tech stack board */
@@ -2195,28 +2200,64 @@
       padding: 0 24px 24px;
     }
 
-    .modal-body p {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 12px;
+    .modal-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 20px;
     }
 
-    .modal-body ul {
-      color: var(--text-muted);
-      font-size: 14px;
-      padding-left: 20px;
+    @media (max-width: 768px) {
+      .modal-details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
 
-    .modal-body ul li {
-      margin-bottom: 6px;
-    }
-
-    .modal-body h3 {
+    .modal-section h3 {
       font-family: 'Fraunces', serif;
       font-weight: 700;
       font-size: 16px;
-      color: var(--text-primary);
-      margin: 16px 0 8px;
+      color: var(--accent-primary);
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-section h3 i {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .modal-body p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .modal-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .modal-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .modal-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: bold;
     }
 
     .modal-tech {
@@ -2227,13 +2268,62 @@
     }
 
     .modal-tech span {
-      font-size: 12px;
+      font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
       color: var(--accent-primary);
-      background: rgba(102, 217, 255, 0.1);
-      border: 1px solid rgba(102, 217, 255, 0.2);
-      padding: 4px 12px;
+      background: rgba(102, 217, 255, 0.08);
+      border: 1px solid rgba(102, 217, 255, 0.15);
+      padding: 4px 10px;
       border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .modal-tech span:hover {
+      background: rgba(102, 217, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .modal-footer-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .modal-btn-primary {
+      background: var(--accent-primary);
+      color: #000;
+    }
+
+    .modal-btn-primary:hover {
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    .modal-btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .modal-btn-outline:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: rgba(102, 217, 255, 0.05);
     }
 
     .cert-preview-wrap {
@@ -3269,39 +3359,27 @@
         <div class="skills-grid">
           <!-- Professional -->
           <div class="pro-skills">
-            <h3>Professional Skills</h3>
-            <div class="hex-skills-grid">
-              <div class="hex-skill">
-                <div class="hex-shape" data-progress="90">
-                  <div class="hex-fill"></div>
-                  <span class="hex-pct">90%</span>
-                </div>
+            <h3>Core Strengths</h3>
+            <div class="strength-grid">
+              <div class="strength-card">
+                <div class="strength-icon"><i class="fas fa-lightbulb"></i></div>
                 <h4>Problem Solving</h4>
-                <p>Analytical thinking and debugging expertise</p>
+                <p>Analytical thinking and debugging expertise across complex systems.</p>
               </div>
-              <div class="hex-skill">
-                <div class="hex-shape" data-progress="80">
-                  <div class="hex-fill"></div>
-                  <span class="hex-pct">80%</span>
-                </div>
+              <div class="strength-card">
+                <div class="strength-icon"><i class="fas fa-comments"></i></div>
                 <h4>Communication</h4>
-                <p>Clear client interaction and team collaboration</p>
+                <p>Clear client interaction and professional team collaboration.</p>
               </div>
-              <div class="hex-skill">
-                <div class="hex-shape" data-progress="80">
-                  <div class="hex-fill"></div>
-                  <span class="hex-pct">80%</span>
-                </div>
+              <div class="strength-card">
+                <div class="strength-icon"><i class="fas fa-users"></i></div>
                 <h4>Team Work</h4>
-                <p>Agile methodology and project coordination</p>
+                <p>Agile methodology and project coordination for successful delivery.</p>
               </div>
-              <div class="hex-skill">
-                <div class="hex-shape" data-progress="85">
-                  <div class="hex-fill"></div>
-                  <span class="hex-pct">85%</span>
-                </div>
+              <div class="strength-card">
+                <div class="strength-icon"><i class="fas fa-palette"></i></div>
                 <h4>Creativity</h4>
-                <p>Innovative solutions and UI/UX design</p>
+                <p>Innovative solutions and user-centric UI/UX design philosophy.</p>
               </div>
             </div>
             <!-- Tech Cloud -->
@@ -4545,35 +4623,87 @@
         }
       }
 
-      /* ---- PROFESSIONAL SKILLS (HEX SHAPES) ---- */
+      /* ---- PROFESSIONAL SKILLS (STRENGTH CARDS) ---- */
       const proSkills = skills?.filter(s => s.type === 'professional') || [];
       if (proSkills.length > 0) {
-        const hexGrid = document.querySelector('.hex-skills-grid');
-        if (hexGrid) {
-          hexGrid.innerHTML = '';
+        const grid = document.querySelector('.strength-grid');
+        if (grid) {
+          grid.innerHTML = '';
+          const iconMap = {
+            'Problem Solving': 'fa-lightbulb',
+            'Communication': 'fa-comments',
+            'Team Work': 'fa-users',
+            'Creativity': 'fa-palette'
+          };
           proSkills.forEach(skill => {
-            const hex = document.createElement('div');
-            hex.className = 'hex-skill';
-            hex.innerHTML = `
-          <div class="hex-shape" data-progress="${skill.percentage}">
-            <div class="hex-fill"></div>
-            <span class="hex-pct">${skill.percentage}%</span>
-          </div>
-          <h4>${skill.name}</h4>
-          ${skill.details ? `<p>${skill.details}</p>` : ''}
-        `;
-            hexGrid.appendChild(hex);
+            const icon = iconMap[skill.name] || 'fa-star';
+            const card = document.createElement('div');
+            card.className = 'strength-card';
+            card.innerHTML = `
+              <div class="strength-icon"><i class="fas ${icon}"></i></div>
+              <h4>${skill.name}</h4>
+              ${skill.details ? `<p>${skill.details}</p>` : ''}
+            `;
+            grid.appendChild(card);
           });
-          // Re-attach IntersectionObserver for hex fills
-          const hexObs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-              if (e.isIntersecting) {
-                e.target.querySelector('.hex-fill').style.height = e.target.dataset.progress + '%';
-                hexObs.unobserve(e.target);
-              }
-            });
-          }, { threshold: 0.5 });
-          hexGrid.querySelectorAll('.hex-shape').forEach(h => hexObs.observe(h));
+        }
+      }
+
+      /* ---- TECHNICAL SKILLS (TECH CLOUD) ---- */
+      const techSkills = skills?.filter(s => s.type === 'technical') || [];
+      if (techSkills.length > 0) {
+        const techStackGrid = document.querySelector('.tech-stack-grid');
+        if (techStackGrid) {
+          techStackGrid.innerHTML = '';
+          // Group by category
+          const groups = {};
+          techSkills.forEach(s => {
+            const cat = s.category || 'other';
+            if (!groups[cat]) groups[cat] = [];
+            groups[cat].push(s);
+          });
+
+          const catNames = {
+            'frontend': 'Frontend',
+            'backend': 'Backend',
+            'ai': 'AI & Data',
+            'tools': 'Tools',
+            'other': 'Other'
+          };
+
+          const iconMap = {
+            'html5': 'devicon-html5-plain colored',
+            'css3': 'devicon-css3-plain colored',
+            'javascript': 'devicon-javascript-plain colored',
+            'react': 'devicon-react-original colored',
+            'python': 'devicon-python-plain colored',
+            'mongodb': 'devicon-mongodb-plain colored',
+            'express': 'devicon-express-original',
+            'opencv': 'devicon-opencv-plain colored',
+            'tensorflow': 'devicon-tensorflow-original colored',
+            'git': 'devicon-git-plain colored',
+            'docker': 'devicon-docker-plain colored',
+            'node.js': 'devicon-nodejs-plain colored',
+            'vercel': 'fas fa-rocket',
+            'render': 'fas fa-server',
+            'figma': 'devicon-figma-plain colored'
+          };
+
+          Object.keys(groups).sort().forEach(cat => {
+            const group = document.createElement('article');
+            group.className = 'tech-group';
+            const itemsHtml = groups[cat].map(s => {
+              const iconClass = iconMap[s.name.toLowerCase()] || 'fas fa-code';
+              const isFA = iconClass.startsWith('fas') || iconClass.startsWith('fab');
+              return `<span class="tech-tag">${isFA ? `<i class="${iconClass}"></i>` : `<i class="${iconClass}"></i>`} ${s.name}</span>`;
+            }).join('');
+
+            group.innerHTML = `
+              <h4>${catNames[cat] || cat}</h4>
+              <div class="tech-tags">${itemsHtml}</div>
+            `;
+            techStackGrid.appendChild(group);
+          });
         }
       }
 
@@ -4592,11 +4722,31 @@
                 ? project.details
                 : `
               <p>${project.overview || project.description}</p>
-              ${project.features?.length ? `<h3>Key Features</h3><ul>${project.features.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
-              <h3>Tech Stack</h3>
-              <div class="modal-tech">${(project.tech || []).map(t => `<span>${t}</span>`).join('')}</div>
-              ${project.highlights?.length ? `<h3>Highlights</h3><ul>${project.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
-              ${project.github ? `<h3>Links</h3><p><a href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>` : ''}
+              
+              <div class="modal-details-grid">
+                <div class="modal-section">
+                  <h3><i class="fas fa-rocket"></i> Key Features</h3>
+                  <ul class="modal-list">
+                    ${(project.features || []).length ? project.features.map(f => `<li>${f}</li>`).join('') : '<li>Custom developed functionality</li>'}
+                  </ul>
+                </div>
+                <div class="modal-section">
+                  <h3><i class="fas fa-star"></i> Highlights</h3>
+                  <ul class="modal-list">
+                    ${(project.highlights || []).length ? project.highlights.map(h => `<li>${h}</li>`).join('') : '<li>Optimized performance and UI</li>'}
+                  </ul>
+                </div>
+              </div>
+
+              <div class="modal-section" style="margin-top:20px;">
+                <h3><i class="fas fa-code"></i> Tech Stack</h3>
+                <div class="modal-tech">${(project.tech || []).map(t => `<span>${t}</span>`).join('')}</div>
+              </div>
+
+              <div class="modal-footer-actions">
+                ${project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+                ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>` : ''}
+              </div>
             `
             };
 

@@ -166,9 +166,13 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .td-img{width:48px;height:36px;object-fit:cover;border-radius:4px;}
 .badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:11px;font-family:'JetBrains Mono',monospace;}
 .badge-web{background:rgba(102,217,255,0.1);color:var(--accent-primary);border:1px solid rgba(102,217,255,0.25);}
-.badge-ai{background:rgba(47,139,217,0.18);color:#9edbff;border:1px solid rgba(102,217,255,0.28);}
+.badge-ai{background:rgba(47,139,217,0.1);color:#9edbff;border:1px solid rgba(47,139,217,0.25);}
 .badge-mobile{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2);}
-.badge-professional{background:rgba(47,139,217,0.18);color:#9edbff;border:1px solid rgba(102,217,255,0.28);}
+.badge-professional{background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25);}
+.badge-technical{background:rgba(102,217,255,0.1);color:var(--accent-primary);border:1px solid rgba(102,217,255,0.25);}
+.skills-table-v2{width:100%;border-collapse:collapse;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.skills-table-v2 th{background:rgba(255,255,255,0.02);}
+.skills-table-v2 td{border-bottom:1px solid rgba(255,255,255,0.03);}
 .actions{display:flex;gap:6px;flex-wrap:nowrap;}
 
 /* ── Forms ── */
@@ -403,16 +407,14 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <button class="btn btn-primary" id="addSkillBtn"><i class="fas fa-plus"></i> Add Skill</button>
         </div>
       </div>
-      <div class="table-wrap"><div class="table-scroll"><table>
+        <table class="skills-table-v2">
           <thead>
-            <tr><th>NAME</th><th>LEVEL</th><th>PERCENTAGE</th><th>ACTIONS</th></tr>
+            <tr><th>TYPE</th><th>CATEGORY</th><th>NAME</th><th>LEVEL</th><th>ACTIONS</th></tr>
           </thead>
           <tbody id="skillsTable">
-            <tr><td colspan="4"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+            <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
           </tbody>
         </table>
-</div>
-      </div>
     </div>
 
     <!-- ── Certifications ── -->
@@ -626,7 +628,23 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <input type="hidden" id="skillId">
       <div class="form-row">
         <div class="form-group"><label>SKILL NAME *</label><input type="text" id="sName" placeholder="JavaScript"></div>
-        <div class="form-group"><label>CATEGORY</label><input type="text" value="Professional" disabled></div>
+        <div class="form-group">
+          <label>TYPE</label>
+          <select id="sType">
+            <option value="technical">Technical</option>
+            <option value="professional">Professional</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>CATEGORY <span style="color:var(--text-muted);font-size:11px;">(For Technical skills: frontend, backend, ai, tools)</span></label>
+        <input type="text" id="sCategory" list="skillCats" placeholder="frontend">
+        <datalist id="skillCats">
+          <option value="frontend"></option>
+          <option value="backend"></option>
+          <option value="ai"></option>
+          <option value="tools"></option>
+        </datalist>
       </div>
       <div class="form-group">
         <label>PERCENTAGE: <span id="sPctDisplay">50</span>%</label>
@@ -645,7 +663,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         </div>
         <div class="form-group"><label>ORDER</label><input type="number" id="sOrder" value="1" min="1"></div>
       </div>
-      <div class="form-group"><label>DETAILS</label><input type="text" id="sDetails" placeholder="Clear client interaction and team collaboration"></div>
+      <div class="form-group"><label>DETAILS <span style="color:var(--text-muted);font-size:11px;">(Mainly for Professional skills)</span></label><input type="text" id="sDetails" placeholder="Clear client interaction and team collaboration"></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeModal('skillModal')">Cancel</button>
@@ -934,24 +952,24 @@ document.getElementById('saveProjectBtn').addEventListener('click', async () => 
 // ── Skills ────────────────────────────────────────────────────────────────────
 async function loadSkills() {
   const tbody = document.getElementById('skillsTable');
-  tbody.innerHTML = '<tr><td colspan="4"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  tbody.innerHTML = '<tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
   try {
-    const allSkills = await api('GET', '/api/admin/skills');
-    const skills = allSkills.filter(s => s.type === 'professional');
+    const skills = await api('GET', '/api/admin/skills');
     if (!skills.length) {
-      tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><i class="fas fa-code"></i>No professional skills yet</div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-code"></i>No skills yet</div></td></tr>';
       return;
     }
+    // Sort by type (professional first) and then order
+    skills.sort((a, b) => {
+      if (a.type !== b.type) return a.type === 'professional' ? -1 : 1;
+      return (a.order || 0) - (b.order || 0);
+    });
     tbody.innerHTML = skills.map(s => `
       <tr>
+        <td><span class="badge badge-${s.type}">${s.type}</span></td>
+        <td><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted)">${s.category || '—'}</span></td>
         <td><strong>${s.name}</strong></td>
         <td>${s.level}</td>
-        <td>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:${s.percentage}%"></div></div>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-primary)">${s.percentage}%</span>
-          </div>
-        </td>
         <td>
           <button class="btn btn-secondary btn-sm btn-icon" onclick="editSkill('${s._id}')" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('skill','${s._id}','${s.name}')" title="Delete"><i class="fas fa-trash"></i></button>
@@ -964,9 +982,11 @@ document.getElementById('addSkillBtn').addEventListener('click', () => {
   document.getElementById('skillModalTitle').textContent = 'Add Skill';
   document.getElementById('skillId').value = '';
   document.getElementById('sName').value = '';
-  document.getElementById('sPct').value = 50;
-  document.getElementById('sPctDisplay').textContent = '50';
-  document.getElementById('sLevel').value = 'Beginner';
+  document.getElementById('sType').value = 'technical';
+  document.getElementById('sCategory').value = '';
+  document.getElementById('sPct').value = '80';
+  document.getElementById('sPctDisplay').textContent = '80';
+  document.getElementById('sLevel').value = 'Expert';
   document.getElementById('sOrder').value = '1';
   document.getElementById('sDetails').value = '';
   openModal('skillModal');
@@ -980,8 +1000,10 @@ async function editSkill(id) {
     document.getElementById('skillModalTitle').textContent = 'Edit Skill';
     document.getElementById('skillId').value = s._id;
     document.getElementById('sName').value = s.name;
-    document.getElementById('sPct').value = s.percentage;
-    document.getElementById('sPctDisplay').textContent = s.percentage;
+    document.getElementById('sType').value = s.type || 'technical';
+    document.getElementById('sCategory').value = s.category || '';
+    document.getElementById('sPct').value = s.percentage || 80;
+    document.getElementById('sPctDisplay').textContent = s.percentage || 80;
     document.getElementById('sLevel').value = s.level;
     document.getElementById('sOrder').value = s.order;
     document.getElementById('sDetails').value = s.details || '';
@@ -993,8 +1015,9 @@ document.getElementById('saveSkillBtn').addEventListener('click', async () => {
   const id = document.getElementById('skillId').value;
   const payload = {
     name:       document.getElementById('sName').value.trim(),
-    type:       'professional',
-    percentage: parseInt(document.getElementById('sPct').value),
+    type:       document.getElementById('sType').value,
+    category:   document.getElementById('sCategory').value.trim().toLowerCase(),
+    percentage: parseInt(document.getElementById('sPct').value) || 80,
     level:      document.getElementById('sLevel').value,
     order:      parseInt(document.getElementById('sOrder').value) || 1,
     details:    document.getElementById('sDetails').value.trim()
