@@ -55,6 +55,24 @@
       --gradient-hero: radial-gradient(circle at 85% 38%, rgba(102, 217, 255, 0.16), transparent 38%), linear-gradient(145deg, #060606 0%, #0d0d0d 52%, #080808 100%);
     }
 
+    /* Selection Color */
+    ::selection {
+      background: var(--accent-primary);
+      color: #000;
+    }
+
+    /* Scroll Progress Bar */
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+      z-index: 10001;
+      box-shadow: 0 0 12px var(--accent-glow);
+      transition: width 0.1s ease-out;
+    }
     /* ===================== RESET & BASE ===================== */
     *,
     *::before,
@@ -1544,7 +1562,11 @@
       height: 300px;
       perspective: 1000px;
       opacity: 0;
-      transform: rotateY(0deg);
+      transition: transform 0.3s ease, opacity 0.5s ease;
+    }
+
+    .port-item:hover {
+      transform: scale(1.03);
     }
 
     .port-item.visible {
@@ -2305,8 +2327,10 @@
       z-index: 9998;
       width: 360px;
       height: 500px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: rgba(18, 18, 18, 0.75);
+      border: 1px solid rgba(102, 217, 255, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-radius: 20px;
       display: flex;
       flex-direction: column;
@@ -2989,6 +3013,8 @@
 </head>
 
 <body>
+  <div id="scrollProgress"></div>
+
   <a href="#home" class="skip-link">Skip to main content</a>
 
   <!-- Custom Cursor -->
@@ -3764,6 +3790,12 @@
 
     /* ============ HEADER SCROLL ============ */
     window.addEventListener('scroll', () => {
+      // Scroll Progress
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("scrollProgress").style.width = scrolled + "%";
+
       document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50);
       document.getElementById('scrollToTop').classList.toggle('visible', window.scrollY > 400);
       // active nav
