@@ -43,8 +43,8 @@
   <style>
     /* ===================== DESIGN TOKENS ===================== */
     :root {
-      --bg-base: #060606;
-      --bg-surface: #0d0d0d;
+      --bg-base: #121212;
+      --bg-surface: #1a1a1a;
       --bg-card: #121212;
       --bg-card-alt: #171717;
       --bg-glass: rgba(18, 18, 18, 0.75);
@@ -54,14 +54,14 @@
       --text-primary: #ffffff;
       --text-muted: #b8b8b8;
       --border: #2a2a2a;
-      --gradient-hero: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 50%, #000000 100%);
+      --gradient-hero: linear-gradient(145deg, #121212 0%, #1c1c1c 50%, #0a0a0a 100%);
       --card-gradient: linear-gradient(145deg, #121212, #171717);
       --modal-bg: rgba(0, 0, 0, 0.85);
     }
 
     [data-theme="light"] {
-      --bg-base: #ffffff;
-      --bg-surface: #f8f9fa;
+      --bg-base: #f0f2f5;
+      --bg-surface: #e8eaed;
       --bg-card: #ffffff;
       --bg-card-alt: #f8f9fa;
       --bg-glass: rgba(255, 255, 255, 0.95);
@@ -71,7 +71,7 @@
       --text-primary: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.08), transparent 38%), linear-gradient(145deg, #ffffff 0%, #f8f9fa 52%, #f1f5f9 100%);
+      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.08), transparent 38%), linear-gradient(145deg, #f0f2f5 0%, #e8eaed 52%, #dcdfe3 100%);
       --card-gradient: linear-gradient(145deg, #ffffff, #f8f9fa);
       --modal-bg: rgba(255, 255, 255, 0.9);
     }
@@ -372,7 +372,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 24px;
       font-weight: 700;
-      color: #f8f8f8;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -749,7 +749,7 @@
     }
 
     .orbit-node:hover {
-      border-color: #ffffff;
+      border-color: var(--accent-primary);
       transform: translateY(-2px);
     }
 
