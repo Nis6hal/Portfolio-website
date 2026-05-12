@@ -4245,7 +4245,10 @@
     function openModal(id, data, type) {
       const modal = document.getElementById(id);
       const d = projectData[data];
-      if (!d) return;
+      if (!d) {
+        console.error('[Modal] No data found for key:', data);
+        return;
+      }
       document.getElementById('modalTitle').textContent = d.title;
       document.getElementById('modalContent').innerHTML = d.content;
       modal.classList.add('open');
@@ -4279,8 +4282,12 @@
       });
     }
 
-    document.querySelectorAll('.details-btn').forEach(btn => {
-      btn.addEventListener('click', () => openModal('projectModal', btn.dataset.project, 'project'));
+    // Use event delegation for dynamically loaded projects
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.details-btn');
+      if (btn) {
+        openModal('projectModal', btn.dataset.project, 'project');
+      }
     });
     bindCertificationPreviewButtons();
     document.querySelectorAll('.modal-close').forEach(btn => {
