@@ -43,8 +43,8 @@
   <style>
     /* ===================== DESIGN TOKENS ===================== */
     :root {
-      --bg-base: #121212;
-      --bg-surface: #1a1a1a;
+      --bg-base: #1c1c1c;
+      --bg-surface: #242424;
       --bg-card: #121212;
       --bg-card-alt: #171717;
       --bg-glass: rgba(18, 18, 18, 0.75);
@@ -54,14 +54,14 @@
       --text-primary: #ffffff;
       --text-muted: #b8b8b8;
       --border: #2a2a2a;
-      --gradient-hero: linear-gradient(145deg, #121212 0%, #1c1c1c 50%, #0a0a0a 100%);
+      --gradient-hero: linear-gradient(145deg, #1c1c1c 0%, #2a2a2a 50%, #121212 100%);
       --card-gradient: linear-gradient(145deg, #121212, #171717);
       --modal-bg: rgba(0, 0, 0, 0.85);
     }
 
     [data-theme="light"] {
-      --bg-base: #f0f2f5;
-      --bg-surface: #e8eaed;
+      --bg-base: #e2e8f0;
+      --bg-surface: #cbd5e1;
       --bg-card: #ffffff;
       --bg-card-alt: #f8f9fa;
       --bg-glass: rgba(255, 255, 255, 0.95);
@@ -71,7 +71,7 @@
       --text-primary: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.08), transparent 38%), linear-gradient(145deg, #f0f2f5 0%, #e8eaed 52%, #dcdfe3 100%);
+      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.08), transparent 38%), linear-gradient(145deg, #e2e8f0 0%, #cbd5e1 52%, #94a3b8 100%);
       --card-gradient: linear-gradient(145deg, #ffffff, #f8f9fa);
       --modal-bg: rgba(255, 255, 255, 0.9);
     }
@@ -385,8 +385,8 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      border: 1.5px solid #f3f3f3;
-      color: #f3f3f3;
+      border: 1.5px solid var(--text-primary);
+      color: var(--text-primary);
       align-items: center;
       justify-content: center;
       font-family: 'Fraunces', serif;
@@ -613,16 +613,16 @@
 
     .btn-cyan {
       background: transparent;
-      color: #f1f1f3;
-      border: 1px solid #eaebef;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
       border-radius: 999px;
       padding: 10px 24px;
       box-shadow: none;
     }
 
     .btn-cyan:hover {
-      background: #f1f1f3;
-      color: #1c1d25;
+      background: var(--text-primary);
+      color: var(--bg-base);
       transform: translateY(-2px);
     }
 
