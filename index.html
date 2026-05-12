@@ -60,26 +60,26 @@
     }
 
     [data-theme="light"] {
-      --bg-base: #f8f9fa;
-      --bg-surface: #ffffff;
+      --bg-base: #ffffff;
+      --bg-surface: #f8f9fa;
       --bg-card: #ffffff;
-      --bg-card-alt: #f1f3f5;
-      --bg-glass: rgba(255, 255, 255, 0.85);
+      --bg-card-alt: #f8f9fa;
+      --bg-glass: rgba(255, 255, 255, 0.95);
       --accent-primary: #0077b6;
-      --accent-secondary: #0096c7;
-      --accent-glow: rgba(0, 119, 182, 0.12);
-      --text-primary: #1a1a1a;
-      --text-muted: #555555;
-      --border: #dee2e6;
-      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.05), transparent 38%), linear-gradient(145deg, #f8f9fa 0%, #ffffff 52%, #f1f3f5 100%);
-      --card-gradient: linear-gradient(145deg, #ffffff, #f1f3f5);
-      --modal-bg: rgba(0, 0, 0, 0.45);
+      --accent-secondary: #023e8a;
+      --accent-glow: rgba(0, 119, 182, 0.15);
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --gradient-hero: radial-gradient(circle at 85% 38%, rgba(0, 119, 255, 0.08), transparent 38%), linear-gradient(145deg, #ffffff 0%, #f8f9fa 52%, #f1f5f9 100%);
+      --card-gradient: linear-gradient(145deg, #ffffff, #f8f9fa);
+      --modal-bg: rgba(255, 255, 255, 0.9);
     }
 
     /* Selection Color */
     ::selection {
       background: var(--accent-primary);
-      color: #000;
+      color: #fff;
     }
 
     /* Scroll Progress Bar */
@@ -404,7 +404,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       font-weight: 500;
-      color: #aeb0ba;
+      color: var(--text-muted);
       position: relative;
       padding: 4px 0;
       transition: color 0.3s;
@@ -424,7 +424,7 @@
 
     .nav-link:hover,
     .nav-link.active {
-      color: #f8f8f8;
+      color: var(--accent-primary) !important;
     }
 
     .nav-link:hover::after,
@@ -446,8 +446,8 @@
 
     .nav-link.nav-cta {
       background: transparent;
-      border: 1px solid #f1f1f1;
-      color: #f8f8f8;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
       padding: 7px 16px;
       border-radius: 999px;
       font-weight: 500;
@@ -481,7 +481,7 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: linear-gradient(140deg, #1b1c22 0%, #22242d 55%, #1d1f27 100%);
+      background: var(--gradient-hero);
     }
 
     .hero::before {
