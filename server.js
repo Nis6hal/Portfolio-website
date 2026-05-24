@@ -1,174 +1,270 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const { Resend } = require('resend');
-const resend = new Resend(process.env.RESEND_API_KEY);
-const crypto = require('crypto');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const { Resend } = require("resend");
+const crypto = require("crypto");
 
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 const app = express();
+
+mongoose.set("bufferCommands", false);
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(express.json());
-app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || '*',
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
-    'http://localhost:3000'
-  ],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      process.env.FRONTEND_URL || "*",
+      "http://localhost:5500",
+      "http://127.0.0.1:5500",
+      "http://localhost:3000",
+    ],
+    credentials: true,
+  }),
+);
 
 // ─── MongoDB Connection ───────────────────────────────────────────────────────
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('❌ MongoDB error:', err));
+async function connectToMongo() {
+  if (!process.env.MONGODB_URI) {
+    console.error("❌ MongoDB error: MONGODB_URI is not set");
+    return false;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+    });
+    console.log("✅ MongoDB connected");
+    return true;
+  } catch (err) {
+    console.error("❌ MongoDB error:", err);
+    return false;
+  }
+}
+
+function requireDb(req, res, next) {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      error: "Database unavailable. Please check MongoDB connection settings.",
+    });
+  }
+  next();
+}
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 
-const ProjectSchema = new mongoose.Schema({
-  title:       { type: String, required: true },
-  description: { type: String, required: true },
-  category:    { type: String, enum: ['web', 'mobile', 'ai'], required: true },
-  image:       { type: String, required: true },
-  tech:        [String],
-  overview:    { type: String, default: '' },
-  features:    [String],
-  highlights:  [String],
-  details:     { type: String, default: '' },
-  github:      { type: String, default: 'https://github.com/nis6hal' },
-  demo:        { type: String, default: '' },
-  order:       { type: Number, default: 0 },
-  visible:     { type: Boolean, default: true }
-}, { timestamps: true });
+const ProjectSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    category: { type: String, enum: ["web", "mobile", "ai"], required: true },
+    image: { type: String, required: true },
+    tech: [String],
+    overview: { type: String, default: "" },
+    features: [String],
+    highlights: [String],
+    details: { type: String, default: "" },
+    github: { type: String, default: "https://github.com/nis6hal" },
+    demo: { type: String, default: "" },
+    order: { type: Number, default: 0 },
+    visible: { type: Boolean, default: true },
+  },
+  { timestamps: true },
+);
 
 const SkillSchema = new mongoose.Schema({
-  name:       { type: String, required: true },
-  level:      { type: String, required: true },
-  details:    { type: String, default: '' },
-  type:       { type: String, enum: ['technical', 'professional'], required: true },
-  category:   { type: String, default: '' }, // e.g., 'frontend', 'backend', 'tools'
-  order:      { type: Number, default: 0 }
+  name: { type: String, required: true },
+  level: { type: String, required: true },
+  details: { type: String, default: "" },
+  type: { type: String, enum: ["technical", "professional"], required: true },
+  category: { type: String, default: "" }, // e.g., 'frontend', 'backend', 'tools'
+  order: { type: Number, default: 0 },
 });
 
-const ContentSchema = new mongoose.Schema({
-  key:   { type: String, unique: true, required: true },
-  value: { type: mongoose.Schema.Types.Mixed, required: true }
-}, { timestamps: true });
+const ContentSchema = new mongoose.Schema(
+  {
+    key: { type: String, unique: true, required: true },
+    value: { type: mongoose.Schema.Types.Mixed, required: true },
+  },
+  { timestamps: true },
+);
 
-const CertificationSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  issuer: { type: String, required: true },
-  date: { type: String, required: true },
-  credentialUrl: { type: String, default: '' }
-}, { timestamps: true });
+const CertificationSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    issuer: { type: String, required: true },
+    date: { type: String, required: true },
+    credentialUrl: { type: String, default: "" },
+  },
+  { timestamps: true },
+);
 
-const Project = mongoose.model('Project', ProjectSchema);
-const Skill   = mongoose.model('Skill',   SkillSchema);
-const Content = mongoose.model('Content', ContentSchema);
-const Certification = mongoose.model('Certification', CertificationSchema);
+const Project = mongoose.model("Project", ProjectSchema);
+const Skill = mongoose.model("Skill", SkillSchema);
+const Content = mongoose.model("Content", ContentSchema);
+const Certification = mongoose.model("Certification", CertificationSchema);
 
 // ─── Contact Request Schema ───────────────────────────────────────────────────
-const ContactRequestSchema = new mongoose.Schema({
-  name:      { type: String, required: true },
-  email:     { type: String, required: true },
-  subject:   { type: String, required: true },
-  message:   { type: String, required: true },
-  token:     { type: String, required: true, unique: true },
-  verified:  { type: Boolean, default: false },
-  expiresAt: { type: Date, required: true }
-}, { timestamps: true });
+const ContactRequestSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    subject: { type: String, required: true },
+    message: { type: String, required: true },
+    token: { type: String, required: true, unique: true },
+    verified: { type: Boolean, default: false },
+    expiresAt: { type: Date, required: true },
+  },
+  { timestamps: true },
+);
 
-const ContactRequest = mongoose.model('ContactRequest', ContactRequestSchema);
+const ContactRequest = mongoose.model("ContactRequest", ContactRequestSchema);
 
 // ─── Nodemailer Transporter ───────────────────────────────────────────────────
-
 
 // ─── Auth Middleware ──────────────────────────────────────────────────────────
 function authMiddleware(req, res, next) {
   const auth = req.headers.authorization;
-  if (!auth || !auth.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'No token provided' });
+  if (!auth || !auth.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "No token provided" });
   }
   try {
-    req.user = jwt.verify(auth.split(' ')[1], process.env.JWT_SECRET);
+    req.user = jwt.verify(auth.split(" ")[1], process.env.JWT_SECRET);
     next();
   } catch {
-    res.status(401).json({ error: 'Invalid or expired token' });
+    res.status(401).json({ error: "Invalid or expired token" });
   }
 }
 
 function getDefaultProjects() {
   return [
     {
-      title: 'Smart Bus Arrival Detector',
-      description: 'Real-time bus tracking and ML-powered ETAs for Pokhara city routes.',
-      category: 'mobile',
-      image: 'Images/Sbad.png',
-      tech: ['React Native', 'Firebase', 'Google Maps', 'Machine Learning'],
-      overview: 'A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.',
-      features: ['Real-time location tracking', 'ML-powered ETA predictions', 'Route visualization', 'Notification system'],
-      highlights: ['Improved commute efficiency by 20%', 'Winner of University Hackathon 2024'],
-      order: 1
+      title: "Smart Bus Arrival Detector",
+      description:
+        "Real-time bus tracking and ML-powered ETAs for Pokhara city routes.",
+      category: "mobile",
+      image: "Images/Sbad.png",
+      tech: ["React Native", "Firebase", "Google Maps", "Machine Learning"],
+      overview:
+        "A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.",
+      features: [
+        "Real-time location tracking",
+        "ML-powered ETA predictions",
+        "Route visualization",
+        "Notification system",
+      ],
+      highlights: [
+        "Improved commute efficiency by 20%",
+        "Winner of University Hackathon 2024",
+      ],
+      order: 1,
     },
     {
-      title: 'Gate Automation',
-      description: 'Edge AI system for real-time license plate recognition designed for automated gate and parking control.',
-      category: 'ai',
-      image: 'Images/Slpd.png',
-      tech: ['Python', 'OpenCV', 'TensorFlow', 'Arduino'],
-      overview: 'An edge AI system for real-time license plate recognition, designed for automated gate and parking control.',
-      features: ['Real-time plate detection', 'OCR integration', 'Hardware gate control via Arduino', 'Log management'],
-      highlights: ['95% accuracy in daylight conditions', 'Cost-effective local edge processing'],
-      order: 2
+      title: "Gate Automation",
+      description:
+        "Edge AI system for real-time license plate recognition designed for automated gate and parking control.",
+      category: "ai",
+      image: "Images/Slpd.png",
+      tech: ["Python", "OpenCV", "TensorFlow", "Arduino"],
+      overview:
+        "An edge AI system for real-time license plate recognition, designed for automated gate and parking control.",
+      features: [
+        "Real-time plate detection",
+        "OCR integration",
+        "Hardware gate control via Arduino",
+        "Log management",
+      ],
+      highlights: [
+        "95% accuracy in daylight conditions",
+        "Cost-effective local edge processing",
+      ],
+      order: 2,
     },
     {
-      title: 'Portfolio Website',
-      description: 'The minimalist portfolio you\'re currently viewing. Features an AI chatbot, animated sections, and responsive layouts.',
-      category: 'web',
-      image: 'Images/Portfolio.png',
-      tech: ['HTML5', 'CSS3', 'JavaScript'],
-      overview: 'The minimalist portfolio website you\'re currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.',
-      features: ['AI-powered Chatbot (Natural Language)', 'Responsive Single-Page Layout', 'Dynamic Content Loading via REST API', 'Glassmorphism UI'],
-      highlights: ['No frameworks used — optimized for performance', 'Fully integrated admin dashboard'],
-      order: 3
+      title: "Portfolio Website",
+      description:
+        "The minimalist portfolio you're currently viewing. Features an AI chatbot, animated sections, and responsive layouts.",
+      category: "web",
+      image: "Images/Portfolio.png",
+      tech: ["HTML5", "CSS3", "JavaScript"],
+      overview:
+        "The minimalist portfolio website you're currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.",
+      features: [
+        "AI-powered Chatbot (Natural Language)",
+        "Responsive Single-Page Layout",
+        "Dynamic Content Loading via REST API",
+        "Glassmorphism UI",
+      ],
+      highlights: [
+        "No frameworks used — optimized for performance",
+        "Fully integrated admin dashboard",
+      ],
+      order: 3,
     },
     {
-      title: 'CineVault',
-      description: 'A movie discovery and tracking application powered by the TMDb API.',
-      category: 'web',
-      image: 'Images/CineVault.png',
-      tech: ['React', 'TMDb API', 'CSS3'],
-      overview: 'A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.',
-      features: ['Real-time movie search', 'Watchlist management', 'Trending & Top Rated categories', 'Detailed movie pages'],
-      highlights: ['Seamless API integration', 'Modern responsive design'],
-      order: 4
+      title: "CineVault",
+      description:
+        "A movie discovery and tracking application powered by the TMDb API.",
+      category: "web",
+      image: "Images/CineVault.png",
+      tech: ["React", "TMDb API", "CSS3"],
+      overview:
+        "A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.",
+      features: [
+        "Real-time movie search",
+        "Watchlist management",
+        "Trending & Top Rated categories",
+        "Detailed movie pages",
+      ],
+      highlights: ["Seamless API integration", "Modern responsive design"],
+      order: 4,
     },
     {
-      title: 'ReadLib',
-      description: 'A local-first book management app with an integrated PDF reader.',
-      category: 'web',
-      image: 'Images/ReadLib.png',
-      tech: ['React', 'IndexedDB', 'pdf.js'],
-      overview: 'A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.',
-      features: ['In-browser PDF reader', 'Local storage for offline use', 'Book categorization', 'Last-read page memory'],
-      highlights: ['Zero server dependency for user data', 'Smooth PDF rendering'],
-      order: 5
+      title: "ReadLib",
+      description:
+        "A local-first book management app with an integrated PDF reader.",
+      category: "web",
+      image: "Images/ReadLib.png",
+      tech: ["React", "IndexedDB", "pdf.js"],
+      overview:
+        "A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.",
+      features: [
+        "In-browser PDF reader",
+        "Local storage for offline use",
+        "Book categorization",
+        "Last-read page memory",
+      ],
+      highlights: [
+        "Zero server dependency for user data",
+        "Smooth PDF rendering",
+      ],
+      order: 5,
     },
     {
-      title: 'UniLib',
-      description: 'A full-stack library management system for universities.',
-      category: 'web',
-      image: 'Images/UniLib.png',
-      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      overview: 'A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.',
-      features: ['User authentication', 'Admin dashboard for book management', 'Issue/Return tracking', 'Inventory reporting'],
-      highlights: ['Enterprise-ready architecture', 'Role-based access control'],
-      order: 6
-    }
+      title: "UniLib",
+      description: "A full-stack library management system for universities.",
+      category: "web",
+      image: "Images/UniLib.png",
+      tech: ["React", "Node.js", "MongoDB", "Express"],
+      overview:
+        "A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.",
+      features: [
+        "User authentication",
+        "Admin dashboard for book management",
+        "Issue/Return tracking",
+        "Inventory reporting",
+      ],
+      highlights: [
+        "Enterprise-ready architecture",
+        "Role-based access control",
+      ],
+      order: 6,
+    },
   ];
 }
 
@@ -182,41 +278,174 @@ async function seedDefaults() {
 
   // Intelligent Skill Sync (Upsert defaults)
   const defaultSkills = [
-    { name: 'Problem Solving', level: 'Expert', type: 'professional', details: 'Analytical thinking and debugging expertise', order: 1 },
-    { name: 'Communication', level: 'Expert', type: 'professional', details: 'Clear client interaction and team collaboration', order: 2 },
-    { name: 'Team Work', level: 'Expert', type: 'professional', details: 'Agile methodology and project coordination', order: 3 },
-    { name: 'Creativity', level: 'Expert', type: 'professional', details: 'Innovative solutions and UI/UX design', order: 4 },
-    { name: 'HTML5', level: 'Expert', type: 'technical', category: 'frontend', order: 1 },
-    { name: 'CSS3', level: 'Expert', type: 'technical', category: 'frontend', order: 2 },
-    { name: 'JavaScript', level: 'Expert', type: 'technical', category: 'frontend', order: 3 },
-    { name: 'React', level: 'Expert', type: 'technical', category: 'frontend', order: 4 },
-    { name: 'Python', level: 'Expert', type: 'technical', category: 'backend', order: 5 },
-    { name: 'Node.js', level: 'Expert', type: 'technical', category: 'backend', order: 6 },
-    { name: 'MongoDB', level: 'Expert', type: 'technical', category: 'backend', order: 7 },
-    { name: 'OpenCV', level: 'Intermediate', type: 'technical', category: 'ai', order: 8 },
-    { name: 'TensorFlow', level: 'Intermediate', type: 'technical', category: 'ai', order: 9 },
-    { name: 'Git', level: 'Expert', type: 'technical', category: 'tools', order: 10 },
-    { name: 'Docker', level: 'Intermediate', type: 'technical', category: 'tools', order: 11 },
-    { name: 'Vercel', level: 'Expert', type: 'technical', category: 'tools', order: 12 },
-    { name: 'Render', level: 'Expert', type: 'technical', category: 'tools', order: 13 },
-    { name: 'Figma', level: 'Intermediate', type: 'technical', category: 'tools', order: 14 }
+    {
+      name: "Problem Solving",
+      level: "Expert",
+      type: "professional",
+      details: "Analytical thinking and debugging expertise",
+      order: 1,
+    },
+    {
+      name: "Communication",
+      level: "Expert",
+      type: "professional",
+      details: "Clear client interaction and team collaboration",
+      order: 2,
+    },
+    {
+      name: "Team Work",
+      level: "Expert",
+      type: "professional",
+      details: "Agile methodology and project coordination",
+      order: 3,
+    },
+    {
+      name: "Creativity",
+      level: "Expert",
+      type: "professional",
+      details: "Innovative solutions and UI/UX design",
+      order: 4,
+    },
+    {
+      name: "HTML5",
+      level: "Expert",
+      type: "technical",
+      category: "frontend",
+      order: 1,
+    },
+    {
+      name: "CSS3",
+      level: "Expert",
+      type: "technical",
+      category: "frontend",
+      order: 2,
+    },
+    {
+      name: "JavaScript",
+      level: "Expert",
+      type: "technical",
+      category: "frontend",
+      order: 3,
+    },
+    {
+      name: "React",
+      level: "Expert",
+      type: "technical",
+      category: "frontend",
+      order: 4,
+    },
+    {
+      name: "Python",
+      level: "Expert",
+      type: "technical",
+      category: "backend",
+      order: 5,
+    },
+    {
+      name: "Node.js",
+      level: "Expert",
+      type: "technical",
+      category: "backend",
+      order: 6,
+    },
+    {
+      name: "MongoDB",
+      level: "Expert",
+      type: "technical",
+      category: "backend",
+      order: 7,
+    },
+    {
+      name: "OpenCV",
+      level: "Intermediate",
+      type: "technical",
+      category: "ai",
+      order: 8,
+    },
+    {
+      name: "TensorFlow",
+      level: "Intermediate",
+      type: "technical",
+      category: "ai",
+      order: 9,
+    },
+    {
+      name: "Git",
+      level: "Expert",
+      type: "technical",
+      category: "tools",
+      order: 10,
+    },
+    {
+      name: "Docker",
+      level: "Intermediate",
+      type: "technical",
+      category: "tools",
+      order: 11,
+    },
+    {
+      name: "Vercel",
+      level: "Expert",
+      type: "technical",
+      category: "tools",
+      order: 12,
+    },
+    {
+      name: "Render",
+      level: "Expert",
+      type: "technical",
+      category: "tools",
+      order: 13,
+    },
+    {
+      name: "Figma",
+      level: "Intermediate",
+      type: "technical",
+      category: "tools",
+      order: 14,
+    },
   ];
 
   for (const s of defaultSkills) {
     await Skill.findOneAndUpdate({ name: s.name }, s, { upsert: true });
   }
-  console.log('✅ Skills synchronized (upserted)');
+  console.log("✅ Skills synchronized (upserted)");
 
   // Seed content if empty
   const contentCount = await Content.countDocuments();
   if (contentCount === 0) {
     await Content.insertMany([
-      { key: 'hero',    value: { name: 'Nischal Bhandari', tagline: 'Computer Engineering Student', description: 'Computer Engineering student building clean digital products across web, AI, and backend systems.' } },
-      { key: 'about',   value: { bio1: "I'm a passionate Computer Engineering student at Pokhara University, Nepal, with a strong foundation in full-stack development.", bio2: "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.", bio3: "My journey in technology started with curiosity and has evolved into a passion for creating digital solutions that impact people's lives positively." } },
-      { key: 'contact', value: { email: 'itisnischal@gmail.com', location: 'Pokhara, Nepal', github: 'https://github.com/nis6hal', linkedin: 'https://linkedin.com/in/nis6hal', twitter: 'https://twitter.com/nis6hal', instagram: 'https://instagram.com/nis6hal' } },
-      { key: 'sections', value: { showGithubActivity: true } }
+      {
+        key: "hero",
+        value: {
+          name: "Nischal Bhandari",
+          tagline: "Computer Engineering Student",
+          description:
+            "Computer Engineering student building clean digital products across web, AI, and backend systems.",
+        },
+      },
+      {
+        key: "about",
+        value: {
+          bio1: "I'm a passionate Computer Engineering student at Pokhara University, Nepal, with a strong foundation in full-stack development.",
+          bio2: "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects.",
+          bio3: "My journey in technology started with curiosity and has evolved into a passion for creating digital solutions that impact people's lives positively.",
+        },
+      },
+      {
+        key: "contact",
+        value: {
+          email: "itisnischal@gmail.com",
+          location: "Pokhara, Nepal",
+          github: "https://github.com/nis6hal",
+          linkedin: "https://linkedin.com/in/nis6hal",
+          twitter: "https://twitter.com/nis6hal",
+          instagram: "https://instagram.com/nis6hal",
+        },
+      },
+      { key: "sections", value: { showGithubActivity: true } },
     ]);
-    console.log('✅ Default content seeded');
+    console.log("✅ Default content seeded");
   }
 
   // Seed certifications if empty
@@ -224,41 +453,48 @@ async function seedDefaults() {
   if (certCount === 0) {
     await Certification.insertMany([
       {
-        name: 'Cloud & DevOps Training',
-        issuer: 'TechAxis Nepal',
-        date: '2025',
-        credentialUrl: 'Images/Certs/Cloud%26Devops.jpg'
+        name: "Cloud & DevOps Training",
+        issuer: "TechAxis Nepal",
+        date: "2025",
+        credentialUrl: "Images/Certs/Cloud%26Devops.jpg",
       },
       {
-        name: 'Fundamentals of Data Science',
-        issuer: 'IBM SkillsBuild',
-        date: '2024',
-        credentialUrl: 'Images/Certs/FundsofDS.jpg'
-      }
+        name: "Fundamentals of Data Science",
+        issuer: "IBM SkillsBuild",
+        date: "2024",
+        credentialUrl: "Images/Certs/FundsofDS.jpg",
+      },
     ]);
-    console.log('✅ Default certifications seeded');
+    console.log("✅ Default certifications seeded");
   }
 }
 
 // ─── PUBLIC ROUTES ────────────────────────────────────────────────────────────
 
 // Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "ok",
+    database:
+      mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // Get all portfolio data in one call (used by frontend on load)
-app.get('/api/portfolio', async (req, res) => {
+app.get("/api/portfolio", requireDb, async (req, res) => {
   try {
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate");
     const [projects, skills, contentDocs, certifications] = await Promise.all([
       Project.find({ visible: true }).sort({ order: 1 }),
       Skill.find().sort({ order: 1 }),
       Content.find(),
-      Certification.find().sort({ createdAt: -1 })
+      Certification.find().sort({ createdAt: -1 }),
     ]);
     const content = {};
-    contentDocs.forEach(c => { content[c.key] = c.value; });
+    contentDocs.forEach((c) => {
+      content[c.key] = c.value;
+    });
     res.json({ projects, skills, certifications, content });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -266,7 +502,7 @@ app.get('/api/portfolio', async (req, res) => {
 });
 
 // Get projects
-app.get('/api/projects', async (req, res) => {
+app.get("/api/projects", requireDb, async (req, res) => {
   try {
     const projects = await Project.find({ visible: true }).sort({ order: 1 });
     res.json(projects);
@@ -276,7 +512,7 @@ app.get('/api/projects', async (req, res) => {
 });
 
 // Get skills
-app.get('/api/skills', async (req, res) => {
+app.get("/api/skills", requireDb, async (req, res) => {
   try {
     const skills = await Skill.find().sort({ order: 1 });
     res.json(skills);
@@ -286,7 +522,7 @@ app.get('/api/skills', async (req, res) => {
 });
 
 // Get certifications
-app.get('/api/certifications', async (req, res) => {
+app.get("/api/certifications", requireDb, async (req, res) => {
   try {
     const certifications = await Certification.find().sort({ createdAt: -1 });
     res.json(certifications);
@@ -296,10 +532,10 @@ app.get('/api/certifications', async (req, res) => {
 });
 
 // Get content by key
-app.get('/api/content/:key', async (req, res) => {
+app.get("/api/content/:key", requireDb, async (req, res) => {
   try {
     const doc = await Content.findOne({ key: req.params.key });
-    if (!doc) return res.status(404).json({ error: 'Not found' });
+    if (!doc) return res.status(404).json({ error: "Not found" });
     res.json(doc.value);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -309,38 +545,53 @@ app.get('/api/content/:key', async (req, res) => {
 // ─── CONTACT ROUTES ───────────────────────────────────────────────────────────
 
 // Step 1: User submits form → send verification email to them
-app.post('/api/contact/submit', async (req, res) => {
+app.post("/api/contact/submit", requireDb, async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
     if (!name || !email || !subject || !message)
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ error: "All fields are required" });
 
     // Basic email format check
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      return res.status(400).json({ error: 'Invalid email address' });
+      return res.status(400).json({ error: "Invalid email address" });
 
     // Rate limit: max 2 unverified requests per email in last hour
     const recentCount = await ContactRequest.countDocuments({
       email,
       verified: false,
-      createdAt: { $gt: new Date(Date.now() - 60 * 60 * 1000) }
+      createdAt: { $gt: new Date(Date.now() - 60 * 60 * 1000) },
     });
     if (recentCount >= 2)
-      return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+      return res
+        .status(429)
+        .json({ error: "Too many requests. Please try again later." });
 
     // Create verification token
-    const token     = crypto.randomBytes(32).toString('hex');
+    const token = crypto.randomBytes(32).toString("hex");
     const expiresAt = new Date(Date.now() + 30 * 60 * 1000); // 30 min expiry
 
-    await ContactRequest.create({ name, email, subject, message, token, expiresAt });
+    await ContactRequest.create({
+      name,
+      email,
+      subject,
+      message,
+      token,
+      expiresAt,
+    });
 
-    const verifyUrl = `${process.env.BACKEND_URL || 'https://nischal-portfolio-api.onrender.com'}/api/contact/verify/${token}`;
+    const verifyUrl = `${process.env.BACKEND_URL || "https://nischal-portfolio-api.onrender.com"}/api/contact/verify/${token}`;
+
+    if (!resend) {
+      return res.status(503).json({
+        error: "Email service unavailable. RESEND_API_KEY is not configured.",
+      });
+    }
 
     // Send verification email to the submitter
     await resend.emails.send({
-      from: 'Nischal Bhandari Portfolio <noreply@nischal-bhandari.com.np>',
+      from: "Nischal Bhandari Portfolio <noreply@nischal-bhandari.com.np>",
       to: email,
-      subject: '✅ Confirm your message to Nischal Bhandari',
+      subject: "✅ Confirm your message to Nischal Bhandari",
       html: `
         <!DOCTYPE html>
         <html>
@@ -358,14 +609,14 @@ app.post('/api/contact/submit', async (req, res) => {
                 <tr><td style="padding:32px 36px;">
                   <h2 style="margin:0 0 12px;font-size:20px;color:#f0f0ff;font-weight:700;">Hi ${name} 👋</h2>
                   <p style="margin:0 0 20px;color:#8888aa;font-size:14px;line-height:1.7;">
-                    You submitted a contact request to <strong style="color:#f0f0ff;">Nischal Bhandari's</strong> portfolio. 
+                    You submitted a contact request to <strong style="color:#f0f0ff;">Nischal Bhandari's</strong> portfolio.
                     Please confirm it was really you by clicking the button below.
                   </p>
                   <!-- Message preview -->
                   <div style="background:#090918;border:1px solid #1a1a3a;border-left:3px solid #F5B800;border-radius:8px;padding:16px 20px;margin-bottom:28px;">
                     <div style="font-size:11px;color:#F5B800;font-family:monospace;letter-spacing:1px;margin-bottom:10px;">YOUR MESSAGE</div>
                     <div style="font-size:13px;color:#8888aa;margin-bottom:6px;"><strong style="color:#f0f0ff;">Subject:</strong> ${subject}</div>
-                    <div style="font-size:13px;color:#8888aa;line-height:1.6;">${message.replace(/\n/g, '<br>')}</div>
+                    <div style="font-size:13px;color:#8888aa;line-height:1.6;">${message.replace(/\n/g, "<br>")}</div>
                   </div>
                   <!-- CTA Button -->
                   <table cellpadding="0" cellspacing="0" width="100%">
@@ -389,24 +640,29 @@ app.post('/api/contact/submit', async (req, res) => {
           </table>
         </body>
         </html>
-      `
+      `,
     });
 
-    res.json({ message: 'Verification email sent! Please check your inbox and confirm your message.' });
-
+    res.json({
+      message:
+        "Verification email sent! Please check your inbox and confirm your message.",
+    });
   } catch (err) {
-    console.error('Contact submit error:', err.message, err.code);
-    res.status(500).json({ error: 'Failed to send verification email. Please try again.', detail: err.message });
+    console.error("Contact submit error:", err.message, err.code);
+    res.status(500).json({
+      error: "Failed to send verification email. Please try again.",
+      detail: err.message,
+    });
   }
 });
 
 // Step 2: User clicks link → forward message to Nischal
-app.get('/api/contact/verify/:token', async (req, res) => {
+app.get("/api/contact/verify/:token", requireDb, async (req, res) => {
   try {
     const request = await ContactRequest.findOne({
       token: req.params.token,
       verified: false,
-      expiresAt: { $gt: new Date() }
+      expiresAt: { $gt: new Date() },
     });
 
     if (!request) {
@@ -423,10 +679,16 @@ app.get('/api/contact/verify/:token', async (req, res) => {
     request.verified = true;
     await request.save();
 
+    if (!resend) {
+      return res
+        .status(503)
+        .send("Email service unavailable. RESEND_API_KEY is not configured.");
+    }
+
     // Forward the message to Nischal
     await resend.emails.send({
-      from: 'Portfolio Contact <noreply@nischal-bhandari.com.np>',
-      to: 'itisnischal@gmail.com',
+      from: "Portfolio Contact <noreply@nischal-bhandari.com.np>",
+      to: "itisnischal@gmail.com",
       replyTo: request.email,
       subject: `📬 New Verified Message: ${request.subject}`,
       html: `
@@ -450,7 +712,7 @@ app.get('/api/contact/verify/:token', async (req, res) => {
                   </div>
                   <div style="background:#090918;border:1px solid #1a1a3a;border-left:3px solid #F5B800;border-radius:8px;padding:16px 20px;">
                     <div style="font-size:11px;color:#F5B800;font-family:monospace;letter-spacing:1px;margin-bottom:10px;">MESSAGE</div>
-                    <p style="margin:0;font-size:14px;color:#c0c0d0;line-height:1.8;">${request.message.replace(/\n/g, '<br>')}</p>
+                    <p style="margin:0;font-size:14px;color:#c0c0d0;line-height:1.8;">${request.message.replace(/\n/g, "<br>")}</p>
                   </div>
                   <p style="margin:20px 0 0;font-size:12px;color:#555577;text-align:center;">Hit Reply to respond directly to ${request.email}</p>
                 </td></tr>
@@ -461,7 +723,7 @@ app.get('/api/contact/verify/:token', async (req, res) => {
             </td></tr>
           </table>
         </body></html>
-      `
+      `,
     });
 
     // Show success page
@@ -477,177 +739,265 @@ app.get('/api/contact/verify/:token', async (req, res) => {
         <br><a href="https://nischal-bhandari.com.np">← Back to portfolio</a>
       </div></body></html>
     `);
-
   } catch (err) {
-    console.error('Contact verify error:', err);
-    res.status(500).send('Something went wrong. Please try again.');
+    console.error("Contact verify error:", err);
+    res.status(500).send("Something went wrong. Please try again.");
   }
 });
 
 // ─── AUTH ROUTES ──────────────────────────────────────────────────────────────
 
-app.post('/api/auth/login', async (req, res) => {
+app.post("/api/auth/login", async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password)
-    return res.status(400).json({ error: 'Username and password required' });
+    return res.status(400).json({ error: "Username and password required" });
 
   const validUser = username === process.env.ADMIN_USERNAME;
   const validPass = password === process.env.ADMIN_PASSWORD;
 
   if (!validUser || !validPass)
-    return res.status(401).json({ error: 'Invalid credentials' });
+    return res.status(401).json({ error: "Invalid credentials" });
 
-  const token = jwt.sign(
-    { username, role: 'admin' },
-    process.env.JWT_SECRET,
-    { expiresIn: '24h' }
-  );
-  res.json({ token, message: 'Login successful' });
+  const token = jwt.sign({ username, role: "admin" }, process.env.JWT_SECRET, {
+    expiresIn: "24h",
+  });
+  res.json({ token, message: "Login successful" });
 });
 
-app.get('/api/auth/verify', authMiddleware, (req, res) => {
+app.get("/api/auth/verify", authMiddleware, (req, res) => {
   res.json({ valid: true, user: req.user });
 });
 
 // ─── ADMIN ROUTES (protected) ─────────────────────────────────────────────────
 
 // --- Projects ---
-app.get('/api/admin/projects', authMiddleware, async (req, res) => {
+app.get("/api/admin/projects", authMiddleware, requireDb, async (req, res) => {
   try {
     const projects = await Project.find().sort({ order: 1 });
     res.json(projects);
-  } catch (err) { res.status(500).json({ error: err.message }); }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.post('/api/admin/projects', authMiddleware, async (req, res) => {
+app.post("/api/admin/projects", authMiddleware, requireDb, async (req, res) => {
   try {
     const project = new Project(req.body);
     await project.save();
     res.status(201).json(project);
-  } catch (err) { res.status(400).json({ error: err.message }); }
-});
-
-app.put('/api/admin/projects/:id', authMiddleware, async (req, res) => {
-  try {
-    const project = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-    if (!project) return res.status(404).json({ error: 'Project not found' });
-    res.json(project);
-  } catch (err) { res.status(400).json({ error: err.message }); }
-});
-
-app.delete('/api/admin/projects/:id', authMiddleware, async (req, res) => {
-  try {
-    await Project.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Project deleted' });
-  } catch (err) { res.status(500).json({ error: err.message }); }
-});
-
-app.post('/api/admin/projects/sync-defaults', authMiddleware, async (req, res) => {
-  try {
-    await seedDefaults(); // Now handles both projects and skills with upsert
-    res.json({ message: 'Projects synchronized with current defaults' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
+app.put(
+  "/api/admin/projects/:id",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      if (!project) return res.status(404).json({ error: "Project not found" });
+      res.json(project);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+);
 
-app.post('/api/admin/projects/sync-defaults', authMiddleware, async (req, res) => {
-  try {
-    await seedDefaults();
-    res.json({ message: 'Projects synchronized with current defaults' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+app.delete(
+  "/api/admin/projects/:id",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      await Project.findByIdAndDelete(req.params.id);
+      res.json({ message: "Project deleted" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
+
+app.post(
+  "/api/admin/projects/sync-defaults",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      await seedDefaults();
+      res.json({ message: "Projects synchronized with current defaults" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
 
 // --- Skills ---
-app.get('/api/admin/skills', authMiddleware, async (req, res) => {
+app.get("/api/admin/skills", authMiddleware, requireDb, async (req, res) => {
   try {
     const skills = await Skill.find().sort({ type: 1, order: 1 });
     res.json(skills);
-  } catch (err) { res.status(500).json({ error: err.message }); }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.put('/api/admin/skills/:id', authMiddleware, async (req, res) => {
-  try {
-    const skill = await Skill.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!skill) return res.status(404).json({ error: 'Skill not found' });
-    res.json(skill);
-  } catch (err) { res.status(400).json({ error: err.message }); }
-});
+app.put(
+  "/api/admin/skills/:id",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      const skill = await Skill.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+      if (!skill) return res.status(404).json({ error: "Skill not found" });
+      res.json(skill);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+);
 
-app.post('/api/admin/skills', authMiddleware, async (req, res) => {
+app.post("/api/admin/skills", authMiddleware, requireDb, async (req, res) => {
   try {
     const skill = new Skill(req.body);
     await skill.save();
     res.status(201).json(skill);
-  } catch (err) { res.status(400).json({ error: err.message }); }
-});
-
-app.delete('/api/admin/skills/:id', authMiddleware, async (req, res) => {
-  try {
-    await Skill.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Skill deleted' });
-  } catch (err) { res.status(500).json({ error: err.message }); }
-});
-
-app.post('/api/admin/skills/sync-defaults', authMiddleware, async (req, res) => {
-  try {
-    await seedDefaults(); // seedDefaults now handles skills with upsert
-    res.json({ message: 'Skills synchronized with current defaults' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
-// --- Certifications ---
-app.get('/api/admin/certifications', authMiddleware, async (req, res) => {
-  try {
-    const certifications = await Certification.find().sort({ createdAt: -1 });
-    res.json(certifications);
-  } catch (err) { res.status(500).json({ error: err.message }); }
-});
+app.delete(
+  "/api/admin/skills/:id",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      await Skill.findByIdAndDelete(req.params.id);
+      res.json({ message: "Skill deleted" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
 
-app.post('/api/certifications', authMiddleware, async (req, res) => {
+app.post(
+  "/api/admin/skills/sync-defaults",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      await seedDefaults(); // seedDefaults now handles skills with upsert
+      res.json({ message: "Skills synchronized with current defaults" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
+
+// --- Certifications ---
+app.get(
+  "/api/admin/certifications",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      const certifications = await Certification.find().sort({ createdAt: -1 });
+      res.json(certifications);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
+
+app.post("/api/certifications", authMiddleware, requireDb, async (req, res) => {
   try {
     const cert = new Certification(req.body);
     await cert.save();
     res.status(201).json(cert);
-  } catch (err) { res.status(400).json({ error: err.message }); }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-app.put('/api/certifications/:id', authMiddleware, async (req, res) => {
-  try {
-    const cert = await Certification.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-    if (!cert) return res.status(404).json({ error: 'Certification not found' });
-    res.json(cert);
-  } catch (err) { res.status(400).json({ error: err.message }); }
-});
+app.put(
+  "/api/certifications/:id",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      const cert = await Certification.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true },
+      );
+      if (!cert)
+        return res.status(404).json({ error: "Certification not found" });
+      res.json(cert);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+);
 
-app.delete('/api/certifications/:id', authMiddleware, async (req, res) => {
-  try {
-    const cert = await Certification.findByIdAndDelete(req.params.id);
-    if (!cert) return res.status(404).json({ error: 'Certification not found' });
-    res.json({ message: 'Certification deleted' });
-  } catch (err) { res.status(500).json({ error: err.message }); }
-});
+app.delete(
+  "/api/certifications/:id",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      const cert = await Certification.findByIdAndDelete(req.params.id);
+      if (!cert)
+        return res.status(404).json({ error: "Certification not found" });
+      res.json({ message: "Certification deleted" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
 
 // --- Content ---
-app.put('/api/admin/content/:key', authMiddleware, async (req, res) => {
-  try {
-    const doc = await Content.findOneAndUpdate(
-      { key: req.params.key },
-      { $set: { value: req.body } },
-      { new: true, upsert: true }
-    );
-    res.json(doc.value);
-  } catch (err) { res.status(400).json({ error: err.message }); }
-});
+app.put(
+  "/api/admin/content/:key",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      const doc = await Content.findOneAndUpdate(
+        { key: req.params.key },
+        { $set: { value: req.body } },
+        { new: true, upsert: true },
+      );
+      res.json(doc.value);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+);
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, async () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  await seedDefaults();
-});
+
+async function startServer() {
+  const mongoConnected = await connectToMongo();
+
+  if (mongoConnected) {
+    try {
+      await seedDefaults();
+    } catch (err) {
+      console.error("❌ Seed error:", err);
+    }
+  }
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
+
+startServer();
