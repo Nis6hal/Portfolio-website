@@ -11,6 +11,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 const app = express();
+const loginAttempts = new Map();
 
 mongoose.set("bufferCommands", false);
 
@@ -54,6 +55,48 @@ function requireDb(req, res, next) {
     });
   }
   next();
+}
+
+function getClientKey(req) {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.trim()) {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.ip || req.connection?.remoteAddress || "unknown";
+}
+
+function isLoginRateLimited(req) {
+  const key = getClientKey(req);
+  const now = Date.now();
+  const windowMs = 15 * 60 * 1000;
+  const maxAttempts = 5;
+  const entry = loginAttempts.get(key);
+
+  if (!entry || now - entry.firstAttemptAt > windowMs) {
+    loginAttempts.set(key, { count: 0, firstAttemptAt: now });
+    return false;
+  }
+
+  return entry.count >= maxAttempts;
+}
+
+function recordLoginFailure(req) {
+  const key = getClientKey(req);
+  const now = Date.now();
+  const windowMs = 15 * 60 * 1000;
+  const entry = loginAttempts.get(key);
+
+  if (!entry || now - entry.firstAttemptAt > windowMs) {
+    loginAttempts.set(key, { count: 1, firstAttemptAt: now });
+    return;
+  }
+
+  entry.count += 1;
+  loginAttempts.set(key, entry);
+}
+
+function clearLoginAttempts(req) {
+  loginAttempts.delete(getClientKey(req));
 }
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
@@ -146,122 +189,126 @@ function getDefaultProjects() {
     {
       title: "Smart Bus Arrival Detector",
       description:
-        "Real-time bus tracking and ML-powered ETAs for Pokhara city routes.",
+        "Built a commuter-focused mobile app that tracks buses live and predicts arrival times for Pokhara city routes.",
       category: "mobile",
       image: "Images/Sbad.png",
       tech: ["React Native", "Firebase", "Google Maps", "Machine Learning"],
       overview:
-        "A commuter-first mobile app for tracking buses in real time with ML-powered ETA predictions for Pokhara city routes.",
+        "Built for real commuter use, this mobile app combines live route visibility with ML-assisted ETA prediction to reduce waiting uncertainty on Pokhara bus routes.",
       features: [
-        "Real-time location tracking",
-        "ML-powered ETA predictions",
-        "Route visualization",
-        "Notification system",
+        "Real-time bus location tracking on route maps",
+        "ML-powered ETA prediction for active routes",
+        "Route visualization for daily commuters",
+        "Notification flow for approaching buses",
       ],
       highlights: [
-        "Improved commute efficiency by 20%",
-        "Winner of University Hackathon 2024",
+        "Focused on reducing commuter waiting uncertainty",
+        "Combined mobile UX with route-aware ETA prediction",
       ],
       order: 1,
     },
     {
       title: "Gate Automation",
       description:
-        "Edge AI system for real-time license plate recognition designed for automated gate and parking control.",
+        "Developed an edge AI gate-control system that detects license plates in real time and triggers automated access workflows.",
       category: "ai",
       image: "Images/Slpd.png",
       tech: ["Python", "OpenCV", "TensorFlow", "Arduino"],
       overview:
-        "An edge AI system for real-time license plate recognition, designed for automated gate and parking control.",
+        "This project combines computer vision, OCR-style recognition, and hardware control to automate gate and parking access without relying on cloud processing.",
       features: [
-        "Real-time plate detection",
-        "OCR integration",
-        "Hardware gate control via Arduino",
-        "Log management",
+        "Real-time license plate detection pipeline",
+        "Recognition workflow integrated with gate logic",
+        "Arduino-based hardware trigger support",
+        "Local event logging for entry and exit records",
       ],
       highlights: [
-        "95% accuracy in daylight conditions",
-        "Cost-effective local edge processing",
+        "Designed for low-latency local edge processing",
+        "Bridged AI inference with real hardware control",
       ],
       order: 2,
     },
     {
       title: "Portfolio Website",
       description:
-        "The minimalist portfolio you're currently viewing. Features an AI chatbot, animated sections, and responsive layouts.",
+        "Designed and deployed a personal portfolio with an admin-managed content flow, responsive UI, and integrated contact workflow.",
       category: "web",
       image: "Images/Portfolio.png",
       tech: ["HTML5", "CSS3", "JavaScript"],
       overview:
-        "The minimalist portfolio website you're currently viewing — built from scratch with vanilla HTML, CSS, and JavaScript.",
+        "Built from scratch with vanilla HTML, CSS, JavaScript, Express, and MongoDB-backed content, this portfolio balances visual polish with practical deployment and maintainability.",
       features: [
-        "AI-powered Chatbot (Natural Language)",
-        "Responsive Single-Page Layout",
-        "Dynamic Content Loading via REST API",
-        "Glassmorphism UI",
+        "Responsive single-page portfolio experience",
+        "Dynamic content loading from a REST API",
+        "Admin panel for projects, skills, and content updates",
+        "Integrated contact verification workflow",
       ],
       highlights: [
-        "No frameworks used — optimized for performance",
-        "Fully integrated admin dashboard",
+        "Combines frontend presentation with backend content management",
+        "Deployed as a real multi-service portfolio stack",
       ],
       order: 3,
     },
     {
       title: "CineVault",
       description:
-        "A movie discovery and tracking application powered by the TMDb API.",
+        "Built a React movie discovery app around the TMDb API with searchable browsing, rich detail views, and responsive dark UI.",
       category: "web",
       image: "Images/CineVault.png",
       tech: ["React", "TMDb API", "CSS3"],
       overview:
-        "A movie discovery and tracking application powered by the TMDb API with a sleek, responsive dark UI.",
+        "CineVault focuses on fast content discovery with category-based browsing, API-driven detail pages, and a polished dark interface for desktop and mobile users.",
       features: [
-        "Real-time movie search",
-        "Watchlist management",
-        "Trending & Top Rated categories",
-        "Detailed movie pages",
+        "Real-time search powered by the TMDb API",
+        "Trending and top-rated discovery flows",
+        "Detailed movie views with richer context",
+        "Responsive dark interface for smaller screens",
       ],
-      highlights: ["Seamless API integration", "Modern responsive design"],
+      highlights: [
+        "Focused on clean API-driven UI flows",
+        "Improved browsing experience with responsive design",
+      ],
       order: 4,
     },
     {
       title: "ReadLib",
       description:
-        "A local-first book management app with an integrated PDF reader.",
+        "Created a local-first reading and library app with persistent book storage and an in-browser PDF reading workflow.",
       category: "web",
       image: "Images/ReadLib.png",
       tech: ["React", "IndexedDB", "pdf.js"],
       overview:
-        "A local-first book management app with an integrated PDF reader. All data stays on your device via IndexedDB.",
+        "ReadLib keeps everything on-device, combining IndexedDB persistence with PDF.js to create a lightweight personal library and reading tracker without server dependency.",
       features: [
-        "In-browser PDF reader",
-        "Local storage for offline use",
-        "Book categorization",
-        "Last-read page memory",
+        "Integrated in-browser PDF reading experience",
+        "IndexedDB-based local persistence for offline use",
+        "Book sorting, categorization, and filtering",
+        "Reading-position memory for returning to documents",
       ],
       highlights: [
-        "Zero server dependency for user data",
-        "Smooth PDF rendering",
+        "No backend required for personal reading data",
+        "Built around practical offline-first usage",
       ],
       order: 5,
     },
     {
       title: "UniLib",
-      description: "A full-stack library management system for universities.",
+      description:
+        "Built a full-stack university library system covering inventory, member workflows, and admin-side operations.",
       category: "web",
       image: "Images/UniLib.png",
       tech: ["React", "Node.js", "MongoDB", "Express"],
       overview:
-        "A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.",
+        "UniLib brings together frontend workflows, REST APIs, and MongoDB-backed records to support common university library tasks such as inventory, borrowing, and member management.",
       features: [
-        "User authentication",
-        "Admin dashboard for book management",
-        "Issue/Return tracking",
-        "Inventory reporting",
+        "Authentication flow for protected user access",
+        "Admin dashboard for inventory and management tasks",
+        "Borrowing and return workflow tracking",
+        "Reporting-friendly inventory visibility",
       ],
       highlights: [
-        "Enterprise-ready architecture",
-        "Role-based access control",
+        "Connected frontend and backend flows in one product",
+        "Structured around realistic university library operations",
       ],
       order: 6,
     },
@@ -752,12 +799,21 @@ app.post("/api/auth/login", async (req, res) => {
   if (!username || !password)
     return res.status(400).json({ error: "Username and password required" });
 
+  if (isLoginRateLimited(req)) {
+    return res.status(429).json({
+      error: "Too many login attempts. Please wait 15 minutes and try again.",
+    });
+  }
+
   const validUser = username === process.env.ADMIN_USERNAME;
   const validPass = password === process.env.ADMIN_PASSWORD;
 
-  if (!validUser || !validPass)
+  if (!validUser || !validPass) {
+    recordLoginFailure(req);
     return res.status(401).json({ error: "Invalid credentials" });
+  }
 
+  clearLoginAttempts(req);
   const token = jwt.sign({ username, role: "admin" }, process.env.JWT_SECRET, {
     expiresIn: "24h",
   });
