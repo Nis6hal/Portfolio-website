@@ -1240,20 +1240,39 @@
       overflow: hidden;
     }
 
+    #certifications .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     #certifications .service-card {
       height: 300px;
+      padding: 24px 20px;
       display: flex;
       flex-direction: column;
     }
 
+    #certifications .service-icon-wrap {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 16px;
+    }
+
+    #certifications .service-icon-wrap i {
+      font-size: 20px;
+    }
+
     #certifications .service-card h3 {
-      min-height: 52px;
+      font-size: 17px;
+      line-height: 1.35;
+      margin-bottom: 10px;
     }
 
     #certifications .service-card p {
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 4px;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     #certifications .read-more-btn {
@@ -2865,6 +2884,10 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      #certifications .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .portfolio-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -3164,7 +3187,7 @@
 
       #certifications .service-card {
         height: 300px;
-        padding: 24px 18px;
+        padding: 22px 18px;
       }
 
       #certifications .service-card p {
@@ -3456,7 +3479,7 @@
           <p class="section-subtitle">CREDENTIALS</p>
           <h2 class="section-title">Certifications</h2>
         </div>
-        <div class="services-grid" id="certificationsGrid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="services-grid" id="certificationsGrid">
           <div class="service-card">
             <div class="service-icon-wrap"><i class="fab fa-aws"></i></div>
             <h3>Cloud & DevOps Training</h3>
