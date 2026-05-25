@@ -438,17 +438,15 @@
     }
 
     .nav-link.active::before {
-      content: '__';
+      content: '';
       position: absolute;
-      bottom: -14px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      color: var(--accent-primary);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -1px;
+      width: 18px;
+      height: 2px;
+      background: var(--accent-primary);
+      border-radius: 999px;
     }
 
     .nav-link.nav-cta {
@@ -1243,13 +1241,19 @@
     }
 
     #certifications .service-card {
-      min-height: 300px;
+      height: 300px;
       display: flex;
       flex-direction: column;
     }
 
+    #certifications .service-card h3 {
+      min-height: 52px;
+    }
+
     #certifications .service-card p {
       flex: 1;
+      overflow-y: auto;
+      padding-right: 4px;
     }
 
     #certifications .read-more-btn {
@@ -3159,7 +3163,7 @@
       }
 
       #certifications .service-card {
-        min-height: 300px;
+        height: 300px;
         padding: 24px 18px;
       }
 
