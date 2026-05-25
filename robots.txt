@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nischal-bhandari.com.np/sitemap.xml

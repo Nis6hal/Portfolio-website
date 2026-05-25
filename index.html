@@ -1820,49 +1820,6 @@
       background: var(--bg-base);
     }
 
-    .commit-graph {
-      overflow-x: auto;
-      padding-bottom: 16px;
-    }
-
-    .commit-grid {
-      display: grid;
-      grid-template-columns: repeat(52, 1fr);
-      gap: 3px;
-      min-width: 700px;
-    }
-
-    .commit-cell {
-      aspect-ratio: 1;
-      border-radius: 2px;
-      transition: transform 0.2s;
-    }
-
-    .commit-cell:hover {
-      transform: scale(1.4);
-      cursor: default;
-    }
-
-    .commit-0 {
-      background: #0d0d24;
-    }
-
-    .commit-1 {
-      background: #003333;
-    }
-
-    .commit-2 {
-      background: #006655;
-    }
-
-    .commit-3 {
-      background: #00aa88;
-    }
-
-    .commit-4 {
-      background: var(--accent-primary);
-    }
-
     .gh-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1898,16 +1855,139 @@
       color: var(--text-muted);
     }
 
+    .gh-repo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .gh-repo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 235px;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .gh-repo-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 14px 30px rgba(102, 217, 255, 0.12);
+    }
+
+    .gh-repo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .gh-repo-name {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+
+    .gh-repo-name a {
+      color: inherit;
+    }
+
+    .gh-repo-name a:hover {
+      color: var(--accent-primary);
+    }
+
+    .gh-repo-visibility {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-primary);
+      border: 1px solid rgba(102, 217, 255, 0.22);
+      background: rgba(102, 217, 255, 0.08);
+      border-radius: 999px;
+      padding: 5px 8px;
+      flex-shrink: 0;
+    }
+
+    .gh-repo-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 90px;
+    }
+
+    .gh-repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .gh-meta-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      background: var(--bg-card-alt);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .gh-repo-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .gh-repo-stats {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .gh-repo-stats span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .gh-repo-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent-primary);
+    }
+
+    .gh-repo-link:hover {
+      text-decoration: underline;
+    }
+
+    .gh-status {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
     .gh-link-wrap {
       text-align: center;
       margin-top: 32px;
     }
-
-    .gh-disclaimer {
-      text-align: center;
-      margin-bottom: 16px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
       color: var(--text-muted);
       letter-spacing: 1px;
     }
@@ -2888,6 +2968,10 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .gh-repo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .portfolio-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -3178,6 +3262,10 @@
       }
 
       .gh-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .gh-repo-grid {
         grid-template-columns: 1fr;
       }
 
@@ -3766,29 +3854,27 @@
         <div class="section-header">
           <p class="section-subtitle">OPEN SOURCE ACTIVITY</p>
           <h2 class="section-title">GitHub Activity</h2>
-          <p class="section-desc">Activity Overview — decorative visualization</p>
+          <p class="section-desc">Live public GitHub profile stats and recently updated repositories.</p>
         </div>
-        <div class="gh-disclaimer">⚠ ACTIVITY OVERVIEW — ILLUSTRATIVE DATA</div>
-        <div class="commit-graph">
-          <div class="commit-grid" id="commitGrid" aria-label="Commit activity heatmap"></div>
-        </div>
-        <div class="gh-stats">
-          <div class="gh-stat-card">
-            <i class="fas fa-code-branch"></i>
-            <span class="num">150+</span>
-            <span class="lbl">Est. Commits</span>
-          </div>
+        <div class="gh-stats" id="ghStats">
           <div class="gh-stat-card">
             <i class="fas fa-folder"></i>
-            <span class="num">8+</span>
-            <span class="lbl">Repositories</span>
+            <span class="num" id="ghPublicRepos">--</span>
+            <span class="lbl">Public Repositories</span>
+          </div>
+          <div class="gh-stat-card">
+            <i class="fas fa-star"></i>
+            <span class="num" id="ghTotalStars">--</span>
+            <span class="lbl">Total Stars</span>
           </div>
           <div class="gh-stat-card">
             <i class="fas fa-terminal"></i>
-            <span class="num">6+</span>
+            <span class="num" id="ghLanguages">--</span>
             <span class="lbl">Languages Used</span>
           </div>
         </div>
+        <div class="gh-repo-grid" id="ghRepoGrid" aria-live="polite"></div>
+        <div class="gh-status" id="ghStatus">Loading GitHub repositories...</div>
         <div class="gh-link-wrap">
           <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="btn btn-cyan-outline">
             <i class="fab fa-github"></i> View GitHub Profile
@@ -4217,28 +4303,70 @@
       }
     }
 
-    /* ============ GITHUB COMMIT GRAPH ============ */
-    (function () {
-      const grid = document.getElementById('commitGrid');
-      if (!grid) return;
-      const WEEKS = 52, DAYS = 7;
-      const cells = WEEKS * DAYS;
-      const frag = document.createDocumentFragment();
-      for (let i = 0; i < cells; i++) {
-        const weekNum = Math.floor(i / DAYS);
-        const recentBias = weekNum / WEEKS;
-        let level;
-        const r = Math.random();
-        if (r > 0.75 + recentBias * 0.15) level = 0;
-        else if (r > 0.55) level = 1;
-        else if (r > 0.35) level = 2;
-        else if (r > 0.2) level = 3;
-        else level = 4;
-        const cell = document.createElement('div');
-        cell.className = 'commit-cell commit-' + level;
-        frag.appendChild(cell);
+    /* ============ LIVE GITHUB DATA ============ */
+    (async function () {
+      const username = 'nis6hal';
+      const repoGrid = document.getElementById('ghRepoGrid');
+      const statusEl = document.getElementById('ghStatus');
+      const reposEl = document.getElementById('ghPublicRepos');
+      const starsEl = document.getElementById('ghTotalStars');
+      const languagesEl = document.getElementById('ghLanguages');
+      if (!repoGrid || !statusEl || !reposEl || !starsEl || !languagesEl) return;
+
+      try {
+        const [userRes, reposRes] = await Promise.all([
+          fetch(`https://api.github.com/users/${username}`),
+          fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`)
+        ]);
+
+        if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API request failed');
+
+        const user = await userRes.json();
+        const allRepos = await reposRes.json();
+        const repos = allRepos.filter(repo => !repo.fork);
+        const featuredRepos = repos.slice().sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 6);
+        const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+        const languages = new Set(repos.map(repo => repo.language).filter(Boolean));
+
+        reposEl.textContent = user.public_repos ?? repos.length;
+        starsEl.textContent = totalStars;
+        languagesEl.textContent = languages.size;
+
+        if (!featuredRepos.length) {
+          statusEl.textContent = 'No public repositories found right now.';
+          return;
+        }
+
+        repoGrid.innerHTML = featuredRepos.map(repo => {
+          const description = repo.description || 'Public repository on GitHub.';
+          const language = repo.language || 'Code';
+          return `
+            <article class="gh-repo-card">
+              <div class="gh-repo-top">
+                <h3 class="gh-repo-name"><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+                <span class="gh-repo-visibility">${repo.private ? 'Private' : 'Public'}</span>
+              </div>
+              <p class="gh-repo-desc">${description}</p>
+              <div class="gh-repo-meta">
+                <span class="gh-meta-pill">${language}</span>
+                <span class="gh-meta-pill">Updated ${new Date(repo.updated_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+              </div>
+              <div class="gh-repo-footer">
+                <div class="gh-repo-stats">
+                  <span><i class="fas fa-star"></i> ${repo.stargazers_count || 0}</span>
+                  <span><i class="fas fa-code-branch"></i> ${repo.forks_count || 0}</span>
+                </div>
+                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo</a>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        statusEl.textContent = 'Showing recently updated public repositories.';
+      } catch (err) {
+        console.warn('[GitHub] Failed to load live GitHub data:', err.message);
+        statusEl.textContent = 'GitHub data is temporarily unavailable. Use the profile link below to view repositories directly.';
       }
-      grid.appendChild(frag);
     })();
 
     /* ============ PROJECT MODAL DATA ============ */
