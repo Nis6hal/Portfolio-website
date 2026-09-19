@@ -70,7 +70,7 @@
     <a href="#certifications" class="nav-link" onclick="closeMobileNav()">Certifications</a>
     <a href="#skills" class="nav-link" onclick="closeMobileNav()">Skills</a>
     <a href="#portfolio" class="nav-link" onclick="closeMobileNav()">Portfolio</a>
-    <a href="#contact" class="nav-link" onclick="closeMobileNav()">Contact</a>
+    <a href="#contact" class="nav-link" onclick="closeMobileNav()">Contacts</a>
   </div>
 
   <!-- Header -->
@@ -90,7 +90,7 @@
         <a href="#certifications" class="nav-link">Certifications</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#portfolio" class="nav-link">Portfolio</a>
-        <a href="#contact" class="nav-link nav-cta">Hire Me</a>
+        <a href="#contact" class="nav-link nav-cta">Contacts</a>
       </nav>
     </div>
   </header>
@@ -246,14 +246,23 @@
             </div>
             <div class="tl-item" data-year="2026">
               <div class="tl-empty"></div>
-              <div class="tl-node"><i class="fas fa-star"></i></div>
+              <div class="tl-node"><i class="fas fa-network-wired"></i></div>
               <div class="tl-card tl-right">
-                <h4>Future Goals</h4>
-                <div class="tl-inst">Innovation Ahead</div>
-                <div class="tl-period">2026 &amp; Beyond</div>
-                <p>Secure a meaningful internship, scale into full-stack product ownership, contribute to OSS, and lead
-                  end-to-end builds with real-world impact.</p>
+                <h4>Engineering Intern</h4>
+                <div class="tl-inst">Nepal Telecom (NTC) — Ranipauwa, Pokhara</div>
+                <div class="tl-period">May 2026 – Aug 2026</div>
+                <p>Completed an engineering internship at Nepal Telecom (Ranipauwa, Pokhara), gaining practical hands-on experience in telecommunication network infrastructure, transmission systems, optical distribution, and enterprise network operations.</p>
               </div>
+            </div>
+            <div class="tl-item" data-year="2026+">
+              <div class="tl-card tl-left">
+                <h4>Future Goals &amp; Beyond</h4>
+                <div class="tl-inst">Software &amp; Systems Engineering</div>
+                <div class="tl-period">2026 &amp; Beyond</div>
+                <p>Graduating in Computer Engineering, scaling full-stack web and AI applications, contributing to high-impact open-source software, and building production-grade digital systems.</p>
+              </div>
+              <div class="tl-node"><i class="fas fa-rocket"></i></div>
+              <div class="tl-empty"></div>
             </div>
           </div>
         </div>
@@ -552,32 +561,159 @@
     <section id="github" class="github-activity">
       <div class="container">
         <div class="section-header">
-          <p class="section-subtitle">OPEN SOURCE ACTIVITY</p>
+          <div class="gh-header-badge">
+            <span class="gh-pulse-dot" aria-hidden="true"></span>
+            <span>LIVE GITHUB SYNC</span>
+          </div>
+          <p class="section-subtitle">OPEN SOURCE &amp; CODE</p>
           <h2 class="section-title">GitHub Activity</h2>
-          <p class="section-desc">Live public GitHub profile stats and recently updated repositories.</p>
+          <p class="section-desc">Live data synced directly from GitHub: public repositories, stars, language breakdowns, and real-time updates.</p>
+          <div class="gh-activity-banner" id="ghActivityBanner" style="display:none;">
+            <i class="fas fa-code-commit"></i>
+            <span id="ghLatestCommit">Connecting to GitHub...</span>
+          </div>
         </div>
         <div class="gh-stats" id="ghStats">
           <div class="gh-stat-card">
             <i class="fas fa-folder"></i>
-            <span class="num" id="ghPublicRepos">--</span>
+            <span class="num" id="ghPublicRepos">9</span>
             <span class="lbl">Public Repositories</span>
           </div>
           <div class="gh-stat-card">
             <i class="fas fa-star"></i>
-            <span class="num" id="ghTotalStars">--</span>
+            <span class="num" id="ghTotalStars">1</span>
             <span class="lbl">Total Stars</span>
           </div>
           <div class="gh-stat-card">
-            <i class="fas fa-terminal"></i>
-            <span class="num" id="ghLanguages">--</span>
+            <i class="fas fa-users"></i>
+            <span class="num" id="ghFollowers">7</span>
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="gh-stat-card">
+            <i class="fas fa-code"></i>
+            <span class="num" id="ghLanguages">4</span>
             <span class="lbl">Languages Used</span>
           </div>
         </div>
-        <div class="gh-repo-grid" id="ghRepoGrid" aria-live="polite"></div>
-        <div class="gh-status" id="ghStatus">Loading GitHub repositories...</div>
+        <div class="gh-repo-grid" id="ghRepoGrid" aria-live="polite">
+          <article class="gh-repo-card">
+            <div class="gh-repo-top">
+              <h3 class="gh-repo-name"><a href="https://github.com/Nis6hal/Smart-Gate-Automation-Using-License-Plate-Recognition" target="_blank" rel="noopener noreferrer">Smart-Gate-Automation-Using-License-Plate-Recognition</a></h3>
+              <span class="gh-repo-visibility">Public</span>
+            </div>
+            <p class="gh-repo-desc">Real-time edge AI license plate detection system designed for automated gate entry, barrier control, and vehicle tracking.</p>
+            <div class="gh-repo-meta">
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#3572A5;"></span> Python</span>
+              <span class="gh-meta-pill">OpenCV • AI</span>
+            </div>
+            <div class="gh-repo-footer">
+              <div class="gh-repo-stats">
+                <span><i class="fas fa-star"></i> 0</span>
+                <span><i class="fas fa-code-branch"></i> 0</span>
+              </div>
+              <a href="https://github.com/Nis6hal/Smart-Gate-Automation-Using-License-Plate-Recognition" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="gh-repo-card">
+            <div class="gh-repo-top">
+              <h3 class="gh-repo-name"><a href="https://github.com/Nis6hal/Complaint-Management-System" target="_blank" rel="noopener noreferrer">Complaint-Management-System</a></h3>
+              <span class="gh-repo-visibility">Public</span>
+            </div>
+            <p class="gh-repo-desc">A full-stack complaint logging and administrative grievance tracking system with status workflows and role management.</p>
+            <div class="gh-repo-meta">
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#f1e05a;"></span> JavaScript</span>
+              <span class="gh-meta-pill">Full Stack</span>
+            </div>
+            <div class="gh-repo-footer">
+              <div class="gh-repo-stats">
+                <span><i class="fas fa-star"></i> 0</span>
+                <span><i class="fas fa-code-branch"></i> 0</span>
+              </div>
+              <a href="https://github.com/Nis6hal/Complaint-Management-System" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="gh-repo-card">
+            <div class="gh-repo-top">
+              <h3 class="gh-repo-name"><a href="https://github.com/Nis6hal/ReadLib" target="_blank" rel="noopener noreferrer">ReadLib</a></h3>
+              <span class="gh-repo-visibility">Public</span>
+            </div>
+            <p class="gh-repo-desc">Local-first digital library and reading companion with integrated PDF reader, progress tracking, and offline support.</p>
+            <div class="gh-repo-meta">
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#f1e05a;"></span> JavaScript</span>
+              <span class="gh-meta-pill">Web App</span>
+            </div>
+            <div class="gh-repo-footer">
+              <div class="gh-repo-stats">
+                <span><i class="fas fa-star"></i> 0</span>
+                <span><i class="fas fa-code-branch"></i> 0</span>
+              </div>
+              <a href="https://github.com/Nis6hal/ReadLib" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="gh-repo-card">
+            <div class="gh-repo-top">
+              <h3 class="gh-repo-name"><a href="https://github.com/Nis6hal/SentimentAnalyzer_NLP-" target="_blank" rel="noopener noreferrer">SentimentAnalyzer_NLP-</a></h3>
+              <span class="gh-repo-visibility">Public</span>
+            </div>
+            <p class="gh-repo-desc">Natural Language Processing sentiment classifier analyzing text sentiment and emotion polarity with machine learning models.</p>
+            <div class="gh-repo-meta">
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#3572A5;"></span> Python</span>
+              <span class="gh-meta-pill">NLP • ML</span>
+            </div>
+            <div class="gh-repo-footer">
+              <div class="gh-repo-stats">
+                <span><i class="fas fa-star"></i> 0</span>
+                <span><i class="fas fa-code-branch"></i> 0</span>
+              </div>
+              <a href="https://github.com/Nis6hal/SentimentAnalyzer_NLP-" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="gh-repo-card">
+            <div class="gh-repo-top">
+              <h3 class="gh-repo-name"><a href="https://github.com/Nis6hal/AI-Powered-Academic-Tutor" target="_blank" rel="noopener noreferrer">AI-Powered-Academic-Tutor</a></h3>
+              <span class="gh-repo-visibility">Public</span>
+            </div>
+            <p class="gh-repo-desc">Interactive AI study assistant designed to provide conceptual explanations, guided tutoring, and engineering problem breakdown.</p>
+            <div class="gh-repo-meta">
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#66d9ff;"></span> AI</span>
+              <span class="gh-meta-pill">EdTech</span>
+            </div>
+            <div class="gh-repo-footer">
+              <div class="gh-repo-stats">
+                <span><i class="fas fa-star"></i> 0</span>
+                <span><i class="fas fa-code-branch"></i> 0</span>
+              </div>
+              <a href="https://github.com/Nis6hal/AI-Powered-Academic-Tutor" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="gh-repo-card">
+            <div class="gh-repo-top">
+              <h3 class="gh-repo-name"><a href="https://github.com/Nis6hal/Portfolio-website" target="_blank" rel="noopener noreferrer">Portfolio-website</a></h3>
+              <span class="gh-repo-visibility">Public</span>
+            </div>
+            <p class="gh-repo-desc">Personal portfolio and showcase platform with custom interactive theme, live GitHub sync, responsive design, and SEO.</p>
+            <div class="gh-repo-meta">
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#e34c26;"></span> HTML</span>
+              <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:#563d7c;"></span> CSS</span>
+            </div>
+            <div class="gh-repo-footer">
+              <div class="gh-repo-stats">
+                <span><i class="fas fa-star"></i> 0</span>
+                <span><i class="fas fa-code-branch"></i> 0</span>
+              </div>
+              <a href="https://github.com/Nis6hal/Portfolio-website" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+        <div class="gh-status" id="ghStatus">Syncing live GitHub data...</div>
         <div class="gh-link-wrap">
           <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="btn btn-cyan-outline">
-            <i class="fab fa-github"></i> View GitHub Profile
+            <i class="fab fa-github"></i> View Full GitHub Profile
           </a>
         </div>
       </div>

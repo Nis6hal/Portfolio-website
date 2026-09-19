@@ -291,36 +291,74 @@
       const statusEl = document.getElementById('ghStatus');
       const reposEl = document.getElementById('ghPublicRepos');
       const starsEl = document.getElementById('ghTotalStars');
+      const followersEl = document.getElementById('ghFollowers');
       const languagesEl = document.getElementById('ghLanguages');
-      if (!repoGrid || !statusEl || !reposEl || !starsEl || !languagesEl) return;
+      const bannerEl = document.getElementById('ghActivityBanner');
+      const latestCommitEl = document.getElementById('ghLatestCommit');
+      if (!repoGrid || !statusEl || !reposEl || !starsEl) return;
 
-      try {
-        const [userRes, reposRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${username}`),
-          fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`)
-        ]);
+      const repoDescriptions = {
+        'Smart-Gate-Automation-Using-License-Plate-Recognition': 'Real-time edge AI license plate detection system designed for automated gate entry, barrier control, and vehicle tracking.',
+        'Complaint-Management-System': 'A full-stack complaint logging and administrative grievance tracking system with status workflows and role management.',
+        'ReadLib': 'Local-first digital library and reading companion with integrated PDF reader, progress tracking, and offline support.',
+        'SentimentAnalyzer_NLP-': 'Natural Language Processing sentiment classifier analyzing text sentiment and emotion polarity with machine learning models.',
+        'AI-Powered-Academic-Tutor': 'Interactive AI study assistant designed to provide conceptual explanations, guided tutoring, and engineering problem breakdown.',
+        'Portfolio-website': 'Personal portfolio and showcase platform with custom interactive theme, live GitHub sync, responsive design, and SEO.',
+        'Typing-Speed-Testing-Website': 'Interactive web application to measure, benchmark, and improve typing speed with real-time WPM and accuracy metrics.',
+        'Star-Worthy-Repos': 'Curated collection and index of high-value open-source tools, developer utilities, and standout repositories.',
+        'Nis6hal': 'Personal profile repository and developer portfolio showcase on GitHub.'
+      };
 
-        if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API request failed');
+      const langColors = {
+        JavaScript: '#f1e05a',
+        Python: '#3572A5',
+        HTML: '#e34c26',
+        CSS: '#563d7c',
+        TypeScript: '#3178c6',
+        'C++': '#f34b7d',
+        C: '#555555'
+      };
 
-        const user = await userRes.json();
-        const allRepos = await reposRes.json();
-        const repos = allRepos.filter(repo => !repo.fork);
-        const featuredRepos = repos.slice().sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 6);
-        const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
-        const languages = new Set(repos.map(repo => repo.language).filter(Boolean));
+      function timeAgo(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        if (seconds < 60) return 'just now';
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes}m ago`;
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours}h ago`;
+        const days = Math.floor(hours / 24);
+        if (days < 30) return `${days}d ago`;
+        const months = Math.floor(days / 30);
+        if (months < 12) return `${months}mo ago`;
+        return `${Math.floor(months / 12)}y ago`;
+      }
 
-        reposEl.textContent = user.public_repos ?? repos.length;
-        starsEl.textContent = totalStars;
-        languagesEl.textContent = languages.size;
-
-        if (!featuredRepos.length) {
-          statusEl.textContent = 'No public repositories found right now.';
-          return;
+      function animateCount(el, target) {
+        if (!el || isNaN(target)) return;
+        const start = parseInt(el.textContent, 10) || 0;
+        if (start === target) return;
+        const duration = 600;
+        const startTime = performance.now();
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(start + (target - start) * ease);
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = target;
         }
+        requestAnimationFrame(update);
+      }
 
-        repoGrid.innerHTML = featuredRepos.map(repo => {
-          const description = repo.description || 'Public repository on GitHub.';
+      function renderRepos(repos) {
+        if (!repos || !repos.length) return;
+        repoGrid.innerHTML = repos.map(repo => {
+          const description = repo.description || repoDescriptions[repo.name] || 'Public open-source repository on GitHub.';
           const language = repo.language || 'Code';
+          const dotColor = langColors[language] || 'var(--accent-primary)';
+          const updatedDate = timeAgo(repo.pushed_at || repo.updated_at);
           return `
             <article class="gh-repo-card">
               <div class="gh-repo-top">
@@ -329,24 +367,97 @@
               </div>
               <p class="gh-repo-desc">${description}</p>
               <div class="gh-repo-meta">
-                <span class="gh-meta-pill">${language}</span>
-                <span class="gh-meta-pill">Updated ${new Date(repo.updated_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                <span class="gh-meta-pill"><span class="gh-lang-dot" style="background:${dotColor};"></span> ${language}</span>
+                <span class="gh-meta-pill">Updated ${updatedDate}</span>
               </div>
               <div class="gh-repo-footer">
                 <div class="gh-repo-stats">
-                  <span><i class="fas fa-star"></i> ${repo.stargazers_count || 0}</span>
-                  <span><i class="fas fa-code-branch"></i> ${repo.forks_count || 0}</span>
+                  <span title="Stars"><i class="fas fa-star"></i> ${repo.stargazers_count || 0}</span>
+                  <span title="Forks"><i class="fas fa-code-branch"></i> ${repo.forks_count || 0}</span>
                 </div>
-                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo</a>
+                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="gh-repo-link">Open Repo <i class="fas fa-arrow-right"></i></a>
               </div>
             </article>
           `;
         }).join('');
+      }
 
-        statusEl.textContent = 'Showing recently updated public repositories.';
+      // Check cache first for instant load
+      try {
+        const cached = localStorage.getItem('nb_gh_live_cache_v1');
+        if (cached) {
+          const data = JSON.parse(cached);
+          if (data && data.repos) {
+            animateCount(reposEl, data.publicRepos);
+            animateCount(starsEl, data.totalStars);
+            if (followersEl) animateCount(followersEl, data.followers);
+            if (languagesEl) animateCount(languagesEl, data.languagesCount);
+            renderRepos(data.repos);
+            if (data.latestEvent && bannerEl && latestCommitEl) {
+              latestCommitEl.innerHTML = data.latestEvent;
+              bannerEl.style.display = 'inline-flex';
+            }
+          }
+        }
+      } catch (e) { /* ignore cache read err */ }
+
+      try {
+        const [userRes, reposRes, eventsRes] = await Promise.allSettled([
+          fetch(`https://api.github.com/users/${username}`),
+          fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`),
+          fetch(`https://api.github.com/users/${username}/events/public?per_page=5`)
+        ]);
+
+        if (userRes.status !== 'fulfilled' || !userRes.value.ok || reposRes.status !== 'fulfilled' || !reposRes.value.ok) {
+          throw new Error('GitHub API rate-limited or unavailable');
+        }
+
+        const user = await userRes.value.json();
+        const allRepos = await reposRes.value.json();
+        const repos = allRepos.filter(repo => !repo.fork);
+        const featuredRepos = repos.slice().sort((a, b) => new Date(b.pushed_at || b.updated_at) - new Date(a.pushed_at || a.updated_at)).slice(0, 6);
+        const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+        const languages = new Set(repos.map(repo => repo.language).filter(Boolean));
+
+        animateCount(reposEl, user.public_repos ?? repos.length);
+        animateCount(starsEl, totalStars);
+        if (followersEl) animateCount(followersEl, user.followers ?? 7);
+        if (languagesEl) animateCount(languagesEl, languages.size || 4);
+
+        renderRepos(featuredRepos);
+
+        let eventText = '';
+        if (eventsRes.status === 'fulfilled' && eventsRes.value.ok) {
+          const events = await eventsRes.value.json();
+          if (Array.isArray(events) && events.length) {
+            const push = events.find(e => e.type === 'PushEvent') || events[0];
+            if (push && bannerEl && latestCommitEl) {
+              const repoName = push.repo?.name || 'repository';
+              const when = timeAgo(push.created_at);
+              eventText = `Latest activity: <strong>Pushed to <a href="https://github.com/${repoName}" target="_blank" rel="noopener noreferrer" style="color:var(--accent-primary);text-decoration:underline;">${repoName}</a></strong> (${when})`;
+              latestCommitEl.innerHTML = eventText;
+              bannerEl.style.display = 'inline-flex';
+            }
+          }
+        }
+
+        statusEl.textContent = 'Live data synced with GitHub • Showing active repositories.';
+
+        // Save fresh cache
+        try {
+          localStorage.setItem('nb_gh_live_cache_v1', JSON.stringify({
+            publicRepos: user.public_repos ?? repos.length,
+            totalStars,
+            followers: user.followers ?? 7,
+            languagesCount: languages.size || 4,
+            repos: featuredRepos,
+            latestEvent: eventText
+          }));
+        } catch (e) { /* ignore cache write err */ }
+
       } catch (err) {
-        console.warn('[GitHub] Failed to load live GitHub data:', err.message);
-        statusEl.textContent = 'GitHub data is temporarily unavailable. Use the profile link below to view repositories directly.';
+        console.warn('[GitHub] Note:', err.message);
+        statusEl.textContent = 'Showing public repositories. Click any repo to view code live on GitHub.';
       }
     })();
 
@@ -591,7 +702,7 @@
       /* ── Availability / hire / internship ── */
       {
         keywords: ['available', 'hire', 'hiring', 'freelance', 'internship', 'job', 'work with', 'open to work', 'opportunity', 'looking for work', 'intern'],
-        reply: '🚀 Absolutely! Nischal is highly motivated and actively seeking new challenges and impact-driven roles.\n\nHe is currently open to:\n✨ BE Computer Engineering Internships (Academic/Independent)\n💻 Junior Developer positions (Full-stack / Frontend / Python)\n🤝 Exciting project collaborations & Freelance work\n🌍 Remote-first teams globally\n\nDirect Contact:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal (Fastest response!)\n\nLet\'s build something great together! 🔥'
+        reply: '🚀 Absolutely! Following his engineering internship at Nepal Telecom (NTC — Ranipauwa, Pokhara), Nischal is highly motivated and actively seeking new challenges and impact-driven roles.\n\nHe is currently open to:\n💻 Software Engineer / Developer positions (Full-stack / Frontend / Python)\n✨ Advanced Engineering Internships & Fellowships\n🤝 High-impact project collaborations & Freelance work\n🌍 Remote-first teams globally\n\nDirect Contact:\n📧 itisnischal@gmail.com\n📸 Instagram: @nis6hal (Fastest response!)\n\nLet\'s build something great together! 🔥'
       },
 
       /* ── Collaborate ── */
@@ -603,7 +714,7 @@
       /* ── Goals ── */
       {
         keywords: ['goal', 'dream', 'aspire', 'future', 'plan', 'ambition', 'next step', 'vision', 'where do you see'],
-        reply: '🏆 Nischal\'s goals:\n\n🎓 Graduate from Pokhara University in 2026\n💼 Land a meaningful developer role or internship\n🌍 Work globally, build products used by thousands\n🤖 Keep pushing into AI/ML and full-stack development\n\nFinal semester, strong portfolio, actively looking. 🔥'
+        reply: '🏆 Nischal\'s goals:\n\n🎓 Graduate in Computer Engineering from Pokhara University in 2026\n💼 Scale from his NTC engineering internship into high-impact developer & engineering roles\n🌍 Work globally, build products used by thousands\n🤖 Keep pushing frontiers in AI/ML and full-stack software systems\n\nFinal semester, proven project track record, actively looking. 🔥'
       },
 
       /* ── Hobbies ── */
@@ -621,7 +732,7 @@
       /* ── Experience ── */
       {
         keywords: ['experience', 'year', 'how long', 'background', 'journey', 'started', 'when did'],
-        reply: '⏱️ Nischal\'s journey:\n\n2022 — Completed Science stream at Chhorepatan Secondary School and started BE Computer Engineering\n2025 — Built first production-focused academic projects and strengthened React + backend fundamentals\n2025 — AI-integrated and product projects: Gate Automation, CineVault, ReadLib\n2026+ — Targeting internship opportunities while expanding product-quality portfolio work\n\nCurrently in 8th semester with 6+ projects shipped. 🔥'
+        reply: '⏱️ Nischal\'s journey:\n\n2022 — Completed Science stream at Chhorepatan Secondary School and started BE Computer Engineering at Pokhara University\n2025 — Built production-focused projects (React, Node.js) and AI systems (Gate Automation, CineVault, ReadLib)\nMay–Aug 2026 — Engineering Intern at Nepal Telecom (NTC — Ranipauwa, Pokhara)\n2026+ — Graduating and actively seeking software engineering & developer opportunities\n\nCurrently in 8th semester with 6+ projects shipped and telecom internship completed. 🔥'
       },
 
       /* ── Contact ── */
