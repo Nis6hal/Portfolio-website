@@ -583,6 +583,11 @@
           file: 'Gitcerts.jpg',
           path: 'Images/Certs/Gitcerts.jpg',
           title: 'Git & GitHub Certification'
+        },
+        {
+          file: 'NTCcerts.jpg',
+          path: 'Images/Certs/NTCcerts.jpg',
+          title: 'Nepal Telecom (NTC) Internship Certificate'
         }
       ];
 
