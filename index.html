@@ -276,16 +276,85 @@
           <p class="section-subtitle">CREDENTIALS</p>
           <h2 class="section-title">Certifications</h2>
         </div>
+        <!-- Certificate Sliding Window Showcase -->
+        <div class="cert-showcase">
+          <div class="cert-slider-header">
+            <div class="cert-slider-title-wrap">
+              <span class="cert-live-tag"><i class="fas fa-images"></i> Certificate Showcase</span>
+              <p class="cert-slider-sub">Direct credential gallery • Click any certificate to inspect &amp; verify</p>
+            </div>
+            <div class="cert-slider-arrows">
+              <button class="cert-slider-btn prev" id="certSliderPrev" aria-label="Previous certificate">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="cert-slider-btn next" id="certSliderNext" aria-label="Next certificate">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="cert-slider-viewport" id="certSliderViewport">
+            <div class="cert-slider-track" id="certSliderTrack">
+              <div class="cert-slide" data-cert-image="Images/Certs/Cloud%26Devops.jpg" data-cert-title="Cloud &amp; DevOps Training Certificate" tabindex="0" role="button" aria-label="View Cloud &amp; DevOps Training Certificate">
+                <div class="cert-slide-inner">
+                  <div class="cert-img-container">
+                    <img src="Images/Certs/Cloud%26Devops.jpg" alt="Cloud &amp; DevOps Training Certificate" loading="lazy">
+                    <div class="cert-overlay">
+                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
+                    </div>
+                  </div>
+                  <div class="cert-meta-info">
+                    <h4>Cloud &amp; DevOps Training</h4>
+                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cert-slide" data-cert-image="Images/Certs/FundsofDS.jpg" data-cert-title="Fundamentals of Data Science Certificate" tabindex="0" role="button" aria-label="View Fundamentals of Data Science Certificate">
+                <div class="cert-slide-inner">
+                  <div class="cert-img-container">
+                    <img src="Images/Certs/FundsofDS.jpg" alt="Fundamentals of Data Science Certificate" loading="lazy">
+                    <div class="cert-overlay">
+                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
+                    </div>
+                  </div>
+                  <div class="cert-meta-info">
+                    <h4>Fundamentals of Data Science</h4>
+                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cert-slide" data-cert-image="Images/Certs/Gitcerts.jpg" data-cert-title="Git &amp; GitHub Certification" tabindex="0" role="button" aria-label="View Git &amp; GitHub Certification">
+                <div class="cert-slide-inner">
+                  <div class="cert-img-container">
+                    <img src="Images/Certs/Gitcerts.jpg" alt="Git &amp; GitHub Certification" loading="lazy">
+                    <div class="cert-overlay">
+                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
+                    </div>
+                  </div>
+                  <div class="cert-meta-info">
+                    <h4>Git &amp; GitHub Certification</h4>
+                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cert-slider-dots" id="certSliderDots" role="tablist" aria-label="Certificate navigation dots"></div>
+        </div>
+
         <div class="services-grid" id="certificationsGrid">
           <div class="service-card">
             <div class="service-icon-wrap"><i class="fab fa-aws"></i></div>
-            <h3>Cloud & DevOps Training</h3>
+            <h3>Cloud &amp; DevOps Training</h3>
             <p>Hands-on training in AWS core services, cloud architecture basics, CI/CD pipelines, and containerized
               deployment workflows.</p>
             <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">
               AWS • Docker • CI/CD</div>
             <a href="Images/Certs/Cloud%26Devops.jpg" data-cert-image="Images/Certs/Cloud%26Devops.jpg"
-              data-cert-title="Cloud & DevOps Training Certificate" class="read-more-btn"
+              data-cert-title="Cloud &amp; DevOps Training Certificate" class="read-more-btn"
               style="margin-top:12px;">Verify Credential</a>
           </div>
           <div class="service-card">
@@ -297,6 +366,16 @@
               Python • Pandas • NumPy • Matplotlib</div>
             <a href="Images/Certs/FundsofDS.jpg" data-cert-image="Images/Certs/FundsofDS.jpg"
               data-cert-title="Fundamentals of Data Science Certificate" class="read-more-btn"
+              style="margin-top:12px;">Verify Credential</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon-wrap"><i class="fab fa-git-alt"></i></div>
+            <h3>Version Control with Git &amp; GitHub</h3>
+            <p>Practical expertise in Git workflows, branching, repository management, collaborative open-source practices, and CI automation.</p>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">
+              Git • GitHub • Version Control</div>
+            <a href="Images/Certs/Gitcerts.jpg" data-cert-image="Images/Certs/Gitcerts.jpg"
+              data-cert-title="Git &amp; GitHub Certification" class="read-more-btn"
               style="margin-top:12px;">Verify Credential</a>
           </div>
         </div>

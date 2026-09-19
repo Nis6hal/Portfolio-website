@@ -1238,6 +1238,253 @@
       margin-top: auto !important;
     }
 
+    /* ===================== CERTIFICATE SHOWCASE SLIDER ===================== */
+    .cert-showcase {
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .cert-slider-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cert-slider-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cert-live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cert-slider-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .cert-slider-arrows {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cert-slider-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .cert-slider-btn:hover {
+      background: var(--accent-primary);
+      color: #000;
+      border-color: var(--accent-primary);
+      transform: scale(1.08);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .cert-slider-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .cert-slider-viewport {
+      overflow: hidden;
+      width: 100%;
+      border-radius: 18px;
+      position: relative;
+      user-select: none;
+    }
+
+    .cert-slider-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .cert-slide {
+      flex: 0 0 calc((100% - 48px) / 3);
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .cert-slide-inner {
+      background: var(--card-gradient);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+
+    .cert-slide:focus-visible .cert-slide-inner,
+    .cert-slide-inner:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 16px 32px rgba(102, 217, 255, 0.16);
+    }
+
+    .cert-img-container {
+      position: relative;
+      height: 200px;
+      background: #050505;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cert-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.4s ease;
+      background: #08080c;
+    }
+
+    .cert-slide-inner:hover .cert-img-container img {
+      transform: scale(1.04);
+    }
+
+    .cert-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 4, 15, 0.65);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .cert-slide-inner:hover .cert-overlay {
+      opacity: 1;
+    }
+
+    .cert-zoom-btn {
+      background: var(--accent-primary);
+      color: #000;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transform: translateY(8px);
+      transition: transform 0.25s ease;
+    }
+
+    .cert-slide-inner:hover .cert-zoom-btn {
+      transform: translateY(0);
+    }
+
+    .cert-meta-info {
+      padding: 16px 18px;
+      background: var(--bg-card);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: auto;
+    }
+
+    .cert-meta-info h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cert-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cert-slider-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .cert-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cert-dot.active {
+      width: 24px;
+      border-radius: 999px;
+      background: var(--accent-primary);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .cert-preview-wrap {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 72vh;
+    }
+
+    .cert-preview-wrap img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+    }
+
     .service-card::before {
       content: '';
       position: absolute;
@@ -3028,6 +3275,14 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .cert-slide {
+        flex: 0 0 calc((100% - 20px) / 2);
+      }
+
+      .cert-slider-track {
+        gap: 20px;
+      }
+
       .gh-stats {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -3332,6 +3587,24 @@
 
       .gh-repo-grid {
         grid-template-columns: 1fr;
+      }
+
+      .cert-slide {
+        flex: 0 0 100%;
+      }
+
+      .cert-slider-track {
+        gap: 16px;
+      }
+
+      .cert-img-container {
+        height: 190px;
+      }
+
+      .cert-slider-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
       }
 
       #certifications .services-grid {

@@ -536,11 +536,16 @@
       if (!modal) return;
       document.getElementById('modalTitle').textContent = title || 'Certificate';
       document.getElementById('modalContent').innerHTML = `
-    <p>Credential preview</p>
-    <div class="cert-preview-wrap">
-      <img src="${imageSrc}" alt="${title || 'Certificate image'}" loading="lazy">
-    </div>
-  `;
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+          <p style="margin:0; color:var(--text-muted); font-size:13px;"><i class="fas fa-shield-alt" style="color:var(--accent-primary); margin-right:6px;"></i> Verified Credential Preview</p>
+          <a href="${imageSrc}" target="_blank" rel="noopener noreferrer" class="port-btn" style="font-size:12px; padding:6px 14px;">
+            <i class="fas fa-external-link-alt"></i> Open Original
+          </a>
+        </div>
+        <div class="cert-preview-wrap">
+          <img src="${imageSrc}" alt="${title || 'Certificate image'}" loading="lazy">
+        </div>
+      `;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
       modal.querySelector('.modal-close').focus();
@@ -553,6 +558,239 @@
         };
       });
     }
+
+    /* ============ DYNAMIC CERTIFICATE SLIDER (AUTO-DETECTS FROM IMAGES/CERTS) ============ */
+    (async function initCertSlider() {
+      const track = document.getElementById('certSliderTrack');
+      const dotsContainer = document.getElementById('certSliderDots');
+      const prevBtn = document.getElementById('certSliderPrev');
+      const nextBtn = document.getElementById('certSliderNext');
+      const viewport = document.getElementById('certSliderViewport');
+      if (!track || !viewport) return;
+
+      const fallbackCerts = [
+        {
+          file: 'Cloud&Devops.jpg',
+          path: 'Images/Certs/Cloud%26Devops.jpg',
+          title: 'Cloud & DevOps Training Certificate'
+        },
+        {
+          file: 'FundsofDS.jpg',
+          path: 'Images/Certs/FundsofDS.jpg',
+          title: 'Fundamentals of Data Science Certificate'
+        },
+        {
+          file: 'Gitcerts.jpg',
+          path: 'Images/Certs/Gitcerts.jpg',
+          title: 'Git & GitHub Certification'
+        }
+      ];
+
+      function formatCertTitle(filename) {
+        const base = filename.replace(/\.[^/.]+$/, '');
+        if (/cloud/i.test(base) && /devops/i.test(base)) return 'Cloud & DevOps Training Certificate';
+        if (/ds|datascience/i.test(base)) return 'Fundamentals of Data Science Certificate';
+        if (/git/i.test(base)) return 'Git & GitHub Certification';
+        if (/ntc/i.test(base) || /intern/i.test(base)) return 'Nepal Telecom (NTC) Internship Certificate';
+
+        return base
+          .replace(/([a-z])([A-Z])/g, '$1 $2')
+          .replace(/[_-]+/g, ' ')
+          .replace(/\b\w/g, l => l.toUpperCase())
+          .trim() + ' Certificate';
+      }
+
+      let certList = fallbackCerts;
+
+      // 1. Check local cache first
+      try {
+        const cached = localStorage.getItem('nb_certs_auto_cache');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length) certList = parsed;
+        }
+      } catch (e) {}
+
+      // 2. Query GitHub repo contents dynamically so any newly added images in Images/Certs/ appear automatically
+      try {
+        const res = await fetch('https://api.github.com/repos/Nis6hal/Portfolio-website/contents/Images/Certs');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length) {
+            const imgRegex = /\.(jpe?g|png|webp|svg)$/i;
+            const certFiles = data.filter(item => item.type === 'file' && imgRegex.test(item.name));
+            if (certFiles.length > 0) {
+              certList = certFiles.map(f => ({
+                file: f.name,
+                path: `Images/Certs/${encodeURIComponent(f.name).replace(/%26/g, '%26')}`,
+                title: formatCertTitle(f.name)
+              }));
+              try {
+                localStorage.setItem('nb_certs_auto_cache', JSON.stringify(certList));
+              } catch (e) {}
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('[CertSlider] Auto-sync notice:', err.message);
+      }
+
+      // 3. Render slides
+      function renderTrack(list) {
+        track.innerHTML = list.map(c => `
+          <div class="cert-slide" data-cert-image="${c.path}" data-cert-title="${c.title}" tabindex="0" role="button" aria-label="View ${c.title}">
+            <div class="cert-slide-inner">
+              <div class="cert-img-container">
+                <img src="${c.path}" alt="${c.title}" loading="lazy">
+                <div class="cert-overlay">
+                  <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
+                </div>
+              </div>
+              <div class="cert-meta-info">
+                <h4>${c.title}</h4>
+                <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        track.querySelectorAll('.cert-slide').forEach(slide => {
+          slide.addEventListener('click', () => {
+            openCertModal(slide.dataset.certImage, slide.dataset.certTitle);
+          });
+          slide.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openCertModal(slide.dataset.certImage, slide.dataset.certTitle);
+            }
+          });
+        });
+      }
+
+      renderTrack(certList);
+
+      let currentIndex = 0;
+      let autoplayTimer = null;
+      let startX = 0;
+      let isSwiping = false;
+
+      function getVisibleCount() {
+        if (window.innerWidth <= 768) return 1;
+        if (window.innerWidth <= 1024) return 2;
+        return 3;
+      }
+
+      function getMaxIndex() {
+        const visible = getVisibleCount();
+        return Math.max(0, certList.length - visible);
+      }
+
+      function updateDots() {
+        if (!dotsContainer) return;
+        const maxIdx = getMaxIndex();
+        const totalPositions = maxIdx + 1;
+        dotsContainer.innerHTML = Array.from({ length: totalPositions }).map((_, i) => `
+          <button class="cert-dot ${i === currentIndex ? 'active' : ''}" data-idx="${i}" aria-label="Go to certificate slide ${i + 1}"></button>
+        `).join('');
+
+        dotsContainer.querySelectorAll('.cert-dot').forEach(btn => {
+          btn.addEventListener('click', () => {
+            goToSlide(parseInt(btn.dataset.idx, 10));
+          });
+        });
+      }
+
+      function goToSlide(index) {
+        const maxIdx = getMaxIndex();
+        currentIndex = Math.max(0, Math.min(index, maxIdx));
+        const slides = track.querySelectorAll('.cert-slide');
+        if (!slides.length) return;
+
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const gap = window.innerWidth <= 768 ? 16 : 24;
+        const offset = currentIndex * (slideWidth + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentIndex >= maxIdx;
+
+        if (dotsContainer) {
+          dotsContainer.querySelectorAll('.cert-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === currentIndex);
+          });
+        }
+      }
+
+      function nextSlide() {
+        const maxIdx = getMaxIndex();
+        if (currentIndex >= maxIdx) {
+          goToSlide(0);
+        } else {
+          goToSlide(currentIndex + 1);
+        }
+      }
+
+      function prevSlide() {
+        const maxIdx = getMaxIndex();
+        if (currentIndex <= 0) {
+          goToSlide(maxIdx);
+        } else {
+          goToSlide(currentIndex - 1);
+        }
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+
+      function startAutoplay() {
+        if (prefersReducedMotion || certList.length <= getVisibleCount()) return;
+        stopAutoplay();
+        autoplayTimer = setInterval(nextSlide, 4000);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
+
+      viewport.addEventListener('mouseenter', stopAutoplay);
+      viewport.addEventListener('mouseleave', startAutoplay);
+
+      // Touch swipe support for mobile
+      viewport.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isSwiping = true;
+        stopAutoplay();
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        isSwiping = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) nextSlide();
+          else prevSlide();
+        }
+        startAutoplay();
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        updateDots();
+        goToSlide(currentIndex);
+      });
+
+      updateDots();
+      goToSlide(0);
+      startAutoplay();
+    })();
 
     // Use event delegation for dynamically loaded projects
     document.addEventListener('click', (e) => {
