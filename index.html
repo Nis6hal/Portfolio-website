@@ -276,88 +276,57 @@
           <p class="section-subtitle">CREDENTIALS</p>
           <h2 class="section-title">Certifications</h2>
         </div>
-        <!-- Certificate Sliding Window Showcase -->
-        <div class="cert-showcase">
-          <div class="cert-slider-header">
-            <div class="cert-slider-title-wrap">
-              <span class="cert-live-tag"><i class="fas fa-images"></i> Certificate Showcase</span>
-              <p class="cert-slider-sub">Direct credential gallery • Click any certificate to inspect &amp; verify</p>
-            </div>
-            <div class="cert-slider-arrows">
-              <button class="cert-slider-btn prev" id="certSliderPrev" aria-label="Previous certificate">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="cert-slider-btn next" id="certSliderNext" aria-label="Next certificate">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
+        <!-- Certificate Image-Only Auto-Scroll Reel -->
+        <div class="cert-reel-wrap" id="certReelWrap">
+          <div class="cert-reel-header">
+            <span class="cert-live-pill"><span class="gh-pulse-dot" aria-hidden="true"></span> Verified Credentials Showcase</span>
+            <span class="cert-reel-hint"><i class="fas fa-hand-pointer"></i> Hover to pause • Click image to verify credential</span>
           </div>
 
-          <div class="cert-slider-viewport" id="certSliderViewport">
-            <div class="cert-slider-track" id="certSliderTrack">
-              <div class="cert-slide" data-cert-image="Images/Certs/Cloud%26Devops.jpg" data-cert-title="Cloud &amp; DevOps Training Certificate" tabindex="0" role="button" aria-label="View Cloud &amp; DevOps Training Certificate">
-                <div class="cert-slide-inner">
-                  <div class="cert-img-container">
-                    <img src="Images/Certs/Cloud%26Devops.jpg" alt="Cloud &amp; DevOps Training Certificate" loading="lazy">
-                    <div class="cert-overlay">
-                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
-                    </div>
-                  </div>
-                  <div class="cert-meta-info">
-                    <h4>Cloud &amp; DevOps Training</h4>
-                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
-                  </div>
-                </div>
+          <div class="cert-marquee" id="certMarquee">
+            <div class="cert-marquee-track" id="certMarqueeTrack">
+              <div class="cert-reel-item" data-cert-image="Images/Certs/Cloud%26Devops.jpg" data-cert-title="Cloud &amp; DevOps Training Certificate" tabindex="0" role="button" aria-label="Verify Cloud &amp; DevOps Training Certificate">
+                <img src="Images/Certs/Cloud%26Devops.jpg" alt="Cloud &amp; DevOps Training Certificate" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
               </div>
 
-              <div class="cert-slide" data-cert-image="Images/Certs/FundsofDS.jpg" data-cert-title="Fundamentals of Data Science Certificate" tabindex="0" role="button" aria-label="View Fundamentals of Data Science Certificate">
-                <div class="cert-slide-inner">
-                  <div class="cert-img-container">
-                    <img src="Images/Certs/FundsofDS.jpg" alt="Fundamentals of Data Science Certificate" loading="lazy">
-                    <div class="cert-overlay">
-                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
-                    </div>
-                  </div>
-                  <div class="cert-meta-info">
-                    <h4>Fundamentals of Data Science</h4>
-                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
-                  </div>
-                </div>
+              <div class="cert-reel-item" data-cert-image="Images/Certs/FundsofDS.jpg" data-cert-title="Fundamentals of Data Science Certificate" tabindex="0" role="button" aria-label="Verify Fundamentals of Data Science Certificate">
+                <img src="Images/Certs/FundsofDS.jpg" alt="Fundamentals of Data Science Certificate" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
               </div>
 
-              <div class="cert-slide" data-cert-image="Images/Certs/Gitcerts.jpg" data-cert-title="Git &amp; GitHub Certification" tabindex="0" role="button" aria-label="View Git &amp; GitHub Certification">
-                <div class="cert-slide-inner">
-                  <div class="cert-img-container">
-                    <img src="Images/Certs/Gitcerts.jpg" alt="Git &amp; GitHub Certification" loading="lazy">
-                    <div class="cert-overlay">
-                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
-                    </div>
-                  </div>
-                  <div class="cert-meta-info">
-                    <h4>Git &amp; GitHub Certification</h4>
-                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
-                  </div>
-                </div>
+              <div class="cert-reel-item" data-cert-image="Images/Certs/Gitcerts.jpg" data-cert-title="Git &amp; GitHub Certification" tabindex="0" role="button" aria-label="Verify Git &amp; GitHub Certification">
+                <img src="Images/Certs/Gitcerts.jpg" alt="Git &amp; GitHub Certification" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
               </div>
 
-              <div class="cert-slide" data-cert-image="Images/Certs/NTCcerts.jpg" data-cert-title="Nepal Telecom (NTC) Internship Certificate" tabindex="0" role="button" aria-label="View Nepal Telecom (NTC) Internship Certificate">
-                <div class="cert-slide-inner">
-                  <div class="cert-img-container">
-                    <img src="Images/Certs/NTCcerts.jpg" alt="Nepal Telecom (NTC) Internship Certificate" loading="lazy">
-                    <div class="cert-overlay">
-                      <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
-                    </div>
-                  </div>
-                  <div class="cert-meta-info">
-                    <h4>NTC Internship Certificate</h4>
-                    <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
-                  </div>
-                </div>
+              <div class="cert-reel-item" data-cert-image="Images/Certs/NTCcerts.jpg" data-cert-title="Nepal Telecom (NTC) Internship Certificate" tabindex="0" role="button" aria-label="Verify Nepal Telecom (NTC) Internship Certificate">
+                <img src="Images/Certs/NTCcerts.jpg" alt="Nepal Telecom (NTC) Internship Certificate" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
+              </div>
+
+              <!-- Loop clone set for continuous infinite auto-scroll -->
+              <div class="cert-reel-item" data-cert-image="Images/Certs/Cloud%26Devops.jpg" data-cert-title="Cloud &amp; DevOps Training Certificate" tabindex="0" role="button" aria-label="Verify Cloud &amp; DevOps Training Certificate">
+                <img src="Images/Certs/Cloud%26Devops.jpg" alt="Cloud &amp; DevOps Training Certificate" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
+              </div>
+
+              <div class="cert-reel-item" data-cert-image="Images/Certs/FundsofDS.jpg" data-cert-title="Fundamentals of Data Science Certificate" tabindex="0" role="button" aria-label="Verify Fundamentals of Data Science Certificate">
+                <img src="Images/Certs/FundsofDS.jpg" alt="Fundamentals of Data Science Certificate" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
+              </div>
+
+              <div class="cert-reel-item" data-cert-image="Images/Certs/Gitcerts.jpg" data-cert-title="Git &amp; GitHub Certification" tabindex="0" role="button" aria-label="Verify Git &amp; GitHub Certification">
+                <img src="Images/Certs/Gitcerts.jpg" alt="Git &amp; GitHub Certification" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
+              </div>
+
+              <div class="cert-reel-item" data-cert-image="Images/Certs/NTCcerts.jpg" data-cert-title="Nepal Telecom (NTC) Internship Certificate" tabindex="0" role="button" aria-label="Verify Nepal Telecom (NTC) Internship Certificate">
+                <img src="Images/Certs/NTCcerts.jpg" alt="Nepal Telecom (NTC) Internship Certificate" loading="lazy">
+                <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
               </div>
             </div>
           </div>
-
-          <div class="cert-slider-dots" id="certSliderDots" role="tablist" aria-label="Certificate navigation dots"></div>
         </div>
 
         <div class="services-grid" id="certificationsGrid">
@@ -394,11 +363,11 @@
               style="margin-top:12px;">Verify Credential</a>
           </div>
           <div class="service-card">
-            <div class="service-icon-wrap"><i class="fas fa-tower-broadcast"></i></div>
+            <div class="service-icon-wrap"><i class="fas fa-network-wired"></i></div>
             <h3>Nepal Telecom (NTC) Internship</h3>
-            <p>Engineering internship certification at Nepal Telecom (Ranipauwa, Pokhara), covering telecommunication systems, optical distribution, and network infrastructure.</p>
-            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">
-              Telecom • Networking • Optical Fiber</div>
+            <p>Engineering internship engaging in telecom networking infrastructure alongside MERN stack development and AI/ML integrations. Engineered an end-to-end Complaint Management System for internal issue workflows.</p>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-primary);">
+              MERN Stack • AI/ML • Networking • Telecom</div>
             <a href="Images/Certs/NTCcerts.jpg" data-cert-image="Images/Certs/NTCcerts.jpg"
               data-cert-title="Nepal Telecom (NTC) Internship Certificate" class="read-more-btn"
               style="margin-top:12px;">Verify Credential</a>

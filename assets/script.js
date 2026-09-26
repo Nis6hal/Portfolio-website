@@ -559,14 +559,10 @@
       });
     }
 
-    /* ============ DYNAMIC CERTIFICATE SLIDER (AUTO-DETECTS FROM IMAGES/CERTS) ============ */
-    (async function initCertSlider() {
-      const track = document.getElementById('certSliderTrack');
-      const dotsContainer = document.getElementById('certSliderDots');
-      const prevBtn = document.getElementById('certSliderPrev');
-      const nextBtn = document.getElementById('certSliderNext');
-      const viewport = document.getElementById('certSliderViewport');
-      if (!track || !viewport) return;
+    /* ============ CERT REEL – INFINITE AUTO-SCROLL MARQUEE ============ */
+    (async function initCertReel() {
+      const track = document.getElementById('certMarqueeTrack');
+      if (!track) return;
 
       const fallbackCerts = [
         {
@@ -640,162 +636,42 @@
         console.warn('[CertSlider] Auto-sync notice:', err.message);
       }
 
-      // 3. Render slides
-      function renderTrack(list) {
-        track.innerHTML = list.map(c => `
-          <div class="cert-slide" data-cert-image="${c.path}" data-cert-title="${c.title}" tabindex="0" role="button" aria-label="View ${c.title}">
-            <div class="cert-slide-inner">
-              <div class="cert-img-container">
-                <img src="${c.path}" alt="${c.title}" loading="lazy">
-                <div class="cert-overlay">
-                  <span class="cert-zoom-btn"><i class="fas fa-expand-alt"></i> Click to Verify</span>
-                </div>
-              </div>
-              <div class="cert-meta-info">
-                <h4>${c.title}</h4>
-                <span class="cert-badge"><i class="fas fa-shield-alt"></i> Verified Credential</span>
-              </div>
-            </div>
-          </div>
-        `).join('');
+      // 3. Build the marquee track (duplicated for seamless loop)
+      function renderReel(list) {
+        // Build one set then duplicate it for the infinite CSS scroll loop
+        const makeItem = c => `
+          <div class="cert-reel-item" data-cert-image="${c.path}" data-cert-title="${c.title}" tabindex="0" role="button" aria-label="Verify ${c.title}">
+            <img src="${c.path}" alt="${c.title}" loading="lazy">
+            <div class="cert-reel-overlay"><i class="fas fa-expand-alt"></i><span>Verify</span></div>
+          </div>`;
 
-        track.querySelectorAll('.cert-slide').forEach(slide => {
-          slide.addEventListener('click', () => {
-            openCertModal(slide.dataset.certImage, slide.dataset.certTitle);
+        const oneSet = list.map(makeItem).join('');
+        track.innerHTML = oneSet + oneSet; // duplicate for seamless loop
+
+        track.querySelectorAll('.cert-reel-item').forEach(item => {
+          item.addEventListener('click', () => {
+            openCertModal(item.dataset.certImage, item.dataset.certTitle);
           });
-          slide.addEventListener('keydown', (e) => {
+          item.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              openCertModal(slide.dataset.certImage, slide.dataset.certTitle);
+              openCertModal(item.dataset.certImage, item.dataset.certTitle);
             }
           });
         });
-      }
 
-      renderTrack(certList);
-
-      let currentIndex = 0;
-      let autoplayTimer = null;
-      let startX = 0;
-      let isSwiping = false;
-
-      function getVisibleCount() {
-        if (window.innerWidth <= 768) return 1;
-        if (window.innerWidth <= 1024) return 2;
-        return 3;
-      }
-
-      function getMaxIndex() {
-        const visible = getVisibleCount();
-        return Math.max(0, certList.length - visible);
-      }
-
-      function updateDots() {
-        if (!dotsContainer) return;
-        const maxIdx = getMaxIndex();
-        const totalPositions = maxIdx + 1;
-        dotsContainer.innerHTML = Array.from({ length: totalPositions }).map((_, i) => `
-          <button class="cert-dot ${i === currentIndex ? 'active' : ''}" data-idx="${i}" aria-label="Go to certificate slide ${i + 1}"></button>
-        `).join('');
-
-        dotsContainer.querySelectorAll('.cert-dot').forEach(btn => {
-          btn.addEventListener('click', () => {
-            goToSlide(parseInt(btn.dataset.idx, 10));
-          });
-        });
-      }
-
-      function goToSlide(index) {
-        const maxIdx = getMaxIndex();
-        currentIndex = Math.max(0, Math.min(index, maxIdx));
-        const slides = track.querySelectorAll('.cert-slide');
-        if (!slides.length) return;
-
-        const slideWidth = slides[0].getBoundingClientRect().width;
-        const gap = window.innerWidth <= 768 ? 16 : 24;
-        const offset = currentIndex * (slideWidth + gap);
-        track.style.transform = `translateX(-${offset}px)`;
-
-        if (prevBtn) prevBtn.disabled = currentIndex === 0;
-        if (nextBtn) nextBtn.disabled = currentIndex >= maxIdx;
-
-        if (dotsContainer) {
-          dotsContainer.querySelectorAll('.cert-dot').forEach((d, i) => {
-            d.classList.toggle('active', i === currentIndex);
-          });
+        // Pause animation on reduced-motion preference
+        if (prefersReducedMotion) {
+          track.style.animationPlayState = 'paused';
         }
       }
 
-      function nextSlide() {
-        const maxIdx = getMaxIndex();
-        if (currentIndex >= maxIdx) {
-          goToSlide(0);
-        } else {
-          goToSlide(currentIndex + 1);
-        }
-      }
+      renderReel(certList);
 
-      function prevSlide() {
-        const maxIdx = getMaxIndex();
-        if (currentIndex <= 0) {
-          goToSlide(maxIdx);
-        } else {
-          goToSlide(currentIndex - 1);
-        }
-      }
-
-      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
-      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
-
-      function startAutoplay() {
-        if (prefersReducedMotion || certList.length <= getVisibleCount()) return;
-        stopAutoplay();
-        autoplayTimer = setInterval(nextSlide, 4000);
-      }
-
-      function stopAutoplay() {
-        if (autoplayTimer) {
-          clearInterval(autoplayTimer);
-          autoplayTimer = null;
-        }
-      }
-
-      function resetAutoplay() {
-        stopAutoplay();
-        startAutoplay();
-      }
-
-      viewport.addEventListener('mouseenter', stopAutoplay);
-      viewport.addEventListener('mouseleave', startAutoplay);
-
-      // Touch swipe support for mobile
-      viewport.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        isSwiping = true;
-        stopAutoplay();
-      }, { passive: true });
-
-      viewport.addEventListener('touchend', (e) => {
-        if (!isSwiping) return;
-        isSwiping = false;
-        const endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
-        if (Math.abs(diff) > 40) {
-          if (diff > 0) nextSlide();
-          else prevSlide();
-        }
-        startAutoplay();
-      }, { passive: true });
-
-      window.addEventListener('resize', () => {
-        updateDots();
-        goToSlide(currentIndex);
-      });
-
-      updateDots();
-      goToSlide(0);
-      startAutoplay();
+      // Re-render with live data if GitHub API returned a different list
+      // (the API fetch already ran above and may have updated certList)
     })();
+
 
     // Use event delegation for dynamically loaded projects
     document.addEventListener('click', (e) => {
