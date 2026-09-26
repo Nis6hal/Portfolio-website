@@ -503,7 +503,7 @@ async function seedDefaults() {
     {
       name: "Nepal Telecom (NTC) Internship",
       issuer: "Nepal Telecom (NTC)",
-      date: "2024",
+      date: "2026",
       credentialUrl: "Images/Certs/NTCcerts.jpg",
       order: 4,
     },
