@@ -127,6 +127,7 @@ const SkillSchema = new mongoose.Schema({
   type: { type: String, enum: ["technical", "professional"], required: true },
   category: { type: String, default: "" }, // e.g., 'frontend', 'backend', 'tools'
   order: { type: Number, default: 0 },
+  visible: { type: Boolean, default: true },
 });
 
 const ContentSchema = new mongoose.Schema(
@@ -143,6 +144,8 @@ const CertificationSchema = new mongoose.Schema(
     issuer: { type: String, required: true },
     date: { type: String, required: true },
     credentialUrl: { type: String, default: "" },
+    order: { type: Number, default: 0 },
+    visible: { type: Boolean, default: true },
   },
   { timestamps: true },
 );
@@ -319,7 +322,15 @@ function getDefaultProjects() {
 async function seedDefaults() {
   const defaultProjects = getDefaultProjects();
   for (const p of defaultProjects) {
-    await Project.findOneAndUpdate({ title: p.title }, p, { upsert: true });
+    const { visible, ...updateFields } = p;
+    await Project.findOneAndUpdate(
+      { title: p.title },
+      {
+        $set: updateFields,
+        $setOnInsert: { visible: true },
+      },
+      { upsert: true }
+    );
   }
   console.log("✅ Projects synchronized (upserted)");
 
@@ -454,9 +465,62 @@ async function seedDefaults() {
   ];
 
   for (const s of defaultSkills) {
-    await Skill.findOneAndUpdate({ name: s.name }, s, { upsert: true });
+    const { visible, ...updateFields } = s;
+    await Skill.findOneAndUpdate(
+      { name: s.name },
+      {
+        $set: updateFields,
+        $setOnInsert: { visible: true },
+      },
+      { upsert: true }
+    );
   }
   console.log("✅ Skills synchronized (upserted)");
+
+  // Intelligent Certifications Sync (Upsert defaults matching source code)
+  const defaultCertifications = [
+    {
+      name: "Cloud & DevOps Training",
+      issuer: "Pokhara University",
+      date: "2026/04/30",
+      credentialUrl: "Images/Certs/Cloud%26Devops.jpg",
+      order: 1,
+    },
+    {
+      name: "Fundamentals of Data Science",
+      issuer: "Great Learning Academy",
+      date: "2024/02",
+      credentialUrl: "Images/Certs/FundsofDS.jpg",
+      order: 2,
+    },
+    {
+      name: "Git & GitHub Course",
+      issuer: "Technology Channel",
+      date: "2026-05-21",
+      credentialUrl: "Images/Certs/Gitcerts.jpg",
+      order: 3,
+    },
+    {
+      name: "Nepal Telecom (NTC) Internship",
+      issuer: "Nepal Telecom (NTC)",
+      date: "2024",
+      credentialUrl: "Images/Certs/NTCcerts.jpg",
+      order: 4,
+    },
+  ];
+
+  for (const c of defaultCertifications) {
+    const { visible, ...updateFields } = c;
+    await Certification.findOneAndUpdate(
+      { name: c.name },
+      {
+        $set: updateFields,
+        $setOnInsert: { visible: true },
+      },
+      { upsert: true }
+    );
+  }
+  console.log("✅ Certifications synchronized (upserted)");
 
   // Seed content if empty
   const contentCount = await Content.countDocuments();
@@ -494,26 +558,6 @@ async function seedDefaults() {
     ]);
     console.log("✅ Default content seeded");
   }
-
-  // Seed certifications if empty
-  const certCount = await Certification.countDocuments();
-  if (certCount === 0) {
-    await Certification.insertMany([
-      {
-        name: "Cloud & DevOps Training",
-        issuer: "TechAxis Nepal",
-        date: "2025",
-        credentialUrl: "Images/Certs/Cloud%26Devops.jpg",
-      },
-      {
-        name: "Fundamentals of Data Science",
-        issuer: "IBM SkillsBuild",
-        date: "2024",
-        credentialUrl: "Images/Certs/FundsofDS.jpg",
-      },
-    ]);
-    console.log("✅ Default certifications seeded");
-  }
 }
 
 // ─── PUBLIC ROUTES ────────────────────────────────────────────────────────────
@@ -533,10 +577,10 @@ app.get("/api/portfolio", requireDb, async (req, res) => {
   try {
     res.set("Cache-Control", "no-store, no-cache, must-revalidate");
     const [projects, skills, contentDocs, certifications] = await Promise.all([
-      Project.find({ visible: true }).sort({ order: 1 }),
-      Skill.find().sort({ order: 1 }),
+      Project.find({ visible: { $ne: false } }).sort({ order: 1 }),
+      Skill.find({ visible: { $ne: false } }).sort({ order: 1 }),
       Content.find(),
-      Certification.find().sort({ createdAt: -1 }),
+      Certification.find({ visible: { $ne: false } }).sort({ order: 1, createdAt: -1 }),
     ]);
     const content = {};
     contentDocs.forEach((c) => {
@@ -551,7 +595,7 @@ app.get("/api/portfolio", requireDb, async (req, res) => {
 // Get projects
 app.get("/api/projects", requireDb, async (req, res) => {
   try {
-    const projects = await Project.find({ visible: true }).sort({ order: 1 });
+    const projects = await Project.find({ visible: { $ne: false } }).sort({ order: 1 });
     res.json(projects);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -561,7 +605,7 @@ app.get("/api/projects", requireDb, async (req, res) => {
 // Get skills
 app.get("/api/skills", requireDb, async (req, res) => {
   try {
-    const skills = await Skill.find().sort({ order: 1 });
+    const skills = await Skill.find({ visible: { $ne: false } }).sort({ order: 1 });
     res.json(skills);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -571,7 +615,7 @@ app.get("/api/skills", requireDb, async (req, res) => {
 // Get certifications
 app.get("/api/certifications", requireDb, async (req, res) => {
   try {
-    const certifications = await Certification.find().sort({ createdAt: -1 });
+    const certifications = await Certification.find({ visible: { $ne: false } }).sort({ order: 1, createdAt: -1 });
     res.json(certifications);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -1012,6 +1056,20 @@ app.delete(
       if (!cert)
         return res.status(404).json({ error: "Certification not found" });
       res.json({ message: "Certification deleted" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+);
+
+app.post(
+  "/api/admin/certifications/sync-defaults",
+  authMiddleware,
+  requireDb,
+  async (req, res) => {
+    try {
+      await seedDefaults();
+      res.json({ message: "Certifications synchronized with current defaults" });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

@@ -181,6 +181,10 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .badge-mobile{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2);}
 .badge-professional{background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.25);}
 .badge-technical{background:rgba(102,217,255,0.1);color:var(--accent-primary);border:1px solid rgba(102,217,255,0.25);}
+.badge-on{background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.3);}
+.badge-off{background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.3);}
+.btn-toggle-vis{cursor:pointer;transition:transform 0.2s;}
+.btn-toggle-vis:hover{transform:scale(1.15);}
 .skills-table-v2{width:100%;border-collapse:collapse;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .skills-table-v2 th{background:rgba(255,255,255,0.02);}
 .skills-table-v2 td{border-bottom:1px solid rgba(255,255,255,0.03);}
@@ -419,10 +423,10 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="table-wrap"><div class="table-scroll"><table class="skills-table-v2">
           <thead>
-            <tr><th>TYPE</th><th>CATEGORY</th><th>NAME</th><th>LEVEL</th><th>ACTIONS</th></tr>
+            <tr><th>TYPE</th><th>CATEGORY</th><th>NAME</th><th>LEVEL</th><th>STATUS</th><th>ACTIONS</th></tr>
           </thead>
           <tbody id="skillsTable">
-            <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+            <tr><td colspan="6"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
           </tbody>
         </table></div></div>
     </div>
@@ -436,14 +440,15 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <div class="toolbar">
         <div class="toolbar-left">
           <button class="btn btn-primary" id="addCertificationBtn"><i class="fas fa-plus"></i> Add Certification</button>
+          <button class="btn btn-secondary" id="syncCertsBtn"><i class="fas fa-rotate"></i> Sync Defaults</button>
         </div>
       </div>
       <div class="table-wrap"><div class="table-scroll"><table>
           <thead>
-            <tr><th>NAME</th><th>ISSUER</th><th>DATE</th><th>CERT IMAGE</th><th>ACTIONS</th></tr>
+            <tr><th>NAME</th><th>ISSUER</th><th>DATE</th><th>CERT IMAGE</th><th>STATUS</th><th>ACTIONS</th></tr>
           </thead>
           <tbody id="certificationsTable">
-            <tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
+            <tr><td colspan="6"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>
           </tbody>
         </table>
 </div>
@@ -539,7 +544,19 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       <datalist id="certImagePaths">
         <option value="Images/Certs/Cloud%26Devops.jpg"></option>
         <option value="Images/Certs/FundsofDS.jpg"></option>
+        <option value="Images/Certs/Gitcerts.jpg"></option>
+        <option value="Images/Certs/NTCcerts.jpg"></option>
       </datalist>
+      <div class="form-row">
+        <div class="form-group"><label>ORDER</label><input type="number" id="cOrder" value="1" min="1"></div>
+        <div class="form-group">
+          <label>VISIBLE</label>
+          <select id="cVisible">
+            <option value="true">Visible</option>
+            <option value="false">Hidden</option>
+          </select>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeModal('certificationModal')">Cancel</button>
@@ -666,6 +683,13 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           </select>
         </div>
         <div class="form-group"><label>ORDER</label><input type="number" id="sOrder" value="1" min="1"></div>
+      </div>
+      <div class="form-group">
+        <label>VISIBLE</label>
+        <select id="sVisible">
+          <option value="true">Visible</option>
+          <option value="false">Hidden</option>
+        </select>
       </div>
       <div class="form-group"><label>DETAILS <span style="color:var(--text-muted);font-size:11px;">(Mainly for Professional skills)</span></label><input type="text" id="sDetails" placeholder="Clear client interaction and team collaboration"></div>
     </div>
@@ -853,19 +877,23 @@ async function loadProjects() {
       tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><i class="fas fa-folder-open"></i>No projects yet</div></td></tr>';
       return;
     }
-    tbody.innerHTML = projects.map(p => `
+    tbody.innerHTML = projects.map(p => {
+      const isVis = p.visible !== false;
+      return `
       <tr>
         <td><img class="td-img" src="${p.image}" alt="${p.title}" onerror="this.src='https://placehold.co/60x40/0d0d24/00e5ff?text=IMG'"></td>
         <td><strong>${p.title}</strong></td>
         <td><span class="badge badge-${p.category}">${p.category}</span></td>
         <td>${(p.tech||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</td>
         <td title="${(p.details || '').replace(/"/g, '&quot;')}" style="max-width:260px;white-space:normal;color:var(--text-muted);font-size:12px;line-height:1.45;">${detailsPreview(p.details)}</td>
-        <td><span class="badge ${p.visible?'badge-on':'badge-off'}">${p.visible?'Visible':'Hidden'}</span></td>
+        <td><span class="badge ${isVis ? 'badge-on' : 'badge-off'}" style="cursor:pointer;" onclick="toggleVisibility('project','${p._id}',${isVis})" title="Click to toggle">${isVis ? 'Visible' : 'Hidden'}</span></td>
         <td>
+          <button class="btn btn-secondary btn-sm btn-icon btn-toggle-vis" onclick="toggleVisibility('project','${p._id}',${isVis})" title="${isVis ? 'Hide' : 'Show'}"><i class="fas ${isVis ? 'fa-eye-slash' : 'fa-eye'}"></i></button>
           <button class="btn btn-secondary btn-sm btn-icon" onclick="editProject('${p._id}')" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('project','${p._id}','${p.title}')" title="Delete"><i class="fas fa-trash"></i></button>
         </td>
-      </tr>`).join('');
+      </tr>`;
+    }).join('');
   } catch (err) { toast(err.message, 'error'); }
 }
 
@@ -953,14 +981,34 @@ document.getElementById('saveProjectBtn').addEventListener('click', async () => 
   } catch (err) { toast(err.message, 'error'); }
 });
 
+// ── Quick Toggle Visibility (Projects, Skills, Certifications) ────────────────
+async function toggleVisibility(type, id, currentVis) {
+  const newVis = !currentVis;
+  try {
+    if (type === 'project') {
+      await api('PUT', `/api/admin/projects/${id}`, { visible: newVis });
+      loadProjects();
+    } else if (type === 'skill') {
+      await api('PUT', `/api/admin/skills/${id}`, { visible: newVis });
+      loadSkills();
+    } else if (type === 'certification') {
+      await api('PUT', `/api/certifications/${id}`, { visible: newVis });
+      loadCertifications();
+    }
+    toast(`Item ${newVis ? 'is now visible on website' : 'is now hidden from website'}`);
+  } catch (err) {
+    toast(err.message, 'error');
+  }
+}
+
 // ── Skills ────────────────────────────────────────────────────────────────────
 async function loadSkills() {
   const tbody = document.getElementById('skillsTable');
-  tbody.innerHTML = '<tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  tbody.innerHTML = '<tr><td colspan="6"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
   try {
     const skills = await api('GET', '/api/admin/skills');
     if (!skills.length) {
-      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-code"></i>No skills yet</div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-code"></i>No skills yet</div></td></tr>';
       return;
     }
     // Sort by type (professional first) and then order
@@ -968,17 +1016,22 @@ async function loadSkills() {
       if (a.type !== b.type) return a.type === 'professional' ? -1 : 1;
       return (a.order || 0) - (b.order || 0);
     });
-    tbody.innerHTML = skills.map(s => `
+    tbody.innerHTML = skills.map(s => {
+      const isVis = s.visible !== false;
+      return `
       <tr>
         <td><span class="badge badge-${s.type}">${s.type}</span></td>
         <td><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted)">${s.category || '—'}</span></td>
         <td><strong>${s.name}</strong></td>
         <td>${s.level}</td>
+        <td><span class="badge ${isVis ? 'badge-on' : 'badge-off'}" style="cursor:pointer;" onclick="toggleVisibility('skill','${s._id}',${isVis})" title="Click to toggle">${isVis ? 'Visible' : 'Hidden'}</span></td>
         <td>
+          <button class="btn btn-secondary btn-sm btn-icon btn-toggle-vis" onclick="toggleVisibility('skill','${s._id}',${isVis})" title="${isVis ? 'Hide' : 'Show'}"><i class="fas ${isVis ? 'fa-eye-slash' : 'fa-eye'}"></i></button>
           <button class="btn btn-secondary btn-sm btn-icon" onclick="editSkill('${s._id}')" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('skill','${s._id}','${s.name}')" title="Delete"><i class="fas fa-trash"></i></button>
         </td>
-      </tr>`).join('');
+      </tr>`;
+    }).join('');
   } catch (err) { toast(err.message, 'error'); }
 }
 
@@ -990,6 +1043,7 @@ document.getElementById('addSkillBtn').addEventListener('click', () => {
   document.getElementById('sCategory').value = '';
   document.getElementById('sLevel').value = 'Expert';
   document.getElementById('sOrder').value = '1';
+  document.getElementById('sVisible').value = 'true';
   document.getElementById('sDetails').value = '';
   openModal('skillModal');
 });
@@ -1005,7 +1059,8 @@ async function editSkill(id) {
     document.getElementById('sType').value = s.type || 'technical';
     document.getElementById('sCategory').value = s.category || '';
     document.getElementById('sLevel').value = s.level;
-    document.getElementById('sOrder').value = s.order;
+    document.getElementById('sOrder').value = s.order || 1;
+    document.getElementById('sVisible').value = (s.visible !== false) ? 'true' : 'false';
     document.getElementById('sDetails').value = s.details || '';
     openModal('skillModal');
   } catch (err) { toast(err.message, 'error'); }
@@ -1028,6 +1083,7 @@ document.getElementById('saveSkillBtn').addEventListener('click', async () => {
     category:   document.getElementById('sCategory').value.trim().toLowerCase(),
     level:      document.getElementById('sLevel').value,
     order:      parseInt(document.getElementById('sOrder').value) || 1,
+    visible:    document.getElementById('sVisible').value === 'true',
     details:    document.getElementById('sDetails').value.trim()
   };
   if (!payload.name) { toast('Skill name is required', 'error'); return; }
@@ -1043,24 +1099,31 @@ document.getElementById('saveSkillBtn').addEventListener('click', async () => {
 // ── Certifications ─────────────────────────────────────────────────────────────
 async function loadCertifications() {
   const tbody = document.getElementById('certificationsTable');
-  tbody.innerHTML = '<tr><td colspan="5"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
+  tbody.innerHTML = '<tr><td colspan="6"><div class="loading"><i class="fas fa-spinner"></i></div></td></tr>';
   try {
     const certifications = await api('GET', '/api/admin/certifications');
     if (!certifications.length) {
-      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><i class="fas fa-certificate"></i>No certifications yet</div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-certificate"></i>No certifications yet</div></td></tr>';
       return;
     }
-    tbody.innerHTML = certifications.map(c => `
+    // Sort by order and date
+    certifications.sort((a, b) => (a.order || 0) - (b.order || 0));
+    tbody.innerHTML = certifications.map(c => {
+      const isVis = c.visible !== false;
+      return `
       <tr>
         <td><strong>${c.name}</strong></td>
         <td>${c.issuer}</td>
         <td>${c.date}</td>
         <td>${c.credentialUrl ? `<a href="${c.credentialUrl}" target="_blank" rel="noopener noreferrer">Preview image</a>` : '<span style="color:var(--text-muted)">—</span>'}</td>
+        <td><span class="badge ${isVis ? 'badge-on' : 'badge-off'}" style="cursor:pointer;" onclick="toggleVisibility('certification','${c._id}',${isVis})" title="Click to toggle">${isVis ? 'Visible' : 'Hidden'}</span></td>
         <td>
+          <button class="btn btn-secondary btn-sm btn-icon btn-toggle-vis" onclick="toggleVisibility('certification','${c._id}',${isVis})" title="${isVis ? 'Hide' : 'Show'}"><i class="fas ${isVis ? 'fa-eye-slash' : 'fa-eye'}"></i></button>
           <button class="btn btn-secondary btn-sm btn-icon" onclick="editCertification('${c._id}')" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('certification','${c._id}','${c.name}')" title="Delete"><i class="fas fa-trash"></i></button>
         </td>
-      </tr>`).join('');
+      </tr>`;
+    }).join('');
   } catch (err) { toast(err.message, 'error'); }
 }
 
@@ -1071,7 +1134,18 @@ document.getElementById('addCertificationBtn').addEventListener('click', () => {
   document.getElementById('cIssuer').value = '';
   document.getElementById('cDate').value = '';
   document.getElementById('cCredentialUrl').value = '';
+  document.getElementById('cOrder').value = '1';
+  document.getElementById('cVisible').value = 'true';
   openModal('certificationModal');
+});
+
+document.getElementById('syncCertsBtn')?.addEventListener('click', async () => {
+  if (!confirm('This will synchronize all certifications with the latest code defaults (including Nepal Telecom NTC Internship). Existing items keep their visibility settings. Proceed?')) return;
+  try {
+    const res = await api('POST', '/api/admin/certifications/sync-defaults');
+    toast(res.message || 'Certifications synchronized', 'success');
+    loadCertifications();
+  } catch (err) { toast(err.message, 'error'); }
 });
 
 async function editCertification(id) {
@@ -1085,6 +1159,8 @@ async function editCertification(id) {
     document.getElementById('cIssuer').value = c.issuer || '';
     document.getElementById('cDate').value = c.date || '';
     document.getElementById('cCredentialUrl').value = c.credentialUrl || '';
+    document.getElementById('cOrder').value = c.order || 1;
+    document.getElementById('cVisible').value = (c.visible !== false) ? 'true' : 'false';
     openModal('certificationModal');
   } catch (err) { toast(err.message, 'error'); }
 }
@@ -1095,7 +1171,9 @@ document.getElementById('saveCertificationBtn').addEventListener('click', async 
     name: document.getElementById('cName').value.trim(),
     issuer: document.getElementById('cIssuer').value.trim(),
     date: document.getElementById('cDate').value.trim(),
-    credentialUrl: document.getElementById('cCredentialUrl').value.trim()
+    credentialUrl: document.getElementById('cCredentialUrl').value.trim(),
+    order: parseInt(document.getElementById('cOrder').value) || 1,
+    visible: document.getElementById('cVisible').value === 'true'
   };
   if (!payload.name || !payload.issuer || !payload.date) {
     toast('Name, issuer, and date are required', 'error');
