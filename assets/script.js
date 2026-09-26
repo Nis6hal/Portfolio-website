@@ -1143,12 +1143,26 @@
       if (certifications?.length > 0) {
         const certGrid = document.getElementById('certificationsGrid');
         if (certGrid) {
-          certGrid.innerHTML = certifications.map(cert => `
+          // If the backend API only returns older certs (fewer than what is in HTML),
+          // preserve any static cards not present in the API response (e.g. NTC Internship)
+          const renderedCerts = [...certifications];
+          // Check if NTC internship exists in API response; if not, add it so it is never dropped
+          const hasNtc = renderedCerts.some(c => /ntc|nepal telecom/i.test(c.name || ''));
+          if (!hasNtc) {
+            renderedCerts.push({
+              name: 'Nepal Telecom (NTC) Internship',
+              issuer: 'Engineering internship engaging in telecom networking infrastructure alongside MERN stack development and AI/ML integrations.',
+              date: 'MERN Stack • AI/ML • Networking • Telecom',
+              credentialUrl: 'Images/Certs/NTCcerts.jpg',
+              isStaticTag: true
+            });
+          }
+          certGrid.innerHTML = renderedCerts.map(cert => `
         <div class="service-card">
-          <div class="service-icon-wrap"><i class="fas fa-certificate"></i></div>
+          <div class="service-icon-wrap"><i class="${cert.isStaticTag ? 'fas fa-network-wired' : (/aws|cloud/i.test(cert.name) ? 'fab fa-aws' : /git/i.test(cert.name) ? 'fab fa-git-alt' : /data/i.test(cert.name) ? 'fas fa-chart-bar' : 'fas fa-certificate')}"></i></div>
           <h3>${cert.name}</h3>
           <p>${cert.issuer}</p>
-          <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);">${cert.date}</div>
+          <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:${cert.isStaticTag ? 'var(--accent-primary)' : 'var(--text-muted)'};">${cert.date}</div>
           ${cert.credentialUrl ? `<a href="${cert.credentialUrl}" data-cert-image="${cert.credentialUrl}" data-cert-title="${cert.name}" class="read-more-btn" style="margin-top:12px;">Verify Credential</a>` : ''}
         </div>
       `).join('');
