@@ -594,7 +594,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="form-row">
         <div class="form-group"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
-        <div class="form-group"><label>CASE STUDY URL <span style="color:var(--text-muted);font-size:11px;">(e.g., Projects/cinevault.html or full link)</span></label><input type="text" id="pCaseStudy" placeholder="Projects/cinevault.html"></div>
+        <div class="form-group"><label>CASE STUDY URL <span style="color:var(--text-muted);font-size:11px;">(optional — leave blank if none)</span></label><input type="text" id="pCaseStudy" placeholder="Projects/cinevault.html"></div>
       </div>
       <div class="form-group full"><label>OVERVIEW <span style="color:var(--text-muted);font-size:11px;">(Short summary of the project)</span></label><textarea id="pOverview" rows="2" placeholder="A commuter-first mobile app for tracking buses..."></textarea></div>
       <div class="form-row">
@@ -885,10 +885,7 @@ async function loadProjects() {
       return `
       <tr>
         <td><img class="td-img" src="${p.image}" alt="${p.title}" onerror="this.src='https://placehold.co/60x40/0d0d24/00e5ff?text=IMG'"></td>
-        <td>
-          <strong>${p.title}</strong>
-          ${p.caseStudyUrl ? `<div style="font-size:11px;margin-top:3px;"><a href="${p.caseStudyUrl}" target="_blank" style="color:var(--accent-primary);text-decoration:none;"><i class="fas fa-arrow-up-right-from-square"></i> Case Study</a></div>` : ''}
-        </td>
+        <td><strong>${p.title}</strong></td>
         <td><span class="badge badge-${p.category}">${p.category}</span></td>
         <td>${(p.tech||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</td>
         <td title="${(p.details || '').replace(/"/g, '&quot;')}" style="max-width:260px;white-space:normal;color:var(--text-muted);font-size:12px;line-height:1.45;">${detailsPreview(p.details)}</td>
