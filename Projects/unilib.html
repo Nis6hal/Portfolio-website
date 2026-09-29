@@ -113,7 +113,7 @@
 
     <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
-      
+
       <div class="case-challenge-box">
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Race Conditions in Last-Copy Book Reservation</h4>
         <p>When multiple students attempt to reserve the final copy of a popular textbook simultaneously, race conditions can cause negative stock counts. Implemented SQLite atomic transactions with check-then-decrement guard clauses to guarantee ACID compliance.</p>
@@ -123,6 +123,69 @@
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Efficient Multi-Field Catalog Indexing</h4>
         <p>Searching across tens of thousands of books by title, author, ISBN, and tags caused slow table scans. Created SQLite B-tree and full-text search indexes with weighted scoring, reducing query response times from 340ms to under 18ms.</p>
       </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-database"></i> Database Schema &amp; Core Tables</h2>
+      <p class="case-text">
+        UniLib's data layer is modeled around a normalized relational schema designed for transactional integrity and fast lookup performance. The core entities are members, books, and circulation events.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-user"></i></div>
+          <h4>Members Table</h4>
+          <p>Stores member profiles, card IDs, contact details, membership status, and fine balances. Unique member card numbers are indexed for O(1) lookup at checkout terminals.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-book"></i></div>
+          <h4>Books &amp; Copies</h4>
+          <p>Two-tier model: a <code>books</code> record for the title/ISBN metadata and a <code>book_copies</code> table tracking individual physical volumes, shelf location, and per-copy status.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-exchange-alt"></i></div>
+          <h4>Circulation Ledger</h4>
+          <p>Every borrow and return is recorded as an immutable ledger row with timestamps, due dates, and staff IDs. This powers all overdue calculations and audit reporting.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-receipt"></i></div>
+          <h4>Fines &amp; Payments</h4>
+          <p>Automated fine accrual records tied to circulation IDs, with payment settlement transactions that update member balances atomically.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-server"></i> Backend API Design</h2>
+      <p class="case-text">
+        The Flask REST API follows a resource-oriented design with consistent HTTP semantics. All mutating endpoints use SQLite transactions wrapped in try/except blocks to roll back on any failure.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-plug"></i></div>
+          <h4>RESTful Resource Mapping</h4>
+          <p>Endpoints map cleanly to resources: <code>GET /books</code>, <code>POST /members/:id/borrow</code>, <code>POST /returns</code>, and <code>GET /analytics/circulation</code>.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4>Input Validation &amp; Sanitization</h4>
+          <p>Every request payload is validated against schema constraints before hitting the database, preventing SQL injection and malformed data from corrupting the circulation ledger.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>Analytics Endpoints</h4>
+          <p>Aggregation queries pre-compute daily circulation summaries, most-borrowed title rankings, and member delinquency rates for the admin dashboard.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
+      <p class="case-text">
+        Building UniLib reinforced how critical atomic transactions are in inventory systems. Even a brief race condition can cascade into lost or duplicated book records. The indexing work also showed that query optimization is an ongoing process — as the catalog grows, new access patterns demand fresh indexes.
+      </p>
+      <p class="case-text">
+        The system successfully automated the full circulation workflow for academic libraries, eliminating manual ledger errors and giving administrators real-time visibility into book demand and member activity.
+      </p>
     </section>
 
     <div class="case-pagination">

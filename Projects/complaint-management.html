@@ -184,6 +184,69 @@
       </div>
     </section>
 
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-project-diagram"></i> Hybrid Architecture &amp; Service Boundaries</h2>
+      <p class="case-text">
+        The system is split into four independently deployable services. The MERN stack handles user-facing operations and business logic, while the Python FastAPI server owns all ML inference. A clean REST contract between them keeps the frontend and ML model decoupled.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-desktop"></i></div>
+          <h4>React Client</h4>
+          <p>Customer portal, agent console, and manager analytics dashboard. All ML interactions go through the Node backend, keeping API keys and inference logic server-side.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-exchange-alt"></i></div>
+          <h4>Node/Express API Gateway</h4>
+          <p>Owns authentication, complaint CRUD, and chatbot orchestration. It forwards classification requests to FastAPI and caches frequent predictions to reduce ML latency.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-brain"></i></div>
+          <h4>FastAPI ML Server</h4>
+          <p>Exposes a single <code>/predict</code> endpoint accepting raw complaint text and returning category, priority, department, sentiment, and confidence in a single response.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-database"></i></div>
+          <h4>MongoDB Persistence</h4>
+          <p>Stores complaint documents with embedded AI metadata. The embedded structure keeps each ticket self-contained, so the dashboard can render full context without joins.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-robot"></i> AI Chatbot Troubleshooting Flow</h2>
+      <p class="case-text">
+        Before a complaint is ever registered as a ticket, the AI Chatbot engages the customer in a short conversation. It identifies the issue domain, asks clarifying questions, and suggests self-fix steps — reducing ticket volume by catching common issues before they reach support staff.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-comment"></i></div>
+          <h4>Intent Detection</h4>
+          <p>The chatbot uses the same DistilBERT model to detect the user's intent from the first message, routing the conversation down the correct troubleshooting tree.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-wrench"></i></div>
+          <h4>Domain-Specific Fixes</h4>
+          <p>For fiber issues, the bot walks users through checking ONT LOS lights. For mobile problems, it prompts VoLTE settings checks — each step tailored to the predicted category.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-check"></i></div>
+          <h4>Escalation Handoff</h4>
+          <p>If self-fix fails, the chatbot automatically drafts and submits a classified ticket with all context, ensuring the human agent never has to re-ask basic questions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
+      <p class="case-text">
+        The most valuable lesson was that ML model quality depends far more on domain-specific preprocessing than on model architecture. The custom Nepglish stopword list and technical term preservation mattered more than choosing DistilBERT over a simpler model. I also learned that hybrid systems — where a lightweight model acts as a front filter and a heavier model handles edge cases — can deliver excellent accuracy at a fraction of the inference cost.
+      </p>
+      <p class="case-text">
+        The system reduced manual triage effort for NTC support teams, cut duplicate ticket volume by over 60%, and gave managers real-time visibility into complaint trends and SLA compliance through the AI analytics dashboard.
+      </p>
+    </section>
+
     <div class="case-pagination">
       <a href="unilib.html" class="case-page-btn">
         <span class="case-page-label">Previous Project</span>

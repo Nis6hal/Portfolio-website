@@ -141,7 +141,7 @@
     <!-- Section 4: Challenges & Solutions -->
     <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
-      
+
       <div class="case-challenge-box">
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Variable Outdoor Lighting &amp; Glare</h4>
         <p>Direct sunlight, shadows, and night-time headlight glare distorted character recognition. An adaptive thresholding pipeline using CLAHE (Contrast Limited Adaptive Histogram Equalization) was implemented, normalizing image contrast before segmentation.</p>
@@ -151,6 +151,64 @@
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Low-Latency Inference on Constrained Hardware</h4>
         <p>Heavy deep learning models caused frame drops on mini-PCs. We optimized the model architecture to a lightweight quantized CNN (MobileNet backbone), shrinking inference time to under 80ms while maintaining 98%+ detection precision.</p>
       </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-microchip"></i> ESP32 Firmware &amp; Actuator Control</h2>
+      <p class="case-text">
+        The physical gate is driven by an ESP32 microcontroller that receives serial commands from the Python vision server and controls the barrier servo. The firmware is designed for reliability and safe failure modes.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-plug"></i></div>
+          <h4>Serial Protocol</h4>
+          <p>A simple text-based protocol over UART carries commands such as <code>OPEN</code>, <code>CLOSE</code>, and <code>STATUS</code>, making the link easy to debug and extend.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-bolt"></i></div>
+          <h4>Fail-Safe Behavior</h4>
+          <p>If the serial link drops or the vision server crashes, the gate defaults to a locked state. A hardware watchdog timer resets the ESP32 if it hangs, ensuring access is never left unguarded.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-mobile"></i></div>
+          <h4>Blynk IoT Dashboard</h4>
+          <p>The ESP32 syncs state with the Blynk mobile app, allowing remote gate status monitoring and manual override from a smartphone when needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-database"></i> Whitelist &amp; Audit Logging Schema</h2>
+      <p class="case-text">
+        The SQLite database on the vision server maintains two key tables: the whitelist of authorized plates and the transaction audit log. Every access attempt — granted or denied — is recorded with a timestamp and the raw plate text.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-id-card"></i></div>
+          <h4>Whitelist Table</h4>
+          <p>Stores normalized plate strings, vehicle owner info, and access group membership. Entries can be added, edited, or revoked through a simple admin interface or direct SQL.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-history"></i></div>
+          <h4>Audit Log Table</h4>
+          <p>Records every detection event with plate text, match result, gate action, and a timestamp. This log powers usage reports and can be exported for security reviews.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-chart-bar"></i></div>
+          <h4>Usage Analytics</h4>
+          <p>Aggregated logs reveal peak entry/exit hours, average daily vehicle count, and unrecognized plate frequency — useful for parking capacity planning.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
+      <p class="case-text">
+        This project highlighted how much computer vision systems depend on their preprocessing pipeline. The CLAHE normalization step turned out to be the single most impactful change — without it, accuracy dropped sharply in challenging lighting. Hardware safety also proved just as important as model accuracy; a vision system that fails closed is far safer than one that fails open.
+      </p>
+      <p class="case-text">
+        The final system achieved 98%+ plate recognition accuracy with sub-100ms inference on affordable mini-PC hardware, making automated gate access viable for small-scale deployments without expensive enterprise infrastructure.
+      </p>
     </section>
 
     <div class="case-pagination">

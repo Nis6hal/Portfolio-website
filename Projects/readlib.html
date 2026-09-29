@@ -119,7 +119,7 @@
 
     <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
-      
+
       <div class="case-challenge-box">
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Large PDF File Memory Pressure in Browser</h4>
         <p>Loading multi-hundred-megabyte textbooks into standard JavaScript memory can crash mobile browser tabs. Solved by streaming PDF byte arrays in chunks using pdf.js Range requests rather than loading entire blobs into RAM at once.</p>
@@ -129,6 +129,69 @@
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Client-Side Cover Thumbnail Extraction</h4>
         <p>To avoid manual cover uploads, an automatic pipeline renders page 1 of every ingested PDF onto a hidden HTML5 canvas, converting the rasterized frame to a lightweight WebP thumbnail stored alongside metadata.</p>
       </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-storage"></i> IndexedDB Storage Schema</h2>
+      <p class="case-text">
+        ReadLib uses a small but carefully designed object store layout inside IndexedDB. Each store handles a distinct domain, and relationships are maintained through explicit foreign keys rather than nested embeddings.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-book"></i></div>
+          <h4>Books Store</h4>
+          <p>Primary key is a UUID. Stores title, author, metadata, shelf status, and a foreign key pointer to the binary blob store for the PDF file.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-image"></i></div>
+          <h4>Blobs Store</h4>
+          <p>Stores raw PDF binary data and generated WebP cover thumbnails keyed by book ID. IndexedDB handles multi-megabyte blobs far better than localStorage.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-bookmark"></i></div>
+          <h4>Reading Progress Store</h4>
+          <p>Tracks per-book state: current page, zoom level, last read timestamp, and shelf assignment (To Read, Currently Reading, Completed).</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-cog"></i></div>
+          <h4>Settings Store</h4>
+          <p>App-level preferences such as theme, reader font size, and sidebar layout, persisted locally so they survive page reloads and app updates.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sync-alt"></i> Import / Export &amp; Data Portability</h2>
+      <p class="case-text">
+        A core principle of the local-first approach is that users should own their data. ReadLib provides a one-click JSON export that serializes the entire catalog — metadata, progress, and shelf assignments — into a single downloadable file.
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-file-export"></i></div>
+          <h4>JSON Snapshot Export</h4>
+          <p>Exports all book metadata and reading progress into a portable JSON file. Raw PDF binaries are excluded from the snapshot since they are too large for text-based formats.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-file-import"></i></div>
+          <h4>Catalog Rehydration</h4>
+          <p>Importing a previously exported JSON snapshot rebuilds the complete reading catalog on a new device without requiring a server account or manual re-entry.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-shield-halved"></i></div>
+          <h4>Zero Cloud Dependency</h4>
+          <p>All export and import operations run entirely client-side. No data ever leaves the device unless the user explicitly initiates a transfer.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
+      <p class="case-text">
+        The local-first architecture taught me that offline capability is not an afterthought but a design constraint that shapes every decision. Streaming large PDFs safely required rethinking how browsers handle memory, and the custom thumbnail pipeline proved that even complex media processing can run client-side when done incrementally.
+      </p>
+      <p class="case-text">
+        ReadLib demonstrates that privacy-respecting, fully offline applications are not only possible but can deliver a polished, performant reading experience without any server dependency.
+      </p>
     </section>
 
     <div class="case-pagination">
