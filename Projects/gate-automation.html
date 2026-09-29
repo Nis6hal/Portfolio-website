@@ -202,6 +202,43 @@
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-code"></i> Technical Deep-Dive: CLAHE Preprocessing Pipeline</h2>
+      <p class="case-text">
+        The single biggest accuracy killer was uneven illumination. Instead of a global histogram equalization (which washes out shadows), a per-tile CLAHE approach normalizes local contrast before the plate is even segmented:
+      </p>
+      <div class="case-challenge-box" style="border-left-color: var(--accent-primary); background: rgba(0,0,0,0.25);">
+        <h4><i class="fas fa-terminal"></i> Adaptive Contrast Normalization</h4>
+        <pre style="margin: 12px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--text-primary); overflow-x: auto;"><code>import cv2
+import numpy as np
+
+def preprocess(frame):
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # CLAHE on 8x8 tiles with clip limit of 2.0
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    equalized = clahe.apply(gray)
+
+    # Adaptive threshold keeps edges sharp in both glare and shadow
+    binary = cv2.adaptiveThreshold(
+        equalized, 255,
+        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+        cv2.THRESH_BINARY,
+        blockSize=15, C=4
+    )
+    return binary
+
+# Then contour extraction for plate bounding box
+contours, _ = cv2.findContours(
+    binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+)
+plates = [c for c in contours if plate_aspect_ratio(c)]</code></pre>
+      </div>
+      <p class="case-text">
+        The <code>clipLimit=2.0</code> setting prevents over-amplification of noise in already-bright regions, while the adaptive threshold with a 15px block size keeps characters sharp in both midday sun and midnight headlight glare.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         This project highlighted how much computer vision systems depend on their preprocessing pipeline. The CLAHE normalization step turned out to be the single most impactful change — without it, accuracy dropped sharply in challenging lighting. Hardware safety also proved just as important as model accuracy; a vision system that fails closed is far safer than one that fails open.

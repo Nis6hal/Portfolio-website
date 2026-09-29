@@ -185,6 +185,34 @@
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-code"></i> Technical Deep-Dive: Chunked PDF Streaming</h2>
+      <p class="case-text">
+        Loading a 200MB textbook into a browser tab can OOM-kill the process on low-memory devices. The solution was to never load the entire blob into RAM — instead, pdf.js fetches byte ranges on demand:
+      </p>
+      <div class="case-challenge-box" style="border-left-color: var(--accent-primary); background: rgba(0,0,0,0.25);">
+        <h4><i class="fas fa-terminal"></i> Range-Request PDF Transport</h4>
+        <pre style="margin: 12px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--text-primary); overflow-x: auto;"><code>// pdf.js configured for partial-range streaming
+const pdfDoc = await pdfjsLib.getDocument({
+  url: '/api/books/{id}/stream',   // serves raw PDF bytes
+  rangeChunkSize: 64 * 1024,        // 64KB chunks
+  disableFontFace: false,
+  cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist/cmaps/',
+  cMapPacked: true
+}).promise;
+
+// Only the pages currently in viewport are rendered
+const page = await pdfDoc.getPage(currentPageNum);
+const viewport = page.getViewport({ scale: fitScale });
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+await page.render({ canvasContext: ctx, viewport }).promise;</code></pre>
+      </div>
+      <p class="case-text">
+        By setting <code>rangeChunkSize</code>, pdf.js issues HTTP Range requests that pull only the byte slices it needs for the current page. The browser never holds the full file in memory, so a 300MB textbook behaves like a 3MB one from the OS's perspective.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         The local-first architecture taught me that offline capability is not an afterthought but a design constraint that shapes every decision. Streaming large PDFs safely required rethinking how browsers handle memory, and the custom thumbnail pipeline proved that even complex media processing can run client-side when done incrementally.

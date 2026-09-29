@@ -238,6 +238,41 @@
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-code"></i> Technical Deep-Dive: TF-IDF Duplicate Detection</h2>
+      <p class="case-text">
+        Preventing duplicate tickets is the highest-impact ML feature in the system. The approach is lightweight but effective: vectorize the new complaint and every existing ticket, then compare cosine similarity. Anything above the threshold is flagged as a potential duplicate before the ticket is ever written to the database.
+      </p>
+      <div class="case-challenge-box" style="border-left-color: var(--accent-primary); background: rgba(0,0,0,0.25);">
+        <h4><i class="fas fa-terminal"></i> Semantic Duplicate Gate</h4>
+        <pre style="margin: 12px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--text-primary); overflow-x: auto;"><code>from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
+DUPLICATE_THRESHOLD = 0.85
+
+def is_duplicate(new_text: str, existing_texts: list[str]) -> bool:
+    if not existing_texts:
+        return False
+
+    vectorizer = TfidfVectorizer(
+        ngram_range=(1, 2),       # unigrams + bigrams
+        sublinear_tf=True,        # log scaling for frequent terms
+        max_features=5000
+    )
+
+    # Fit on existing, transform the new text in the same space
+    tfidf_existing = vectorizer.fit_transform(existing_texts)
+    tfidf_new = vectorizer.transform([new_text])
+
+    similarities = cosine_similarity(tfidf_new, tfidf_existing)[0]
+    return bool(np.max(similarities) &gt; DUPLICATE_THRESHOLD)</code></pre>
+      </div>
+      <p class="case-text">
+        The <code>ngram_range=(1, 2)</code> setting is crucial — it lets the model match "internet slow" with "broadband speed is low" by sharing the bigram "internet slow" with "slow internet". Combined with sublinear TF scaling, frequent but uninformative words like "the" or "is" don't dominate the similarity score.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         The most valuable lesson was that ML model quality depends far more on domain-specific preprocessing than on model architecture. The custom Nepglish stopword list and technical term preservation mattered more than choosing DistilBERT over a simpler model. I also learned that hybrid systems — where a lightweight model acts as a front filter and a heavier model handles edge cases — can deliver excellent accuracy at a fraction of the inference cost.

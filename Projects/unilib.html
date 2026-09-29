@@ -179,6 +179,43 @@
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-code"></i> Technical Deep-Dive: Atomic Borrow Transaction</h2>
+      <p class="case-text">
+        The borrow operation is the most critical path in the entire system. It must decrement available copies, create a circulation record, and set the due date — all as a single atomic unit. Here is the core logic:
+      </p>
+      <div class="case-challenge-box" style="border-left-color: var(--accent-primary); background: rgba(0,0,0,0.25);">
+        <h4><i class="fas fa-terminal"></i> SQLite Transaction Guard</h4>
+        <pre style="margin: 12px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; color: var(--text-primary); overflow-x: auto;"><code># Check-then-decrement inside a single transaction
+cursor.execute("BEGIN IMMEDIATE")
+try:
+    cursor.execute(
+        "SELECT available FROM book_copies WHERE book_id = ? AND status = 'available' LIMIT 1",
+        (book_id,)
+    )
+    row = cursor.fetchone()
+    if not row:
+        raise Exception("No copies available")
+
+    cursor.execute(
+        "UPDATE book_copies SET status = 'borrowed', member_id = ? WHERE book_id = ? AND status = 'available'",
+        (member_id, book_id)
+    )
+
+    cursor.execute(
+        "INSERT INTO circulation (member_id, book_id, due_date) VALUES (?, ?, datetime('now', '+14 days'))",
+        (member_id, book_id)
+    )
+    conn.commit()
+except Exception:
+    conn.rollback()
+    raise</code></pre>
+      </div>
+      <p class="case-text">
+        Using <code>BEGIN IMMEDIATE</code> acquires a write lock before any reads, preventing the classic "last copy reservation race" where two concurrent requests both see an available copy and both proceed to borrow it.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         Building UniLib reinforced how critical atomic transactions are in inventory systems. Even a brief race condition can cascade into lost or duplicated book records. The indexing work also showed that query optimization is an ongoing process — as the catalog grows, new access patterns demand fresh indexes.
