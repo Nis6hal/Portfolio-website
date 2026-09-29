@@ -1298,6 +1298,17 @@
             `
             };
 
+            const slugMap = {
+              'smart-bus': 'Projects/smart-bus.html',
+              'gate-automation': 'Projects/gate-automation.html',
+              'portfolio': 'Projects/portfolio.html',
+              'cinevault': 'Projects/cinevault.html',
+              'readlib': 'Projects/readlib.html',
+              'unilib': 'Projects/unilib.html'
+            };
+            const projectSlug = (project.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const caseStudyUrl = slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : null);
+
             const item = document.createElement('div');
             item.className = 'port-item';
             item.dataset.category = project.category || 'web';
@@ -1318,7 +1329,7 @@
                 <div class="port-tech">${techHtml}</div>
               </div>
               <div class="port-actions">
-                <button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>
+                ${caseStudyUrl ? `<a href="${caseStudyUrl}" class="port-btn details-btn"><i class="fas fa-arrow-right"></i> Case Study</a>` : `<button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>`}
                 <a href="${project.github || 'https://github.com/nis6hal'}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
                 <a href="${project.demo && project.demo.trim() !== '' ? project.demo : '#contact'}" ${project.demo && project.demo.trim() !== '' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
               </div>
@@ -1328,7 +1339,7 @@
             grid.appendChild(item);
           });
 
-          grid.querySelectorAll('.details-btn').forEach(btn => {
+          grid.querySelectorAll('button.details-btn').forEach(btn => {
             btn.addEventListener('click', () => openModal('projectModal', btn.dataset.project, 'project'));
           });
 
