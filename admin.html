@@ -592,7 +592,10 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         <div class="form-group"><label>IMAGE PATH</label><input type="text" id="pImage" placeholder="Images/CineVault.png"></div>
         <div class="form-group"><label>GITHUB URL</label><input type="url" id="pGithub" placeholder="https://github.com/nis6hal"></div>
       </div>
-      <div class="form-group full"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
+      <div class="form-row">
+        <div class="form-group"><label>DEMO URL <span style="color:var(--text-muted);font-size:11px;">(leave blank to hide button)</span></label><input type="url" id="pDemo" placeholder="https://yourproject.com"></div>
+        <div class="form-group"><label>CASE STUDY URL <span style="color:var(--text-muted);font-size:11px;">(e.g., Projects/cinevault.html or full link)</span></label><input type="text" id="pCaseStudy" placeholder="Projects/cinevault.html"></div>
+      </div>
       <div class="form-group full"><label>OVERVIEW <span style="color:var(--text-muted);font-size:11px;">(Short summary of the project)</span></label><textarea id="pOverview" rows="2" placeholder="A commuter-first mobile app for tracking buses..."></textarea></div>
       <div class="form-row">
         <div class="form-group"><label>FEATURES <span style="color:var(--text-muted);font-size:11px;">(One per line)</span></label><textarea id="pFeatures" rows="4" placeholder="Real-time tracking&#10;ML predictions&#10;Route visualization"></textarea></div>
@@ -882,7 +885,10 @@ async function loadProjects() {
       return `
       <tr>
         <td><img class="td-img" src="${p.image}" alt="${p.title}" onerror="this.src='https://placehold.co/60x40/0d0d24/00e5ff?text=IMG'"></td>
-        <td><strong>${p.title}</strong></td>
+        <td>
+          <strong>${p.title}</strong>
+          ${p.caseStudyUrl ? `<div style="font-size:11px;margin-top:3px;"><a href="${p.caseStudyUrl}" target="_blank" style="color:var(--accent-primary);text-decoration:none;"><i class="fas fa-arrow-up-right-from-square"></i> Case Study</a></div>` : ''}
+        </td>
         <td><span class="badge badge-${p.category}">${p.category}</span></td>
         <td>${(p.tech||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</td>
         <td title="${(p.details || '').replace(/"/g, '&quot;')}" style="max-width:260px;white-space:normal;color:var(--text-muted);font-size:12px;line-height:1.45;">${detailsPreview(p.details)}</td>
@@ -906,6 +912,7 @@ document.getElementById('addProjectBtn').addEventListener('click', () => {
   document.getElementById('pImage').value = '';
   document.getElementById('pGithub').value = 'https://github.com/nis6hal';
   document.getElementById('pDemo').value = '';
+  document.getElementById('pCaseStudy').value = '';
   document.getElementById('pOverview').value = '';
   document.getElementById('pFeatures').value = '';
   document.getElementById('pHighlights').value = '';
@@ -942,6 +949,7 @@ async function editProject(id) {
     document.getElementById('pImage').value = p.image;
     document.getElementById('pGithub').value = p.github || '';
     document.getElementById('pDemo').value = p.demo || '';
+    document.getElementById('pCaseStudy').value = p.caseStudyUrl || '';
     document.getElementById('pOverview').value = p.overview || '';
     document.getElementById('pFeatures').value = (p.features || []).join('\n');
     document.getElementById('pHighlights').value = (p.highlights || []).join('\n');
@@ -956,20 +964,22 @@ async function editProject(id) {
 document.getElementById('saveProjectBtn').addEventListener('click', async () => {
   const id = document.getElementById('projectId').value;
   const demo = document.getElementById('pDemo').value.trim();
+  const caseStudyUrl = document.getElementById('pCaseStudy').value.trim();
   const payload = {
-    title:       document.getElementById('pTitle').value.trim(),
-    description: document.getElementById('pDesc').value.trim(),
-    category:    document.getElementById('pCategory').value,
-    image:       document.getElementById('pImage').value.trim(),
-    github:      document.getElementById('pGithub').value.trim(),
-    demo:        demo || '',
-    overview:    document.getElementById('pOverview').value.trim(),
-    features:    document.getElementById('pFeatures').value.split('\n').map(f=>f.trim()).filter(Boolean),
-    highlights:  document.getElementById('pHighlights').value.split('\n').map(h=>h.trim()).filter(Boolean),
-    details:     document.getElementById('pDetails').value.trim(),
-    tech:        document.getElementById('pTech').value.split(',').map(t=>t.trim()).filter(Boolean),
-    order:       parseInt(document.getElementById('pOrder').value) || 1,
-    visible:     document.getElementById('pVisible').value === 'true'
+    title:        document.getElementById('pTitle').value.trim(),
+    description:  document.getElementById('pDesc').value.trim(),
+    category:     document.getElementById('pCategory').value,
+    image:        document.getElementById('pImage').value.trim(),
+    github:       document.getElementById('pGithub').value.trim(),
+    demo:         demo || '',
+    caseStudyUrl: caseStudyUrl || '',
+    overview:     document.getElementById('pOverview').value.trim(),
+    features:     document.getElementById('pFeatures').value.split('\n').map(f=>f.trim()).filter(Boolean),
+    highlights:   document.getElementById('pHighlights').value.split('\n').map(h=>h.trim()).filter(Boolean),
+    details:      document.getElementById('pDetails').value.trim(),
+    tech:         document.getElementById('pTech').value.split(',').map(t=>t.trim()).filter(Boolean),
+    order:        parseInt(document.getElementById('pOrder').value) || 1,
+    visible:      document.getElementById('pVisible').value === 'true'
   };
   if (!payload.title || !payload.description) { toast('Title and description are required', 'error'); return; }
   try {

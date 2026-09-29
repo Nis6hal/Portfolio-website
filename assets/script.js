@@ -1307,7 +1307,9 @@
               'unilib': 'Projects/unilib.html'
             };
             const projectSlug = (project.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-            const caseStudyUrl = slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : null);
+            const caseStudyUrl = (project.caseStudyUrl && project.caseStudyUrl.trim())
+              ? project.caseStudyUrl.trim()
+              : (slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : null));
 
             const item = document.createElement('div');
             item.className = 'port-item';

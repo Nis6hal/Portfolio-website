@@ -114,6 +114,7 @@ const ProjectSchema = new mongoose.Schema(
     details: { type: String, default: "" },
     github: { type: String, default: "https://github.com/nis6hal" },
     demo: { type: String, default: "" },
+    caseStudyUrl: { type: String, default: "" },
     order: { type: Number, default: 0 },
     visible: { type: Boolean, default: true },
   },
@@ -208,6 +209,7 @@ function getDefaultProjects() {
         "Focused on reducing commuter waiting uncertainty",
         "Combined mobile UX with route-aware ETA prediction",
       ],
+      caseStudyUrl: "Projects/smart-bus.html",
       order: 1,
     },
     {
@@ -229,6 +231,7 @@ function getDefaultProjects() {
         "Designed for low-latency local edge processing",
         "Bridged AI inference with real hardware control",
       ],
+      caseStudyUrl: "Projects/gate-automation.html",
       order: 2,
     },
     {
@@ -250,6 +253,7 @@ function getDefaultProjects() {
         "Combines frontend presentation with backend content management",
         "Deployed as a real multi-service portfolio stack",
       ],
+      caseStudyUrl: "Projects/portfolio.html",
       order: 3,
     },
     {
@@ -271,6 +275,7 @@ function getDefaultProjects() {
         "Focused on clean API-driven UI flows",
         "Improved browsing experience with responsive design",
       ],
+      caseStudyUrl: "Projects/cinevault.html",
       order: 4,
     },
     {
@@ -292,6 +297,7 @@ function getDefaultProjects() {
         "No backend required for personal reading data",
         "Built around practical offline-first usage",
       ],
+      caseStudyUrl: "Projects/readlib.html",
       order: 5,
     },
     {
@@ -313,6 +319,7 @@ function getDefaultProjects() {
         "Connected frontend and backend flows in one product",
         "Structured around realistic university library operations",
       ],
+      caseStudyUrl: "Projects/unilib.html",
       order: 6,
     },
   ];
