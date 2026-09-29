@@ -652,11 +652,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: -36px;
     }
 
     .profile-cutout-wrap {
       position: relative;
-      width: 480px;
+      width: 520px;
       max-width: 100%;
       display: flex;
       flex-direction: column;
@@ -666,11 +667,11 @@
 
     .profile-cutout-glow {
       position: absolute;
-      top: 20%;
+      top: 18%;
       left: 50%;
       transform: translate(-50%, -15%);
-      width: 380px;
-      height: 480px;
+      width: 420px;
+      height: 540px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--accent-glow) 0%, rgba(102, 217, 255, 0.2) 40%, transparent 70%);
       filter: blur(48px);
@@ -707,7 +708,7 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 660px;
+      max-height: 740px;
       object-fit: contain;
       object-position: bottom center;
       display: block;
@@ -3347,12 +3348,16 @@
         grid-template-columns: 1fr 1fr;
       }
 
+      .hero-visual {
+        margin-top: -15px;
+      }
+
       .profile-cutout-wrap {
-        width: 380px;
+        width: 420px;
       }
 
       .profile-cutout-img {
-        max-height: 520px;
+        max-height: 580px;
       }
 
       .profile-hex-wrap {
@@ -3404,14 +3409,15 @@
 
       .hero-visual {
         order: -1;
+        margin-top: 0;
       }
 
       .profile-cutout-wrap {
-        width: 320px;
+        width: 330px;
       }
 
       .profile-cutout-img {
-        max-height: 440px;
+        max-height: 460px;
       }
 
       .profile-status-badge {
