@@ -673,10 +673,11 @@
     })();
 
 
-    // Use event delegation for dynamically loaded projects
+    // Use event delegation for dynamically loaded projects or fallback modal
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.details-btn');
-      if (btn) {
+      if (btn && (!btn.getAttribute('href') || btn.getAttribute('href') === '#')) {
+        e.preventDefault();
         openModal('projectModal', btn.dataset.project, 'project');
       }
     });

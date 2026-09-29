@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineVault — Film Discovery Platform | Nischal Bhandari</title>
+  <meta name="description" content="Case study on CineVault - A modern movie discovery, trailer player, and watchlist tracking application powered by TMDb API.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">Frontend Web App</span>
+        <span class="case-timeline-badge"><i class="fas fa-film"></i> Entertainment UI</span>
+      </div>
+      <h1 class="case-title">CineVault — Film Discovery Platform</h1>
+      <p class="case-lead">
+        A cinema discovery and tracking web application powered by the TMDb API, providing film lovers with instant access to trending releases, high-definition trailers, cast breakdowns, and customized watchlists.
+      </p>
+      <div class="case-links">
+        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Live Application Demo
+        </a>
+      </div>
+    </section>
+
+    <div class="case-banner-frame">
+      <img src="../Images/CineVault.png" alt="CineVault Film Discovery Preview" loading="eager">
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>Frontend React Engineer</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Data Source</h4>
+        <p>The Movie Database (TMDb REST API)</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">React.js</span>
+          <span class="case-tech-tag">TMDb API</span>
+          <span class="case-tech-tag">CSS3 Glassmorphism</span>
+          <span class="case-tech-tag">React Router</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Experience</h4>
+        <p>Infinite Scroll &bull; Debounced Search &bull; Trailer Modals</p>
+      </div>
+    </div>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Vision</h2>
+      <p class="case-text">
+        Modern movie catalogs are often cluttered with invasive ads, slow loading interfaces, and fragmented streaming metadata. CineVault was designed as a sleek, distraction-free movie discovery hub, putting visual posters, critical ratings, and video previews front and center.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Core Capabilities</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-fire"></i></div>
+          <h4>Curated Feeds</h4>
+          <p>Real-time feeds highlighting trending movies of the week, top-rated all-time classics, and upcoming theatrical premieres.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-search"></i></div>
+          <h4>Instant Search &amp; Filter</h4>
+          <p>Live debounced querying allowing users to filter by genre, release decade, user score, and language with instantaneous UI updates.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-play"></i></div>
+          <h4>Inline YouTube Trailers</h4>
+          <p>Integrated official trailer modals fetching YouTube video IDs via TMDb video endpoints without redirecting away from the page.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-bookmark"></i></div>
+          <h4>Client-Side Watchlist</h4>
+          <p>Persistent bookmarking system allowing users to save movies they want to watch later, saved locally in browser storage.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+      
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: API Rate Limiting on Rapid Search Typing</h4>
+        <p>Typing in search bars without safeguards triggers dozens of redundant HTTP requests, triggering TMDb rate limits. Implemented a custom <code>useDebounce</code> React hook that waits 350ms post-keystroke, reducing outbound API calls by over 75%.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Image Heavy Grid Performance</h4>
+        <p>Loading hundreds of high-res backdrop and poster images can bog down browser memory. Implemented native lazy loading with blur placeholders and prioritized loading only for above-the-fold viewport elements.</p>
+      </div>
+    </section>
+
+    <div class="case-pagination">
+      <a href="portfolio.html" class="case-page-btn">
+        <span class="case-page-label">Previous Project</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> Portfolio Website</span>
+      </a>
+      <a href="readlib.html" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Next Case Study</span>
+        <span class="case-page-title">ReadLib <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+</body>
+</html>

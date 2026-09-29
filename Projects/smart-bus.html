@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Bus Arrival Detector | Nischal Bhandari</title>
+  <meta name="description" content="Case study on Smart Bus Arrival Detector - A mobile app for live bus tracking and ML ETA predictions across Pokhara routes.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <!-- Sticky Header -->
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <!-- Hero Header -->
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">Mobile &amp; Machine Learning</span>
+        <span class="case-timeline-badge"><i class="far fa-calendar-alt"></i> Pokhara City Transit</span>
+      </div>
+      <h1 class="case-title">Smart Bus Arrival Detector</h1>
+      <p class="case-lead">
+        A commuter-first mobile app designed for tracking municipal buses in real time with machine-learning powered ETA predictions across Pokhara city routes.
+      </p>
+      <div class="case-links">
+        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Live Demo / APK
+        </a>
+      </div>
+    </section>
+
+    <!-- Main Banner Image -->
+    <div class="case-banner-frame">
+      <img src="../Images/Sbad.png" alt="Smart Bus Arrival Detector Interface Preview" loading="eager">
+    </div>
+
+    <!-- Metadata Ribbon -->
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>Full-Stack Mobile &amp; ML Developer</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Platform</h4>
+        <p>Android &amp; iOS (React Native)</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">React Native</span>
+          <span class="case-tech-tag">Firebase</span>
+          <span class="case-tech-tag">Google Maps API</span>
+          <span class="case-tech-tag">Python (ML)</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Impact / Result</h4>
+        <p>Real-Time GPS Tracking &bull; Route ETAs</p>
+      </div>
+    </div>
+
+    <!-- Section 1: Overview & Problem -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Problem &amp; Background</h2>
+      <p class="case-text">
+        In cities like Pokhara, public transit commuters face significant uncertainty regarding bus arrival times. Without a centralized dispatch or telemetry system, passengers frequently wait at bus stops for unpredictable intervals, and traffic bottlenecks fluctuate dynamically during peak hours.
+      </p>
+      <p class="case-text">
+        The Smart Bus Arrival Detector was built to eliminate this commuter friction by broadcasting GPS telemetry from active transit buses and applying route-aware machine learning models to calculate dynamic arrival windows.
+      </p>
+    </section>
+
+    <!-- Section 2: Key Features -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Key Features</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <h4>Live Bus Radar</h4>
+          <p>Visual map interface rendering moving bus coordinates with smooth marker interpolation and route waypoints.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-brain"></i></div>
+          <h4>ML ETA Forecasting</h4>
+          <p>Dynamic arrival time computation factoring in historical road segment speeds, time-of-day traffic, and current velocity.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-bell"></i></div>
+          <h4>Stop Proximity Alerts</h4>
+          <p>Configurable push notifications that alert commuters 5 and 2 minutes before the bus arrives at their selected stop.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-route"></i></div>
+          <h4>Route Planning</h4>
+          <p>Browse municipal transit routes, stops, and schedules with offline caching for frequent daily commutes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Architecture & Engineering -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-layer-group"></i> Architecture &amp; Data Pipeline</h2>
+      <p class="case-text">
+        The system consists of three interconnected layers:
+      </p>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-broadcast-tower"></i></div>
+          <h4>1. Telemetry Ingestion</h4>
+          <p>Low-latency telemetry streaming using Firebase Realtime Database for lightweight, real-time push synchronization across mobile clients.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-microchip"></i></div>
+          <h4>2. Prediction Engine</h4>
+          <p>Regression models trained on route transit segment datasets calculate dynamic arrival windows instead of static distance-over-speed estimates.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h4>3. Client Application</h4>
+          <p>Cross-platform React Native frontend optimized for battery efficiency, minimizing GPS background polling while retaining high accuracy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Engineering Challenges -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-shield-virus"></i> Key Engineering Challenges &amp; Solutions</h2>
+      
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: GPS Drift &amp; Map Snapping</h4>
+        <p>In hilly terrain and narrow streets around Pokhara, raw GPS readings exhibited occasional jitter and drift away from the mapped roads. To solve this, a Kalman filter and road-network snap-to-polyline algorithm were applied to guarantee seamless marker trajectories on Google Maps.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Battery &amp; Data Bandwidth Consumption</h4>
+        <p>Constant real-time network subscriptions on budget smartphones drain battery rapidly. We implemented adaptive polling intervals: when a bus is idle or distant, updates stream every 10 seconds, scaling up to sub-second updates only when approaching a designated commuter radius.</p>
+      </div>
+    </section>
+
+    <!-- Project Pagination -->
+    <div class="case-pagination">
+      <a href="../index.html#portfolio" class="case-page-btn">
+        <span class="case-page-label">Portfolio</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> All Projects</span>
+      </a>
+      <a href="gate-automation.html" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Next Case Study</span>
+        <span class="case-page-title">Gate Automation <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    // Theme toggle sync with main portfolio
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+</body>
+</html>

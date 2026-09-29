@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniLib — University Library Management System | Nischal Bhandari</title>
+  <meta name="description" content="Case study on UniLib - A full-stack MERN university library management system with role-based access, borrow tracking, and admin analytics.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">Full-Stack MERN</span>
+        <span class="case-timeline-badge"><i class="fas fa-university"></i> Academic Enterprise</span>
+      </div>
+      <h1 class="case-title">UniLib — University Library Management System</h1>
+      <p class="case-lead">
+        A full-stack enterprise web application built for universities to automate physical book inventory, member cards, circulation borrowing workflows, late-fee management, and administration analytics.
+      </p>
+      <div class="case-links">
+        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Live Application Demo
+        </a>
+      </div>
+    </section>
+
+    <div class="case-banner-frame">
+      <img src="../Images/UniLib.png" alt="UniLib University Library System Preview" loading="eager">
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>Full-Stack Backend &amp; Database Architect</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Deployment</h4>
+        <p>Docker &bull; Node.js Express &bull; MongoDB</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">React.js</span>
+          <span class="case-tech-tag">Node.js</span>
+          <span class="case-tech-tag">Express</span>
+          <span class="case-tech-tag">MongoDB (Mongoose)</span>
+          <span class="case-tech-tag">JWT</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Security</h4>
+        <p>Role-Based Access Control (Admin / Librarian / Student)</p>
+      </div>
+    </div>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Problem &amp; Context</h2>
+      <p class="case-text">
+        Many university departments manage physical library assets through fragmented spreadsheets or manual paper ledgers. This results in lost inventory, untracked book renewals, and manual calculation of late fines.
+      </p>
+      <p class="case-text">
+        UniLib was built to provide an institutional-grade platform: centralizing thousands of titles, automating member check-out/return cycles with barcode scanning readiness, and giving department heads live metrics on book circulation.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> System Features</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-boxes"></i></div>
+          <h4>Catalog &amp; Inventory Management</h4>
+          <p>ISBN-based lookups, volume copy tracking, shelf aisle tagging, and automated out-of-stock reservation queues.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-exchange-alt"></i></div>
+          <h4>Automated Borrow / Return Flow</h4>
+          <p>Streamlined checkout modal calculating automatic due dates, email reminder triggers, and automated overdue penalty calculations.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-user-shield"></i></div>
+          <h4>Role-Based Access Control (RBAC)</h4>
+          <p>Granular permission scopes separating Student self-service portals from Librarian issuance desks and System Admin controls.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-chart-pie"></i></div>
+          <h4>Circulation Analytics</h4>
+          <p>Visual reports on most-borrowed topics, active reading trends, student delinquency rates, and inventory audits.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+      
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Race Conditions in Last-Copy Book Reservation</h4>
+        <p>When multiple students attempt to reserve the final copy of a popular textbook simultaneously, race conditions can cause negative stock counts. Implemented MongoDB atomic document transactions (<code>findOneAndUpdate</code> with copy counter conditions) to guarantee ACID compliance.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Efficient Multi-Field Catalog Indexing</h4>
+        <p>Searching across tens of thousands of books by title, author, ISBN, and tags caused slow table scans. Created compound text indexes in MongoDB with weighted scoring, reducing query response times from 340ms to under 18ms.</p>
+      </div>
+    </section>
+
+    <div class="case-pagination">
+      <a href="readlib.html" class="case-page-btn">
+        <span class="case-page-label">Previous Project</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> ReadLib</span>
+      </a>
+      <a href="../index.html#portfolio" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Return</span>
+        <span class="case-page-title">Back to Portfolio <i class="fas fa-home"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReadLib — Local-First Book Management | Nischal Bhandari</title>
+  <meta name="description" content="Case study on ReadLib - A local-first book management application with embedded pdf.js reader and IndexedDB persistent storage.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">Web &bull; Local-First Architecture</span>
+        <span class="case-timeline-badge"><i class="fas fa-database"></i> IndexedDB Powered</span>
+      </div>
+      <h1 class="case-title">ReadLib — Local-First Book Management System</h1>
+      <p class="case-lead">
+        A private, local-first library and personal reading companion with an embedded PDF document reader, persistent offline IndexedDB storage, and reading progress tracking.
+      </p>
+      <div class="case-links">
+        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Live Application Demo
+        </a>
+      </div>
+    </section>
+
+    <div class="case-banner-frame">
+      <img src="../Images/ReadLib.png" alt="ReadLib Application Interface Preview" loading="eager">
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>Frontend &amp; Offline Systems Architect</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Architecture</h4>
+        <p>100% Local-First &bull; Zero Server Dependency</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">React.js</span>
+          <span class="case-tech-tag">IndexedDB (idb)</span>
+          <span class="case-tech-tag">pdf.js</span>
+          <span class="case-tech-tag">Vite</span>
+          <span class="case-tech-tag">CSS Modules</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Privacy</h4>
+        <p>All Books &amp; Notes Stored Directly on Device</p>
+      </div>
+    </div>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Problem &amp; Core Idea</h2>
+      <p class="case-text">
+        Most contemporary book and document management tools force users into cloud accounts, subscriptions, and proprietary file locking. If your internet connection drops or the service shuts down, your library is inaccessible.
+      </p>
+      <p class="case-text">
+        ReadLib was built on the <strong>Local-First software principle</strong>: your books, PDFs, and reading progress stay permanently on your machine inside IndexedDB. The app loads instantly even with zero internet connectivity.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Key Features</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-book-open"></i></div>
+          <h4>Embedded PDF Reader</h4>
+          <p>Read uploaded PDF books directly inside the browser using Mozilla's pdf.js engine with zoom controls, page jumps, and dark reading mode.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>Reading State Tracking</h4>
+          <p>Organize books into <em>To Read</em>, <em>Currently Reading</em>, and <em>Completed</em> shelves with automated page bookmark persistence.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-server"></i></div>
+          <h4>IndexedDB Binary Storage</h4>
+          <p>Stores raw PDF binary blobs and generated cover thumbnail caches client-side without hitting 5MB LocalStorage limits.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-file-export"></i></div>
+          <h4>Import &amp; Export Backup</h4>
+          <p>One-click JSON export and import allows users to migrate their complete reading catalog to other devices seamlessly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+      
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Large PDF File Memory Pressure in Browser</h4>
+        <p>Loading multi-hundred-megabyte textbooks into standard JavaScript memory can crash mobile browser tabs. Solved by streaming PDF byte arrays in chunks using pdf.js Range requests rather than loading entire blobs into RAM at once.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Client-Side Cover Thumbnail Extraction</h4>
+        <p>To avoid manual cover uploads, an automatic pipeline renders page 1 of every ingested PDF onto a hidden HTML5 canvas, converting the rasterized frame to a lightweight WebP thumbnail stored alongside metadata.</p>
+      </div>
+    </section>
+
+    <div class="case-pagination">
+      <a href="cinevault.html" class="case-page-btn">
+        <span class="case-page-label">Previous Project</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> CineVault</span>
+      </a>
+      <a href="unilib.html" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Next Case Study</span>
+        <span class="case-page-title">UniLib <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gate Automation — License Plate Detection | Nischal Bhandari</title>
+  <meta name="description" content="Case study on Edge AI Gate Automation system for automatic vehicle license plate recognition and access control.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">AI &bull; Computer Vision &bull; IoT</span>
+        <span class="case-timeline-badge"><i class="fas fa-microchip"></i> Edge AI System</span>
+      </div>
+      <h1 class="case-title">Gate Automation — License Plate Detection</h1>
+      <p class="case-lead">
+        An edge AI system for real-time license plate detection and optical character recognition (ANPR), engineered for automated barrier control, high security, and automated parking management.
+      </p>
+      <div class="case-links">
+        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-play-circle"></i> Video Demonstration
+        </a>
+      </div>
+    </section>
+
+    <div class="case-banner-frame">
+      <img src="../Images/Slpd.png" alt="Gate Automation License Plate Detection Preview" loading="eager">
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>Embedded AI &amp; Computer Vision Engineer</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Hardware</h4>
+        <p>Arduino, Camera Module, Servo Relays</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">Python</span>
+          <span class="case-tech-tag">OpenCV</span>
+          <span class="case-tech-tag">TensorFlow</span>
+          <span class="case-tech-tag">Arduino</span>
+          <span class="case-tech-tag">SQLite</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Performance</h4>
+        <p>98%+ Accuracy &bull; &lt;100ms Inference</p>
+      </div>
+    </div>
+
+    <!-- Section 1: Problem -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Problem &amp; Context</h2>
+      <p class="case-text">
+        Manual gate security relies heavily on physical passes, paper entry logs, and human vigilance, leading to security bottlenecks during peak hours, human clerical errors, and unauthorized access vulnerabilities.
+      </p>
+      <p class="case-text">
+        This project automated the complete access loop: from camera vehicle detection to real-time optical plate parsing, whitelist database matching, and servo barrier activation—all running on affordable, localized compute hardware.
+      </p>
+    </section>
+
+    <!-- Section 2: Features -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Key Capabilities</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-video"></i></div>
+          <h4>Real-Time 30 FPS Stream</h4>
+          <p>Continuous video pipeline that extracts vehicle frames, detects bounding regions of interest, and isolates plate contours on the fly.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-font"></i></div>
+          <h4>Multi-Format OCR</h4>
+          <p>Trained neural network models to recognize both standard international Latin characters and embossed regional plate formats.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-door-open"></i></div>
+          <h4>Microcontroller Barrier Relay</h4>
+          <p>Serial communication with Arduino actuators to trigger physical barrier gates upon verified cryptographic whitelist matching.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-database"></i></div>
+          <h4>Audit Logging &amp; Timestamps</h4>
+          <p>Structured SQLite storage capturing timestamped vehicle logs, entry/exit durations, and captured plate image snapshots.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Engineering Pipeline -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-project-diagram"></i> Hardware-Software Pipeline</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-camera"></i></div>
+          <h4>Frame Acquisition</h4>
+          <p>Video frames are ingested, resized, and passed through grayscale, bilateral filter smoothing, and adaptive edge thresholding.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-crop-alt"></i></div>
+          <h4>Plate Localization</h4>
+          <p>Contour approximation filters rectangular license plate regions, validating aspect ratios before feeding into the OCR model.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-check-double"></i></div>
+          <h4>Verification &amp; Trigger</h4>
+          <p>The parsed string is sanitized, verified against the database whitelist, and a serial signal triggers the Arduino servo barrier.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Challenges & Solutions -->
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+      
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Variable Outdoor Lighting &amp; Glare</h4>
+        <p>Direct sunlight, shadows, and night-time headlight glare distorted character recognition. An adaptive thresholding pipeline using CLAHE (Contrast Limited Adaptive Histogram Equalization) was implemented, normalizing image contrast before segmentation.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Low-Latency Inference on Constrained Hardware</h4>
+        <p>Heavy deep learning models caused frame drops on mini-PCs. We optimized the model architecture to a lightweight quantized CNN (MobileNet backbone), shrinking inference time to under 80ms while maintaining 98%+ detection precision.</p>
+      </div>
+    </section>
+
+    <div class="case-pagination">
+      <a href="smart-bus.html" class="case-page-btn">
+        <span class="case-page-label">Previous Project</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> Smart Bus Arrival Detector</span>
+      </a>
+      <a href="portfolio.html" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Next Case Study</span>
+        <span class="case-page-title">Portfolio Website <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+</body>
+</html>
