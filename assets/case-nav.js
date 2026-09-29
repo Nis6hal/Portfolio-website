@@ -1,8 +1,9 @@
 /**
  * case-nav.js — Shared utilities for case study pages
  *
- * 1. CUSTOM CURSOR  — injects #cursor-dot + #cursor-ring and wires up the
- *    same cursor behaviour as the main portfolio page.
+ * 1. CUSTOM CURSOR  — injects #cursor-dot + #cursor-ring (same as index.html)
+ *    and wires up the same cursor behaviour as the main portfolio page.
+ *    Runs synchronously so there is no flash of the native cursor.
  *
  * 2. DYNAMIC PAGINATION — fetches visible projects from the API, finds where
  *    the current page sits, then rewrites .case-pagination so hidden projects
@@ -11,7 +12,7 @@
  * Usage: include as the last <script> in every Projects/*.html page.
  */
 
-/* ── 1. CUSTOM CURSOR ─────────────────────────────────────────────────────── */
+/* ── 1. CUSTOM CURSOR (synchronous — no timing gap) ─────────────────────── */
 (function () {
   const isTouchDevice  = navigator.maxTouchPoints > 0;
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -21,22 +22,21 @@
     return;
   }
 
-  // Inject the two cursor elements if they don't already exist
-  function ensureEl(id, styles) {
-    let el = document.getElementById(id);
-    if (!el) {
-      el = document.createElement('div');
-      el.id = id;
-      Object.assign(el.style, styles);
-      document.body.appendChild(el);
-    }
-    return el;
-  }
+  // Re-use existing elements if they were already added to the HTML,
+  // otherwise create them — matches what index.html does with hardcoded divs.
+  let dot  = document.getElementById('cursor-dot');
+  let ring = document.getElementById('cursor-ring');
 
-  // Styles match what styles.css defines via #cursor-dot / #cursor-ring,
-  // but we set them inline as a fallback guarantee.
-  const dot  = ensureEl('cursor-dot',  {});
-  const ring = ensureEl('cursor-ring', {});
+  if (!dot) {
+    dot = document.createElement('div');
+    dot.id = 'cursor-dot';
+    document.body.appendChild(dot);
+  }
+  if (!ring) {
+    ring = document.createElement('div');
+    ring.id = 'cursor-ring';
+    document.body.appendChild(ring);
+  }
 
   let rx = 0, ry = 0, mx = 0, my = 0;
 
@@ -55,6 +55,7 @@
     requestAnimationFrame(lerp);
   })();
 
+  // Apply hover / click states to all interactive elements
   document.querySelectorAll('a, button, [role="button"]').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -74,7 +75,6 @@
   const pagination = document.querySelector('.case-pagination');
   if (!pagination) return;
 
-  // Normalise a caseStudyUrl to just its filename (e.g. "smart-bus.html")
   function filename(url) {
     if (!url) return '';
     return url.split('/').pop().toLowerCase();
@@ -87,21 +87,19 @@
     const res = await fetch(`${API_BASE}/api/projects`);
     if (!res.ok) throw new Error('API unavailable');
     const all = await res.json();
-    // Only projects that have a case study page
     projects = all.filter(p => p.caseStudyUrl && p.caseStudyUrl.trim());
   } catch {
-    // API unavailable — leave existing static links in place
-    return;
+    return; // API unavailable — leave existing static links in place
   }
 
   const idx = projects.findIndex(p => filename(p.caseStudyUrl) === currentFile);
-  if (idx === -1) return; // This page isn't in the visible list — leave as-is
+  if (idx === -1) return;
 
   const prev = idx > 0                   ? projects[idx - 1] : null;
   const next = idx < projects.length - 1 ? projects[idx + 1] : null;
 
   function buildLink(project, direction) {
-    const href  = filename(project.caseStudyUrl); // We're already in Projects/
+    const href  = filename(project.caseStudyUrl);
     const label = direction === 'prev' ? 'Previous Case Study' : 'Next Case Study';
     const icon  = direction === 'prev'
       ? `<i class="fas fa-arrow-left"></i> ${project.title}`

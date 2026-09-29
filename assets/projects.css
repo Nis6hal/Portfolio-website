@@ -2,6 +2,13 @@
    PROJECT CASE STUDY STYLES (projects.css)
    ========================================================================== */
 
+/* Hide the native cursor site-wide on case study pages.
+   Browser UA sets cursor:pointer on <a> which beats the inherited cursor:none
+   from body in styles.css — this explicit rule wins over UA. */
+.case-body * {
+  cursor: none !important;
+}
+
 .case-body {
   background-color: var(--bg-base);
   color: var(--text-primary);
