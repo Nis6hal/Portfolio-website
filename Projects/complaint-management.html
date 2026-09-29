@@ -273,6 +273,34 @@ def is_duplicate(new_text: str, existing_texts: list[str]) -> bool:
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-balance-scale"></i> Design Decisions &amp; Trade-offs</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-plug"></i></div>
+          <h4>Hybrid MERN + FastAPI</h4>
+          <p><strong>Why:</strong> Node.js handles real-time chat and CRUD naturally; Python owns the ML ecosystem (Transformers, scikit-learn). <strong>Trade-off:</strong> Two services to deploy and monitor — more operational overhead than a monolith.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-robot"></i></div>
+          <h4>DistilBERT + TF-IDF Ensemble</h4>
+          <p><strong>Why:</strong> TF-IDF catches surface-level duplicates instantly; DistilBERT handles semantic similarity for nuanced cases. <strong>Trade-off:</strong> Two inference paths mean more code — but the TF-IDF path alone catches &gt;85% of duplicates.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-database"></i></div>
+          <h4>Embedded AI Metadata in MongoDB</h4>
+          <p><strong>Why:</strong> Each complaint reads as a single document — the dashboard gets full context in one query. <strong>Trade-off:</strong> If the ML model's output schema changes, old documents need migration.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-redo"></i> What I'd Do Differently</h2>
+      <p class="case-text">
+        I'd add a lightweight caching layer (Redis) between the Node API and FastAPI to memoize frequent predictions — many complaints in a telecom context repeat the same root causes. I'd also move the synthetic dataset generation into a versioned data pipeline (like DVC) so the 15,000-record corpus is reproducible and auditable, which matters more for enterprise clients than for a personal project.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         The most valuable lesson was that ML model quality depends far more on domain-specific preprocessing than on model architecture. The custom Nepglish stopword list and technical term preservation mattered more than choosing DistilBERT over a simpler model. I also learned that hybrid systems — where a lightweight model acts as a front filter and a heavier model handles edge cases — can deliver excellent accuracy at a fraction of the inference cost.

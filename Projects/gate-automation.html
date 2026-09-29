@@ -239,6 +239,34 @@ plates = [c for c in contours if plate_aspect_ratio(c)]</code></pre>
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-balance-scale"></i> Design Decisions &amp; Trade-offs</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-microchip"></i></div>
+          <h4>ESP32 Over Industrial PLC</h4>
+          <p><strong>Why:</strong> A $15 ESP32 with a servo can run the gate relay and Blynk dashboard. <strong>Trade-off:</strong> No industrial certifications — not suitable for safety-critical environments like factory gates.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-camera"></i></div>
+          <h4>YOLOv8 + EasyOCR Pipeline</h4>
+          <p><strong>Why:</strong> YOLOv8 localizes the plate region; EasyOCR reads characters. Splitting detection and recognition lets me swap either model independently. <strong>Trade-off:</strong> Two model passes mean ~160ms total inference — acceptable, but a single end-to-end ANPR model would be faster.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-wifi"></i></div>
+          <h4>WiFi-Connected Vision Server</h4>
+          <p><strong>Why:</strong> A mini-PC running the vision stack is far more flexible than embedding the model directly on the ESP32. <strong>Trade-off:</strong> Network dependency — if the WiFi drops, the gate locks. Mitigated by the fail-safe firmware default.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-redo"></i> What I'd Do Differently</h2>
+      <p class="case-text">
+        I'd add a local edge-deployable transformer-based ANPR model (like PaddleOCR's plate-specific model) to replace EasyOCR — it handles embossed and reflective plates far better. I'd also implement a proper REST API for the whitelist management instead of direct SQL edits, so facility staff could manage authorized vehicles from a phone without touching the database.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         This project highlighted how much computer vision systems depend on their preprocessing pipeline. The CLAHE normalization step turned out to be the single most impactful change — without it, accuracy dropped sharply in challenging lighting. Hardware safety also proved just as important as model accuracy; a vision system that fails closed is far safer than one that fails open.

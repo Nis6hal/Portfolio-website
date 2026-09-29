@@ -213,6 +213,34 @@ await page.render({ canvasContext: ctx, viewport }).promise;</code></pre>
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-balance-scale"></i> Design Decisions &amp; Trade-offs</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-cloud"></i></div>
+          <h4>Zero Server Dependency</h4>
+          <p><strong>Why:</strong> Absolute privacy — no data ever leaves the device. <strong>Trade-off:</strong> Multi-device sync requires manual JSON export/import; there's no real-time collaboration or cloud backup.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-crop"></i></div>
+          <h4>pdf.js Over Custom Renderer</h4>
+          <p><strong>Why:</strong> Battle-tested, handles thousands of PDF edge cases I'd never catch building my own. <strong>Trade-off:</strong> Adds ~2MB to the bundle and depends on Mozilla's CDN for font maps (mitigated by packing cmaps locally).</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-magic"></i></div>
+          <h4>Automatic Cover Thumbnails</h4>
+          <p><strong>Why:</strong> Users never need to hunt for cover images — every PDF renders its own. <strong>Trade-off:</strong> First import of a large PDF is slower because page 1 must be rasterized before the UI responds.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-redo"></i> What I'd Do Differently</h2>
+      <p class="case-text">
+        I'd add a background sync layer using the Background Sync API so exported JSON snapshots could be uploaded to a user-chosen cloud drive (Drive, Dropbox) without breaking the local-first promise — the sync would be opt-in and encrypted. I'd also explore Web Workers for the thumbnail extraction pipeline; rendering page 1 on the main thread causes a brief UI freeze on large PDFs that a worker would eliminate.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         The local-first architecture taught me that offline capability is not an afterthought but a design constraint that shapes every decision. Streaming large PDFs safely required rethinking how browsers handle memory, and the custom thumbnail pipeline proved that even complex media processing can run client-side when done incrementally.

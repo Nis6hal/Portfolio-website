@@ -216,6 +216,34 @@ except Exception:
     </section>
 
     <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-balance-scale"></i> Design Decisions &amp; Trade-offs</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-database"></i></div>
+          <h4>SQLite over PostgreSQL</h4>
+          <p><strong>Why:</strong> Zero external infrastructure — the app runs on a single binary with no server setup. <strong>Trade-off:</strong> Concurrent write throughput is limited to single-writer, which is fine for library circulation but would bottleneck at massive scale.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-layer-group"></i></div>
+          <h4>Two-Tier Book Model</h4>
+          <p><strong>Why:</strong> Separating title metadata from physical copies means updating an author name or ISBN affects one row, not hundreds of copy records. <strong>Trade-off:</strong> More joins in queries, mitigated by indexing.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-wallet"></i></div>
+          <h4>Client-Side React, Server-Side Flask</h4>
+          <p><strong>Why:</strong> Keeps the frontend lightweight and the backend simple. No SSR complexity. <strong>Trade-off:</strong> Initial page load ships a heavier JS bundle — acceptable for an internal admin tool.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-redo"></i> What I'd Do Differently</h2>
+      <p class="case-text">
+        If I were to rebuild UniLib today, I'd move the catalog search to a dedicated search engine like Meilisearch or Typesense instead of SQLite FTS. The weighted scoring I built manually works well, but a purpose-built engine would give typo tolerance and ranking out of the box. I'd also add a proper migration layer (Alembic) from day one — starting with raw SQL DDL made schema evolution painful as requirements shifted.
+      </p>
+    </section>
+
+    <section class="case-section">
       <h2 class="case-section-title"><i class="fas fa-graduation-cap"></i> Lessons Learned &amp; Outcomes</h2>
       <p class="case-text">
         Building UniLib reinforced how critical atomic transactions are in inventory systems. Even a brief race condition can cascade into lost or duplicated book records. The indexing work also showed that query optimization is an ongoing process — as the catalog grows, new access patterns demand fresh indexes.
