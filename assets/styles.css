@@ -476,8 +476,8 @@
       margin: 0 auto;
       padding: 100px 24px 60px;
       display: grid;
-      grid-template-columns: 60% 40%;
-      gap: 48px;
+      grid-template-columns: 54% 46%;
+      gap: 40px;
       align-items: center;
       width: 100%;
     }
@@ -656,7 +656,7 @@
 
     .profile-cutout-wrap {
       position: relative;
-      width: 400px;
+      width: 480px;
       max-width: 100%;
       display: flex;
       flex-direction: column;
@@ -666,15 +666,15 @@
 
     .profile-cutout-glow {
       position: absolute;
-      top: 25%;
+      top: 20%;
       left: 50%;
-      transform: translate(-50%, -20%);
-      width: 320px;
-      height: 380px;
+      transform: translate(-50%, -15%);
+      width: 380px;
+      height: 480px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(102, 217, 255, 0.18) 35%, transparent 70%);
-      filter: blur(40px);
-      opacity: 0.75;
+      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(102, 217, 255, 0.2) 40%, transparent 70%);
+      filter: blur(48px);
+      opacity: 0.8;
       z-index: 0;
       pointer-events: none;
       transition: opacity 0.5s ease, transform 0.5s ease;
@@ -682,13 +682,13 @@
 
     .profile-cutout-wrap:hover .profile-cutout-glow {
       opacity: 1;
-      transform: translate(-50%, -20%) scale(1.1);
+      transform: translate(-50%, -15%) scale(1.08);
     }
 
     [data-theme="light"] .profile-cutout-glow {
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.22) 0%, rgba(14, 165, 233, 0.1) 45%, transparent 70%);
-      opacity: 0.6;
-      filter: blur(35px);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, rgba(14, 165, 233, 0.12) 45%, transparent 70%);
+      opacity: 0.65;
+      filter: blur(40px);
     }
 
     .profile-cutout-frame {
@@ -698,16 +698,16 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      /* Soft bottom fade so full-body or waist cutouts blend seamlessly */
-      -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+      /* Soft bottom fade so full-body shoes/legs blend seamlessly */
+      -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
     }
 
     .profile-cutout-img {
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 520px;
+      max-height: 660px;
       object-fit: contain;
       object-position: bottom center;
       display: block;
@@ -3348,11 +3348,11 @@
       }
 
       .profile-cutout-wrap {
-        width: 330px;
+        width: 380px;
       }
 
       .profile-cutout-img {
-        max-height: 440px;
+        max-height: 520px;
       }
 
       .profile-hex-wrap {
@@ -3407,11 +3407,11 @@
       }
 
       .profile-cutout-wrap {
-        width: 290px;
+        width: 320px;
       }
 
       .profile-cutout-img {
-        max-height: 380px;
+        max-height: 440px;
       }
 
       .profile-status-badge {
