@@ -469,7 +469,11 @@
     <h3>Key Features</h3>
     <ul><li>Live bus location updates on an interactive map</li><li>ML-powered ETA predictions with route awareness</li><li>Push alerts for approaching buses</li><li>Route-level commute planning support</li></ul>
     <h3>Tech Stack</h3><div class="modal-tech"><span>React Native</span><span>Firebase</span><span>Google Maps</span><span>Machine Learning</span></div>
-    <h3>Highlights</h3><p>Built for real commuter scenarios with practical ETA accuracy and lightweight mobile performance.</p>`
+    <h3>Highlights</h3><p>Built for real commuter scenarios with practical ETA accuracy and lightweight mobile performance.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/smart-bus.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
       },
       'gate-automation': {
         title: 'Gate Automation — License Plate Detection',
@@ -477,7 +481,11 @@
     <h3>Key Features</h3>
     <ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control integration</li><li>Vehicle entry/exit logging with timestamps</li></ul>
     <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Arduino</span><span>SQLite</span></div>
-    <h3>Highlights</h3><p>98%+ detection accuracy across varied lighting conditions. Sub-100ms latency on low-power hardware.</p>`
+    <h3>Highlights</h3><p>98%+ detection accuracy across varied lighting conditions. Sub-100ms latency on low-power hardware.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/gate-automation.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
       },
       portfolio: {
         title: 'Portfolio Website',
@@ -485,7 +493,11 @@
     <h3>Key Features</h3>
     <ul><li>Rule-based AI chatbot with score-based keyword matching</li><li>Animated skill bars and hexagonal progress displays</li><li>Section-wise motion and scroll-triggered interactions</li><li>Responsive design with custom cursor and micro-animations</li></ul>
     <h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
-    <h3>Highlights</h3><p>Single-file frontend architecture with smooth performance and responsive behavior across devices.</p>`
+    <h3>Highlights</h3><p>Single-file frontend architecture with smooth performance and responsive behavior across devices.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/portfolio.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/Nis6hal/Portfolio-website" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
       },
       cinevault: {
         title: 'CineVault',
@@ -493,7 +505,11 @@
     <h3>Key Features</h3>
     <ul><li>Browse trending, top-rated, and upcoming films</li><li>Search by title, genre, or keyword</li><li>Detailed movie pages with trailers, cast, and reviews</li><li>Responsive dark theme with smooth transitions</li></ul>
     <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>TMDb API</span><span>CSS3</span><span>React Router</span></div>
-    <h3>Highlights</h3><p>Lazy-loaded images, infinite scroll, and debounced search for a fluid browsing experience.</p>`
+    <h3>Highlights</h3><p>Lazy-loaded images, infinite scroll, and debounced search for a fluid browsing experience.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/cinevault.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
       },
       readlib: {
         title: 'ReadLib — Book Management System',
@@ -501,7 +517,11 @@
     <h3>Key Features</h3>
     <ul><li>Add and manage books with cover thumbnails</li><li>Track reading progress (Planned / Reading / Completed)</li><li>Built-in PDF reader powered by pdf.js</li><li>Sort, filter, and search your library</li><li>Glassmorphism UI with toast notifications</li></ul>
     <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>IndexedDB</span><span>pdf.js</span><span>Vite</span></div>
-    <h3>Highlights</h3><p>Fully local-first — no server needed. Persistent storage survives browser restarts. Deployed on Vercel.</p>`
+    <h3>Highlights</h3><p>Fully local-first — no server needed. Persistent storage survives browser restarts. Deployed on Vercel.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/readlib.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
       },
       unilib: {
         title: 'UniLib — Library Management System',
@@ -509,7 +529,11 @@
     <h3>Key Features</h3>
     <ul><li>Book inventory with search and filtering</li><li>Member registration and management</li><li>Borrow/return workflows with due dates</li><li>Admin analytics dashboard with charts</li></ul>
     <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>
-    <h3>Highlights</h3><p>REST API with JWT auth. Role-based access for admins and members. Deployed with Docker.</p>`
+    <h3>Highlights</h3><p>REST API with JWT auth. Role-based access for admins and members. Deployed with Docker.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/unilib.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
       }
     };
 
@@ -1264,6 +1288,19 @@
             const techHtml = (project.tech || []).map(t => `<span>${t}</span>`).join('');
             const catLabel = (project.category || 'web').charAt(0).toUpperCase() + (project.category || 'web').slice(1);
 
+            const slugMap = {
+              'smart-bus': 'Projects/smart-bus.html',
+              'gate-automation': 'Projects/gate-automation.html',
+              'portfolio': 'Projects/portfolio.html',
+              'cinevault': 'Projects/cinevault.html',
+              'readlib': 'Projects/readlib.html',
+              'unilib': 'Projects/unilib.html'
+            };
+            const projectSlug = (project.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const caseStudyUrl = (project.caseStudyUrl && project.caseStudyUrl.trim())
+              ? project.caseStudyUrl.trim()
+              : (slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : null));
+
             projectData[project._id] = {
               title: project.title,
               content: project.details && project.details.trim()
@@ -1292,24 +1329,12 @@
               </div>
 
               <div class="modal-footer-actions">
+                ${caseStudyUrl ? `<a href="${caseStudyUrl}" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>` : ''}
                 ${project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
                 ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>` : ''}
               </div>
             `
             };
-
-            const slugMap = {
-              'smart-bus': 'Projects/smart-bus.html',
-              'gate-automation': 'Projects/gate-automation.html',
-              'portfolio': 'Projects/portfolio.html',
-              'cinevault': 'Projects/cinevault.html',
-              'readlib': 'Projects/readlib.html',
-              'unilib': 'Projects/unilib.html'
-            };
-            const projectSlug = (project.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-            const caseStudyUrl = (project.caseStudyUrl && project.caseStudyUrl.trim())
-              ? project.caseStudyUrl.trim()
-              : (slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : null));
 
             const item = document.createElement('div');
             item.className = 'port-item';
@@ -1331,7 +1356,7 @@
                 <div class="port-tech">${techHtml}</div>
               </div>
               <div class="port-actions">
-                ${caseStudyUrl ? `<a href="${caseStudyUrl}" class="port-btn details-btn"><i class="fas fa-arrow-right"></i> Case Study</a>` : `<button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>`}
+                <button class="port-btn details-btn" data-project="${project._id}"><i class="fas fa-info-circle"></i> Details</button>
                 <a href="${project.github || 'https://github.com/nis6hal'}" target="_blank" rel="noopener noreferrer" class="port-btn"><i class="fab fa-github"></i> GitHub</a>
                 <a href="${project.demo && project.demo.trim() !== '' ? project.demo : '#contact'}" ${project.demo && project.demo.trim() !== '' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="port-btn"><i class="fas fa-external-link-alt"></i> Demo</a>
               </div>
