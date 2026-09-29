@@ -480,11 +480,11 @@
         content: `<p>An edge AI system for real-time license plate recognition, designed for automated gate and parking control.</p>
     <h3>Key Features</h3>
     <ul><li>Real-time plate detection at 30 FPS</li><li>Support for Nepali and international plates</li><li>Automated gate/barrier control integration</li><li>Vehicle entry/exit logging with timestamps</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>Arduino</span><span>SQLite</span></div>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>OpenCV</span><span>YOLOv8</span><span>ESP32</span><span>Flask</span><span>SQLite</span></div>
     <h3>Highlights</h3><p>98%+ detection accuracy across varied lighting conditions. Sub-100ms latency on low-power hardware.</p>
     <div class="modal-footer-actions">
       <a href="Projects/gate-automation.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
-      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://github.com/Nis6hal/Smart-Gate-Automation-Using-License-Plate-Recognition" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
     </div>`
       },
       portfolio: {
@@ -508,7 +508,8 @@
     <h3>Highlights</h3><p>Lazy-loaded images, infinite scroll, and debounced search for a fluid browsing experience.</p>
     <div class="modal-footer-actions">
       <a href="Projects/cinevault.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
-      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://github.com/Nis6hal/Cinevault" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://cinevault-phi.vercel.app" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fas fa-external-link-alt"></i> Live Demo</a>
     </div>`
       },
       readlib: {
@@ -520,7 +521,8 @@
     <h3>Highlights</h3><p>Fully local-first — no server needed. Persistent storage survives browser restarts. Deployed on Vercel.</p>
     <div class="modal-footer-actions">
       <a href="Projects/readlib.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
-      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://github.com/Nis6hal/ReadLib" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://read-lib-iota.vercel.app" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fas fa-external-link-alt"></i> Live Demo</a>
     </div>`
       },
       unilib: {
@@ -528,11 +530,48 @@
         content: `<p>A full-stack library management system designed for universities, with book inventory, member management, and borrowing workflows.</p>
     <h3>Key Features</h3>
     <ul><li>Book inventory with search and filtering</li><li>Member registration and management</li><li>Borrow/return workflows with due dates</li><li>Admin analytics dashboard with charts</li></ul>
-    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>
-    <h3>Highlights</h3><p>REST API with JWT auth. Role-based access for admins and members. Deployed with Docker.</p>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React 19</span><span>Vite</span><span>Flask</span><span>SQLite</span></div>
+    <h3>Highlights</h3><p>React + Flask REST API with SQLite. Audit logging and transaction safety.</p>
     <div class="modal-footer-actions">
       <a href="Projects/unilib.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
-      <a href="https://github.com/nis6hal" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://github.com/Nis6hal/UniLib" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
+      },
+      'complaint-management': {
+        title: 'NTC AI-Powered Complaint Management',
+        content: `<p>A hybrid AI complaint management system for Nepal Telecom with automated ML classification, sentiment analysis, and NLP-based duplicate ticket detection.</p>
+    <h3>Key Features</h3>
+    <ul><li>Automated ML classification of complaint category, priority, and department</li><li>Sentiment analysis (positive, negative, neutral)</li><li>TF-IDF cosine similarity for duplicate detection &gt;85%</li><li>Interactive AI chatbot with smart troubleshooting suggestions</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span><span>FastAPI</span><span>Python</span><span>DistilBERT</span></div>
+    <h3>Highlights</h3><p>MERN stack enhanced with a Python FastAPI ML inference engine. Fine-tuned on 15,000+ Nepal Telecom complaint records.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/complaint-management.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/Nis6hal/Complaint-Management-System" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://comanagesys.vercel.app" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+    </div>`
+      },
+      'sentiment-analyzer': {
+        title: 'Sentiment Analyzer — NLP Classifier',
+        content: `<p>A Streamlit + scikit-learn SVM sentiment analysis tool trained on a custom text dataset for real-time sentiment prediction.</p>
+    <h3>Key Features</h3>
+    <ul><li>Real-time sentiment prediction from natural language text</li><li>SVM classifier trained on custom labeled dataset</li><li>Clean web interface with Streamlit</li><li>TF-IDF vectorization with stopword removal</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>Python</span><span>Streamlit</span><span>scikit-learn</span><span>NLP</span><span>NumPy</span><span>pandas</span></div>
+    <h3>Highlights</h3><p>Built during Computer Engineering studies at Pokhara University. Achieves 100% accuracy on training dataset.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/sentiment-analyzer.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/Nis6hal/SentimentAnalyzer_NLP-" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+    </div>`
+      },
+      'typing-speed': {
+        title: 'Typing Speed Test',
+        content: `<p>A zero-dependency vanilla HTML/CSS/JS typing test measuring WPM, accuracy, and progress with gamification — all in a single file.</p>
+    <h3>Key Features</h3>
+    <ul><li>Real-time WPM and character-by-character accuracy</li><li>Dark/light themes with unlockable color schemes</li><li>XP, levels, achievements, daily challenges with streaks</li><li>Progress charts, error heatmaps, CSV export</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Canvas API</span></div>
+    <h3>Highlights</h3><p>100% client-side, no build step, no server. Works offline. Responsive design for all devices.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/typing-speed.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/Nis6hal/Typing-Speed-Testing-Website" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
     </div>`
       }
     };
@@ -804,7 +843,7 @@
       /* ── All projects ── */
       {
         keywords: ['project', 'work', 'built', 'made', 'what have you', 'show me', 'examples'],
-        reply: 'Nischal has built 6 flagship projects:\n\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs\n🚗 Gate Automation — Smart license plate detection for automated gate flow\n🌐 Portfolio Website — this site! (HTML, CSS, JS)\n🎬 CineVault — Movie discovery app (React, TMDb API)\n📚 ReadLib — Local-first book manager with built-in PDF reader\n📖 UniLib — Full-stack university library management system\n\nOpen the Portfolio section for details or check github.com/nis6hal.'
+        reply: 'Nischal has built 9 flagship projects:\n\n🚌 Smart Bus Arrival Detector — Real-time bus tracking with ML ETAs\n🚗 Gate Automation — Smart license plate detection for automated gate flow\n🌐 Portfolio Website — this site! (HTML, CSS, JS)\n🎬 CineVault — Movie discovery app (React, TMDb API)\n📚 ReadLib — Local-first book manager with built-in PDF reader\n📖 UniLib — Full-stack university library management system\n🏢 NTC Complaint Management — AI-powered hybrid CMS for Nepal Telecom\n📊 Sentiment Analyzer — NLP sentiment classifier with Streamlit + SVM\n⌨️ Typing Speed Test — Vanilla JS typing test with gamification\n\nOpen the Portfolio section for details or check github.com/nis6hal.'
       },
 
       /* ── Smart Bus ── */
@@ -816,7 +855,7 @@
       /* ── Gate Automation / SLPD ── */
       {
         keywords: ['license plate', 'slpd', 'gate', 'parking', 'detection', 'opencv', 'plate', 'automation'],
-        reply: '🚗 Gate Automation — License Plate Detection\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n\nStack: Python · OpenCV · TensorFlow · Arduino · SQLite'
+        reply: '🚗 Gate Automation — License Plate Detection\nEdge AI for real-time license plate recognition — built for automated gate and parking control.\n\n✨ Highlights:\n• 98%+ detection accuracy across lighting conditions\n• Sub-100ms latency on low-power hardware\n• Supports Nepali & international plates\n\nStack: Python · OpenCV · YOLOv8 · ESP32 · Flask · SQLite'
       },
 
       /* ── CineVault ── */
@@ -834,7 +873,25 @@
       /* ── UniLib ── */
       {
         keywords: ['unilib', 'uni lib', 'university library', 'full stack library'],
-        reply: '📖 UniLib — Library Management System\nA full-stack library system designed for universities.\n\n✨ Highlights:\n• Book inventory, member management, borrow/return workflows\n• Admin analytics dashboard with charts\n• REST API with JWT auth and role-based access\n• Deployed with Docker\n\nStack: React · Node.js · MongoDB · Express'
+        reply: '📖 UniLib — Library Management System\nA full-stack library system designed for universities.\n\n✨ Highlights:\n• Book inventory, member management, borrow/return workflows\n• Audit logging and transaction safety\n• Python Flask REST API with SQLite backend\n• Live dashboard with circulation analytics\n\nStack: React 19 · Flask · SQLite'
+      },
+
+      /* ── Complaint Management ── */
+      {
+        keywords: ['complaint', 'cms', 'nepal telecom', 'ntc', 'customer complaint', 'ticket', 'distilbert', 'ml classification'],
+        reply: '🏢 NTC AI-Powered Complaint Management System\nA hybrid AI complaint management system for Nepal Telecom with automated ML classification.\n\n✨ Highlights:\n• DistilBERT + TF-IDF Ensemble for category/priority/department prediction\n• Sentiment analysis (positive/negative/neutral) from complaint text\n• TF-IDF Cosine Similarity (&gt;85%) for duplicate ticket prevention\n• Interactive AI chatbot with smart self-fix suggestions\n\nStack: React · Node.js · MongoDB · Express · FastAPI · Python · DistilBERT'
+      },
+
+      /* ── Sentiment Analyzer ── */
+      {
+        keywords: ['sentiment', 'sentiment analyzer', 'nlp', 'sentiment analysis', 'text classification', 'svm', 'streamlit'],
+        reply: '📊 Sentiment Analyzer — NLP Classifier\nA Streamlit + scikit-learn SVM sentiment analysis tool trained on a custom text dataset.\n\n✨ Highlights:\n• Real-time sentiment prediction from natural language text\n• SVM classifier with TF-IDF vectorization and stopword removal\n• Clean web interface with Streamlit\n• Achieves 100% accuracy on training dataset\n\nStack: Python · Streamlit · scikit-learn · NLP'
+      },
+
+      /* ── Typing Speed Test ── */
+      {
+        keywords: ['typing', 'typing speed', 'wpm', 'typing test', 'typing speed test', 'keyboard'],
+        reply: '⌨️ Typing Speed Test\nA zero-dependency vanilla HTML/CSS/JS typing test with gamification.\n\n✨ Highlights:\n• Real-time WPM and character-by-character accuracy\n• XP, levels, achievements, daily challenges with streaks\n• Progress charts, error heatmaps, and CSV export\n• 100% client-side — no server or build step required\n\nStack: HTML5 · CSS3 · JavaScript · Canvas API'
       },
 
       /* ── Certifications ── */
@@ -876,7 +933,7 @@
       /* ── Experience ── */
       {
         keywords: ['experience', 'year', 'how long', 'background', 'journey', 'started', 'when did'],
-        reply: '⏱️ Nischal\'s journey:\n\n2022 — Completed Science stream at Chhorepatan Secondary School and started BE Computer Engineering at Pokhara University\n2025 — Built production-focused projects (React, Node.js) and AI systems (Gate Automation, CineVault, ReadLib)\nMay–Aug 2026 — Engineering Intern at Nepal Telecom (NTC — Ranipauwa, Pokhara)\n2026+ — Graduating and actively seeking software engineering & developer opportunities\n\nCurrently in 8th semester with 6+ projects shipped and telecom internship completed. 🔥'
+        reply: '⏱️ Nischal\'s journey:\n\n2022 — Completed Science stream at Chhorepatan Secondary School and started BE Computer Engineering at Pokhara University\n2025 — Built production-focused projects (React, Node.js) and AI systems (Gate Automation, CineVault, ReadLib)\nMay–Aug 2026 — Engineering Intern at Nepal Telecom (NTC — Ranipauwa, Pokhara)\n2026+ — Graduating and actively seeking software engineering & developer opportunities\n\nCurrently in 8th semester with 9+ projects shipped and telecom internship completed. 🔥'
       },
 
       /* ── Contact ── */

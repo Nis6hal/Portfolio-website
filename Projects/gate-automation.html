@@ -40,11 +40,8 @@
         An edge AI system for real-time license plate detection and optical character recognition (ANPR), engineered for automated barrier control, high security, and automated parking management.
       </p>
       <div class="case-links">
-        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/Nis6hal/Smart-Gate-Automation-Using-License-Plate-Recognition" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-github"></i> View Repository
-        </a>
-        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-play-circle"></i> Video Demonstration
         </a>
       </div>
     </section>
@@ -60,17 +57,20 @@
       </div>
       <div class="case-meta-item">
         <h4>Hardware</h4>
-        <p>Arduino, Camera Module, Servo Relays</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Tech Stack</h4>
-        <div class="case-tech-tags">
-          <span class="case-tech-tag">Python</span>
-          <span class="case-tech-tag">OpenCV</span>
-          <span class="case-tech-tag">TensorFlow</span>
-          <span class="case-tech-tag">Arduino</span>
-          <span class="case-tech-tag">SQLite</span>
-        </div>
+         <p>ESP32, Camera Module, Servo Relays</p>
+       </div>
+       <div class="case-meta-item">
+         <h4>Tech Stack</h4>
+         <div class="case-tech-tags">
+           <span class="case-tech-tag">Python</span>
+           <span class="case-tech-tag">OpenCV</span>
+           <span class="case-tech-tag">YOLOv8</span>
+           <span class="case-tech-tag">EasyOCR</span>
+           <span class="case-tech-tag">Flask</span>
+           <span class="case-tech-tag">ESP32</span>
+           <span class="case-tech-tag">SQLite</span>
+           <span class="case-tech-tag">Blynk IoT</span>
+         </div>
       </div>
       <div class="case-meta-item">
         <h4>Performance</h4>
@@ -106,7 +106,7 @@
         <div class="case-card">
           <div class="case-card-icon"><i class="fas fa-door-open"></i></div>
           <h4>Microcontroller Barrier Relay</h4>
-          <p>Serial communication with Arduino actuators to trigger physical barrier gates upon verified cryptographic whitelist matching.</p>
+          <p>Serial communication with ESP32 actuators to trigger physical barrier gates upon verified cryptographic whitelist matching.</p>
         </div>
         <div class="case-card">
           <div class="case-card-icon"><i class="fas fa-database"></i></div>
@@ -133,7 +133,7 @@
         <div class="case-card">
           <div class="case-card-icon"><i class="fas fa-check-double"></i></div>
           <h4>Verification &amp; Trigger</h4>
-          <p>The parsed string is sanitized, verified against the database whitelist, and a serial signal triggers the Arduino servo barrier.</p>
+          <p>The parsed string is sanitized, verified against the database whitelist, and a serial signal triggers the ESP32 servo barrier.</p>
         </div>
       </div>
     </section>

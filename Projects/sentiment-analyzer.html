@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Analyzer — NLP ML Classifier | Nischal Bhandari</title>
+  <meta name="description" content="Case study on a Streamlit-based sentiment analysis web application using scikit-learn SVM classifier trained on a custom text sentiment dataset.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">AI &bull; NLP &bull; Machine Learning</span>
+        <span class="case-timeline-badge"><i class="fas fa-brain"></i> Sentiment Classifier</span>
+      </div>
+      <h1 class="case-title">Sentiment Analyzer — NLP ML Classifier</h1>
+      <p class="case-lead">
+        A sentiment analysis web application built with Streamlit and scikit-learn, using a trained Support Vector Machine (SVM) classifier to predict the sentiment of text input in real time.
+      </p>
+      <div class="case-links">
+        <a href="https://github.com/Nis6hal/SentimentAnalyzer_NLP-" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+      </div>
+    </section>
+
+    <div class="case-banner-frame">
+      <img src="../Images/SentimentAnalyzer.png" alt="Sentiment Analyzer Web Interface" loading="eager">
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>NLP ML Engineer</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Data Source</h4>
+        <p>Custom Text Sentiment Dataset (samples.csv)</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">Python</span>
+          <span class="case-tech-tag">Streamlit</span>
+          <span class="case-tech-tag">scikit-learn</span>
+          <span class="case-tech-tag">pandas</span>
+          <span class="case-tech-tag">NumPy</span>
+          <span class="case-tech-tag">NLTK</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Model</h4>
+        <p>Support Vector Machine (SVM Classification)</p>
+      </div>
+    </div>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Problem &amp; Core Idea</h2>
+      <p class="case-text">
+        Determining the sentiment of unstructured text — whether a given sentence, review, or message expresses positive, negative, or neutral emotion — is a foundational Natural Language Processing (NLP) task. Manual classification doesn't scale, and building a model from scratch requires significant ML expertise.
+      </p>
+      <p class="case-text">
+        This project implements a complete sentiment analysis pipeline: from text preprocessing with stopword removal, through SVM model training on a custom dataset, to a deployable Streamlit web interface where users can enter any text and get instant sentiment predictions.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Key Capabilities</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-bolt"></i></div>
+          <h4>Real-Time Prediction</h4>
+          <p>Users enter any text and receive instant sentiment classification — no batch processing or delays.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-file-csv"></i></div>
+          <h4>Custom Dataset Training</h4>
+          <p>The SVM classifier is trained on <code>samples.csv</code>, a custom dataset with labeled sentence-sentiment pairs.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-cogs"></i></div>
+          <h4>Modular Architecture</h4>
+          <p>Clean separation of concerns: <code>training.py</code> handles model training, <code>app.py</code> serves the web UI, and <code>utils.py</code> provides preprocessing helpers.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-save"></i></div>
+          <h4>Persistent Model Artifacts</h4>
+          <p>Trained model (<code>sentiment_model.pkl</code>) and fitted TF-IDF vectorizer (<code>vectorizer.pkl</code>) are saved for production inference without retraining.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-project-diagram"></i> Technical Pipeline</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-filter"></i></div>
+          <h4>Text Preprocessing</h4>
+          <p>Stopword removal and text normalization applied to raw input text before vectorization, ensuring consistent feature representation for the classifier.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-vectors"></i></div>
+          <h4>Feature Extraction</h4>
+          <p>TF-IDF (Term Frequency-Inverse Document Frequency) vectorizer converts preprocessed text into numerical feature vectors consumable by the SVM model.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-brain"></i></i></div>
+          <h4>SVM Classification</h4>
+          <p>A Support Vector Machine classifier trained on labeled sentiment data predicts whether input text is Positive, Negative, or Neutral.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <h4>Streamlit Deployment</h4>
+          <p>The trained model and vectorizer are loaded at runtime in a Streamlit web app, providing a clean UI for users to input text and see predictions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Noisy Text Normalization</h4>
+        <p>Natural language input contains punctuation, inconsistent casing, and irrelevant stopwords that degrade model accuracy. Implemented a standardized preprocessing pipeline in <code>utils.py</code> that lowercases, removes punctuation and stopwords, and normalizes text before TF-IDF vectorization.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Model Persistence &amp; Reload</h4>
+        <p>Re-training the SVM model on every app launch is computationally expensive. Solved by serializing both the trained classifier and the fitted vectorizer to pickle files (<code>.pkl</code>) during training, which are then deserialized at app startup for instant inference.</p>
+      </div>
+    </section>
+
+    <div class="case-pagination">
+      <a href="complaint-management.html" class="case-page-btn">
+        <span class="case-page-label">Previous Project</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> Complaint Management</span>
+      </a>
+      <a href="typing-speed.html" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Next Case Study</span>
+        <span class="case-page-title">Typing Speed Test <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+  <script src="../assets/case-nav.js"></script>
+</body>
+</html>

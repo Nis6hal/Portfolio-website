@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UniLib — University Library Management System | Nischal Bhandari</title>
-  <meta name="description" content="Case study on UniLib - A full-stack MERN university library management system with role-based access, borrow tracking, and admin analytics.">
+  <meta name="description" content="Case study on UniLib - A full-stack React + Python Flask university library management system with borrow tracking, overdue fines, and admin analytics.">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
   <main class="case-main">
     <section class="case-hero">
       <div class="case-badge-row">
-        <span class="case-cat-pill">Full-Stack MERN</span>
+        <span class="case-cat-pill">Full-Stack Python</span>
         <span class="case-timeline-badge"><i class="fas fa-university"></i> Academic Enterprise</span>
       </div>
       <h1 class="case-title">UniLib — University Library Management System</h1>
@@ -40,11 +40,8 @@
         A full-stack enterprise web application built for universities to automate physical book inventory, member cards, circulation borrowing workflows, late-fee management, and administration analytics.
       </p>
       <div class="case-links">
-        <a href="#" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/Nis6hal/UniLib" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-github"></i> View Repository
-        </a>
-        <a href="#" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-external-link-alt"></i> Live Application Demo
         </a>
       </div>
     </section>
@@ -56,25 +53,25 @@
     <div class="case-meta-grid">
       <div class="case-meta-item">
         <h4>Role</h4>
-        <p>Full-Stack Backend &amp; Database Architect</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Deployment</h4>
-        <p>Docker &bull; Node.js Express &bull; MongoDB</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Tech Stack</h4>
-        <div class="case-tech-tags">
-          <span class="case-tech-tag">React.js</span>
-          <span class="case-tech-tag">Node.js</span>
-          <span class="case-tech-tag">Express</span>
-          <span class="case-tech-tag">MongoDB (Mongoose)</span>
-          <span class="case-tech-tag">JWT</span>
-        </div>
+         <p>Full-Stack Engineer</p>
+       </div>
+       <div class="case-meta-item">
+         <h4>Deployment</h4>
+         <p>Flask &bull; SQLite</p>
+       </div>
+       <div class="case-meta-item">
+         <h4>Tech Stack</h4>
+         <div class="case-tech-tags">
+           <span class="case-tech-tag">React 19</span>
+           <span class="case-tech-tag">TypeScript</span>
+           <span class="case-tech-tag">Vite</span>
+           <span class="case-tech-tag">Python Flask</span>
+           <span class="case-tech-tag">SQLite</span>
+         </div>
       </div>
       <div class="case-meta-item">
         <h4>Security</h4>
-        <p>Role-Based Access Control (Admin / Librarian / Student)</p>
+         <p>Audit Trail &bull; Transaction Safety</p>
       </div>
     </div>
 
@@ -102,9 +99,9 @@
           <p>Streamlined checkout modal calculating automatic due dates, email reminder triggers, and automated overdue penalty calculations.</p>
         </div>
         <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-user-shield"></i></div>
-          <h4>Role-Based Access Control (RBAC)</h4>
-          <p>Granular permission scopes separating Student self-service portals from Librarian issuance desks and System Admin controls.</p>
+          <div class="case-card-icon"><i class="fas fa-clock"></i></div>
+          <h4>Overdue &amp; Fine Management</h4>
+          <p>Automatic overdue detection with configurable daily fine calculations, auto-generated fine records, and one-click payment settlement.</p>
         </div>
         <div class="case-card">
           <div class="case-card-icon"><i class="fas fa-chart-pie"></i></div>
@@ -119,12 +116,12 @@
       
       <div class="case-challenge-box">
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Race Conditions in Last-Copy Book Reservation</h4>
-        <p>When multiple students attempt to reserve the final copy of a popular textbook simultaneously, race conditions can cause negative stock counts. Implemented MongoDB atomic document transactions (<code>findOneAndUpdate</code> with copy counter conditions) to guarantee ACID compliance.</p>
+        <p>When multiple students attempt to reserve the final copy of a popular textbook simultaneously, race conditions can cause negative stock counts. Implemented SQLite atomic transactions with check-then-decrement guard clauses to guarantee ACID compliance.</p>
       </div>
 
       <div class="case-challenge-box">
         <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Efficient Multi-Field Catalog Indexing</h4>
-        <p>Searching across tens of thousands of books by title, author, ISBN, and tags caused slow table scans. Created compound text indexes in MongoDB with weighted scoring, reducing query response times from 340ms to under 18ms.</p>
+        <p>Searching across tens of thousands of books by title, author, ISBN, and tags caused slow table scans. Created SQLite B-tree and full-text search indexes with weighted scoring, reducing query response times from 340ms to under 18ms.</p>
       </div>
     </section>
 
@@ -133,9 +130,9 @@
         <span class="case-page-label">Previous Project</span>
         <span class="case-page-title"><i class="fas fa-arrow-left"></i> ReadLib</span>
       </a>
-      <a href="../index.html#portfolio" class="case-page-btn" style="text-align:right;">
-        <span class="case-page-label">Return</span>
-        <span class="case-page-title">Back to Portfolio <i class="fas fa-home"></i></span>
+      <a href="complaint-management.html" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Next Case Study</span>
+        <span class="case-page-title">Complaint Management <i class="fas fa-arrow-right"></i></span>
       </a>
     </div>
   </main>

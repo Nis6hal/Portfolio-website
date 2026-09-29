@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test — Vanilla JS Utility | Nischal Bhandari</title>
+  <meta name="description" content="Case study on a vanilla HTML/CSS/JavaScript typing speed test application with real-time WPM calculation, accuracy measurement, gamification, and analytics.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/projects.css">
+</head>
+
+<body class="case-body">
+  <header class="case-nav">
+    <div class="case-nav-container">
+      <a href="../index.html#portfolio" class="case-back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="theme-toggle" id="caseThemeToggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-main">
+    <section class="case-hero">
+      <div class="case-badge-row">
+        <span class="case-cat-pill">Web App &bull; Vanilla JS</span>
+        <span class="case-timeline-badge"><i class="fas fa-keyboard"></i> Utility Tool</span>
+      </div>
+      <h1 class="case-title">Typing Speed Test</h1>
+      <p class="case-lead">
+        A feature-rich typing speed test application built with vanilla HTML, CSS, and JavaScript — measuring WPM, accuracy, and tracking progress with gamification elements, all running entirely in the browser.
+      </p>
+      <div class="case-links">
+        <a href="https://github.com/Nis6hal/Typing-Speed-Testing-Website" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i> View Repository
+        </a>
+      </div>
+    </section>
+
+    <div class="case-banner-frame">
+      <img src="../Images/TypingSpeed.png" alt="Typing Speed Test Interface" loading="eager">
+    </div>
+
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <h4>Role</h4>
+        <p>Frontend Engineer</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Data Source</h4>
+        <p>Preloaded Quotes &amp; User Custom Text</p>
+      </div>
+      <div class="case-meta-item">
+        <h4>Tech Stack</h4>
+        <div class="case-tech-tags">
+          <span class="case-tech-tag">HTML5</span>
+          <span class="case-tech-tag">CSS3</span>
+          <span class="case-tech-tag">JavaScript</span>
+          <span class="case-tech-tag">Canvas API</span>
+          <span class="case-tech-tag">Web Audio API</span>
+          <span class="case-tech-tag">localStorage</span>
+        </div>
+      </div>
+      <div class="case-meta-item">
+        <h4>Architecture</h4>
+        <p>Single-File, Zero-Dependency, 100% Client-Side</p>
+      </div>
+    </div>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Vision</h2>
+      <p class="case-text">
+        Most typing test tools either require account signups, inject ads and trackers, or depend on heavy frontend frameworks — all of which distract from the core experience: measuring and improving typing speed.
+      </p>
+      <p class="case-text">
+        This application was built as a single self-contained HTML file with zero external dependencies. No frameworks, no build step, no server — just vanilla JavaScript that delivers real-time WPM, character-by-character accuracy, gamification, and persistent progress tracking entirely in the browser.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Key Features</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-bolt"></i></div>
+          <h4>Real-Time WPM &amp; Accuracy</h4>
+          <p>Calculates Words Per Minute using the standard 5-characters-per-word formula and tracks character-by-character accuracy with live color feedback.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-quote-left"></i></div>
+          <h4>Multiple Quote Sources</h4>
+          <p>Preloaded quote bank for random selection, or users can input custom text for personalized typing tests.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-stopwatch"></i></div>
+          <h4>Timer Modes</h4>
+          <p>Unlimited mode for untimed practice, or a 60-second challenge mode for competitive benchmarking.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-moon"></i></div>
+          <h4>Themes &amp; Customization</h4>
+          <p>Dark/light mode toggle with persisted preference, unlockable color themes (Matrix, Retro, Zen, Rainbow), and animated background options (Matrix rain, particles, gradients).</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-trophy"></i></div>
+          <h4>Gamification System</h4>
+          <p>XP earning and leveling, achievements and badges for milestones, daily challenges with streak tracking, and confetti celebrations for accomplishments.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-chart-bar"></i></div>
+          <h4>Analytics &amp; Progress</h4>
+          <p>History tracking with WPM/accuracy trend charts, error heatmaps for commonly mistyped characters, and CSV export of session data.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="class-section-title"><i class="fas fa-cogs"></i> Technical Implementation</h2>
+      <div class="case-cards-grid">
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-code"></i></div>
+          <h4>Vanilla JavaScript Architecture</h4>
+          <p>Organized with modular JavaScript — quote management, timer system, input processing, statistics engine, UI components, and gamification module — all without any framework dependencies.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-cookie"></i></div>
+          <h4>Persistent Client Storage</h4>
+          <p>All user data — settings, themes, XP, levels, history, and nickname — stored in browser localStorage. No server or external database required.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-canvas"></i></div>
+          <h4>Canvas &amp; Audio APIs</h4>
+          <p>Canvas API powers animated background effects (Matrix rain, particles) and the error heatmap visualization. Web Audio API provides sound feedback for correct and incorrect keystrokes.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-card-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h4>Responsive Design</h4>
+          <p>Fluid responsive layout tested across desktop, tablet, and mobile browsers for a consistent typing experience on any device.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Accurate Real-Time WPM &amp; Accuracy</h4>
+        <p>Calculating WPM and character-level accuracy in real time without jank requires careful event handling and DOM update batching. Implemented a dedicated input processing loop that validates each keystroke against the target text, updates the progress bar, and recomputes metrics on every input event with minimal reflow.</p>
+      </div>
+
+      <div class="case-challenge-box">
+        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Smooth 60fps Canvas Animations</h4>
+        <p>Animating background effects (Matrix rain, particle systems) with vanilla JavaScript while maintaining 60fps performance. Optimized by using <code>requestAnimationFrame</code>, off-screen canvas buffering for particle systems, and capping particle counts based on device performance to prevent frame drops.</p>
+      </div>
+    </section>
+
+    <div class="case-pagination">
+      <a href="sentiment-analyzer.html" class="case-page-btn">
+        <span class="case-page-label">Previous Project</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> Sentiment Analyzer</span>
+      </a>
+      <a href="../index.html#portfolio" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Return</span>
+        <span class="case-page-title">Back to Portfolio <i class="fas fa-home"></i></span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const themeBtn = document.getElementById('caseThemeToggle');
+    const storedTheme = localStorage.getItem('portfolio-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    updateThemeIcon(storedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(t) {
+      themeBtn.innerHTML = t === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+  </script>
+  <script src="../assets/case-nav.js"></script>
+</body>
+</html>
