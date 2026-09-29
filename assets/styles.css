@@ -652,7 +652,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: -36px;
+      margin-top: -72px;
     }
 
     .profile-cutout-wrap {
@@ -731,7 +731,7 @@
 
     .profile-status-badge {
       position: absolute;
-      bottom: 8px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
