@@ -878,7 +878,7 @@
       /* ── Experience ── */
       {
         keywords: ['experience', 'year', 'how long', 'background', 'journey', 'started', 'when did'],
-        reply: '⏱️ Nischal\'s journey:\n\n2022 — Completed Science stream at Chhorepatan Secondary School and started BE Computer Engineering at Pokhara University\n2025 — Built production-focused projects (React, Node.js) and AI systems (Gate Automation, CineVault, ReadLib)\nMay–Aug 2026 — Engineering Intern at Nepal Telecom (NTC — Ranipauwa, Pokhara)\n2026+ — Graduating and actively seeking software engineering & developer opportunities\n\nCurrently in 8th semester with 9+ projects shipped and telecom internship completed. 🔥'
+        reply: '⏱️ Nischal\'s journey:\n\n2022 — Completed Science stream at Chhorepatan Secondary School and started BE Computer Engineering at Pokhara University\n2025 — Built production-focused projects (React, Node.js) and AI systems (Gate Automation, CineVault, ReadLib)\nMay–Aug 2026 — Engineering Intern at Nepal Telecom (NTC — Ranipauwa, Pokhara)\n2026+ — Graduating and actively seeking software engineering & developer opportunities\n\nCurrently in 8th semester with 6+ projects shipped and telecom internship completed. 🔥'
       },
 
       /* ── Contact ── */
