@@ -2,24 +2,6 @@
    PROJECT CASE STUDY STYLES (projects.css)
    ========================================================================== */
 
-/* Restore cursor on case study pages — styles.css hides it globally
-   but these pages don't have the custom cursor elements. */
-.case-body,
-.case-body *,
-.case-body button,
-.case-body a {
-  cursor: auto !important;
-}
-
-.case-body a,
-.case-body button,
-.case-body .case-btn,
-.case-body .case-back-link,
-.case-body .case-page-btn,
-.case-body .theme-toggle {
-  cursor: pointer !important;
-}
-
 .case-body {
   background-color: var(--bg-base);
   color: var(--text-primary);
