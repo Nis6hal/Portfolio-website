@@ -652,12 +652,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: -72px;
+      margin-top: -95px;
     }
 
     .profile-cutout-wrap {
       position: relative;
-      width: 520px;
+      width: 550px;
       max-width: 100%;
       display: flex;
       flex-direction: column;
@@ -667,11 +667,11 @@
 
     .profile-cutout-glow {
       position: absolute;
-      top: 18%;
+      top: 16%;
       left: 50%;
       transform: translate(-50%, -15%);
-      width: 420px;
-      height: 540px;
+      width: 440px;
+      height: 570px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--accent-glow) 0%, rgba(102, 217, 255, 0.2) 40%, transparent 70%);
       filter: blur(48px);
@@ -708,9 +708,10 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 740px;
+      max-height: 785px;
       object-fit: contain;
       object-position: bottom center;
+      transform-origin: bottom center;
       display: block;
       filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.5));
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
@@ -3349,15 +3350,15 @@
       }
 
       .hero-visual {
-        margin-top: -15px;
+        margin-top: -20px;
       }
 
       .profile-cutout-wrap {
-        width: 420px;
+        width: 430px;
       }
 
       .profile-cutout-img {
-        max-height: 580px;
+        max-height: 600px;
       }
 
       .profile-hex-wrap {
@@ -3413,11 +3414,11 @@
       }
 
       .profile-cutout-wrap {
-        width: 330px;
+        width: 340px;
       }
 
       .profile-cutout-img {
-        max-height: 460px;
+        max-height: 480px;
       }
 
       .profile-status-badge {
