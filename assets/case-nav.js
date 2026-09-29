@@ -127,3 +127,127 @@
 
   pagination.innerHTML = leftHTML + rightHTML;
 })();
+
+
+/* ── 3. READING PROGRESS BAR ────────────────────────────────────────────── */
+(function () {
+  const header = document.querySelector('.case-nav');
+  if (!header) return;
+  let bar = document.querySelector('.case-reading-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.className = 'case-reading-bar';
+    header.appendChild(bar);
+  }
+  function updateProgress() {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+})();
+
+/* ── 4. CODE COPY BUTTONS ───────────────────────────────────────────────── */
+(function () {
+  document.querySelectorAll('.code-copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const parent = btn.closest('.code-window') || btn.closest('.case-challenge-box');
+      const codeEl = parent ? parent.querySelector('code') : null;
+      if (!codeEl) return;
+      try {
+        await navigator.clipboard.writeText(codeEl.innerText);
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check" style="color:var(--accent-primary);"></i> Copied!';
+        setTimeout(() => { btn.innerHTML = origHTML; }, 2000);
+      } catch (err) {
+        console.warn('Copy failed:', err);
+      }
+    });
+  });
+})();
+
+/* ── 5. IMAGE LIGHTBOX MODAL ────────────────────────────────────────────── */
+(function () {
+  const previewImg = document.querySelector('.case-banner-frame img');
+  if (!previewImg) return;
+
+  const lightbox = document.createElement('div');
+  lightbox.className = 'case-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-label', 'Image preview');
+  lightbox.innerHTML = `
+    <button class="case-lightbox-close" aria-label="Close image preview"><i class="fas fa-times"></i></button>
+    <img src="${previewImg.src}" alt="${previewImg.alt}">
+  `;
+  document.body.appendChild(lightbox);
+
+  const openLightbox = () => {
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeLightbox = () => {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  previewImg.addEventListener('click', openLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.closest('.case-lightbox-close')) {
+      closeLightbox();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+})();
+
+/* ── 6. QUICK-JUMP SCROLLSPY ────────────────────────────────────────────── */
+(function () {
+  const quickLinks = document.querySelectorAll('.case-quick-link');
+  if (!quickLinks.length) return;
+
+  const targets = Array.from(quickLinks).map(link => {
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return null;
+    return document.getElementById(href.slice(1));
+  }).filter(Boolean);
+
+  function highlightOnScroll() {
+    const scrollPos = window.scrollY + 130;
+    let activeId = '';
+    targets.forEach(section => {
+      if (section.offsetTop <= scrollPos) {
+        activeId = section.id;
+      }
+    });
+    quickLinks.forEach(link => {
+      const match = link.getAttribute('href') === '#' + activeId;
+      link.classList.toggle('active', match);
+    });
+  }
+  window.addEventListener('scroll', highlightOnScroll, { passive: true });
+  highlightOnScroll();
+})();
+
+/* ── 7. PRODUCT SHOWCASE TAB SWITCHING ──────────────────────────────────── */
+(function () {
+  const tabBtns = document.querySelectorAll('.showcase-tab-btn');
+  if (!tabBtns.length) return;
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.tab;
+      if (!targetId) return;
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.showcase-tab-pane').forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.classList.add('active');
+      }
+    });
+  });
+})();

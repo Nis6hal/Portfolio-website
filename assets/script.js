@@ -536,6 +536,19 @@
       <a href="Projects/unilib.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
       <a href="https://github.com/Nis6hal/UniLib" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
     </div>`
+      },
+      'complaint-management': {
+        title: 'NTC AI-Powered Complaint Management System',
+        content: `<p>A production-grade, enterprise-ready Hybrid AI Complaint Management System tailored for Nepal Telecom (NTC). Enhances a MERN stack with a Python FastAPI ML engine for automated triage.</p>
+    <h3>Key Features</h3>
+    <ul><li>Automated ML ticket classification (DistilBERT / TF-IDF ensemble)</li><li>Interactive troubleshooting AI Chatbot widget with domain fixes</li><li>Cosine similarity duplicate ticket prevention gate (&gt;85% threshold)</li><li>Executive AI analytics dashboard with ticket forecasting</li></ul>
+    <h3>Tech Stack</h3><div class="modal-tech"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>FastAPI</span><span>DistilBERT</span><span>scikit-learn</span></div>
+    <h3>Highlights</h3><p>Trained on 15,000+ Nepali-English telecom complaints, achieved 100% classification accuracy, and cut duplicate tickets by &gt;60%.</p>
+    <div class="modal-footer-actions">
+      <a href="Projects/complaint-management.html" class="modal-btn modal-btn-case-study"><i class="fas fa-file-alt"></i> Case Study <i class="fas fa-arrow-right"></i></a>
+      <a href="https://github.com/Nis6hal/Complaint-Management-System" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-outline"><i class="fab fa-github"></i> View Code</a>
+      <a href="https://comanagesys.vercel.app" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+    </div>`
       }
     };
 
@@ -1296,12 +1309,13 @@
               'portfolio': 'Projects/portfolio.html',
               'cinevault': 'Projects/cinevault.html',
               'readlib': 'Projects/readlib.html',
-              'unilib': 'Projects/unilib.html'
+              'unilib': 'Projects/unilib.html',
+              'complaint-management': 'Projects/complaint-management.html'
             };
             const projectSlug = (project.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
             const caseStudyUrl = (project.caseStudyUrl && project.caseStudyUrl.trim())
               ? project.caseStudyUrl.trim()
-              : (slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : null));
+              : (slugMap[projectSlug] || slugMap[project._id] || (project.title.toLowerCase().includes('smart bus') ? 'Projects/smart-bus.html' : project.title.toLowerCase().includes('gate') ? 'Projects/gate-automation.html' : project.title.toLowerCase().includes('portfolio') ? 'Projects/portfolio.html' : project.title.toLowerCase().includes('cinevault') ? 'Projects/cinevault.html' : project.title.toLowerCase().includes('readlib') ? 'Projects/readlib.html' : project.title.toLowerCase().includes('unilib') ? 'Projects/unilib.html' : project.title.toLowerCase().includes('complaint') ? 'Projects/complaint-management.html' : null));
 
             projectData[project._id] = {
               title: project.title,

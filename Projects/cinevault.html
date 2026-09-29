@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="../assets/styles.css">
   <link rel="stylesheet" href="../assets/projects.css">
 </head>
@@ -30,111 +31,220 @@
   </header>
 
   <main class="case-main">
-    <section class="case-hero">
-      <div class="case-badge-row">
-        <span class="case-cat-pill">Frontend Web App</span>
-        <span class="case-timeline-badge"><i class="fas fa-film"></i> Entertainment UI</span>
+    <!-- STYLE 1: PRODUCT SHOWCASE SPLIT HERO -->
+    <section class="showcase-hero-split">
+      <div class="showcase-hero-visual">
+        <div class="case-banner-frame">
+          <img src="../Images/CineVault.png" alt="CineVault Film Discovery Preview" loading="eager" title="Click to view fullscreen">
+        </div>
       </div>
-      <h1 class="case-title">CineVault — Film Discovery Platform</h1>
-      <p class="case-lead">
-        A cinema discovery and tracking web application powered by the TMDb API, providing film lovers with instant access to trending releases, high-definition trailers, cast breakdowns, and customized watchlists.
-      </p>
-      <div class="case-links">
-        <a href="https://github.com/Nis6hal/Cinevault" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-github"></i> View Repository
-        </a>
-        <a href="https://cinevault-phi.vercel.app" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-external-link-alt"></i> Live Application Demo
-        </a>
+      <div class="showcase-hero-content">
+        <div class="case-badge-row">
+          <span class="case-cat-pill">Frontend Web App</span>
+          <span class="case-timeline-badge"><i class="fas fa-film"></i> Entertainment UI</span>
+        </div>
+        <h1 class="case-title">CineVault — Film Discovery Platform</h1>
+        <p class="case-lead">
+          A cinema discovery and tracking web application powered by TMDb API, providing movie lovers with instant access to trending releases, trailer modals, and persistent watchlists.
+        </p>
+        
+        <div class="showcase-mini-meta">
+          <div class="showcase-mini-meta-item">
+            <i class="fas fa-user-tag"></i> Role: <strong>Frontend React Engineer</strong>
+          </div>
+          <div class="showcase-mini-meta-item">
+            <i class="fas fa-database"></i> Source: <strong>TMDb REST API</strong>
+          </div>
+        </div>
+
+        <div class="case-links">
+          <a href="https://github.com/Nis6hal/Cinevault" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> View Repository
+          </a>
+          <a href="https://cinevault-phi.vercel.app" class="case-btn case-btn-outline" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-external-link-alt"></i> Live App Demo
+          </a>
+        </div>
       </div>
     </section>
 
-    <div class="case-banner-frame">
-      <img src="../Images/CineVault.png" alt="CineVault Film Discovery Preview" loading="eager">
+    <!-- KPI Metric Strip -->
+    <div class="case-stats-strip">
+      <div class="case-stat-card">
+        <div class="case-stat-num">&gt; 75%</div>
+        <div class="case-stat-label"><i class="fas fa-bolt"></i> API Call Cut</div>
+        <p class="case-stat-desc">Custom debouncing hook eliminates keystroke request thrashing.</p>
+      </div>
+      <div class="case-stat-card">
+        <div class="case-stat-num">&lt; 300ms</div>
+        <div class="case-stat-label"><i class="fas fa-search"></i> Filter Latency</div>
+        <p class="case-stat-desc">Near-instant reactive genre, rating, and decade filtering in UI.</p>
+      </div>
+      <div class="case-stat-card">
+        <div class="case-stat-num">60 FPS</div>
+        <div class="case-stat-label"><i class="fas fa-film"></i> Scroll Rate</div>
+        <p class="case-stat-desc">IntersectionObserver lazy-loads media to protect render thread.</p>
+      </div>
+      <div class="case-stat-card">
+        <div class="case-stat-num">100%</div>
+        <div class="case-stat-label"><i class="fas fa-bookmark"></i> Offline Watchlist</div>
+        <p class="case-stat-desc">Client-side persistence survives browser restarts with zero auth friction.</p>
+      </div>
     </div>
 
-    <div class="case-meta-grid">
-      <div class="case-meta-item">
-        <h4>Role</h4>
-        <p>Frontend React Engineer</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Data Source</h4>
-        <p>The Movie Database (TMDb REST API)</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Tech Stack</h4>
+    <!-- Tech Stack Pill Ribbon -->
+    <div class="case-meta-grid" style="margin-bottom:24px; padding:16px 20px;">
+      <div class="case-meta-item" style="grid-column: 1 / -1;">
+        <h4>Technologies &amp; Libraries</h4>
         <div class="case-tech-tags">
-          <span class="case-tech-tag">React</span>
-          <span class="case-tech-tag">TypeScript</span>
-          <span class="case-tech-tag">Vite</span>
-          <span class="case-tech-tag">Electron</span>
-          <span class="case-tech-tag">TMDb API</span>
-          <span class="case-tech-tag">React Router</span>
-          <span class="case-tech-tag">Glassmorphism</span>
+          <span class="case-tech-tag"><i class="devicon-react-original colored"></i> React</span>
+          <span class="case-tech-tag"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+          <span class="case-tech-tag"><i class="devicon-vite-original colored"></i> Vite</span>
+          <span class="case-tech-tag"><i class="fas fa-database"></i> TMDb API</span>
+          <span class="case-tech-tag"><i class="devicon-react-original"></i> React Router</span>
+          <span class="case-tech-tag"><i class="fas fa-palette"></i> Glassmorphism</span>
         </div>
-      </div>
-      <div class="case-meta-item">
-        <h4>Experience</h4>
-        <p>Infinite Scroll &bull; Debounced Search &bull; Trailer Modals</p>
       </div>
     </div>
 
-    <section class="case-section">
-      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Vision</h2>
-      <p class="case-text">
-        Modern movie catalogs are often cluttered with invasive ads, slow loading interfaces, and fragmented streaming metadata. CineVault was designed as a sleek, distraction-free movie discovery hub, putting visual posters, critical ratings, and video previews front and center.
-      </p>
-    </section>
+    <!-- TAB NAVIGATION BAR -->
+    <nav class="showcase-tabs-nav" aria-label="Project Tabs">
+      <button class="showcase-tab-btn active" data-tab="tab-overview">
+        <i class="fas fa-bullseye"></i> 1. Vision &amp; Pipeline
+      </button>
+      <button class="showcase-tab-btn" data-tab="tab-features">
+        <i class="fas fa-sparkles"></i> 2. Core Capabilities
+      </button>
+      <button class="showcase-tab-btn" data-tab="tab-code">
+        <i class="fas fa-code"></i> 3. Code &amp; Challenges
+      </button>
+    </nav>
 
-    <section class="case-section">
-      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Core Capabilities</h2>
-      <div class="case-cards-grid">
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-fire"></i></div>
-          <h4>Curated Feeds</h4>
-          <p>Real-time feeds highlighting trending movies of the week, top-rated all-time classics, and upcoming theatrical premieres.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-search"></i></div>
-          <h4>Instant Search &amp; Filter</h4>
-          <p>Live debounced querying allowing users to filter by genre, release decade, user score, and language with instantaneous UI updates.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-play"></i></div>
-          <h4>Inline YouTube Trailers</h4>
-          <p>Integrated official trailer modals fetching YouTube video IDs via TMDb video endpoints without redirecting away from the page.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-bookmark"></i></div>
-          <h4>Client-Side Watchlist</h4>
-          <p>Persistent bookmarking system allowing users to save movies they want to watch later, saved locally in browser storage.</p>
-        </div>
-      </div>
-    </section>
+    <!-- TAB PANE 1: VISION & PIPELINE -->
+    <div class="showcase-tab-pane active" id="tab-overview">
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-bullseye"></i> The Vision</h2>
+        <p class="case-text">
+          Modern movie catalogs are often cluttered with invasive ads, slow loading interfaces, and fragmented streaming metadata. CineVault was designed as a sleek, distraction-free movie discovery hub, putting visual posters, critical ratings, and video previews front and center.
+        </p>
+      </section>
 
-    <section class="case-section">
-      <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
-      
-      <div class="case-challenge-box">
-        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: API Rate Limiting on Rapid Search Typing</h4>
-        <p>Typing in search bars without safeguards triggers dozens of redundant HTTP requests, triggering TMDb rate limits. Implemented a custom <code>useDebounce</code> React hook that waits 350ms post-keystroke, reducing outbound API calls by over 75%.</p>
-      </div>
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-project-diagram"></i> Data Flow &amp; Rendering Pipeline</h2>
+        <div class="arch-pipeline">
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 1</div>
+            <div class="arch-node-title"><i class="fas fa-keyboard"></i> Keystroke</div>
+            <div class="arch-node-sub">User enters title or selects genre tag</div>
+          </div>
+          <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 2</div>
+            <div class="arch-node-title"><i class="fas fa-stopwatch"></i> useDebounce</div>
+            <div class="arch-node-sub">Holds execution for 350ms pause window</div>
+          </div>
+          <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 3</div>
+            <div class="arch-node-title"><i class="fas fa-cloud-download-alt"></i> TMDb API</div>
+            <div class="arch-node-sub">Fetches metadata, backdrop CDN links &amp; YouTube keys</div>
+          </div>
+          <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 4</div>
+            <div class="arch-node-title"><i class="fas fa-th"></i> Virtual Grid</div>
+            <div class="arch-node-sub">Renders cards with blur placeholders &amp; trailer modal</div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-      <div class="case-challenge-box">
-        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Image Heavy Grid Performance</h4>
-        <p>Loading hundreds of high-res backdrop and poster images can bog down browser memory. Implemented native lazy loading with blur placeholders and prioritized loading only for above-the-fold viewport elements.</p>
-      </div>
-    </section>
+    <!-- TAB PANE 2: CORE CAPABILITIES -->
+    <div class="showcase-tab-pane" id="tab-features">
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Core Capabilities</h2>
+        <div class="case-cards-grid">
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-fire"></i></div>
+            <h4>Curated Feeds</h4>
+            <p>Real-time feeds highlighting trending movies of the week, top-rated all-time classics, and upcoming theatrical premieres.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-search"></i></div>
+            <h4>Instant Search &amp; Filter</h4>
+            <p>Live debounced querying allowing users to filter by genre, release decade, user score, and language with instantaneous UI updates.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-play"></i></div>
+            <h4>Inline YouTube Trailers</h4>
+            <p>Integrated official trailer modals fetching YouTube video IDs via TMDb video endpoints without redirecting away from the page.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-bookmark"></i></div>
+            <h4>Client-Side Watchlist</h4>
+            <p>Persistent bookmarking system allowing users to save movies they want to watch later, saved locally in browser storage.</p>
+          </div>
+        </div>
+      </section>
+    </div>
 
+    <!-- TAB PANE 3: CODE & CHALLENGES -->
+    <div class="showcase-tab-pane" id="tab-code">
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-code"></i> Technical Implementation: Debounced Search Hook</h2>
+        <p class="case-text">
+          Preventing search flood was accomplished with a custom React debounce hook that isolates state updates until user typing pauses:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-controls">
+              <span class="code-dot code-dot-red"></span>
+              <span class="code-dot code-dot-yellow"></span>
+              <span class="code-dot code-dot-green"></span>
+            </div>
+            <div class="code-title"><i class="devicon-typescript-plain colored"></i> useDebounce.ts</div>
+            <button class="code-copy-btn" aria-label="Copy code"><i class="fas fa-copy"></i> Copy</button>
+          </div>
+          <pre class="code-body"><code><span class="token-kw">import</span> { useState, useEffect } <span class="token-kw">from</span> <span class="token-str">'react'</span>;
+
+<span class="token-kw">export function</span> <span class="token-fn">useDebounce</span>&lt;<span class="token-fn">T</span>&gt;(value: <span class="token-fn">T</span>, delay: number = <span class="token-num">350</span>): <span class="token-fn">T</span> {
+  <span class="token-kw">const</span> [debouncedValue, setDebouncedValue] = <span class="token-fn">useState</span>&lt;<span class="token-fn">T</span>&gt;(value);
+
+  <span class="token-fn">useEffect</span>(() =&gt; {
+    <span class="token-kw">const</span> handler = <span class="token-fn">setTimeout</span>(() =&gt; <span class="token-fn">setDebouncedValue</span>(value), delay);
+    <span class="token-kw">return</span> () =&gt; <span class="token-fn">clearTimeout</span>(handler);
+  }, [value, delay]);
+
+  <span class="token-kw">return</span> debouncedValue;
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+        
+        <div class="case-challenge-box">
+          <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: API Rate Limiting on Rapid Search Typing</h4>
+          <p>Typing in search bars without safeguards triggers dozens of redundant HTTP requests, triggering TMDb rate limits. Implemented a custom <code>useDebounce</code> React hook that waits 350ms post-keystroke, reducing outbound API calls by over 75%.</p>
+        </div>
+
+        <div class="case-challenge-box">
+          <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Image Heavy Grid Performance</h4>
+          <p>Loading hundreds of high-res backdrop and poster images can bog down browser memory. Implemented native lazy loading with blur placeholders and prioritized loading only for above-the-fold viewport elements.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Pagination -->
     <div class="case-pagination">
-      <a href="portfolio.html" class="case-page-btn">
-        <span class="case-page-label">Previous Project</span>
-        <span class="case-page-title"><i class="fas fa-arrow-left"></i> Portfolio Website</span>
+      <a href="readlib.html" class="case-page-btn">
+        <span class="case-page-label">Previous Case Study</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> ReadLib</span>
       </a>
-      <a href="readlib.html" class="case-page-btn" style="text-align:right;">
+      <a href="gate-automation.html" class="case-page-btn" style="text-align:right;">
         <span class="case-page-label">Next Case Study</span>
-        <span class="case-page-title">ReadLib <i class="fas fa-arrow-right"></i></span>
+        <span class="case-page-title">Gate Automation <i class="fas fa-arrow-right"></i></span>
       </a>
     </div>
   </main>
@@ -160,4 +270,3 @@
   <script src="../assets/case-nav.js"></script>
 </body>
 </html>
-

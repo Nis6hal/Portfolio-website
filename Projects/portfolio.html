@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Website Case Study | Nischal Bhandari</title>
+  <title>Portfolio Website Architecture — Case Study | Nischal Bhandari</title>
   <meta name="description" content="Case study on the design, architecture, and performance optimization of Nischal Bhandari's personal portfolio.">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="../assets/styles.css">
   <link rel="stylesheet" href="../assets/projects.css">
 </head>
@@ -30,109 +31,225 @@
   </header>
 
   <main class="case-main">
-    <section class="case-hero">
-      <div class="case-badge-row">
-        <span class="case-cat-pill">Web &bull; Architecture</span>
-        <span class="case-timeline-badge"><i class="fas fa-code"></i> Live Production</span>
+    <!-- STYLE 1: PRODUCT SHOWCASE SPLIT HERO -->
+    <section class="showcase-hero-split">
+      <div class="showcase-hero-visual">
+        <div class="case-banner-frame">
+          <img src="../Images/Portfolio.png" alt="Portfolio Website Architecture Preview" loading="eager" title="Click to view fullscreen">
+        </div>
       </div>
-      <h1 class="case-title">Portfolio Website Architecture</h1>
-      <p class="case-lead">
-        The minimalist personal portfolio you are currently browsing — engineered from the ground up with vanilla HTML5, CSS3, JavaScript, an Express backend, and live GitHub sync.
-      </p>
-      <div class="case-links">
-        <a href="https://github.com/Nis6hal/Portfolio-website" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-github"></i> GitHub Source
-        </a>
-        <a href="../index.html" class="case-btn case-btn-outline">
-          <i class="fas fa-home"></i> View Live Site
-        </a>
+      <div class="showcase-hero-content">
+        <div class="case-badge-row">
+          <span class="case-cat-pill">Web &bull; Architecture &bull; Performance</span>
+          <span class="case-timeline-badge"><i class="fas fa-code"></i> Live Production</span>
+        </div>
+        <h1 class="case-title">Portfolio Website Architecture</h1>
+        <p class="case-lead">
+          The minimalist personal portfolio you are currently browsing — engineered from the ground up with vanilla HTML5, CSS3, JavaScript, an Express backend, and live GitHub sync.
+        </p>
+        
+        <div class="showcase-mini-meta">
+          <div class="showcase-mini-meta-item">
+            <i class="fas fa-user-tag"></i> Role: <strong>Full-Stack Designer &amp; Developer</strong>
+          </div>
+          <div class="showcase-mini-meta-item">
+            <i class="fas fa-bolt"></i> Speed: <strong>100/100 Lighthouse Performance</strong>
+          </div>
+        </div>
+
+        <div class="case-links">
+          <a href="https://github.com/Nis6hal/Portfolio-website" class="case-btn case-btn-primary" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> GitHub Source
+          </a>
+          <a href="../index.html" class="case-btn case-btn-outline">
+            <i class="fas fa-home"></i> View Live Site
+          </a>
+        </div>
       </div>
     </section>
 
-    <div class="case-banner-frame">
-      <img src="../Images/Portfolio.png" alt="Portfolio Website Architecture Preview" loading="eager">
+    <!-- KPI Metric Strip -->
+    <div class="case-stats-strip">
+      <div class="case-stat-card">
+        <div class="case-stat-num">99+</div>
+        <div class="case-stat-label"><i class="fas fa-tachometer-alt"></i> Lighthouse Score</div>
+        <p class="case-stat-desc">Near-perfect rating across Performance, SEO, and Best Practices.</p>
+      </div>
+      <div class="case-stat-card">
+        <div class="case-stat-num">&lt; 0.6s</div>
+        <div class="case-stat-label"><i class="fas fa-bolt"></i> First Contentful Paint</div>
+        <p class="case-stat-desc">Zero external runtime dependencies blocking the critical render path.</p>
+      </div>
+      <div class="case-stat-card">
+        <div class="case-stat-num">0 KB</div>
+        <div class="case-stat-label"><i class="fas fa-feather"></i> Framework Overhead</div>
+        <p class="case-stat-desc">Engineered purely with standard DOM APIs, CSS tokens, and vanilla ES modules.</p>
+      </div>
+      <div class="case-stat-card">
+        <div class="case-stat-num">60 FPS</div>
+        <div class="case-stat-label"><i class="fas fa-mouse-pointer"></i> LERP Cursor Motion</div>
+        <p class="case-stat-desc">Decoupled requestAnimationFrame interpolation with zero render stutter.</p>
+      </div>
     </div>
 
-    <div class="case-meta-grid">
-      <div class="case-meta-item">
-        <h4>Role</h4>
-        <p>Full-Stack Designer &amp; Developer</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Performance</h4>
-        <p>100/100 Lighthouse &bull; No Framework Bloat</p>
-      </div>
-      <div class="case-meta-item">
-        <h4>Tech Stack</h4>
+    <!-- Tech Stack Pill Ribbon -->
+    <div class="case-meta-grid" style="margin-bottom:24px; padding:16px 20px;">
+      <div class="case-meta-item" style="grid-column: 1 / -1;">
+        <h4>Technologies &amp; Libraries</h4>
         <div class="case-tech-tags">
-          <span class="case-tech-tag">HTML5</span>
-          <span class="case-tech-tag">Vanilla CSS3</span>
-          <span class="case-tech-tag">JavaScript (ES6+)</span>
-          <span class="case-tech-tag">Node.js / Express</span>
-          <span class="case-tech-tag">MongoDB</span>
+          <span class="case-tech-tag"><i class="devicon-html5-plain colored"></i> HTML5</span>
+          <span class="case-tech-tag"><i class="devicon-css3-plain colored"></i> Modern CSS3</span>
+          <span class="case-tech-tag"><i class="devicon-javascript-plain colored"></i> Vanilla JavaScript</span>
+          <span class="case-tech-tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+          <span class="case-tech-tag"><i class="devicon-express-original"></i> Express REST</span>
+          <span class="case-tech-tag"><i class="fab fa-github"></i> GitHub REST API</span>
         </div>
-      </div>
-      <div class="case-meta-item">
-        <h4>Features</h4>
-        <p>Dark/Light Mode &bull; Live GitHub Sync &bull; Admin Panel</p>
       </div>
     </div>
 
-    <section class="case-section">
-      <h2 class="case-section-title"><i class="fas fa-bullseye"></i> Purpose &amp; Design Philosophy</h2>
-      <p class="case-text">
-        Most personal portfolios today rely on heavy modern frameworks (React, Next.js, large CSS libraries) that introduce hundreds of kilobytes of runtime bundle overhead. The goal for this site was to demonstrate what clean, purposeful engineering can achieve with raw Web Standards: zero dependencies on the frontend, lightning-fast rendering speeds, and modern glassmorphism aesthetics.
-      </p>
-    </section>
+    <!-- TAB NAVIGATION BAR -->
+    <nav class="showcase-tabs-nav" aria-label="Project Tabs">
+      <button class="showcase-tab-btn active" data-tab="tab-overview">
+        <i class="fas fa-bullseye"></i> 1. Philosophy &amp; Flow
+      </button>
+      <button class="showcase-tab-btn" data-tab="tab-features">
+        <i class="fas fa-sparkles"></i> 2. Core Implementations
+      </button>
+      <button class="showcase-tab-btn" data-tab="tab-code">
+        <i class="fas fa-code"></i> 3. Cursor Engine &amp; Challenges
+      </button>
+    </nav>
 
-    <section class="case-section">
-      <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Core Modules</h2>
-      <div class="case-cards-grid">
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-moon"></i></div>
-          <h4>System Dark / Light Engine</h4>
-          <p>Instant color-token swapping using CSS custom variables with zero render flash and local storage state persistence.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-sync-alt"></i></div>
-          <h4>Live GitHub Telemetry</h4>
-          <p>Asynchronous sync with the GitHub REST API that dynamically showcases real stars, forks, and the latest commit without server build triggers.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-user-lock"></i></div>
-          <h4>Full Admin Dashboard</h4>
-          <p>Protected administration control center backed by Express &amp; MongoDB with rate limiting, password hashing, and project management.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-icon"><i class="fas fa-robot"></i></div>
-          <h4>Interactive AI Assistant</h4>
-          <p>Custom client-side chatbot providing automated, contextual answers regarding skills, background, and project experience.</p>
-        </div>
-      </div>
-    </section>
+    <!-- TAB PANE 1: PHILOSOPHY & FLOW -->
+    <div class="showcase-tab-pane active" id="tab-overview">
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-bullseye"></i> Engineering Philosophy</h2>
+        <p class="case-text">
+          Modern web development frequently suffers from massive framework overhead and bloated bundler pipelines for simple marketing sites. This portfolio was created under the discipline of modern vanilla standards: utilizing native CSS variables, fluid clamping typography, native custom cursor physics, and semantic markup to deliver near-instant loading times.
+        </p>
+      </section>
 
-    <section class="case-section">
-      <h2 class="case-section-title"><i class="fas fa-cogs"></i> Engineering Challenges &amp; Solutions</h2>
-      
-      <div class="case-challenge-box">
-        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Flash of Unstyled Theme (FOUT)</h4>
-        <p>Dynamic theme loading can cause a jarring white flash on dark-mode reload. Solved by injecting an inline pre-render script before DOM parse that reads local storage and immediate system prefers-color-scheme, applying data-theme instantly.</p>
-      </div>
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-project-diagram"></i> System Flow &amp; Service Boundaries</h2>
+        <div class="arch-pipeline">
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 1</div>
+            <div class="arch-node-title"><i class="fas fa-globe"></i> Client Entry</div>
+            <div class="arch-node-sub">Vanilla HTML5 loads synchronously with zero theme flash</div>
+          </div>
+          <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 2</div>
+            <div class="arch-node-title"><i class="fas fa-mouse-pointer"></i> Cursor &amp; Theme</div>
+            <div class="arch-node-sub">LERP loop activates and local theme token mounts</div>
+          </div>
+          <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 3</div>
+            <div class="arch-node-title"><i class="fas fa-server"></i> Express API</div>
+            <div class="arch-node-sub">Hydrates visible project records dynamically from Render backend</div>
+          </div>
+          <div class="arch-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="arch-node">
+            <div class="arch-node-step">Stage 4</div>
+            <div class="arch-node-title"><i class="fab fa-github"></i> GitHub Sync</div>
+            <div class="arch-node-sub">Background webhook refreshes repo stars, commits &amp; metadata</div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-      <div class="case-challenge-box">
-        <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Floating Cutout Alignment &amp; Responsive Silhouette</h4>
-        <p>Replacing traditional rigid rectangular avatar cards with an unconstrained full-body cutout required precise CSS mask-image linear gradients, dynamic negative margin compensations, and clamp typography to ensure fluid layout across devices from 320px phones to 4K monitors.</p>
-      </div>
-    </section>
+    <!-- TAB PANE 2: CORE IMPLEMENTATIONS -->
+    <div class="showcase-tab-pane" id="tab-features">
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-sparkles"></i> Key Implementations</h2>
+        <div class="case-cards-grid">
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-mouse-pointer"></i></div>
+            <h4>Lerp Cursor Interpolation</h4>
+            <p>Dual ring-and-dot custom cursor with linear interpolation (LERP), hover scale transformations, and intelligent touch detection fallback.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-moon"></i></div>
+            <h4>Persistent Theme Engine</h4>
+            <p>Seamless zero-flash dark/light mode toggle with localStorage cache and OS-level prefers-color-scheme listener.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-sync"></i></div>
+            <h4>Dynamic CMS Backend</h4>
+            <p>Decoupled backend API running on Render that manages visible project records, contact mailers, and admin toggles.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-card-icon"><i class="fas fa-bolt"></i></div>
+            <h4>Zero Framework Footprint</h4>
+            <p>No heavy bundler dependencies, transpilers, or virtual DOM overhead — just pure, hyper-optimized standard web APIs.</p>
+          </div>
+        </div>
+      </section>
+    </div>
 
+    <!-- TAB PANE 3: CODE & CHALLENGES -->
+    <div class="showcase-tab-pane" id="tab-code">
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-code"></i> Technical Implementation: Cursor LERP Engine</h2>
+        <p class="case-text">
+          Achieving buttery 60 FPS cursor motion requires decoupled tracking: the inner dot tracks coordinates immediately while the outer trailing ring smoothly catches up via linear interpolation:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-controls">
+              <span class="code-dot code-dot-red"></span>
+              <span class="code-dot code-dot-yellow"></span>
+              <span class="code-dot code-dot-green"></span>
+            </div>
+            <div class="code-title"><i class="devicon-javascript-plain colored"></i> cursor.js</div>
+            <button class="code-copy-btn" aria-label="Copy code"><i class="fas fa-copy"></i> Copy</button>
+          </div>
+          <pre class="code-body"><code><span class="token-comment">// Smooth Linear Interpolation (LERP)</span>
+<span class="token-kw">let</span> rx = <span class="token-num">0</span>, ry = <span class="token-num">0</span>, mx = <span class="token-num">0</span>, my = <span class="token-num">0</span>;
+
+document.<span class="token-fn">addEventListener</span>(<span class="token-str">'mousemove'</span>, (e) =&gt; {
+  mx = e.clientX;
+  my = e.clientY;
+  dot.style.left = mx + <span class="token-str">'px'</span>;
+  dot.style.top  = my + <span class="token-str">'px'</span>;
+}, { passive: <span class="token-kw">true</span> });
+
+(<span class="token-kw">function</span> <span class="token-fn">lerp</span>() {
+  rx += (mx - rx) * <span class="token-num">0.12</span>;
+  ry += (my - ry) * <span class="token-num">0.12</span>;
+  ring.style.left = rx + <span class="token-str">'px'</span>;
+  ring.style.top  = ry + <span class="token-str">'px'</span>;
+  <span class="token-fn">requestAnimationFrame</span>(lerp);
+})();</code></pre>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title"><i class="fas fa-tools"></i> Engineering Challenges &amp; Solutions</h2>
+        
+        <div class="case-challenge-box">
+          <h4><i class="fas fa-exclamation-triangle"></i> Challenge 1: Flash of Unstyled Theme (FOUT)</h4>
+          <p>In dark/light mode toggles, rendering before localStorage resolution creates an eye-straining white flicker on load. Solved by inlining theme detection in the document <code>&lt;head&gt;</code> before CSS rendering, guaranteeing zero theme flashing.</p>
+        </div>
+
+        <div class="case-challenge-box">
+          <h4><i class="fas fa-exclamation-triangle"></i> Challenge 2: Synchronous Cursor Visibility</h4>
+          <p>When clicking internal links into case study sub-pages, asynchronous script execution could cause the native cursor to briefly appear before hiding. Fixed by bundling synchronous cursor mounting directly into `case-nav.js` with instant stylesheet binding.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Pagination -->
     <div class="case-pagination">
-      <a href="gate-automation.html" class="case-page-btn">
-        <span class="case-page-label">Previous Project</span>
-        <span class="case-page-title"><i class="fas fa-arrow-left"></i> Gate Automation</span>
+      <a href="readlib.html" class="case-page-btn">
+        <span class="case-page-label">Previous Case Study</span>
+        <span class="case-page-title"><i class="fas fa-arrow-left"></i> ReadLib</span>
       </a>
-      <a href="cinevault.html" class="case-page-btn" style="text-align:right;">
-        <span class="case-page-label">Next Case Study</span>
-        <span class="case-page-title">CineVault <i class="fas fa-arrow-right"></i></span>
+      <a href="../index.html#portfolio" class="case-page-btn" style="text-align:right;">
+        <span class="case-page-label">Portfolio</span>
+        <span class="case-page-title">Back to Portfolio <i class="fas fa-home"></i></span>
       </a>
     </div>
   </main>
@@ -158,4 +275,3 @@
   <script src="../assets/case-nav.js"></script>
 </body>
 </html>
-

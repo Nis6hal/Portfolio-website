@@ -5,7 +5,7 @@
 /* Hide the native cursor site-wide on case study pages.
    Browser UA sets cursor:pointer on <a> which beats the inherited cursor:none
    from body in styles.css — this explicit rule wins over UA. */
-.case-body * {
+.case-body:not(.touch-device) * {
   cursor: none !important;
 }
 
@@ -376,5 +376,522 @@
   .case-pagination {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+
+/* ==========================================================================
+   ENHANCED CASE STUDY COMPONENTS (KPIs, IDE Code, Quick-Jump, Pipeline)
+   ========================================================================== */
+
+/* ── Reading Progress Bar ─────────────────────────────────────────── */
+.case-reading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+  box-shadow: 0 0 10px var(--accent-glow);
+  transition: width 0.1s linear;
+  z-index: 101;
+}
+
+/* ── Sticky Quick-Jump Navigation ────────────────────────────────── */
+.case-quick-nav-wrap {
+  position: sticky;
+  top: 48px;
+  z-index: 95;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  margin: -12px -24px 32px;
+}
+
+.case-quick-nav {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.case-quick-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.case-quick-link {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.case-quick-link:hover,
+.case-quick-link.active {
+  color: var(--accent-primary);
+  background: rgba(102, 217, 255, 0.1);
+  border-color: rgba(102, 217, 255, 0.35);
+  box-shadow: 0 0 12px rgba(102, 217, 255, 0.15);
+}
+
+/* ── KPI / Metrics Stat Strip ─────────────────────────────────────── */
+.case-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 28px 0 36px;
+}
+
+.case-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(102, 217, 255, 0.35);
+  box-shadow: 0 10px 25px -10px var(--accent-glow);
+}
+
+.case-stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  opacity: 0.7;
+}
+
+.case-stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 700;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.case-stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.case-stat-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── System Architecture Pipeline Flow ───────────────────────────── */
+.arch-pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 20px 0 28px;
+  overflow-x: auto;
+  padding: 8px 4px 14px;
+  scrollbar-width: thin;
+}
+
+.arch-node {
+  flex: 1;
+  min-width: 145px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.arch-node:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 20px rgba(102, 217, 255, 0.15);
+}
+
+.arch-node-step {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.arch-node-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.arch-node-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.arch-arrow {
+  color: var(--text-muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* ── IDE / Terminal Code Block Window ────────────────────────────── */
+.code-window {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #080816;
+  margin: 18px 0 22px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6);
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border);
+}
+
+.code-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.code-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.code-dot-red { background: #ff5f56; }
+.code-dot-yellow { background: #ffbd2e; }
+.code-dot-green { background: #27c93f; }
+
+.code-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.code-copy-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.code-copy-btn:hover {
+  background: rgba(102, 217, 255, 0.15);
+  color: var(--accent-primary);
+  border-color: rgba(102, 217, 255, 0.35);
+}
+
+.code-body {
+  padding: 16px 20px;
+  margin: 0;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #e2e8f0;
+}
+
+.code-body code {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Syntax tokens */
+.token-kw { color: #f472b6; font-weight: 500; }
+.token-fn { color: #60a5fa; }
+.token-str { color: #34d399; }
+.token-comment { color: #64748b; font-style: italic; }
+.token-num { color: #fbbf24; }
+.token-op { color: #94a3b8; }
+
+/* ── Lightbox Image Modal ────────────────────────────────────────── */
+.case-banner-frame img {
+  cursor: zoom-in;
+  transition: transform 0.4s ease;
+}
+
+.case-banner-frame:hover img {
+  transform: scale(1.015);
+}
+
+.case-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 4, 15, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.case-lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.case-lightbox img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  transform: scale(0.96);
+  transition: transform 0.25s ease;
+}
+
+.case-lightbox.open img {
+  transform: scale(1);
+}
+
+.case-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.case-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   STYLE 1: PRODUCT SHOWCASE ENHANCEMENTS (Split Hero + Tabbed Sections)
+   ========================================================================== */
+
+/* ── Split Hero Layout ────────────────────────────────────────── */
+.showcase-hero-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 900px) {
+  .showcase-hero-split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.showcase-hero-visual {
+  position: relative;
+}
+
+.showcase-hero-visual .case-banner-frame {
+  margin-bottom: 0;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.65), 0 0 20px var(--accent-glow);
+  transition: transform 0.4s ease, border-color 0.3s ease;
+}
+
+.showcase-hero-visual .case-banner-frame:hover {
+  transform: translateY(-4px);
+  border-color: rgba(102, 217, 255, 0.4);
+}
+
+.showcase-hero-visual .case-banner-frame img {
+  max-height: 420px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.showcase-hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.showcase-hero-content .case-title {
+  font-size: clamp(28px, 4vw, 44px);
+  margin-bottom: 12px;
+}
+
+.showcase-hero-content .case-lead {
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.showcase-mini-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.showcase-mini-meta-item {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.showcase-mini-meta-item strong {
+  color: var(--text-primary);
+}
+
+/* ── Interactive Showcase Tab Bar ────────────────────────────── */
+.showcase-tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 32px 0 28px;
+  position: sticky;
+  top: 52px;
+  z-index: 90;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.showcase-tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.showcase-tab-btn {
+  flex: 1;
+  min-width: 130px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.showcase-tab-btn i {
+  font-size: 13px;
+}
+
+.showcase-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.showcase-tab-btn.active {
+  color: var(--accent-primary);
+  background: rgba(102, 217, 255, 0.12);
+  border-color: rgba(102, 217, 255, 0.3);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+/* ── Tab Content Panes ────────────────────────────────────────── */
+.showcase-tab-pane {
+  display: none;
+  animation: tabFadeIn 0.35s ease;
+}
+
+.showcase-tab-pane.active {
+  display: block;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
